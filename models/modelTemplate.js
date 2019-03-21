@@ -1,4 +1,4 @@
-// modelTemplate.js
+// modelTemplate.js - to be deleted once actual models are created
 const mongoose = require('mongoose')
 
 const templateSchema = new mongoose.Schema({
