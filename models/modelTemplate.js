@@ -1,0 +1,14 @@
+// modelTemplate.js
+const mongoose = require('mongoose')
+
+const templateSchema = new mongoose.Schema({
+  keyString: { type: String, required: true, unique: true },
+  keyNumber: { type: Number, required: true, min: 1, max: 5},
+  keyBoolean: { type: Boolean, required: true }
+}, {
+  timestamps: true
+})
+
+templateSchema.plugin(require('mongoose-unique-validator'))
+
+module.exports = mongoose.model('Template', templateSchema)
