@@ -1,0 +1,16 @@
+{
+  "name": "wdi-project-3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start:server": "nodemon",
+    "start:client": "webpack-dev-server --mode=development",
+    "seed": "node db/seeds.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.19"
+  }
+}
