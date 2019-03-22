@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 // import axios from 'axios'
 
-import Home from './components/home/home'
+import Home from './components/pages/home'
 
 class App extends React.Component {
 
