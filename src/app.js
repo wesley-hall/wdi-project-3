@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom'
 
 import Home from './components/pages/home'
 
+import BooksAll from './components/pages/booksAll'
+
 class App extends React.Component {
 
   render() {
@@ -12,6 +14,7 @@ class App extends React.Component {
       <div>
         <h1>Hello World!</h1>
         <Home />
+        <BooksAll />
       </div>
     )
   }
