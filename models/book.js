@@ -13,10 +13,11 @@ const reviewSchema = new mongoose.Schema({
 const bookSchema = new mongoose.Schema({
 
   title: {type: String, required: true},
-  authors: {type: mongoose.Schema.ObjectId, ref: 'Author', required: true},
+  authors: [{type: String}],
   image: {type: String},
   genre: {type: mongoose.Schema.ObjectId, ref: 'BookGenre', required: true},
   fiction: {type: Boolean, required: true},
+  description: {type: String},
   rating: [ratingSchema],
   review: [reviewSchema],
   owner: { type: mongoose.Schema.ObjectId, ref: 'User'},

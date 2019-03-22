@@ -3,8 +3,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const userRatingSchema = new mongoose.Schema({
-  rating: { type: Number },
-  createdAt: { type: Date, default: Date.now }
+  rating: { type: Number }
 })
 
 const userSchema = new mongoose.Schema({
