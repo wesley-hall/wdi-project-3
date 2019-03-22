@@ -3,33 +3,60 @@ Books.create([
       title: 'King Lear',
       authors: [ 'Rene Weis', 'William Shakespeare'],
       image: 'https://books.google.com/books/content?id=cWJcAgAAQBAJ&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api',
-      genre: 'tragedy',
       fiction: true,
-      rating: 4,
+      genre: genres[2],
       description: 'Lear, King of Britain, in an attempt to avoid future strife, divides his kingdom between his three daughters. ... He convinces Gloucester that Edgar is plotting against him, and then persuades his brother to flee from his fathers anger. To avoid arrest, Edgar disguises himself as a mad beggar, Poor Tom.',
-      review: `I had originally planned to give this book four stars for the outline of Obama's plan. But, in addition to the plan, seven of Obama's speeches are included at the back of the book. Among them is his "A More Perfect Union" speech that he gave in Philadelphia on March 18, 2008, where he confronted the issue of race in America. This speech alone is more than worthy of an additional star in my rating.`,
-      owner: 'Obama4ever',
-      returnDate: new Date('')
-      borrower: 'partykiller'
-
-      location: 'London',
-      reviews: [1, 3, 5],
-      fiction: true, 
+      rating: [
+        { rating: 3, user: users[1]}
+      ],
+      review: [
+        {
+          review: 'Why does this masterpiece--yes, a true masterpiece--continue to collect dust on library shelves? I\'m almost finished not reading but studying its verbal tapestry, so intricately woven with the emotions of its characters. The play holds together, where no thread can be pulled from it. King Lear is Shakespeare\'s best play. Perhaps this work is neglected, because it requires thinking on the reader\'s part. Sad--so sad...',
+          user: users[0],
+        }
+      ],
+      owner: users[0],
+      returnDate: new Date(),
+      borrower: users[2]
 
     },
+
     {
-    title: 'Change We Can Believe in',
-    authors: [ 'Barack Obama'],
-    image: `https://books.google.com/books/content?id=pK5ALFeVVcMC&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api`,
-    genre: 'biography',
-    fiction: false,
-    description: 'Change We Can Believe In outlines Barack Obamas vision for America and its standing in the world.In these pages you will find bold and specific ideas about how Barack Obama plans to fix the ailing American economy and strengthen its middle class, make health care affordable for all, achieve energy independence, and keep America safe in a dangerous world. Change We Can Believe In asks us not just to believe in Barack Obamas ability to bring change to Washington, it asks us to believe in the ability of each of us to change the world',
-    rating: 4,
-    review: `I had originally planned to give this book four stars for the outline of Obama's plan. But, in addition to the plan, seven of Obama's speeches are included at the back of the book. Among them is his "A More Perfect Union" speech that he gave in Philadelphia on March 18, 2008, where he confronted the issue of race in America. This speech alone is more than worthy of an additional star in my rating.`,
-    owner: 'Obama4ever',
-    returnDate: '2018-09-06T12:48:25.776Z',
-    borrower: 'partykiller'
-  },
+      title: 'Change We Can Believe in',
+      authors: [ 'Barack Obama'],
+      image: 'https://books.google.com/books/content?id=pK5ALFeVVcMC&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api',
+      fiction: false,
+      genre: genres[0],
+      description: 'Change We Can Believe In outlines Barack Obamas vision for America and its standing in the world.In these pages you will find bold and specific ideas about how Barack Obama plans to fix the ailing American economy and strengthen its middle class, make health care affordable for all, achieve energy independence, and keep America safe in a dangerous world. Change We Can Believe In asks us not just to believe in Barack Obamas ability to bring change to Washington, it asks us to believe in the ability of each of us to change the world',
+      rating: [
+        { rating: 4, user: users[0]}
+      ],
+      review: [
+        {
+          review: 'I had originally planned to give this book four stars for the outline of Obama\'s plan. But, in addition to the plan, seven of Obama\'s speeches are included at the back of the book. Among them is his "A More Perfect Union" speech that he gave in Philadelphia on March 18, 2008, where he confronted the issue of race in America. This speech alone is more than worthy of an additional star in my rating.',
+          user: users[0]
+        }
+      ],
+      owner: users[0],
+      returnDate: new Date(),
+      borrower: users[2]
+    }
+
+
+
+  //   {
+  //   title: 'Change We Can Believe in',
+  //   authors: [ 'Barack Obama'],
+  //   image: `https://books.google.com/books/content?id=pK5ALFeVVcMC&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api`,
+  //   genre: 'biography',
+  //   fiction: false,
+  //   description: 'Change We Can Believe In outlines Barack Obamas vision for America and its standing in the world.In these pages you will find bold and specific ideas about how Barack Obama plans to fix the ailing American economy and strengthen its middle class, make health care affordable for all, achieve energy independence, and keep America safe in a dangerous world. Change We Can Believe In asks us not just to believe in Barack Obamas ability to bring change to Washington, it asks us to believe in the ability of each of us to change the world',
+  //   rating: 4,
+  //   review: `I had originally planned to give this book four stars for the outline of Obama's plan. But, in addition to the plan, seven of Obama's speeches are included at the back of the book. Among them is his "A More Perfect Union" speech that he gave in Philadelphia on March 18, 2008, where he confronted the issue of race in America. This speech alone is more than worthy of an additional star in my rating.`,
+  //   owner: 'Obama4ever',
+  //   returnDate: '2018-09-06T12:48:25.776Z',
+  //   borrower: 'partykiller'
+  // },
   {
 
     title: 'The Joy of Cooking',
