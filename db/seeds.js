@@ -5,7 +5,7 @@ const Books = require('../models/book')
 const User = require('../models/user')
 
 
-mongoose.connect(dbURI, { useNewURLParser: true}, (err, db) => {
+mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
   db.dropDatabase()
 
   User.create([
@@ -20,8 +20,7 @@ mongoose.connect(dbURI, { useNewURLParser: true}, (err, db) => {
         lng: 49
       },
       libraryPicture: 'someurl',
-      libraryDescription: 'dusty',
-      userRating: 4
+      libraryDescription: 'dusty'
     },
     {
       username: 'Jack',
@@ -34,8 +33,7 @@ mongoose.connect(dbURI, { useNewURLParser: true}, (err, db) => {
         lng: 49
       },
       libraryPicture: 'someurl',
-      libraryDescription: 'dusty',
-      userRating: 4
+      libraryDescription: 'dusty'
     },
     {
       username: 'Sumi',
@@ -48,11 +46,33 @@ mongoose.connect(dbURI, { useNewURLParser: true}, (err, db) => {
         lng: 49
       },
       libraryPicture: 'someurl',
-      libraryDescription: 'dusty',
-      userRating: 4
+      libraryDescription: 'dusty'
     }
   ])
-    .then(users => console.log(`${users.length} users created`))
+    .then(users => {
+      return Books.create([
+        {
+          title: 'Change We Can Believe in',
+          authors: [ 'Barack Obama'],
+          image: 'https://books.google.com/books/content?id=pK5ALFeVVcMC&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api',
+          fiction: false,
+          description: 'Change We Can Believe In outlines Barack Obamas vision for America and its standing in the world.In these pages you will find bold and specific ideas about how Barack Obama plans to fix the ailing American economy and strengthen its middle class, make health care affordable for all, achieve energy independence, and keep America safe in a dangerous world. Change We Can Believe In asks us not just to believe in Barack Obamas ability to bring change to Washington, it asks us to believe in the ability of each of us to change the world',
+          rating: [
+            { rating: 4, user: users[0]}
+          ],
+          review: [
+            {
+              review: 'I had originally planned to give this book four stars for the outline of Obama\'s plan. But, in addition to the plan, seven of Obama\'s speeches are included at the back of the book. Among them is his "A More Perfect Union" speech that he gave in Philadelphia on March 18, 2008, where he confronted the issue of race in America. This speech alone is more than worthy of an additional star in my rating.',
+              user: users[0]
+            }
+          ],
+          owner: users[0],
+          returnDate: new Date(),
+          borrower: users[2]
+        }
+      ])
+    })
+    .then(books => console.log(`${books.length} books created`))
     .catch(err => console.log(err))
     .finally(() => mongoose.connection.close())
 

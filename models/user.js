@@ -1,9 +1,10 @@
-// modelTemplate.js - to be deleted once actual models are created
+  // modelTemplate.js - to be deleted once actual models are created
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const userRatingSchema = new mongoose.Schema({
-  rating: { type: Number }
+  rating: { type: Number },
+  user: {type: mongoose.Schema.ObjectId, ref: 'User'}
 })
 
 const userSchema = new mongoose.Schema({

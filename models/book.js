@@ -2,12 +2,12 @@ const mongoose = require('mongoose')
 
 const ratingSchema = new mongoose.Schema({
   rating: {type: Number, min: 1, max: 5},
-  user_id: {type: mongoose.Schema.ObjectId, ref: 'User'}
+  user: {type: mongoose.Schema.ObjectId, ref: 'User'}
 })
 
 const reviewSchema = new mongoose.Schema({
   review: {type: String},
-  user_id: {type: mongoose.Schema.ObjectId, ref: 'User'}
+  user: {type: mongoose.Schema.ObjectId, ref: 'User'}
 })
 
 const bookSchema = new mongoose.Schema({
@@ -15,7 +15,6 @@ const bookSchema = new mongoose.Schema({
   title: {type: String, required: true},
   authors: [{type: String}],
   image: {type: String},
-  genre: {type: mongoose.Schema.ObjectId, ref: 'BookGenre', required: true},
   fiction: {type: Boolean, required: true},
   description: {type: String},
   rating: [ratingSchema],
@@ -25,4 +24,4 @@ const bookSchema = new mongoose.Schema({
   borrower: {type: mongoose.Schema.ObjectId, ref: 'User'}
 })
 
-module.exports = mongoose.model('BookSchema', bookSchema)
+module.exports = mongoose.model('Book', bookSchema)
