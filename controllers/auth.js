@@ -33,15 +33,16 @@ function login(req, res) {
     .catch(err => res.status(422).json(err))
 }
 
-function userIds(req, res) {
+function librariesAll(req, res) {
   User
     .find()
-    .then(users => res.json(users.map(user => ({ _id: user._id, libraryName: user.libraryName }))))
+    .populate('userBooks')
+    .then(libraries => res.json(libraries.map(library => ({ libraryName: library.libraryName, location: library.location, books: library.books, owner: library._id }))))
     .catch(err => res.json(err))
 }
 
 module.exports = {
   register,
   login,
-  userIds
+  librariesAll
 }

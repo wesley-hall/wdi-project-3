@@ -7,11 +7,16 @@ class Libraries extends React.Component {
   constructor() {
     super()
 
+    this.state = {
+      libraries: []
+    }
   }
 
-  // componentDidMount() {
-  //   axios.get('/api/')
-  // }
+  componentDidMount() {
+    axios.get('/api/libraries')
+      .then(users => console.log(users.data))
+      .catch(err => console.log(err))
+  }
 
 
 
@@ -19,11 +24,7 @@ class Libraries extends React.Component {
     return (
       <div>
         <h1>Libraries</h1>
-        <LibrariesMap
-          center={this.mapCenter}
-          points={this.state.points}
-          onClick={this.handleClick}
-        />
+
       </div>
     )
   }

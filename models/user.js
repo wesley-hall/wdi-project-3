@@ -23,6 +23,16 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 })
 
+userSchema.virtual('userBooks', {
+  ref: 'Book',
+  localField: '_id',
+  foreignField: 'owner'
+})
+
+userSchema.set('toJSON', {
+  virtuals: true
+})
+
 userSchema.plugin(require('mongoose-unique-validator'))
 
 userSchema.set('toJSON', {
