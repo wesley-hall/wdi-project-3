@@ -6,6 +6,8 @@ router.post('/register', auth.register)
 
 router.post('/login', auth.login)
 
+router.get('/users', auth.userIds)
+
 router.route('/books')
   .get(books.booksAll)
   .post(books.booksCreate)

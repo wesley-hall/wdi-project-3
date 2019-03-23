@@ -33,7 +33,15 @@ function login(req, res) {
     .catch(err => res.status(422).json(err))
 }
 
+function userIds(req, res) {
+  User
+    .find()
+    .then(users => res.json(users.map(user => ({ _id: user._id, libraryName: user.libraryName }))))
+    .catch(err => res.json(err))
+}
+
 module.exports = {
   register,
-  login
+  login,
+  userIds
 }
