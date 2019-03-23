@@ -1,4 +1,5 @@
 import React from 'react'
+// import axios from 'axios'
 
 class Exchange extends React.Component {
   constructor() {
@@ -14,6 +15,8 @@ class Exchange extends React.Component {
       errors: {}
     }
     this.handleChange = this.handleChange.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
+
   }
 
   handleChange({ target: { name , value }}) {
@@ -21,6 +24,12 @@ class Exchange extends React.Component {
     const errors = {...this.state.errors, [name]: ''}
     this.setState({data,errors})
   }
+
+  // handleSubmit(e) {
+  //   e.preventDefault()
+  //   axios.post('api/:id/exchange', this.state.data)
+  //     .catch(err => this.setState({errors: err.response.data.errors}))
+  // }
 
   render() {
     return (
