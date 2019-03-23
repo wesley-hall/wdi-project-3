@@ -123,6 +123,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       },
       {
         genre: 'language'
+      },
+      {
+        genre: 'drama'
       }
     ])
   ]
@@ -209,6 +212,53 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           owner: users[3],
           returnDate: new Date(),
           borrower: users[4]
+        },
+        {
+          title: 'The Help',
+          authors: [ 'Kathryn Stockett'],
+          image: 'https://books.google.com/books/content?id=wsEXhw17prsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+          fiction: true,
+          genre: genres[9],
+          description: `Twenty-two-year-old Skeeter has just returned home after graduating from Ole Miss. She may have a degree, but it is 1962, Mississippi, and her mother will not be happy till Skeeter has a ring on her finger. Skeeter would normally find solace with her beloved maid Constantine, the woman who raised her, but Constantine has disappeared and no one will tell Skeeter where she has gone.
+
+          Aibileen is a black maid, a wise, regal woman raising her seventeenth white child. Something has shifted inside her after the loss of her own son, who died while his bosses looked the other way. She is devoted to the little girl she looks after, though she knows both their hearts may be broken.
+
+          Minny, Aibileen's best friend, is short, fat, and perhaps the sassiest woman in Mississippi. She can cook like nobody's business, but she can't mind her tongue, so she's lost yet another job. Minny finally finds a position working for someone too new to town to know her reputation. But her new boss has secrets of her own.`,
+
+          rating: [
+            { rating: 4, user: users[5]}
+          ],
+          review: [
+            {
+              review: `The only reason I'm not giving it a 5 is because I felt like some of the stories needed a better or stronger ending. I truly think it is a fantastic book, and it makes you really think about what happened in the not-so-distant past... and probably still happening in some parts of the country today. Scary thoughts, but in the end, at least the right people got something back they deserved, even if it wasn't as much as it should have been.
+
+              The characters are very clear and strong. And when there are upwards of 10 to 12 supporting or lead female characters, an author has to spend a tremendous amount of time creating distinct pictures in a readers mind. Stockett did a great job with this task. Each and every one shows you a different personality: leaders and followers, movers and shakers, smart and silly, strong and weak, tolerant and intolerant, thirsty for all the world has to offer and content to stay the same for an entire lifetime.`,
+              user: users[5]
+            }
+          ],
+          owner: users[5],
+          returnDate: new Date(),
+          borrower: users[4]
+        },
+        {
+          title: 'The Hobbit',
+          authors: [ 'J.R.R Tolkien'],
+          image: 'http://www.orjon.com/dev/booker/images/bookcovers/cover-theHobbit.jpeg',
+          fiction: true,
+          genre: genres[4],
+          description: ' In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it was a hobbit-hole, and that means comfort.',
+
+          rating: [
+            { rating: 5, user: users[3]}
+          ],
+          review: [
+            {
+              review: 'To call this the epitome in which all high fantasy should be judged does not quite suffice; this is simply one of the best books that has ever been written or will ever be written. The Hobbit defines the high fantasy genre along with its sequel, of course, and has been an inspiration to countless authors and readers alike. Tolkien, quite literally, kick started a genre that would eventually capture the hearts of thousands of people. He changed the literary world. He made fantasy real. ',
+              user: users[3]
+            }
+          ],
+          owner: users[3],
+          returnDate: new Date()
         }
       ])
     })
