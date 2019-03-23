@@ -9,7 +9,12 @@ class Nav extends React.Component {
   constructor() {
     super()
 
+    this.logout = this.logout.bind(this)
+  }
 
+  logout() {
+    Auth.logout()
+    this.props.history.push('/')
   }
 
 
