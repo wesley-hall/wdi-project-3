@@ -51,9 +51,9 @@ Books.create([
     ],
     review: [
       {
-        review: `'I can not but think good horsemanship has a great deal to do with the mind." Jane Austen always did a great job of planting ridiculous declarations in the mouths of characters she wished to discredit. Character was her strong suit and there\'s some good\'uns here in.
+        review: `I can not but think good horsemanship has a great deal to do with the mind." Jane Austen always did a great job of planting ridiculous declarations in the mouths of characters she wished to discredit. Character was her strong suit and there\'s some good\'uns here in.
 
-        Within Mansfield Park there are characterizations so delicate and actions of importance utterly unassuming. Some seem meaningless in their modesty. Excellent work by a diligent author. Dangerous pitfalls for the casual reader.'`,
+        Within Mansfield Park there are characterizations so delicate and actions of importance utterly unassuming. Some seem meaningless in their modesty. Excellent work by a diligent author. Dangerous pitfalls for the casual reader.`,
         user: users[2]
       }
     ],

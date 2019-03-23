@@ -8,5 +8,12 @@ router.post('/login', auth.login)
 
 router.route('/books')
   .get(books.booksAll)
+  .post(books.bookCreate)
 
+router.route('/books/:id')
+  .get(books.bookShow)
+  .put(books.bookUpdate)
+  .delete(books.bookDelete)
+
+router.route('/books')
 module.exports = router
