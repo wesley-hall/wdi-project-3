@@ -17,6 +17,7 @@
     "express": "^4.16.4",
     "file-loader": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
+    "mapbox-gl": "^0.53.1",
     "mongoose": "^5.4.19",
     "mongoose-unique-validator": "^2.0.2",
     "react": "^16.8.4",
