@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import 'bulma'
 
 import SecureRoute from './components/common/secureRoute'
 import Nav from './components/common/nav'
@@ -24,7 +25,6 @@ class App extends React.Component {
       <BrowserRouter>
         <div>
           <Nav />
-          <h1>Booker</h1>
           <Switch>
             <SecureRoute path="/books/:id/update" component={BookUpdate}/>
             <SecureRoute path="/books/add" component={BookAdd}/>

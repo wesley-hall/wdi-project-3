@@ -5,7 +5,6 @@ class BookAdd extends React.Component {
     super()
   }
 
-
   render() {
     return (
       <div>
