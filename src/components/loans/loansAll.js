@@ -20,7 +20,7 @@ class LoansAll extends React.Component {
     return (
       <main className="section">
         <div className="container">
-          <p>loansAll</p>
+          <h1>loansAll</h1>
         </div>
       </main>
     )

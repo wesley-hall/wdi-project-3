@@ -126,6 +126,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       },
       {
         genre: 'drama'
+      },
+      {
+        genre: 'literature'
       }
     ])
   ]
@@ -241,6 +244,26 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           owner: users[5],
           returnDate: new Date(),
           borrower: users[4]
+        },
+        {
+          title: '1984',
+          authors: [ 'George Orwell'],
+          image: 'http://www.orjon.com/dev/booker/images/bookcovers/cover-1984.jpeg',
+          fiction: true,
+          genre: genres[4],
+          description: ' Lorem ipsum',
+
+          rating: [
+            { rating: 5, user: users[3]}
+          ],
+          review: [
+            {
+              review: 'Lorem ipsum ',
+              user: users[1]
+            }
+          ],
+          owner: users[2],
+          returnDate: new Date()
         },
         {
           title: 'The Hobbit',
