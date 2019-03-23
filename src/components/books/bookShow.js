@@ -32,8 +32,6 @@ class BookShow extends React.Component {
   render() {
     if (!this.state.book) return null
     const { book } = this.state
-    book.ratingAverage = this.ratingAverage(book.rating).toFixed(1)
-    book.ratingQuantity = book.rating.length
     return(
       <div>
         <main className="section">
@@ -51,7 +49,7 @@ class BookShow extends React.Component {
 
                 <h5 className="subtitle is-7">Genre: {book.genre}</h5>
                 <h5 className="subtitle is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h5>
-                <h5 className="subtitle is-7">Rating: {book.ratingAverage} ({book.ratingQuantity})</h5>
+                <h5 className="subtitle is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
                 <h5 className="subtitle is-7">Location: {book.owner.location}</h5>
                 <h5 className="subtitle is-7">Return Date: {book.returnDate}</h5>
                 <h5 className="subtitle is-7">{book.description}</h5>

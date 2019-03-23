@@ -16,6 +16,14 @@ class BooksAll extends React.Component {
       .then(res => this.setState({ books: res.data }))
   }
 
+  ratingAverage(ratingArray) {
+    let sum = 0
+    for (let i=0; i < ratingArray.length; i++) {
+      sum += ratingArray[i].rating
+    }
+    return sum/ratingArray.length
+  }
+
   render() {
     console.log(this.state.books)
     return (
@@ -24,7 +32,6 @@ class BooksAll extends React.Component {
           <div className="columns is-mobile is-multiline">
             {!this.state.books && <p>...loading</p>}
             {this.state.books && this.state.books.map(book => (
-
               <div key={book._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
                 <Link to={`/books/${book._id}`} >
                   <div className="card">
@@ -41,7 +48,7 @@ class BooksAll extends React.Component {
                       <h5 className="title is-7">by: {book.authors[0]}</h5>
                       <h5 className="subtitle is-7">Genre: {book.genre}</h5>
                       <h5 className="subtitle is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h5>
-                      <h5 className="subtitle is-7">Rating: {book.rating[0].rating}</h5>
+                      <h5 className="subtitle is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
                       <h5 className="subtitle is-7">Location: {book.owner.location}</h5>
                       <h5 className="subtitle is-7">Return Date: {book.returnDate}</h5>
                     </div>
