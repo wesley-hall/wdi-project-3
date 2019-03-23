@@ -30,10 +30,9 @@ class App extends React.Component {
             <SecureRoute path="/books/add" component={BookAdd}/>
             <Route path="/books/:id" component={BookShow}/>
             <Route path="/libraries" component={Libraries}/>
-            <Route path="/login" component={Login}/>
-
             <Route path="/books" component={BooksAll}/>
             <Route path="/register" component={Register}/>
+            <Route path="/login" component={Login}/>
             <Route exact path="/" component={Home}/>
 
 
