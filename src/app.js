@@ -24,7 +24,7 @@ class App extends React.Component {
     return(
       <BrowserRouter>
         <div>
-
+          <Nav />
           <h1>Booker</h1>
           <Switch>
             <SecureRoute path="/books/:id/update" component={BookUpdate}/>
@@ -49,6 +49,3 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 )
-
-
-// <Nav />
