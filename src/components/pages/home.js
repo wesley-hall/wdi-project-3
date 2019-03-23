@@ -9,12 +9,12 @@ class Home extends React.Component {
 
   render() {
     return (
-      <section id="home">
+      <main className="section">
         <div className="container">
           <h1>Home</h1>
           <p>The community library project</p>
         </div>
-      </section>
+      </main>
     )
   }
 }

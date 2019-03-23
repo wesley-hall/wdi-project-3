@@ -11,8 +11,8 @@ class LoansAll extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/loans')
-      .then(res => this.setState({ loans: res.data }))
+    // axios.get('/api/loans')
+    //   .then(res => this.setState({ loans: res.data }))
   }
 
   render() {

@@ -162,7 +162,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           genre: genres[1],
           description: 'Change We Can Believe In outlines Barack Obamas vision for America and its standing in the world.In these pages you will find bold and specific ideas about how Barack Obama plans to fix the ailing American economy and strengthen its middle class, make health care affordable for all, achieve energy independence, and keep America safe in a dangerous world. Change We Can Believe In asks us not just to believe in Barack Obamas ability to bring change to Washington, it asks us to believe in the ability of each of us to change the world',
           rating: [
-            { rating: 4, user: users[0]}
+            { rating: 1, user: users[0]},
+            { rating: 4, user: users[1]},
+            { rating: 5, user: users[2]}
           ],
           review: [
             {
