@@ -1,6 +1,6 @@
 import React from 'react'
 
-class BookAdd extends React.Component {
+class LoanAdd extends React.Component {
   constructor() {
     super()
   }
@@ -8,10 +8,10 @@ class BookAdd extends React.Component {
   render() {
     return (
       <div>
-        <h1>Book Add</h1>
+        <h1>Loan Add</h1>
       </div>
     )
   }
 }
 
-export default BookAdd
+export default LoanAdd
