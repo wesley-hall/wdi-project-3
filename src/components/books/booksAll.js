@@ -26,6 +26,7 @@ class BooksAll extends React.Component {
 
                 <div className="card">
                   <div className="card-header">
+                    <h4 className="card-header-title">id: {book._id}</h4>
                     <h4 className="card-header-title">Title: {book.title}</h4>
                     <h5 className="title is-6">Author(s): {book.authors[0]}</h5>
                   </div>
