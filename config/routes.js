@@ -6,13 +6,16 @@ router.post('/register', auth.register)
 
 router.post('/login', auth.login)
 
+router.get('/libraries', auth.librariesAll)
+
 router.route('/books')
   .get(books.booksAll)
-  .post(books.booksCreate)
+  .post(books.bookCreate)
 
 router.route('/books/:id')
-  .get(books.booksShow)
-  .put(books.booksUpdate)
-  .delete(books.booksDelete)
+  .get(books.bookShow)
+  .put(books.bookUpdate)
+  .delete(books.bookDelete)
 
+router.route('/books')
 module.exports = router

@@ -8,14 +8,14 @@ function booksAll(req, res, next) {
 }
 
 
-function booksCreate(req, res) {
+function bookCreate(req, res) {
   Book
-    .create(req.body.book)
+    .create(req.body)
     .then(book => res.status(201).json(book))
     .catch(err=> res.status(500).json(err))
 }
 
-function booksShow(req, res) {
+function bookShow(req, res) {
   Book
     .findById(req.params.id)
     .exec()
@@ -28,15 +28,15 @@ function booksShow(req, res) {
     .catch(err => res.status(500).json(err))
 }
 
-function booksUpdate(req, res) {
+function bookUpdate(req, res) {
   Book
-    .findByIdandUpdate(req.params.id, req.body, { new: true, runValidators: true})
+    .findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true})
     .exec()
     .then(book => res.status(200).json(book))
     .catch(err => res.status(500).json(err))
 }
 
-function booksDelete(req, res) {
+function bookDelete(req, res) {
   Book
     .findByIdAndRemove(req.params.id)
     .exec()
@@ -46,8 +46,8 @@ function booksDelete(req, res) {
 
 module.exports = {
   booksAll: booksAll,
-  booksCreate: booksCreate,
-  booksShow: booksShow,
-  booksUpdate: booksUpdate,
-  booksDelete: booksDelete
+  bookCreate: bookCreate,
+  bookShow: bookShow,
+  bookUpdate: bookUpdate,
+  bookDelete: bookDelete
 }
