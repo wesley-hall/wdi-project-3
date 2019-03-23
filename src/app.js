@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 
 import Home from './components/pages/home'
 import Register from './components/auth/register'
-
+import Exchange from './components/auth/exchangeBooks'
 import BooksAll from './components/pages/booksAll'
 
 class App extends React.Component {
@@ -18,6 +18,7 @@ class App extends React.Component {
         <Home />
         <BooksAll />
         <Register />
+        <Exchange />
       </div>
     )
   }

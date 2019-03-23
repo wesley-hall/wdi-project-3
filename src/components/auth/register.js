@@ -13,14 +13,22 @@ class Register extends React.Component {
         postCode: '',
         libraryDescription: '',
         libraryPicture: ''
-      }
+      },
+      errors: {}
     }
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange({ target: { name , value }}) {
+    const data = {...this.state.data, [name]: value}
+    const errors = {...this.state.errors, [name]: ''}
+    this.setState({data,errors})
   }
 
   render() {
     return (
       <div>
-        <form className='registration'>
+        <form className='update'>
 
           <div>
             <input
@@ -28,6 +36,7 @@ class Register extends React.Component {
               name="username"
               placeholder="Username"
               value={this.state.data.username}
+              onChange={this.handleChange}
             />
           </div>
 
@@ -37,6 +46,7 @@ class Register extends React.Component {
               name="email"
               placeholder="Email"
               value={this.state.data.email}
+              onChange={this.handleChange}
             />
           </div>
 
@@ -47,6 +57,7 @@ class Register extends React.Component {
               name="password"
               placeholder="Password"
               value={this.state.data.password}
+              onChange={this.handleChange}
             />
           </div>
 
@@ -56,6 +67,7 @@ class Register extends React.Component {
               name="passwordconfirmation"
               placeholder="Password Confirmation"
               value={this.state.data.passwordConfirmation}
+              onChange={this.handleChange}
             />
           </div>
 
@@ -65,6 +77,7 @@ class Register extends React.Component {
               name="profilePicture"
               placeholder="profilePicture"
               value={this.state.data.profilePicture}
+              onChange={this.handleChange}
             />
           </div>
 
@@ -74,22 +87,32 @@ class Register extends React.Component {
               name="postcode"
               placeholder="Post Code"
               value={this.state.data.postCode}
+              onChange={this.handleChange}
             />
           </div>
 
           <div>
             <p>Library Description: <br />
-              <textarea name="textarea_1" value={this.state.data.libraryDescription} />
+              <textarea
+                name="textarea"
+                value={this.state.data.libraryDescription}
+                onChange={this.handleChange}
+              />
             </p>
           </div>
 
           <div>
             <input
               className="input"
-              name="profilePicture"
-              placeholder="profilePicture"
-              value={this.state.data.profilePicture}
+              name="libraryPicture"
+              placeholder="libraryPicture"
+              value={this.state.data.libraryPicture}
+              onChange={this.handleChange}
             />
+          </div>
+
+          <div>
+            <button className="Register Button">Register</button>
           </div>
 
         </form>
