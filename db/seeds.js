@@ -22,7 +22,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           lat: 51.5,
           lng: 49
         },
-        libraryPicture: 'someurl',
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryA.jpg',
         libraryDescription: 'A library that\'s doubled as a dining room, where I could be surrounded by the books I love'
       },
       {
@@ -36,7 +36,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           lat: 51.5 ,
           lng: 49
         },
-        libraryPicture: 'someurl',
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryB.jpg',
         libraryDescription: 'Collection of books slightly chewed up by cats, but still functional'
       },
       {
@@ -50,7 +50,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           lat: 51.5 ,
           lng: 49
         },
-        libraryPicture: 'someurl',
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryC.jpg',
         libraryDescription: 'I am an avid collection of religious books such as the Quran, the Torah, the bible.'
       },
       {
@@ -64,7 +64,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           lat: 51.5 ,
           lng: 49
         },
-        libraryPicture: 'someurl',
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryD.jpg',
         libraryDescription: 'Eclectic collection of books, records and antiques. Some comic books as well.'
       },
       {
