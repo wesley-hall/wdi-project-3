@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-// import axios from 'axios'
 
 import SecureRoute from './components/common/secureRoute'
 import Nav from './components/common/nav'

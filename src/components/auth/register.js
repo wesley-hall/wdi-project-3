@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 class Register extends React.Component {
   constructor() {
@@ -17,6 +18,7 @@ class Register extends React.Component {
       errors: {}
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange({ target: { name , value }}) {
@@ -24,11 +26,21 @@ class Register extends React.Component {
     const errors = {...this.state.errors, [name]: ''}
     this.setState({data,errors})
   }
+  handleSubmit(e) {
+    e.preventDefault()
+    axios.post('/api/register', this.state.data)
+      .catch(err => this.setState({errors: err.response.data.errors}))
+  }
+
 
   render() {
     return (
       <div>
-        <form className='update'>
+
+        <form
+          className='update'
+          onSubmit={this.handleSubmit}
+        >
 
           <div>
             <input
