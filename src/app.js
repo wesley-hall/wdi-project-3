@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import 'bulma'
 
+import './style.scss'
+
 import SecureRoute from './components/common/secureRoute'
 import Nav from './components/common/nav'
 import Home from './components/pages/home'
