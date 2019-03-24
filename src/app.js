@@ -17,7 +17,7 @@ import BooksAll from './components/books/booksAll'
 import BookShow from './components/books/bookShow'
 import BookAdd from './components/books/bookAdd'
 import BookUpdate from './components/books/bookUpdate'
-import Libraries from './components/books/Libraries'
+import Libraries from './components/books/libraries'
 
 import LoansAll from './components/loans/loansAll'
 import LoanAdd from './components/loans/loanAdd'

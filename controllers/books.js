@@ -3,6 +3,7 @@ const Book = require('../models/book')
 function booksAll(req, res, next) {
   Book
     .find()
+    .populate('owner')
     .then(books => res.json(books))
     .catch(next)
 }
@@ -18,6 +19,7 @@ function bookCreate(req, res) {
 function bookShow(req, res) {
   Book
     .findById(req.params.id)
+    .populate('owner')
     .exec()
     .then(book => {
       if(!book) {
