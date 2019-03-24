@@ -1,11 +1,12 @@
 const Book = require('../models/book')
+require('../models/bookGenre')
 
-function booksAll(req, res, next) {
+function booksAll(req, res) {
   Book
     .find()
-    .populate('owner')
+    .populate('owner genre')
     .then(books => res.json(books))
-    .catch(next)
+    .catch(e => console.log(e))
 }
 
 
@@ -19,7 +20,7 @@ function bookCreate(req, res) {
 function bookShow(req, res) {
   Book
     .findById(req.params.id)
-    .populate('owner')
+    .populate('owner genre')
     .exec()
     .then(book => {
       if(!book) {
