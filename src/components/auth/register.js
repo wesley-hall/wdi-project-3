@@ -11,7 +11,7 @@ class Register extends React.Component {
         password: '',
         passwordConfirmation: '',
         profilePicture: '',
-        postCode: '',
+        postcode: '',
         libraryDescription: '',
         libraryPicture: ''
       },
@@ -28,6 +28,7 @@ class Register extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault()
+    console.log('trying to submit')
     axios.post('/api/register', this.state.data)
       .catch(err => this.setState({errors: err.response.data.errors}))
   }
@@ -37,9 +38,8 @@ class Register extends React.Component {
     return (
       <main className="section">
         <div className="container">
-          <h1>Register new user....</h1>
+          <h1>Register a new user</h1>
           <form
-            className='update'
             onSubmit={this.handleSubmit}
           >
 
@@ -70,6 +70,7 @@ class Register extends React.Component {
                 <input
                   className="input"
                   name="password"
+                  type="password"
                   placeholder="Password"
                   value={this.state.data.password}
                   onChange={this.handleChange}
@@ -79,7 +80,8 @@ class Register extends React.Component {
               <div className="column is-half">
                 <input
                   className="input"
-                  name="passwordconfirmation"
+                  name="passwordConfirmation"
+                  type="password"
                   placeholder="Password Confirmation"
                   value={this.state.data.passwordConfirmation}
                   onChange={this.handleChange}
@@ -103,7 +105,7 @@ class Register extends React.Component {
                 className="input"
                 name="postcode"
                 placeholder="Post Code"
-                value={this.state.data.postCode}
+                value={this.state.data.postcode}
                 onChange={this.handleChange}
               />
             </div>
@@ -112,7 +114,8 @@ class Register extends React.Component {
             <div>
               <p>Library Description: <br />
                 <textarea
-                  name="textarea"
+                  className="textarea"
+                  name="libraryDescription"
                   value={this.state.data.libraryDescription}
                   onChange={this.handleChange}
                 />
@@ -132,7 +135,7 @@ class Register extends React.Component {
             <br />
 
             <div>
-              <button className="Register button is-success is-pulled-right">Register</button>
+              <button className="button is-success is-pulled-right">Register</button>
             </div>
 
           </form>
