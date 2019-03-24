@@ -1,1 +1,28 @@
 @import '~mapbox-gl/dist/mapbox-gl.css';
+
+div.map-libraries {
+  width: 100vw;
+  height: 90vh;
+}
+
+.marker-libraries {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marker-libraries:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  z-index: -1;
+  border-radius: 50% 50% 0 50%;
+  transform: rotate(45deg);
+}

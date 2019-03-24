@@ -1,4 +1,3 @@
-// modelTemplate.js - to be deleted once actual models are created
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
