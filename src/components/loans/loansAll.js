@@ -54,23 +54,26 @@ class LoansAll extends React.Component {
               <h2>Books Borrowed</h2>
               {loans.map(loan => (
                 <div key={loan._id}>
-                  <h4>{loan.start}</h4>
-                  <h4>{loan.end}</h4>
-                  <h4>{loan.book.title}</h4>
-                  <h4>{loan.borrower.username}</h4>
-                  <h4>{loan.returned}</h4>
+                  <div className="columns">
+                    <h4 className="column">{loan.start}</h4>
+                    <h4 className="column">{loan.end}</h4>
+                    <h4 className="column">{loan.book.title}</h4>
+                    <h4 className="column">{loan.borrower.username}</h4>
+                    <h4 className="column">{loan.returned}</h4>
 
-                  <p>Select:</p>
-                  <select
-                    name="booksBorrowed"
-                    defaultValue={2}
-                    onChange={this.handleChange}
-                  >
-                    <option value="1">Books Borrowed</option>
-                    <option value="2">Waiting for Confirmation</option>
-                    <option value="2">Returned</option>
-                    <option value="3">Overdue</option>
-                  </select>
+                    <p>Select:</p>
+                    <select
+                      className="column"
+                      name="booksBorrowed"
+                      defaultValue={2}
+                      onChange={this.handleChange}
+                    >
+                      <option value="1">Books Borrowed</option>
+                      <option value="2">Waiting for Confirmation</option>
+                      <option value="2">Returned</option>
+                      <option value="3">Overdue</option>
+                    </select>
+                  </div>
                 </div>
               ))}
             </div>
