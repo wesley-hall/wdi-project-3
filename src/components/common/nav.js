@@ -26,7 +26,6 @@ class Nav extends React.Component {
           <Link to="/books" className="navbar-item">/Books</Link>
           <Link to="/libraries" className="navbar-item">/Libraries</Link>
           <Link to="/loans" className="navbar-item">/Loans</Link>
-          <Link to="/loanAdd" className="navbar-item">/Loan Add</Link>
         </div>
         <div className="navbar-menu">
           <div className="navbar-end">

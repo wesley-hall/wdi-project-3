@@ -71,7 +71,7 @@ class LoanAdd extends React.Component {
                 <h5 className="subtitle is-7">Genre: {book.genre}</h5>
                 <h5 className="subtitle is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h5>
                 <h5 className="subtitle is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
-                <h5 className="subtitle is-7">Location: {book.owner.location}</h5>
+              
                 <h5 className="subtitle is-7">Return Date: {book.returnDate}</h5>
                 <h5 className="subtitle is-7">{book.description}</h5>
 
