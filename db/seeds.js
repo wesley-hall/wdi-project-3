@@ -12,85 +12,127 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
   const promiseArray = [
     User.create([
       {
-        username: 'Richierich',
+        username: 'Rich',
         profilePicture: 'http://www.orjon.com/dev/booker/images/profile/manA.jpg',
         email: 'rich@email',
-        password: 'password',
-        passwordConfirmation: 'password',
+        password: 'pass',
+        passwordConfirmation: 'pass',
         libraryName: 'Rich\'s library',
         location: {
-          lat: 51.5,
-          lng: 49
+          lat: 51.516625,
+          lng: -0.074982
         },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryA.jpg',
         libraryDescription: 'A library that\'s doubled as a dining room, where I could be surrounded by the books I love'
       },
       {
-        username: 'LumberJack',
+        username: 'Jack',
         profilePicture: 'http://www.orjon.com/dev/booker/images/profile/manB.jpg',
         email: 'jack@email',
-        password: 'password',
-        passwordConfirmation: 'password',
+        password: 'pass',
+        passwordConfirmation: 'pass',
         libraryName: 'jacklibrary',
         location: {
-          lat: 51.5 ,
-          lng: 49
+          lat: 51.517066 ,
+          lng: -0.069700
         },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryB.jpg',
         libraryDescription: 'Collection of books slightly chewed up by cats, but still functional'
       },
       {
-        username: 'Sumimi',
+        username: 'Sumi',
         profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyA.jpg',
         email: 'sumi@email',
-        password: 'password',
-        passwordConfirmation: 'password',
+        password: 'pass',
+        passwordConfirmation: 'pass',
         libraryName: 'Sumilibrary',
         location: {
-          lat: 51.5 ,
-          lng: 49
+          lat: 51.515204 ,
+          lng: -0.072349
         },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryC.jpg',
         libraryDescription: 'I am an avid collection of religious books such as the Quran, the Torah, the bible.'
       },
       {
-        username: 'Zoe68',
+        username: 'Zoe',
         profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyB.jpg',
         email: 'zoe@email',
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Zoe library',
         location: {
-          lat: 51.5 ,
-          lng: 49
+          lat: 51.514120 ,
+          lng: -0.071449
         },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryD.jpg',
         libraryDescription: 'Eclectic collection of books, records and antiques. Some comic books as well.'
       },
       {
-        username: 'Derooroo',
+        username: 'Orjon',
         profilePicture: 'http://www.orjon.com/dev/booker/images/profile/manC.jpg',
         email: 'orjon@email',
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Orjon library',
         location: {
-          lat: 51.5 ,
-          lng: 49
+          lat: 51.515795 ,
+          lng: -0.067593
         },
         libraryPicture: 'someurl',
         libraryDescription: 'filled with dead bodies'
       },
       {
-        username: 'Marygoround',
+        username: 'Mary',
         profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyC.jpg',
         email: 'mary@email',
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Mary library',
         location: {
-          lat: 51.5 ,
-          lng: 49
+          lat: 51.513791 ,
+          lng: -0.067392
+        },
+        libraryPicture: 'someurl',
+        libraryDescription: 'cluttered'
+      },
+      {
+        username: 'Wesley',
+        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyC.jpg',
+        email: 'wesley@email',
+        password: 'pass',
+        passwordConfirmation: 'pass',
+        libraryName: 'Steve library',
+        location: {
+          lat: 51.511868 ,
+          lng: -0.072210
+        },
+        libraryPicture: 'someurl',
+        libraryDescription: 'cluttered'
+      },
+      {
+        username: 'Steven',
+        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyC.jpg',
+        email: 'steven@email',
+        password: 'pass',
+        passwordConfirmation: 'pass',
+        libraryName: 'Steve library',
+        location: {
+          lat: 51.5212,
+          lng: 0.0718
+        },
+        libraryPicture: 'someurl',
+        libraryDescription: 'cluttered'
+      },
+      {
+        username: 'Matthew',
+        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyC.jpg',
+        email: 'steven@email',
+        password: 'pass',
+        passwordConfirmation: 'pass',
+        libraryName: 'Steve library',
+        location: {
+          lat: 51.5212,
+          lng: 0.0718
         },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
@@ -251,14 +293,18 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           image: 'http://www.orjon.com/dev/booker/images/bookcovers/cover-1984.jpeg',
           fiction: true,
           genre: genres[4],
-          description: ' Lorem ipsum',
+          description: 'Among the seminal texts of the 20th century, Nineteen Eighty-Four is a rare work that grows more haunting as its futuristic purgatory becomes more real. Published in 1949, the book offers political satirist George Orwell\'s nightmarish vision of a totalitarian, bureaucratic world and one poor stiff\'s attempt to find individuality. The brilliance of the novel is Orwell\'s prescience of modern life--the ubiquity of television, the distortion of the language--and his ability to construct such a thorough version of hell. Required reading for students since it was published, it ranks among the most terrifying novels ever written. ',
 
           rating: [
             { rating: 5, user: users[3]}
           ],
           review: [
             {
-              review: 'Lorem ipsum ',
+              review: `This book is far from perfect. Its characters lack depth, its rhetoric is sometimes didactic, its plot (well, half of it anyway) was lifted from Zumyatin’s We, and the lengthy Goldstein treatise shoved into the middle is a flaw which alters the structure of the novel like a scar disfigures a face.
+
+              But in the long run, all that does not matter, because George Orwell got it right.
+
+              Orwell, a socialist who fought against Franco, watched appalled as the great Soviet experiment was reduced to a totalitarian state, a repressive force equal in evil to Fascist Italy or Nazi Germany. He came to realize that ideology in an authoritarian state is nothing but a distraction, a shiny thing made for the public to stare at. He came to realize that the point of control was more control, the point of torture was more torture, that the point of all their "alternative facts" was to fashion a world where people would no longer possess even a word for truth. `,
               user: users[1]
             }
           ],
