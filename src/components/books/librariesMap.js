@@ -15,7 +15,7 @@ class LibrariesMap extends React.Component {
       container: this.mapDiv,
       style: 'mapbox://styles/mapbox/streets-v9',
       center: this.props.center,
-      zoom: 6
+      zoom: 13
     })
 
     this.map.addControl(new MapboxGeocoder({
