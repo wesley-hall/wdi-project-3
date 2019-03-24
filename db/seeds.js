@@ -102,7 +102,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'wesley@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Steve library',
+        libraryName: 'Wesley library',
         location: {
           lat: 51.511868 ,
           lng: -0.072210
@@ -118,8 +118,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Steve library',
         location: {
-          lat: 51.5212,
-          lng: 0.0718
+          lat: 51.522164,
+          lng: -0.075526
         },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
@@ -132,8 +132,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Matthew library',
         location: {
-          lat: 51.5257,
-          lng: 0.0875
+          lat: 51.518474,
+          lng: -0.061351
         },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
@@ -160,8 +160,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Pascual library',
         location: {
-          lat: 51.508040,
-          lng: -0.087068
+          lat: 51.517453,
+          lng: -0.088473
         },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
@@ -338,7 +338,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           Minny, Aibileen's best friend, is short, fat, and perhaps the sassiest woman in Mississippi. She can cook like nobody's business, but she can't mind her tongue, so she's lost yet another job. Minny finally finds a position working for someone too new to town to know her reputation. But her new boss has secrets of her own.`,
 
           rating: [
-            { rating: 4, user: users[5]}
+            { rating: 4, user: users[5]},
+            { rating: 4, user: users[7]},
+            { rating: 3, user: users[6]}
           ],
           review: [
             {
@@ -346,6 +348,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
 
               The characters are very clear and strong. And when there are upwards of 10 to 12 supporting or lead female characters, an author has to spend a tremendous amount of time creating distinct pictures in a readers mind. Stockett did a great job with this task. Each and every one shows you a different personality: leaders and followers, movers and shakers, smart and silly, strong and weak, tolerant and intolerant, thirsty for all the world has to offer and content to stay the same for an entire lifetime.`,
               user: users[5]
+            },
+            {
+              review: 'My 12 year old daughter would like to read this. I have not read it in a few years and can\'t remember if there is anything graphic that she will encounter. What do you think about a middle school student reading this?',
+              user: users[6]
             }
           ],
           owner: users[5]
@@ -359,7 +365,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           description: 'Among the seminal texts of the 20th century, Nineteen Eighty-Four is a rare work that grows more haunting as its futuristic purgatory becomes more real. Published in 1949, the book offers political satirist George Orwell\'s nightmarish vision of a totalitarian, bureaucratic world and one poor stiff\'s attempt to find individuality. The brilliance of the novel is Orwell\'s prescience of modern life--the ubiquity of television, the distortion of the language--and his ability to construct such a thorough version of hell. Required reading for students since it was published, it ranks among the most terrifying novels ever written. ',
 
           rating: [
-            { rating: 5, user: users[3]}
+            { rating: 5, user: users[3]},
+            { rating: 4, user: users[8]},
+            { rating: 4, user: users[9]}
           ],
           review: [
             {
@@ -368,6 +376,18 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
               But in the long run, all that does not matter, because George Orwell got it right.
 
               Orwell, a socialist who fought against Franco, watched appalled as the great Soviet experiment was reduced to a totalitarian state, a repressive force equal in evil to Fascist Italy or Nazi Germany. He came to realize that ideology in an authoritarian state is nothing but a distraction, a shiny thing made for the public to stare at. He came to realize that the point of control was more control, the point of torture was more torture, that the point of all their "alternative facts" was to fashion a world where people would no longer possess even a word for truth. `,
+              user: users[1]
+            },
+            {
+              review: `This book is far from perfect. Its characters lack depth, its rhetoric is sometimes didactic, its plot (well, half of it anyway) was lifted from Zumyatin’s We, and the lengthy Goldstein treatise shoved into the middle is a flaw which alters the structure of the novel like a scar disfigures a face.
+
+              But in the long run, all that does not matter, because George Orwell got it right.
+
+              Orwell, a socialist who fought against Franco, watched appalled as the great Soviet experiment was reduced to a totalitarian state, a repressive force equal in evil to Fascist Italy or Nazi Germany. He came to realize that ideology in an authoritarian state is nothing but a distraction, a shiny thing made for the public to stare at. He came to realize that the point of control was more control, the point of torture was more torture, that the point of all their "alternative facts" was to fashion a world where people would no longer possess even a word for truth. `,
+              user: users[1]
+            },
+            {
+              review: '1984 is not a particularly good novel, but it is a very good essay. On the novel front, the characters are bland and you only care about them because of the awful things they live through. As a novel all the political exposition is heavyhanded, and the message completely overrides any sense of storytelling. As an essay, the points it makes can be earthshaking. It seems everyone who has so much as gotten a parking ticket thinks he lives in a 1984-dystopia. Every administration that reaches for power, injures civil liberties or collaborates too much with media is accused of playing Big Brother. These are the successes of 1984\'s paranoia, far outliving its original intent as a battery against where Communism was going (Orwell was a severely disappointed Marxist), and while people who compare their leaders to Big Brother are usually overreaching themselves and speak far away from Orwell\'s intent and vision, it is a useful catchcloth for dissent. Like so many immortalized books with a social vision, 1984\'s actual substance is so thin that its ideologies and fear-mongering aspects can be stretched and skewed to suit the readers. If you\'d like a better sense of the real world and Orwell\'s intents, rather than third-hand interpretations of his fiction, then his Homage to Catalonia is highly recommended. ',
               user: users[1]
             }
           ],
@@ -382,7 +402,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           description: ' In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it was a hobbit-hole, and that means comfort.',
 
           rating: [
-            { rating: 5, user: users[3]}
+            { rating: 5, user: users[3]},
+            { rating: 4, user: users[8]}
           ],
           review: [
             {
