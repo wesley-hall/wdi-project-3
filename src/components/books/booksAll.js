@@ -12,6 +12,7 @@ class BooksAll extends React.Component {
   componentDidMount() {
     axios.get('/api/books')
       .then(res => this.setState({ books: res.data }))
+      .catch(e => console.error(e))
   }
 
   ratingAverage(ratingArray) {
@@ -57,10 +58,10 @@ class BooksAll extends React.Component {
                     <div className="card-content">
                       <h4 className="title is-6">{book.title}</h4>
                       <h5 className="title is-7">by: {book.authors[0]}</h5>
-                      <h5 className="subtitle is-7">Genre: {book.genre}</h5>
+                      <h5 className="subtitle is-7">Genre: {book.genre.genre}</h5>
                       <h5 className="subtitle is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h5>
                       <h5 className="subtitle is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
-                      <h5 className="subtitle is-7">Distance: {this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51,0.02)}km</h5>
+                      <h5 className="subtitle is-7">Distance: {this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51.514980, -0.070729)}km</h5>
                       <h5 className="subtitle is-7">Return Date: {book.returnDate}</h5>
                     </div>
                   </div>

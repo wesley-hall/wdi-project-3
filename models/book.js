@@ -20,9 +20,7 @@ const bookSchema = new mongoose.Schema({
   description: {type: String},
   rating: [ratingSchema],
   review: [reviewSchema],
-  owner: { type: mongoose.Schema.ObjectId, ref: 'User'},
-  returnDate: {type: Date, required: true},
-  borrower: {type: mongoose.Schema.ObjectId, ref: 'User'}
+  owner: { type: mongoose.Schema.ObjectId, ref: 'User'}
 })
 
 module.exports = mongoose.model('Book', bookSchema)

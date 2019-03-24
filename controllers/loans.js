@@ -3,7 +3,7 @@ const Loan = require('../models/loan')
 function loansAll(req, res, next) {
   Loan
     .find()
-    .populate('owner')
+    .populate('book borrower')
     .then(loans => res.json(loans))
     .catch(next)
 }
