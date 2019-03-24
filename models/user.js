@@ -23,11 +23,23 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 })
 
-userSchema.virtual('userBooks', {
+userSchema.virtual('booksOwned', {
   ref: 'Book',
   localField: '_id',
   foreignField: 'owner'
 })
+
+userSchema.virtual('booksBorrowed', {
+  ref: 'Loan',
+  localField: '_id',
+  foreignField: 'borrower'
+})
+
+// userSchema.virtual('booksLoanedOut', {
+//   ref: 'Loan',
+//   localField: '_id',
+//   foreignField: 'wtf, mate?'
+// })
 
 userSchema.set('toJSON', {
   virtuals: true

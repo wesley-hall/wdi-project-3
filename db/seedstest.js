@@ -4,7 +4,6 @@ const {dbURI} = require('../config/environment')
 const Books = require('../models/book')
 const BookGenre = require('../models/bookGenre')
 const User = require('../models/user')
-const Loan = require('../models/loan')
 const Promise = require('bluebird')
 
 mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
@@ -239,8 +238,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
               user: users[2]
             }
           ],
-          owner: users[0]
-
+          owner: users[0],
+          returnDate: new Date(),
+          borrower: users[2]
         },
         {
           title: 'Change We Can Believe in',
@@ -274,7 +274,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
               user: users[2]
             }
           ],
-          owner: users[1]
+          owner: users[1],
+          returnDate: new Date(),
+          borrower: users[3]
         },
         {
           title: 'The Joy of Cooking',
@@ -292,8 +294,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
               user: users[2]
             }
           ],
-          owner: users[2]
-
+          owner: users[2],
+          returnDate: new Date()
         },
         {
           title: 'Mansfield Park',
@@ -311,7 +313,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
               user: users[2]
             }
           ],
-          owner: users[3]
+          owner: users[3],
+          returnDate: new Date(),
+          borrower: users[4]
         },
         {
           title: 'The Help',
@@ -336,7 +340,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
               user: users[5]
             }
           ],
-          owner: users[5]
+          owner: users[5],
+          returnDate: new Date(),
+          borrower: users[4]
         },
         {
           title: '1984',
@@ -359,7 +365,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
               user: users[1]
             }
           ],
-          owner: users[2]
+          owner: users[2],
+          returnDate: new Date()
         },
         {
           title: 'The Hobbit',
@@ -378,7 +385,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
               user: users[3]
             }
           ],
-          owner: users[3]
+          owner: users[3],
+          returnDate: new Date()
         }
       ])
     })
@@ -387,3 +395,6 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
     .finally(() => mongoose.connection.close())
 
 })
+
+// returnDate: {type: Date, required: true},
+// borrower: {type: mongoose.Schema.ObjectId, ref: 'User'}
