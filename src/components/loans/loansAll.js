@@ -17,6 +17,7 @@ class LoansAll extends React.Component {
     if (!this.state.loans) return null
     console.log(this.state.loans)
     const { loans } = this.state
+
     return (
       <div>
         <main className="section">
@@ -28,49 +29,58 @@ class LoansAll extends React.Component {
               <h2>Books Loaned Out</h2>
               {loans.map(loan => (
                 <div key={loan._id}>
-                  <h4>{loan.start}</h4>
-                  <h4>{loan.end}</h4>
-                  <h4>{loan.book.title}</h4>
-                  <h4>{loan.borrower.username}</h4>
-                  <h4>{loan.returned}</h4>
-                  <h4>{loan.approved}</h4>
+                  <div className="columns">
+                    <h4 className="column is-gapless">{loan.start.substring(10,-5)}</h4>
+                    <h4 className="column is-gapless">{loan.end.substring(10,-5)}</h4>
+                    <h4 className="column is-gapless">{loan.book.title}</h4>
+                    <h4 className="column is-gapless">{loan.book.authors}</h4>
+                    <h4 className="column is-gapless">{loan.borrower.username}</h4>
+                    <h4 className="column is-gapless">{loan.returned}</h4>
+                    <h4 className="column is-gapless">{loan.approved}</h4>
 
-                  <p>Select:</p>
-                  <select
-                    name="booksLoaned"
-                    defaultValue={2}
-                    onChange={this.handleChange}
-                  >
-                    <option value="1">On Loan</option>
-                    <option value="2">Pending Approval</option>
-                    <option value="2">Returned</option>
-                    <option value="3">Overdue</option>
-                  </select>
+                    <p>Select:</p>
+                    <select
+                      name="booksLoaned"
+                      defaultValue={2}
+                      onChange={this.handleChange}
+                    >
+                      <option value="1">On Loan</option>
+                      <option value="2">Pending Approval</option>
+                      <option value="2">Returned</option>
+                      <option value="3">Overdue</option>
+                    </select>
+                  </div>
                 </div>
+
               ))}
+              <hr />
             </div>
 
             <div>
               <h2>Books Borrowed</h2>
               {loans.map(loan => (
                 <div key={loan._id}>
-                  <h4>{loan.start}</h4>
-                  <h4>{loan.end}</h4>
-                  <h4>{loan.book.title}</h4>
-                  <h4>{loan.borrower.username}</h4>
-                  <h4>{loan.returned}</h4>
+                  <div className="columns">
+                    <h4 className="column is-gapless">{loan.start.substring(10,-5)}</h4>
+                    <h4 className="column is-gapless">{loan.end.substring(10,-5)}</h4>
+                    <h4 className="column is-gapless">{loan.book.title}</h4>
+                    <h4 className="column is-gapless">{loan.book.authors}</h4>
+                    <h4 className="column is-gapless">{loan.borrower.username}</h4>
+                    <h4 className="column is-gapless">{loan.returned}</h4>
 
-                  <p>Select:</p>
-                  <select
-                    name="booksBorrowed"
-                    defaultValue={2}
-                    onChange={this.handleChange}
-                  >
-                    <option value="1">Books Borrowed</option>
-                    <option value="2">Waiting for Confirmation</option>
-                    <option value="2">Returned</option>
-                    <option value="3">Overdue</option>
-                  </select>
+                    <p>Select:</p>
+                    <select
+                      className="column"
+                      name="booksBorrowed"
+                      defaultValue={2}
+                      onChange={this.handleChange}
+                    >
+                      <option value="1">Books Borrowed</option>
+                      <option value="2">Waiting for Confirmation</option>
+                      <option value="2">Returned</option>
+                      <option value="3">Overdue</option>
+                    </select>
+                  </div>
                 </div>
               ))}
             </div>

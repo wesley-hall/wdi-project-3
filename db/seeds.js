@@ -429,6 +429,33 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           message: 'This is a loan request message',
           returned: null,
           approved: false
+        },
+        {
+          book: books[2],
+          borrower: users[8],
+          start: new Date(),
+          end: new Date(),
+          message: 'This is a loan request message2',
+          returned: null,
+          approved: false
+        },
+        {
+          book: books[3],
+          borrower: users[1],
+          start: new Date(),
+          end: new Date(),
+          message: 'This is a loan request message',
+          returned: null,
+          approved: false
+        },
+        {
+          book: books[4],
+          borrower: users[5],
+          start: new Date(),
+          end: new Date(),
+          message: 'This is a loan request message2',
+          returned: null,
+          approved: false
         }
       ])
     })

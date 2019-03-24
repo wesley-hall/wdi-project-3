@@ -27,6 +27,7 @@ class Login extends React.Component {
   }
 
   handleSubmit(e) {
+    console.log('submitting properly')
     e.preventDefault()
     axios.post('/api/login', this.state.data)
       .then(res => {
@@ -42,6 +43,13 @@ class Login extends React.Component {
     return (
       <main className="section">
         <div className="container">
+          <div className="column">
+            <Link to="/register">
+              <button
+                className="button is-warning is-pulled-right"
+              >New user?</button>
+            </Link>
+          </div>
           <form
             className="update"
             onSubmit={this.handleSubmit}
@@ -50,11 +58,7 @@ class Login extends React.Component {
               <div className="column">
                 <h1 >Login</h1>
               </div>
-              <div className="column">
-                <Link to="/register">
-                  <button className="button is-warning is-pulled-right">New user?</button>
-                </Link>
-              </div>
+
             </div>
             <br />
             <div>
@@ -80,7 +84,9 @@ class Login extends React.Component {
             </div>
             <br />
             <div>
-              <button className="Login button is-success is-pulled-right">Login</button>
+              <button
+                className="Login button is-success is-pulled-right"
+              >Login</button>
             </div>
           </form>
         </div>

@@ -37,7 +37,6 @@ class Libraries extends React.Component {
     console.log('libraries[0] books length', libraries[0].books.length)
     return (
       <div>
-        <h1>Libraries</h1>
         <div>
           <LibrariesMap
             center={center}
