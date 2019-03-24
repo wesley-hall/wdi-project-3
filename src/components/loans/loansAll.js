@@ -14,6 +14,7 @@ class LoansAll extends React.Component {
   }
 
   render() {
+    if (!this.state.loans) return null
     console.log(this.state.loans)
     const { loans } = this.state
     return (
@@ -29,8 +30,8 @@ class LoansAll extends React.Component {
                 <div key={loan._id}>
                   <h4>{loan.start}</h4>
                   <h4>{loan.end}</h4>
-                  <h4>{loan.book}</h4>
-                  <h4>{loan.borrower}</h4>
+                  <h4>{loan.book.title}</h4>
+                  <h4>{loan.borrower.username}</h4>
                   <h4>{loan.returned}</h4>
                   <h4>{loan.approved}</h4>
 
@@ -55,8 +56,8 @@ class LoansAll extends React.Component {
                 <div key={loan._id}>
                   <h4>{loan.start}</h4>
                   <h4>{loan.end}</h4>
-                  <h4>{loan.book}</h4>
-                  <h4>{loan.borrower}</h4>
+                  <h4>{loan.book.title}</h4>
+                  <h4>{loan.borrower.username}</h4>
                   <h4>{loan.returned}</h4>
 
                   <p>Select:</p>
