@@ -3,6 +3,7 @@ const Loan = require('../models/loan')
 function loansAll(req, res, next) {
   Loan
     .find()
+    .populate('owner')
     .then(loans => res.json(loans))
     .catch(next)
 }
@@ -11,6 +12,7 @@ function loansAll(req, res, next) {
 function loanCreate(req, res) {
   Loan
     .create(req.body)
+    .populate('owner')
     .then(loan => res.status(201).json(loan))
     .catch(err=> res.status(500).json(err))
 }
@@ -18,6 +20,7 @@ function loanCreate(req, res) {
 function loanShow(req, res) {
   Loan
     .findById(req.params.id)
+    .populate('owner')
     .exec()
     .then(loan => {
       if(!loan) {

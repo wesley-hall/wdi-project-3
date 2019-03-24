@@ -35,101 +35,109 @@ class Register extends React.Component {
 
   render() {
     return (
-      <div>
+      <main className="section">
+        <div className="container">
+          <h1>Register new user....</h1>
+          <form
+            className='update'
+            onSubmit={this.handleSubmit}
+          >
 
-        <form
-          className='update'
-          onSubmit={this.handleSubmit}
-        >
-
-          <div>
-            <input
-              className="input"
-              name="username"
-              placeholder="Username"
-              value={this.state.data.username}
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <div>
-            <input
-              className="input"
-              name="email"
-              placeholder="Email"
-              value={this.state.data.email}
-              onChange={this.handleChange}
-            />
-          </div>
-
-
-          <div>
-            <input
-              className="input"
-              name="password"
-              placeholder="Password"
-              value={this.state.data.password}
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <div>
-            <input
-              className="input"
-              name="passwordconfirmation"
-              placeholder="Password Confirmation"
-              value={this.state.data.passwordConfirmation}
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <div>
-            <input
-              className="input"
-              name="profilePicture"
-              placeholder="profilePicture"
-              value={this.state.data.profilePicture}
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <div>
-            <input
-              className="input"
-              name="postcode"
-              placeholder="Post Code"
-              value={this.state.data.postCode}
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <div>
-            <p>Library Description: <br />
-              <textarea
-                name="textarea"
-                value={this.state.data.libraryDescription}
+            <div>
+              <input
+                className="input"
+                name="username"
+                placeholder="Username"
+                value={this.state.data.username}
                 onChange={this.handleChange}
               />
-            </p>
-          </div>
+            </div>
+            <br />
 
-          <div>
-            <input
-              className="input"
-              name="libraryPicture"
-              placeholder="libraryPicture"
-              value={this.state.data.libraryPicture}
-              onChange={this.handleChange}
-            />
-          </div>
+            <div>
+              <input
+                className="input"
+                name="email"
+                placeholder="Email"
+                value={this.state.data.email}
+                onChange={this.handleChange}
+              />
+            </div>
+            <br />
 
-          <div>
-            <button className="Register Button">Register</button>
-          </div>
+            <div className="columns">
+              <div className="column is-half">
+                <input
+                  className="input"
+                  name="password"
+                  placeholder="Password"
+                  value={this.state.data.password}
+                  onChange={this.handleChange}
+                />
+              </div>
 
-        </form>
-      </div>
+              <div className="column is-half">
+                <input
+                  className="input"
+                  name="passwordconfirmation"
+                  placeholder="Password Confirmation"
+                  value={this.state.data.passwordConfirmation}
+                  onChange={this.handleChange}
+                />
+              </div>
+            </div>
 
+            <div>
+              <input
+                className="input"
+                name="profilePicture"
+                placeholder="profilePicture"
+                value={this.state.data.profilePicture}
+                onChange={this.handleChange}
+              />
+            </div>
+            <br />
+
+            <div>
+              <input
+                className="input"
+                name="postcode"
+                placeholder="Post Code"
+                value={this.state.data.postCode}
+                onChange={this.handleChange}
+              />
+            </div>
+            <br />
+
+            <div>
+              <p>Library Description: <br />
+                <textarea
+                  name="textarea"
+                  value={this.state.data.libraryDescription}
+                  onChange={this.handleChange}
+                />
+              </p>
+            </div>
+            <br />
+
+            <div>
+              <input
+                className="input"
+                name="libraryPicture"
+                placeholder="libraryPicture"
+                value={this.state.data.libraryPicture}
+                onChange={this.handleChange}
+              />
+            </div>
+            <br />
+
+            <div>
+              <button className="Register button is-success is-pulled-right">Register</button>
+            </div>
+
+          </form>
+        </div>
+      </main>
     )
   }
 }

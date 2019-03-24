@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Auth from '../../lib/auth'
 
+
 class BookShow extends React.Component {
   constructor() {
     super()
@@ -28,6 +29,19 @@ class BookShow extends React.Component {
     return sum/ratingArray.length
   }
 
+  calculateDistance(lat1, lon1, lat2, lon2){
+    const R = 6371e3
+    const φ1 = lat1 * Math.PI / 180
+    const φ2 = lat2 * Math.PI / 180
+    const Δφ = (lat2-lat1) * Math.PI / 180
+    const Δλ = (lon2-lon1) * Math.PI / 180
+    const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+          Math.cos(φ1) * Math.cos(φ2) *
+          Math.sin(Δλ/2) * Math.sin(Δλ/2)
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+    const d = R * c
+    return (d/1000).toFixed(2)
+  }
 
   render() {
     if (!this.state.book) return null
@@ -48,10 +62,11 @@ class BookShow extends React.Component {
               <div className="column is-half">
 
                 <h5 className="subtitle is-7">Genre: {book.genre}</h5>
-                <h5 className="subtitle is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h5>
-                <h5 className="subtitle is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
-                <h5 className="subtitle is-7">Location: {book.owner.location}</h5>
-                <h5 className="subtitle is-7">Return Date: {book.returnDate}</h5>
+                <h5 className="is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h5>
+                <h5 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
+                <h5 className="is-7">dist:
+                {this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51,0.02)}km</h5>
+               <h5 className="subtitle is-7">Return Date: {book.returnDate}</h5>
                 <h5 className="subtitle is-7">{book.description}</h5>
 
                 <hr />

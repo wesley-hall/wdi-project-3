@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link, withRouter } from 'react-router-dom'
 
 import Auth from '../../lib/auth'
 
@@ -42,10 +43,20 @@ class Login extends React.Component {
       <main className="section">
         <div className="container">
           <form
-            className='update'
+            className="update"
             onSubmit={this.handleSubmit}
           >
-
+            <div className="columns">
+              <div className="column">
+                <h1 >Login</h1>
+              </div>
+              <div className="column">
+                <Link to="/register">
+                  <button className="button is-warning is-pulled-right">New user?</button>
+                </Link>
+              </div>
+            </div>
+            <br />
             <div>
               <input
                 className="input"
@@ -55,6 +66,7 @@ class Login extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
+            <br />
 
             <div>
               <input
@@ -66,12 +78,10 @@ class Login extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-
-
+            <br />
             <div>
-              <button className="Login Button">Login</button>
+              <button className="Login button is-success is-pulled-right">Login</button>
             </div>
-
           </form>
         </div>
       </main>
