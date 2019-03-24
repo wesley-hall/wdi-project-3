@@ -36,8 +36,8 @@ function login(req, res) {
 function librariesAll(req, res) {
   User
     .find()
-    .populate('userBooks')
-    .then(libraries => res.json(libraries.map(library => ({ libraryName: library.libraryName, location: library.location, books: library.userBooks, owner: library._id }))))
+    .populate('booksOwned')
+    .then(libraries => res.json(libraries.map(library => ({ libraryName: library.libraryName, location: library.location, books: library.booksOwned, owner: library._id }))))
     .catch(err => res.json(err))
 }
 

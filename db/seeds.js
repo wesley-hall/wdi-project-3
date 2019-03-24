@@ -284,11 +284,17 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           genre: genres[0],
           description: 'In 1931, Irma S. Rombauer, a recent widow, took her life savings and self-published a cookbook that she hoped might support her family. Little did she know that her book would go on to become Americas most beloved cooking companion.',
           rating: [
-            { rating: 4, user: users[2]}
+            { rating: 4, user: users[2]},
+            { rating: 3, user: users[5]},
+            { rating: 2, user: users[4]}
           ],
           review: [
             {
               review: 'What do I like most about The Joy of Cooking? It is fairly encyclopedic, covering about as broad a range of cooking topics as it can; while most of the recipes are from the Western tradition, it also dips into some less traditional preparations (e.g., ceviche). The book does not assume that you know anything about cooking -- not sure what a "dash" is? You can look up an explanation for that. What\'s the difference between a filet and a cutlet? It explains that, too. (HINT: they\'re basically synonymous.) It has a great index, is organized well, and has recipes to cover almost any occasion and varying degrees of culinary sophistication.',
+              user: users[2]
+            },
+            {
+              review: 'I don\'t know why it took so long for me to include this very worthy book to my Goodreads Library. This is my second copy. The first, a paperback, became so tattered and worn that my son presented this valued edition as a gift. I have been cooking for more than forty years, but continue to return to this book for ideas, information and special recipes. On many occasions I search for new ways to prepare foods and will find the ideal formula for preparation. Frequently I will "tweak" the recipe in order to please the palates of my diners, but JOY has rarely failed to please me.',
               user: users[2]
             }
           ],
@@ -309,6 +315,12 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
             {
               review: 'I can not but think good horsemanship has a great deal to do with the mind." Jane Austen always did a great job of planting ridiculous declarations in the mouths of characters she wished to discredit. Character was her strong suit and there\'s some good\'uns here in.',
               user: users[2]
+            },
+            {
+              review: `I was astounded to find that many of the reviews on this site criticize this book for the main character, Fanny Price, & her timidity and morality. It is very different from Pride and Prejudice and Sense and Sensibility, whose smart, sensible heroines make the novels, but I actually enjoyed this book immensely for its social commentary.
+
+              Most of the characters in this book singlemindedly pursue wealth, status, and pleasure regardless of their personal and moral costs. Their antics are pretty hilarious, and I think Fanny's passive and proper nature makes her an ideal medium through which to observe all the frivolous and shallow people around her. Aside from being funny, the book also raises the issue of a girl's "duty" to marry well - should personal happiness be sacrificed for money and connections?`,
+              user: users[3]
             }
           ],
           owner: users[3]
