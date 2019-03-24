@@ -1,7 +1,7 @@
 import React from 'react'
 import mapboxgl from 'mapbox-gl'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
-mapboxgl.accessToken = 'pk.eyJ1Ijoid2VzbGV5aGFsbCIsImEiOiJjanNweDIyejYwcGw0NDNvZTV4ZHh6ejRlIn0.jzCFDC5gNOXBTSelrS7N5A'
+mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
 
 class LibrariesMap extends React.Component {
   constructor() {
