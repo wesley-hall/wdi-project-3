@@ -6,7 +6,8 @@
   "scripts": {
     "start:server": "nodemon",
     "start:client": "webpack-dev-server --mode=development",
-    "seed": "node db/seeds.js"
+    "seed": "node db/seeds.js",
+    "test": "node_modules/.bin/mocha"
   },
   "dependencies": {
     "@mapbox/mapbox-gl-geocoder": "^3.1.6",
@@ -34,11 +35,14 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "chai": "^4.2.0",
     "css-loader": "^2.1.0",
     "html-webpack-plugin": "^3.2.0",
+    "mocha": "^6.0.2",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "supertest": "^4.0.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"

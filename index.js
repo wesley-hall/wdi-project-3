@@ -19,3 +19,5 @@ app.get('/*', (req, res) => res.sendFile(`${__dirname}/dist/index.html`))
 app.use(errorHandler)
 
 app.listen(port, console.log(`Listening on ${port}`))
+
+module.exports = app
