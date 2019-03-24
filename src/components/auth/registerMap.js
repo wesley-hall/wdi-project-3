@@ -27,18 +27,25 @@ class RegisterMap extends React.Component{
 
     const getMarkerLocation = () => {
       const markerLocation = marker.getLngLat()
-      axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${markerLocation.lng},${markerLocation.lat}.json`, {
-        params: {
-          access_token: mapboxgl.accessToken
-        }
-      })
-        .then(res => this.setState({ address: res.data.features[0] }))
-        .catch(err => console.log(err))
       const location = { lat: markerLocation.lat, lng: markerLocation.lng }
       this.props.onSelectLocation(location)
+      this.getMapboxPlace(markerLocation.lng, markerLocation.lat)
     }
 
     marker.on('dragend', getMarkerLocation)
+  }
+
+  getMapboxPlace(lng, lat) {
+    axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json`, {
+      params: {
+        access_token: mapboxgl.accessToken
+      }
+    })
+      .then(res => {
+        const address = {...this.state, address: res.data.features[0]}
+        this.setState({ address})
+      })
+      .catch(err => console.log(err))
   }
 
   render() {

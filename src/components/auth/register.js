@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 
+import RegisterMap from './registerMap'
+
 class Register extends React.Component {
   constructor() {
     super()
@@ -11,13 +13,21 @@ class Register extends React.Component {
         password: '',
         passwordConfirmation: '',
         profilePicture: '',
-        postcode: '',
+        location: {},
+        libraryName: '',
         libraryDescription: '',
         libraryPicture: ''
       },
       errors: {}
     }
+
+    this.mapCenter = {
+      lat: 51.5,
+      lng: -0.11
+    }
+
     this.handleChange = this.handleChange.bind(this)
+    this.handleLocation = this.handleLocation.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -26,6 +36,12 @@ class Register extends React.Component {
     const errors = {...this.state.errors, [name]: ''}
     this.setState({data,errors})
   }
+
+  handleLocation(location) {
+    this.setState({...this.state.data, location})
+    console.log('state out map', this.state)
+  }
+
   handleSubmit(e) {
     e.preventDefault()
     console.log('trying to submit')
@@ -101,11 +117,19 @@ class Register extends React.Component {
             <br />
 
             <div>
+              <RegisterMap
+                center={this.mapCenter}
+                onSelectLocation={this.handleLocation}
+              />
+            </div>
+            <br />
+
+            <div>
               <input
                 className="input"
-                name="postcode"
-                placeholder="Post Code"
-                value={this.state.data.postcode}
+                name="libraryName"
+                placeholder="Library Name"
+                value={this.state.data.libraryName}
                 onChange={this.handleChange}
               />
             </div>
