@@ -18,6 +18,26 @@ class LoansAll extends React.Component {
       .then(res => this.setState({ loans: res.data }))
   }
 
+
+  // loanStatus() {
+  //   if
+  //  (datetoday > date created)
+  //   }
+  //   return pendingApproval
+
+  //   } else (if datetoday >= date returned)
+  //   }
+  //   return bookReturned
+
+  //   } else (if datetoday > end date && returned === null)
+  //   }
+  //   return overdue
+
+  // } else  (datetoday <= end date && returned === null)
+  //   }
+  //   return onLoan
+  // }
+
   handleChange({ target: { name , value }}) {
     const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: ''}

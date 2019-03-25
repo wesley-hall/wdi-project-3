@@ -8,11 +8,12 @@ function loansAll(req, res, next) {
     .catch(next)
 }
 
-
 function loanCreate(req, res) {
+  req.body.borrower = req.currentUser
+  req.body.book = req.params.id
+  req.body.approved = false
   Loan
     .create(req.body)
-    .populate('owner')
     .then(loan => res.status(201).json(loan))
     .catch(err=> res.status(500).json(err))
 }

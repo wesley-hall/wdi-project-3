@@ -11,6 +11,7 @@ function booksAll(req, res) {
 
 
 function bookCreate(req, res) {
+  req.body.owner = req.currentUser
   Book
     .create(req.body)
     .then(book => res.status(201).json(book))
