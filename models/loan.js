@@ -5,6 +5,7 @@ const loanSchema = new mongoose.Schema({
   borrower: { type: mongoose.Schema.ObjectId, ref: 'User'},
   start: { type: Date, required: true},
   end: { type: Date, required: true},
+  status: {type: String, required: true},
   message: { type: String },
   returned: { type: Date},
   approved: { type: Boolean, required: true }

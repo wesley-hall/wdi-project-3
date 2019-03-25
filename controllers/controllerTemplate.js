@@ -7,7 +7,7 @@ const Template = require('../models/modelTemplate')
 function indexRoute(req, res) {
   return Template
     .find(req.query)
-    .then(animals => res.status(200).json(animals))
+    .then(books => res.status(200).json(books))
     .catch(err => res.json(err))
 }
 
