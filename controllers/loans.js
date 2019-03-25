@@ -8,7 +8,6 @@ function loansAll(req, res, next) {
     .catch(next)
 }
 
-
 function loanCreate(req, res) {
   req.body.borrower = req.currentUser
   req.body.book = req.params.id

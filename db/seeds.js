@@ -422,40 +422,41 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       const [ books, users ] = data
       return Loan.create([
         {
-          book: books[0],
-          borrower: users[9],
-          start: new Date(),
-          end: new Date(),
-          message: 'This is a loan request message',
+          book: books[3],
+          borrower: users[3],
+          start: '2019-02-20T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan A Zoe to Sumi returned',
+          returned: '2019-02-25T10:14:31.561Z',
+          approved: true
+        },
+        {
+          book: books[6],
+          borrower: users[3],
+          start: '2019-03-20T10:14:31.561Z',
+          end: '2019-04-20T10:14:31.561Z',
+          message: 'Loan B Zoe to Sumi ongoing',
           returned: null,
           approved: false
         },
         {
           book: books[2],
-          borrower: users[8],
-          start: new Date(),
-          end: new Date(),
-          message: 'This is a loan request message2',
-          returned: null,
-          approved: false
+          borrower: users[2],
+          start: '2019-02-19T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Request A Book Sumi to Zoe returned',
+          returned: '2019-02-25T10:14:31.561Z',
+          approved: true
         },
+
         {
-          book: books[3],
-          borrower: users[1],
-          start: new Date(),
-          end: new Date(),
-          message: 'This is a loan request message',
+          book: books[5],
+          borrower: users[2],
+          start: '2019-03-20T10:14:31.561Z',
+          end: '2019-04-20T10:14:31.561Z',
+          message: 'Request A Book Sumi to Zoe still reading',
           returned: null,
-          approved: false
-        },
-        {
-          book: books[4],
-          borrower: users[5],
-          start: new Date(),
-          end: new Date(),
-          message: 'This is a loan request message2',
-          returned: null,
-          approved: false
+          approved: true
         }
       ])
     })
