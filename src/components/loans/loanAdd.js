@@ -68,11 +68,9 @@ class LoanAdd extends React.Component {
               </div>
               <div className="column is-half">
 
-                <h5 className="subtitle is-7">Genre: {book.genre}</h5>
+                <h5 className="subtitle is-7">Genre: {book.genre.genre}</h5>
                 <h5 className="subtitle is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h5>
                 <h5 className="subtitle is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
-              
-                <h5 className="subtitle is-7">Return Date: {book.returnDate}</h5>
                 <h5 className="subtitle is-7">{book.description}</h5>
 
                 <hr />
@@ -111,7 +109,7 @@ class LoanAdd extends React.Component {
 
               <div>
                 <input
-                  className="approved"
+                  className="input"
                   name="approved"
                   placeholder="Approved"
                   value={this.state.data.approved}
@@ -121,7 +119,7 @@ class LoanAdd extends React.Component {
 
               <div>
                 <input
-                  className="returned"
+                  className="input"
                   name="returned"
                   placeholder="Returned"
                   value={this.state.data.returned}
@@ -132,7 +130,8 @@ class LoanAdd extends React.Component {
               <div>
                 <p>Message: <br />
                   <textarea
-                    name="textarea_1"
+                    className="textarea"
+                    name="message"
                     value={this.state.data.message}
                     onChange={this.handleChange}
                   />
