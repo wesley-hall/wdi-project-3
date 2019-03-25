@@ -127,7 +127,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       {
         username: 'Matthew',
         profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyC.jpg',
-        email: 'steven@email',
+        email: 'matthew@email',
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Matthew library',
@@ -211,7 +211,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         Books.create([
           {
             title: 'King Lear',
-            authors: [ 'Rene Weis', 'William Shakespeare'],
+            authors: 'William Shakespeare',
             image: 'https://books.google.com/books/content?id=cWJcAgAAQBAJ&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api',
             fiction: true,
             genre: genres[2],
@@ -245,7 +245,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           },
           {
             title: 'Change We Can Believe in',
-            authors: [ 'Barack Obama'],
+            authors: 'Barack Obama',
             image: 'https://books.google.com/books/content?id=pK5ALFeVVcMC&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api',
             fiction: false,
             genre: genres[1],
@@ -279,7 +279,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           },
           {
             title: 'The Joy of Cooking',
-            authors: [ 'Irma S. Rombauer'],
+            authors: 'Irma S. Rombauer',
             image: 'https://books.google.com/books/content?id=MFWFeJ5t8zcC&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api',
             fiction: true,
             genre: genres[0],
@@ -304,7 +304,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           },
           {
             title: 'Mansfield Park',
-            authors: [ 'Jane Austen'],
+            authors: 'Jane Austen',
             image: 'http://books.google.com/books/content?id=yS4JAAAAQAAJ&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api',
             fiction: true,
             genre: genres[3],
@@ -328,7 +328,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           },
           {
             title: 'The Help',
-            authors: [ 'Kathryn Stockett'],
+            authors: 'Kathryn Stockett',
             image: 'https://books.google.com/books/content?id=wsEXhw17prsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
             fiction: true,
             genre: genres[9],
@@ -359,7 +359,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           },
           {
             title: '1984',
-            authors: [ 'George Orwell'],
+            authors: 'George Orwell',
             image: 'http://www.orjon.com/dev/booker/images/bookcovers/cover-1984.jpeg',
             fiction: true,
             genre: genres[4],
@@ -396,7 +396,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           },
           {
             title: 'The Hobbit',
-            authors: [ 'J.R.R Tolkien'],
+            authors: 'J.R.R Tolkien',
             image: 'http://www.orjon.com/dev/booker/images/bookcovers/cover-theHobbit.jpeg',
             fiction: true,
             genre: genres[4],
