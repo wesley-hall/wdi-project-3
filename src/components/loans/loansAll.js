@@ -5,7 +5,12 @@ import { Link } from 'react-router-dom'
 class LoansAll extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      errors: {}
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
@@ -14,6 +19,12 @@ class LoansAll extends React.Component {
   }
 
   handleChange({ target: { name , value }}) {
+    const data = {...this.state.data, [name]: value}
+    const errors = {...this.state.errors, [name]: ''}
+    this.setState({data,errors})
+  }
+
+  handleClick({ target: { name , value }}) {
     const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: ''}
     this.setState({data,errors})
@@ -67,10 +78,25 @@ class LoansAll extends React.Component {
                     <h4 className="column is-gapless">{loan.approved}</h4>
 
                     <div>
-                      <button className="Approve">Approve Loan</button>
+                      <button
+                        className="confirmReturned"
+                        onClick={this.handleClick}
+                      >Confirm Book Returned</button>
                     </div>
+
                     <div>
-                      <button className="Reject">Reject Loan</button>
+                      <button
+                        className="Approve"
+                        onClick={this.handleClick}
+                      >Approve Loan</button>
+                    </div>
+
+                    <div>
+                      <button
+                        className="Reject"
+                        onClick={this.handleClick}
+                      >
+                        Reject Loan</button>
                     </div>
 
                   </div>
@@ -87,7 +113,7 @@ class LoansAll extends React.Component {
                   <select
                     name="booksBorrowed"
                     defaultValue={2}
-                    onChange={this.handleInputChange}
+                    onChange={this.handleChange}
                   >
                     <option value="1">On Loan</option>
                     <option value="2">Pending Confirmation</option>
@@ -117,7 +143,11 @@ class LoansAll extends React.Component {
                     <h4 className="column is-gapless">{loan.returned}</h4>
 
                     <div>
-                      <button className="Cancel">Cancel Loan Request</button>
+                      <button
+                        className="Cancel"
+                        onClick={this.handleClick}
+                      >
+                      Cancel Loan Request</button>
                     </div>
 
                   </div>
