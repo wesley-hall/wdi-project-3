@@ -13,7 +13,7 @@ const reviewSchema = new mongoose.Schema({
 const bookSchema = new mongoose.Schema({
 
   title: {type: String, required: true},
-  authors: [{type: String}],
+  authors: {type: String},
   image: {type: String},
   fiction: {type: Boolean, required: true},
   genre: { type: mongoose.Schema.ObjectId, ref: 'BookGenre'},
