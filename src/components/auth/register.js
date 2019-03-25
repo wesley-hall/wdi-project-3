@@ -40,13 +40,12 @@ class Register extends React.Component {
   handleLocation(location) {
     const data = {...this.state.data, location}
     this.setState({ data })
-    console.log('state out map', this.state)
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log('trying to submit')
     axios.post('/api/register', this.state.data)
+      .then(() => this.props.history.push('/login'))
       .catch(err => this.setState({errors: err.response.data.errors}))
   }
 
