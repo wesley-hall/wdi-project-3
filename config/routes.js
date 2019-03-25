@@ -19,9 +19,9 @@ router.route('/books/:id')
   .put(secureRoute, books.bookUpdate)
   .delete(secureRoute, books.bookDelete)
 
-router.route('/loans')
-  .get(loans.loansAll)
-  .post(secureRoute, loans.loanCreate)
+router.get('/loans', loans.loansAll)
+
+router.post('/books/:id/loan', secureRoute, loans.loanCreate)
 
 router.route('/loans/:id')
   .get(loans.loanShow)
