@@ -30,7 +30,6 @@ class RegisterMap extends React.Component{
     const getMarkerLocation = () => {
       const markerLocation = marker.getLngLat()
       const location = { lat: markerLocation.lat, lng: markerLocation.lng }
-      console.log('location', location)
       this.props.onSelectLocation(location)
       this.getMapboxPlace(markerLocation.lng, markerLocation.lat)
     }
@@ -55,7 +54,6 @@ class RegisterMap extends React.Component{
   render() {
     if (!this.state.data.address) return null
     const { address } = this.state.data
-    console.log('address', address)
     return (
       <div>
         <div className="map-register" ref={el => this.mapDiv = el} />
