@@ -9,10 +9,15 @@ class Home extends React.Component {
 
   render() {
     return (
-      <main className="section">
-        <div className="container">
-          <h1>Home</h1>
-          <p>The community library project</p>
+      <main className="hero is-bold backgroundHero is-fullheight-with-navbar">
+        <div className="hero-body">
+
+          <div className="container has-text-centered">
+            <h1 className="title">
+              Booker: The community library project
+            </h1>
+          </div>
+
         </div>
       </main>
     )

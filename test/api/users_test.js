@@ -7,6 +7,14 @@ const { secret } = require('../../config/environment')
 
 const jwt = require('jsonwebtoken')
 
+const bookData = {
+  title: 'The Hobbit',
+  authors: 'J.R.R Tolkien',
+  image: 'http://www.orjon.com/dev/booker/images/bookcovers/cover-theHobbit.jpeg',
+  fiction: true,
+  description: ' In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it was a hobbit-hole, and that means comfort.'
+}
+
 let token
 
 describe('Book tests', () => {
@@ -16,15 +24,12 @@ describe('Book tests', () => {
     done()
   })
 
+
   beforeEach(done => {
     Book.collection.remove()
-    Book.create({
-      title: 'The Name of the Wind',
-      authors: 'Patrick Rothfuss',
-      image: 'https://images-na.ssl-images-amazon.com/images/I/91b8oNwaV1L.jpg',
-      fiction: true,
-      description: 'The Name of the Wind, also called The Kingkiller Chronicle: Day One, is a fantasy novel written by American author Patrick Rothfuss. It is the first book in the ongoing fantasy trilogy The Kingkiller Chronicle, followed by The Wise Man\'s Fear.'
-    })
+    Book.create(
+      bookData
+    )
       .then(() => User.remove({}))
       .then(() => User.create({
         username: 'test',
@@ -45,15 +50,6 @@ describe('Book tests', () => {
 
       .catch(done)
   })
-  // title: {type: String, required: true},
-  // authors: {type: String},
-  // image: {type: String},
-  // fiction: {type: Boolean, required: true},
-  // genre: { type: mongoose.Schema.ObjectId, ref: 'BookGenre'},
-  // description: {type: String},
-  // rating: [ratingSchema],
-  // review: [reviewSchema],
-  // owner: { type: mongoose.Schema.ObjectId, ref: 'User'}
 
   describe('GET /api/books', () => {
 
@@ -107,24 +103,40 @@ describe('Book tests', () => {
         })
     })
   })
-})
-describe('POST /api/books', () => {
-  console.log(token)
-  it('should return a 201 response', done => {
-    api
-      .post('/api/books')
-      .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${token}`})
-      .send({
-        title: 'Molly\'s Game',
-        authors: 'Molly Bloom',
-        image: 'https://images-na.ssl-images-amazon.com/images/I/51XLk1fcHdL._SX329_BO1,204,203,200_.jpg',
-        fiction: false,
-        description: 'When Molly Bloom was a little girl growing up in a small Colorado town, she watched her brothers win medals, ace tests, and receive high praise from everyone they met. Molly wanted nothing more than to bask in that glow a little herself, so she pushed herself too—as a student, as an athlete. She was successful but felt like she was always coming from behind. She wanted to break free, to find a life without rules and limits, a life where she didn\'t have to measure up to anyone or anything—where she could become whatever she wanted.'
-      })
-      .end((err, res) => {
-        console.log(err)
-        expect(res.status).to.eq(201)
-        done()
-      })
+  describe('POST /api/books', () => {
+    it('should return a 201 response', done => {
+      api
+        .post('/api/books')
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${token}`})
+        .send(bookData)
+        .end((err, res) => {
+          console.log(err)
+          expect(res.status).to.eq(201)
+          done()
+        })
+    })
+    it('should create a book', done => {
+      api
+        .post('/api/books')
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${token}`})
+        .send(bookData)
+        .end((err, res) => {
+          const book = res.body
+          expect(book)
+            .to.have.property('_id')
+            .and.to.be.a('string')
+
+          expect(book)
+            .to.have.property('title')
+            .and.to.be.a('string')
+
+          expect(book)
+            .to.have.property('fiction')
+            .and.to.be.a('boolean')
+
+          done()
+        })
+    })
   })
+
 })

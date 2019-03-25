@@ -111,7 +111,7 @@ class LoanAdd extends React.Component {
 
               <div>
                 <input
-                  className="approved"
+                  className="input"
                   name="approved"
                   placeholder="Approved"
                   value={this.state.data.approved}
@@ -121,7 +121,7 @@ class LoanAdd extends React.Component {
 
               <div>
                 <input
-                  className="returned"
+                  className="input"
                   name="returned"
                   placeholder="Returned"
                   value={this.state.data.returned}
@@ -132,7 +132,8 @@ class LoanAdd extends React.Component {
               <div>
                 <p>Message: <br />
                   <textarea
-                    name="textarea_1"
+                    className="textarea"
+                    name="message"
                     value={this.state.data.message}
                     onChange={this.handleChange}
                   />

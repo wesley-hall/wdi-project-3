@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+import Auth from '../../lib/auth'
+
 class BooksAll extends React.Component {
   constructor() {
     super()
@@ -39,40 +41,50 @@ class BooksAll extends React.Component {
 
   render() {
     return (
-      <main className="section">
-        <div className="container">
-          <div className="columns is-mobile is-multiline">
-            {!this.state.books && <p>...loading</p>}
-            {this.state.books && this.state.books.map(book => (
-              <div key={book._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
-                <Link to={`/books/${book._id}`} >
-                  <div className="card">
-                    <div className="card-header">
-                      <div className="card-image">
-                        <figure className="image">
-                          <img src={book.image} alt={book.title} />
-                        </figure>
+      <div>
+        <br />
+        {Auth.isAuthenticated() && <Link to="/books/add" className="button button-add-book is-success is-pulled-right">Add a book...</Link>}
+
+        <main className="section">
+
+          <div className="container">
+
+            <div className="columns is-mobile is-multiline">
+              {!this.state.books && <p>...loading</p>}
+              {this.state.books && this.state.books.map(book => (
+                <div key={book._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
+                  <Link to={`/books/${book._id}`} >
+                    <div className="card">
+                      <div className="card-header">
+                        <div className="card-image">
+                          <figure className="image">
+                            <img src={book.image} alt={book.title} />
+                          </figure>
+                        </div>
+                      </div>
+
+                      <div className="card-content">
+                        <h4 className="title is-6">{book.title}</h4>
+                        <h5 className="title is-7">by: {book.authors}</h5>
+                        <h5 className="subtitle is-7">Genre: {book.genre.genre}</h5>
+                        <h5 className="subtitle is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h5>
+                        <h5 className="subtitle is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
+                        <h5 className="subtitle is-7">Distance: {this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51.514980, -0.070729)}km</h5>
+                        <h5 className="subtitle is-7">Return Date: {book.returnDate}</h5>
                       </div>
                     </div>
+                  </Link>
+                </div>
 
-                    <div className="card-content">
-                      <h4 className="title is-6">{book.title}</h4>
-                      <h5 className="title is-7">by: {book.authors}</h5>
-                      <h5 className="subtitle is-7">Genre: {book.genre.genre}</h5>
-                      <h5 className="subtitle is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h5>
-                      <h5 className="subtitle is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
-                      <h5 className="subtitle is-7">Distance: {this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51.514980, -0.070729)}km</h5>
-                      <h5 className="subtitle is-7">Return Date: {book.returnDate}</h5>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     )
   }
 }
 export default BooksAll
+
+// {this.isOwner() && <Link className="button is-warning" to={`/bookjs/${book._id}/edit`}>Edit</Link>}
+// {this.isOwner() && <button className="button is-danger" onClick={this.handleDelete}>Delete</button>}

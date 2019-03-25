@@ -5,6 +5,19 @@ div.map-libraries {
   height: 90vh;
 }
 
+.backgroundHero {
+  height: 500px;
+  background-image: url(http://www.orjon.com/dev/booker/images/hero/bookshelf2-light.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1.title {
+
+  color: black;
+  font-size: 3rem;
+}
+
 .marker-libraries {
   color: white;
   font-size: 16px;
@@ -14,6 +27,10 @@ div.map-libraries {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.button-add-book {
+  margin-right:1.5rem
 }
 
 .marker-libraries:before {
