@@ -8,7 +8,9 @@ class RegisterMap extends React.Component{
   constructor() {
     super()
     this.state = {
-      address: {}
+      data: {
+        address: {}
+      }
     }
   }
 
@@ -17,7 +19,7 @@ class RegisterMap extends React.Component{
       container: this.mapDiv,
       style: 'mapbox://styles/mapbox/streets-v9',
       center: this.props.center,
-      zoom: 11
+      zoom: 10
     })
 
     const marker = new mapboxgl.Marker({ draggable: true })
@@ -28,6 +30,7 @@ class RegisterMap extends React.Component{
     const getMarkerLocation = () => {
       const markerLocation = marker.getLngLat()
       const location = { lat: markerLocation.lat, lng: markerLocation.lng }
+      console.log('location', location)
       this.props.onSelectLocation(location)
       this.getMapboxPlace(markerLocation.lng, markerLocation.lat)
     }
@@ -42,15 +45,16 @@ class RegisterMap extends React.Component{
       }
     })
       .then(res => {
-        const address = {...this.state, address: res.data.features[0]}
-        this.setState({ address})
+        const address = res.data.features[0]
+        const data = {...this.state.data, address}
+        this.setState({ data })
       })
       .catch(err => console.log(err))
   }
 
   render() {
-    if (!this.state.address) return null
-    const { address } = this.state
+    if (!this.state.data.address) return null
+    const { address } = this.state.data
     console.log('address', address)
     return (
       <div>
