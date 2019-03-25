@@ -30,7 +30,6 @@ class BookAdd extends React.Component {
     axios.get('/api/genres')
       .then(res => {
         this.setState({ genres: res.data })
-        console.log(this.state.genres)
       })
       .catch(err => console.log(err))
   }
@@ -104,6 +103,11 @@ class BookAdd extends React.Component {
               <div className="field">
                 <div className="control">
                   <div className="select">
+                    <select>
+                      {this.state.genres && this.state.genres.map(genre => (
+                        <option key={genre._id}>{genre.genre}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
               </div>
@@ -121,5 +125,3 @@ class BookAdd extends React.Component {
 }
 
 export default BookAdd
-
-                    // <select>{this.state.genres.map(genre => <option key={genre._id}>{genre.genre}</option>)}</select>
