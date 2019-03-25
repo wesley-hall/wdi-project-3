@@ -34,11 +34,12 @@ class Register extends React.Component {
   handleChange({ target: { name , value }}) {
     const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: ''}
-    this.setState({data,errors})
+    this.setState({ data, errors })
   }
 
   handleLocation(location) {
-    this.setState({...this.state.data, location})
+    const data = {...this.state.data, location}
+    this.setState({ data })
     console.log('state out map', this.state)
   }
 
@@ -117,6 +118,7 @@ class Register extends React.Component {
             <br />
 
             <div>
+              <label>Choose your location on the map</label>
               <RegisterMap
                 center={this.mapCenter}
                 onSelectLocation={this.handleLocation}
