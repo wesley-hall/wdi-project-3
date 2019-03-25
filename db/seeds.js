@@ -169,37 +169,37 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
     ]),
     BookGenre.create([
       {
-        genre: 'cooking'
+        genre: 'Cooking'
       },
       {
-        genre: 'biography'
+        genre: 'Biography'
       },
       {
-        genre: 'tragedy'
+        genre: 'Tragedy'
       },
       {
-        genre: 'romance'
+        genre: 'Romance'
       },
       {
-        genre: 'fantasy'
+        genre: 'Fantasy'
       },
       {
-        genre: 'sci-fi'
+        genre: 'Sci-Fi'
       },
       {
-        genre: 'diy'
+        genre: 'D.I.Y.'
       },
       {
-        genre: 'art'
+        genre: 'Art'
       },
       {
-        genre: 'language'
+        genre: 'Language'
       },
       {
-        genre: 'drama'
+        genre: 'Drama'
       },
       {
-        genre: 'literature'
+        genre: 'Literature'
       }
     ])
   ]
