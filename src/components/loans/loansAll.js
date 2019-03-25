@@ -79,47 +79,32 @@ class LoansAll extends React.Component {
                 </div>
               </div>
               <div className="columns">
-                <h4 className="column is-gapless">Start Date</h4>
-                <h4 className="column is-gapless">End Date</h4>
-                <h4 className="column is-gapless">Book Title</h4>
-                <h4 className="column is-gapless">Author</h4>
-                <h4 className="column is-gapless">Requested By</h4>
-                <h4 className="column is-gapless">Status</h4>
-                <h4 className="column is-gapless">Actions</h4>
+                <h4 className="column is-2 is-gapless">Start Date</h4>
+                <h4 className="column is-2 is-gapless">End Date</h4>
+                <h4 className="column is-2 is-gapless">Book Title</h4>
+                <h4 className="column is-2 is-gapless">Requested By</h4>
+                <h4 className="column is-2 is-gapless">Returned</h4>
+                <h4 className="column is-2 is-gapless">Actions</h4>
               </div>
               {loanedFromMe.map(loan => (
                 <div key={loan._id}>
                   <div className="columns">
-                    <h4 className="column is-gapless">{loan.start.substring(10,-5)}</h4>
-                    <h4 className="column is-gapless">{loan.end.substring(10,-5)}</h4>
-                    <h4 className="column is-gapless">{loan.book.title}</h4>
-                    <h4 className="column is-gapless">{loan.book.authors}</h4>
-                    <h4 className="column is-gapless">{loan.borrower.username}</h4>
-                    <h4 className="column is-gapless">{loan.returned}</h4>
-                    <h4 className="column is-gapless">{loan.approved}</h4>
-
-                    <div>
-                      <button
-                        className="confirmReturned"
-                        onClick={this.handleClick}
-                      >Confirm Book Returned</button>
+                    <h4 className="column is-2 is-gapless">{loan.start.substring(10,-5)}</h4>
+                    <h4 className="column is-2 is-gapless">{loan.end.substring(10,-5)}</h4>
+                    <h4 className="column is-2 is-gapless">{loan.book.title}</h4>
+                    <h4 className="column is-2 is-gapless">{loan.borrower.username}</h4>
+                    <h4 className="column is-2 is-gapless">{loan.returned && loan.returned.substring(10,-5)}</h4>
+                    <div className="column is-2 is-gapless">
+                      <button className="button is-small is-warning" onClick={this.handleClick}>
+                        Confirm Book Returned
+                      </button>
+                      <button className="button is-small is-warning" onClick={this.handleClick}>
+                        Approve Loan
+                      </button>
+                      <button className="button is-small is-warning" onClick={this.handleClick}>
+                        Reject Loan
+                      </button>
                     </div>
-
-                    <div>
-                      <button
-                        className="Approve"
-                        onClick={this.handleClick}
-                      >Approve Loan</button>
-                    </div>
-
-                    <div>
-                      <button
-                        className="Reject"
-                        onClick={this.handleClick}
-                      >
-                        Reject Loan</button>
-                    </div>
-
                   </div>
                 </div>
               ))}
@@ -145,32 +130,26 @@ class LoansAll extends React.Component {
               </div>
 
               <div className="columns">
-                <h4 className="column is-gapless">Start Date</h4>
-                <h4 className="column is-gapless">End Date</h4>
-                <h4 className="column is-gapless">Book Title</h4>
-                <h4 className="column is-gapless">Author</h4>
-                <h4 className="column is-gapless">Requested From</h4>
-                <h4 className="column is-gapless">Status</h4>
-                <h4 className="column is-gapless">Select</h4>
+                <h4 className="column is-2 is-gapless">Start Date</h4>
+                <h4 className="column is-2 is-gapless">End Date</h4>
+                <h4 className="column is-2 is-gapless">Book Title</h4>
+                <h4 className="column is-2 is-gapless">Requested From</h4>
+                <h4 className="column is-2 is-gapless">Returns</h4>
+                <h4 className="column is-2 is-gapless">Actions</h4>
               </div>
               {loanedByMe.map(loan => (
                 <div key={loan._id}>
                   <div className="columns">
-                    <h4 className="column is-gapless">{loan.start.substring(10,-5)}</h4>
-                    <h4 className="column is-gapless">{loan.end.substring(10,-5)}</h4>
-                    <h4 className="column is-gapless">{loan.book.title}</h4>
-                    <h4 className="column is-gapless">{loan.book.authors}</h4>
-                    <h4 className="column is-gapless">{loan.borrower.username}</h4>
-                    <h4 className="column is-gapless">{loan.returned}</h4>
-
-                    <div>
-                      <button
-                        className="Cancel"
-                        onClick={this.handleClick}
-                      >
-                      Cancel Loan Request</button>
+                    <h4 className="column is-2 is-gapless">{loan.start.substring(10,-5)}</h4>
+                    <h4 className="column is-2 is-gapless">{loan.end.substring(10,-5)}</h4>
+                    <h4 className="column is-2 is-gapless">{loan.book.title}</h4>
+                    <h4 className="column is-2 is-gapless">{loan.borrower.username}</h4>
+                    <h4 className="column is-2 is-gapless">{loan.returned && loan.returned.substring(10,-5)}</h4>
+                    <div className="column is-2 is-gapless">
+                      <button className="button is-small is-danger" onClick={this.handleClick}>
+                        Cancel Loan Request
+                      </button>
                     </div>
-
                   </div>
                 </div>
               ))}
