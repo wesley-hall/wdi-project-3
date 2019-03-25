@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import 'bulma'
 
+
 import './style.scss'
 
 import SecureRoute from './components/common/secureRoute'
@@ -31,9 +32,9 @@ class App extends React.Component {
         <div>
           <Nav />
           <Switch>
-            <SecureRoute path="/books/:id/update" component={BookUpdate}/>
-            <SecureRoute path="/books/:id/loan" component={LoanAdd}/>
-            <SecureRoute path="/books/add" component={BookAdd}/>
+            <Route path="/books/:id/update" component={BookUpdate}/>
+            <Route path="/books/:id/loan" component={LoanAdd}/>
+            <Route path="/books/add" component={BookAdd}/>
             <Route path="/books/:id" component={BookShow}/>
             <Route path="/libraries" component={Libraries}/>
             <Route path="/books" component={BooksAll}/>

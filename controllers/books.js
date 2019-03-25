@@ -15,7 +15,7 @@ function bookCreate(req, res) {
   Book
     .create(req.body)
     .then(book => res.status(201).json(book))
-    .catch(err=> res.status(500).json(err))
+    .catch(err=> res.status(422).json(err))
 }
 
 function bookShow(req, res) {
