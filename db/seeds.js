@@ -10,6 +10,41 @@ const Promise = require('bluebird')
 mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
   db.dropDatabase()
 
+  // Users
+  // 0: Rich
+  // 1: jack
+  // 2: sumi
+  // 3: zoe
+  // 4: orjon
+  // 5: mary
+  // 6: wesley
+  // 7: steven
+  // 8: matthew
+  // 9: stephano
+  //10: Pascual
+
+  //   genres
+  // 0: Cooking
+  // 1: Biography
+  // 2: Tragedy
+  // 3: Romance
+  // 4: Fantasy
+  // 5: Sci-Fi
+  // 6: D.I.Y.
+  // 7: Art
+  // 8: Language
+  // 9: Drama
+  // 10:Literature
+
+  // book : owner
+  // 0 : user0
+  // 1 : user1
+  // 2 : user2
+  // 3 : user3
+  // 4 : user5
+  // 5 : user2
+  // 6 : user3
+
   const promiseArray = [
     User.create([
       {
@@ -19,10 +54,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Rich\'s library',
-        location: {
-          lat: 51.516625,
-          lng: -0.074982
-        },
+        location: { lat: 51.516625, lng: -0.074982 },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryA.jpg',
         libraryDescription: 'A library that\'s doubled as a dining room, where I could be surrounded by the books I love'
       },
@@ -33,10 +65,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'jacklibrary',
-        location: {
-          lat: 51.517066 ,
-          lng: -0.069700
-        },
+        location: { lat: 51.517066, lng: -0.069700 },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryB.jpg',
         libraryDescription: 'Collection of books slightly chewed up by cats, but still functional'
       },
@@ -47,10 +76,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Sumilibrary',
-        location: {
-          lat: 51.515204 ,
-          lng: -0.072349
-        },
+        location: { lat: 51.515204, lng: -0.072349 },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryC.jpg',
         libraryDescription: 'I am an avid collection of religious books such as the Quran, the Torah, the bible.'
       },
@@ -61,10 +87,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Zoe library',
-        location: {
-          lat: 51.514120 ,
-          lng: -0.071449
-        },
+        location: { lat: 51.514120, lng: -0.071449 },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryD.jpg',
         libraryDescription: 'Eclectic collection of books, records and antiques. Some comic books as well.'
       },
@@ -75,10 +98,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Orjon library',
-        location: {
-          lat: 51.515795 ,
-          lng: -0.067593
-        },
+        location: { lat: 51.515795, lng: -0.067593 },
         libraryPicture: 'someurl',
         libraryDescription: 'filled with dead bodies'
       },
@@ -89,10 +109,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Mary library',
-        location: {
-          lat: 51.513791 ,
-          lng: -0.067392
-        },
+        location: { lat: 51.513791, lng: -0.067392 },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
       },
@@ -103,10 +120,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Wesley library',
-        location: {
-          lat: 51.511868 ,
-          lng: -0.072210
-        },
+        location: { lat: 51.511868, lng: -0.072210},
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
       },
@@ -117,10 +131,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Steve library',
-        location: {
-          lat: 51.522164,
-          lng: -0.075526
-        },
+        location: { lat: 51.522164, lng: -0.075526 },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
       },
@@ -131,10 +142,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Matthew library',
-        location: {
-          lat: 51.518474,
-          lng: -0.061351
-        },
+        location: { lat: 51.518474, lng: -0.061351 },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
       },
@@ -145,10 +153,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Stephano library',
-        location: {
-          lat: 51.518474,
-          lng: -0.061351
-        },
+        location: { lat: 51.518474, lng: -0.061351},
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
       },
@@ -159,48 +164,23 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         password: 'pass',
         passwordConfirmation: 'pass',
         libraryName: 'Pascual library',
-        location: {
-          lat: 51.517453,
-          lng: -0.088473
-        },
+        location: { lat: 51.517453, lng: -0.088473 },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
       }
     ]),
     BookGenre.create([
-      {
-        genre: 'Cooking'
-      },
-      {
-        genre: 'Biography'
-      },
-      {
-        genre: 'Tragedy'
-      },
-      {
-        genre: 'Romance'
-      },
-      {
-        genre: 'Fantasy'
-      },
-      {
-        genre: 'Sci-Fi'
-      },
-      {
-        genre: 'D.I.Y.'
-      },
-      {
-        genre: 'Art'
-      },
-      {
-        genre: 'Language'
-      },
-      {
-        genre: 'Drama'
-      },
-      {
-        genre: 'Literature'
-      }
+      { genre: 'Cooking'},
+      { genre: 'Biography'},
+      { genre: 'Tragedy' },
+      { genre: 'Romance'},
+      { genre: 'Fantasy'},
+      { genre: 'Sci-Fi'},
+      { genre: 'D.I.Y.'},
+      { genre: 'Art'},
+      { genre: 'Language'},
+      { genre: 'Drama'},
+      { genre: 'Literature'}
     ])
   ]
 
@@ -210,6 +190,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       return Promise.all([
         Books.create([
           {
+            owner: users[0],
             title: 'King Lear',
             authors: 'William Shakespeare',
             image: 'https://books.google.com/books/content?id=cWJcAgAAQBAJ&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api',
@@ -239,11 +220,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
                 review: 'My first encounter with Shakespeare has totally swept me off my feet. As much as I had heard of the indisputable grandeur of the most famous playwright of all times I never expected to be so immersed in the swirling undercurrents of the incongruities of human nature that are so vividly portrayed in this tragedy. Even though my inexpensive Wordsworth edition wasn’t generous with annotations or academic essays, the universality of Shakespeare’s art, wrought in versed polyptotons, playful aphorisms and grotesque imagery, surpasses all attempts to categorize his work. Always elusive and prone to countless interpretations, Shakespeare remains inscrutable and daunts the present reader with questions of yesteryear about the meaning of life.',
                 user: users[2]
               }
-            ],
-            owner: users[0]
-
+            ]
           },
           {
+            owner: users[1],
             title: 'Change We Can Believe in',
             authors: 'Barack Obama',
             image: 'https://books.google.com/books/content?id=pK5ALFeVVcMC&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api',
@@ -274,10 +254,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
                 As with any all encompassing policy proposal there will be items that you completely agree with and others that you would want to see some alterations to before being implemented. But, when read in the light (or shadows) of the last eight years under the Bush administration, Obama's vision is a breath of fresh air that allows you to once again ponder what America is truly capable of accomplishing. When read in comparison with the muddled, status quo policies being hocked by McCain, it is difficult to see how any critical thinking citizen with a social conscience could not easily prefer Obama's proposal. `,
                 user: users[2]
               }
-            ],
-            owner: users[1]
+            ]
           },
           {
+            owner: users[2],
             title: 'The Joy of Cooking',
             authors: 'Irma S. Rombauer',
             image: 'https://books.google.com/books/content?id=MFWFeJ5t8zcC&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api',
@@ -292,17 +272,16 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
             review: [
               {
                 review: 'What do I like most about The Joy of Cooking? It is fairly encyclopedic, covering about as broad a range of cooking topics as it can; while most of the recipes are from the Western tradition, it also dips into some less traditional preparations (e.g., ceviche). The book does not assume that you know anything about cooking -- not sure what a "dash" is? You can look up an explanation for that. What\'s the difference between a filet and a cutlet? It explains that, too. (HINT: they\'re basically synonymous.) It has a great index, is organized well, and has recipes to cover almost any occasion and varying degrees of culinary sophistication.',
-                user: users[2]
+                user: users[5]
               },
               {
                 review: 'I don\'t know why it took so long for me to include this very worthy book to my Goodreads Library. This is my second copy. The first, a paperback, became so tattered and worn that my son presented this valued edition as a gift. I have been cooking for more than forty years, but continue to return to this book for ideas, information and special recipes. On many occasions I search for new ways to prepare foods and will find the ideal formula for preparation. Frequently I will "tweak" the recipe in order to please the palates of my diners, but JOY has rarely failed to please me.',
-                user: users[2]
+                user: users[1]
               }
-            ],
-            owner: users[2]
-
+            ]
           },
           {
+            owner: users[3],
             title: 'Mansfield Park',
             authors: 'Jane Austen',
             image: 'http://books.google.com/books/content?id=yS4JAAAAQAAJ&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api',
@@ -310,7 +289,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
             genre: genres[3],
             description: 'Frances O\'Connor, born into a poor family, is sent away to live with wealthy uncle Sir Thomas (Harold Pinter), his wife (Lindsay Duncan) and their four children, where she\'ll be brought up for a proper introduction to society. She is treated unfavorably by her relatives, except for her cousin Edmund (Jonny Lee Miller), whom she grows fond of. However, Fanny\'s life is thrown into disarray with the arrival of worldly Mary Crawford (Embeth Davidtz) and her brother Henry (Alessandro Nivola).',
             rating: [
-              { rating: 3, user: users[2]}
+              { rating: 3, user: users[2]},
+              { rating: 1, user: users[1]}
             ],
             review: [
               {
@@ -323,10 +303,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
                 Most of the characters in this book singlemindedly pursue wealth, status, and pleasure regardless of their personal and moral costs. Their antics are pretty hilarious, and I think Fanny's passive and proper nature makes her an ideal medium through which to observe all the frivolous and shallow people around her. Aside from being funny, the book also raises the issue of a girl's "duty" to marry well - should personal happiness be sacrificed for money and connections?`,
                 user: users[3]
               }
-            ],
-            owner: users[3]
+            ]
           },
           {
+            owner: users[5],
             title: 'The Help',
             authors: 'Kathryn Stockett',
             image: 'https://books.google.com/books/content?id=wsEXhw17prsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
@@ -354,17 +334,16 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
                 review: 'My 12 year old daughter would like to read this. I have not read it in a few years and can\'t remember if there is anything graphic that she will encounter. What do you think about a middle school student reading this?',
                 user: users[6]
               }
-            ],
-            owner: users[5]
+            ]
           },
           {
+            owner: users[2],
             title: '1984',
             authors: 'George Orwell',
             image: 'http://www.orjon.com/dev/booker/images/bookcovers/cover-1984.jpeg',
             fiction: true,
             genre: genres[4],
             description: 'Among the seminal texts of the 20th century, Nineteen Eighty-Four is a rare work that grows more haunting as its futuristic purgatory becomes more real. Published in 1949, the book offers political satirist George Orwell\'s nightmarish vision of a totalitarian, bureaucratic world and one poor stiff\'s attempt to find individuality. The brilliance of the novel is Orwell\'s prescience of modern life--the ubiquity of television, the distortion of the language--and his ability to construct such a thorough version of hell. Required reading for students since it was published, it ranks among the most terrifying novels ever written. ',
-
             rating: [
               { rating: 5, user: users[3]},
               { rating: 4, user: users[8]},
@@ -391,10 +370,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
                 review: '1984 is not a particularly good novel, but it is a very good essay. On the novel front, the characters are bland and you only care about them because of the awful things they live through. As a novel all the political exposition is heavyhanded, and the message completely overrides any sense of storytelling. As an essay, the points it makes can be earthshaking. It seems everyone who has so much as gotten a parking ticket thinks he lives in a 1984-dystopia. Every administration that reaches for power, injures civil liberties or collaborates too much with media is accused of playing Big Brother. These are the successes of 1984\'s paranoia, far outliving its original intent as a battery against where Communism was going (Orwell was a severely disappointed Marxist), and while people who compare their leaders to Big Brother are usually overreaching themselves and speak far away from Orwell\'s intent and vision, it is a useful catchcloth for dissent. Like so many immortalized books with a social vision, 1984\'s actual substance is so thin that its ideologies and fear-mongering aspects can be stretched and skewed to suit the readers. If you\'d like a better sense of the real world and Orwell\'s intents, rather than third-hand interpretations of his fiction, then his Homage to Catalonia is highly recommended. ',
                 user: users[1]
               }
-            ],
-            owner: users[2]
+            ]
           },
           {
+            owner: users[3],
             title: 'The Hobbit',
             authors: 'J.R.R Tolkien',
             image: 'http://www.orjon.com/dev/booker/images/bookcovers/cover-theHobbit.jpeg',
@@ -411,8 +390,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
                 review: 'To call this the epitome in which all high fantasy should be judged does not quite suffice; this is simply one of the best books that has ever been written or will ever be written. The Hobbit defines the high fantasy genre along with its sequel, of course, and has been an inspiration to countless authors and readers alike. Tolkien, quite literally, kick started a genre that would eventually capture the hearts of thousands of people. He changed the literary world. He made fantasy real. ',
                 user: users[3]
               }
-            ],
-            owner: users[3]
+            ]
           }
         ]),
         users
@@ -422,38 +400,56 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       const [ books, users ] = data
       return Loan.create([
         {
-          book: books[0],
-          borrower: users[9],
-          start: new Date(),
-          end: new Date(),
-          message: 'This is a loan request message',
+          book: books[3],
+          borrower: users[2],
+          start: '2019-02-20T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan A',
+          returned: '2019-02-25T10:14:31.561Z',
+          approved: true
+        },
+        {
+          book: books[6],
+          borrower: users[2],
+          start: '2019-03-20T10:14:31.561Z',
+          end: '2019-04-20T10:14:31.561Z',
+          message: 'Loan B',
           returned: null,
           approved: false
         },
         {
           book: books[2],
-          borrower: users[8],
-          start: new Date(),
-          end: new Date(),
-          message: 'This is a loan request message2',
+          borrower: users[3],
+          start: '2019-02-19T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan C',
+          returned: '2019-02-25T10:14:31.561Z',
+          approved: true
+        },
+        {
+          book: books[5],
+          borrower: users[3],
+          start: '2019-03-20T10:14:31.561Z',
+          end: '2019-04-20T10:14:31.561Z',
+          message: 'Loan D',
+          returned: null,
+          approved: true
+        },
+        {
+          book: books[5],
+          borrower: users[0],
+          start: '2019-05-20T10:14:31.561Z',
+          end: '2019-05-30T10:14:31.561Z',
+          message: 'Loan E',
           returned: null,
           approved: false
         },
         {
-          book: books[3],
+          book: books[5],
           borrower: users[1],
-          start: new Date(),
-          end: new Date(),
-          message: 'This is a loan request message',
-          returned: null,
-          approved: false
-        },
-        {
-          book: books[4],
-          borrower: users[5],
-          start: new Date(),
-          end: new Date(),
-          message: 'This is a loan request message2',
+          start: '2019-05-15T10:14:31.561Z',
+          end: '2019-05-25T10:14:31.561Z',
+          message: 'Loan F',
           returned: null,
           approved: false
         }
