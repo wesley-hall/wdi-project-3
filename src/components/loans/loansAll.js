@@ -8,8 +8,10 @@ class LoansAll extends React.Component {
   constructor() {
     super()
     this.state = {
-      loanedFromMe: [],
-      loanedByMe: [],
+      loans: {
+        loanedFromMe: [],
+        loanedByMe: []
+      },
       errors: {}
     }
 
@@ -23,36 +25,20 @@ class LoansAll extends React.Component {
         console.log(res.data[0].borrower.username)
         console.log('Hello', res.data)
         console.log('auth sub', Auth.getPayload().sub)
-        console.log('abc', res.data.filter(loans => loans.book.owner === Auth.getPayload().sub))
-        // .map(user => ({loanedFromMe: user.borrower, loanedByMe: user.owner}))
+        const loanedFromMe = res.data.filter(loans => loans.book.owner === Auth.getPayload().sub)
+        const loanedByMe = res.data.filter(loans => loans.borrower._id === Auth.getPayload().sub)
+        console.log('loanedFromMe', loanedFromMe)
+        console.log('loanedByMe', loanedByMe)
+        const loans = {...this.state.loans, loanedFromMe, loanedByMe}
+        console.log('loans', loans)
+        this.setState({ loans })
       })
-      .then(res => this.setState({ loanedFromMe: res}))
 
   }
 
 
-<<<<<<< HEAD
-=======
-  // loanStatus() {
-  //   if
-  //  (datetoday > date created)
-  //   }
-  //   return pendingApproval
 
-  //   } else (if datetoday >= date returned)
-  //   }
-  //   return bookReturned
 
-  //   } else (if datetoday > end date && returned === null)
-  //   }
-  //   return overdue
-
-  // } else  (datetoday <= end date && returned === null)
-  //   }
-  //   return onLoan
-  // }
-
->>>>>>> development
   handleChange({ target: { name , value }}) {
     const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: ''}
@@ -66,9 +52,9 @@ class LoansAll extends React.Component {
   }
 
   render() {
-    if (!this.state.loans) return null
+    if (!this.state.loans.loanedFromMe && !this.state.loans.loanedByMe) return null
     console.log(this.state)
-    // const { loans } = this.state
+    const { loanedFromMe, loanedByMe } = this.state.loans
 
     return (
       <div>
@@ -101,7 +87,7 @@ class LoansAll extends React.Component {
                 <h4 className="column is-gapless">Status</h4>
                 <h4 className="column is-gapless">Actions</h4>
               </div>
-              {loans.map(loan => (
+              {loanedFromMe.map(loan => (
                 <div key={loan._id}>
                   <div className="columns">
                     <h4 className="column is-gapless">{loan.start.substring(10,-5)}</h4>
@@ -167,7 +153,7 @@ class LoansAll extends React.Component {
                 <h4 className="column is-gapless">Status</h4>
                 <h4 className="column is-gapless">Select</h4>
               </div>
-              {loans.map(loan => (
+              {loanedByMe.map(loan => (
                 <div key={loan._id}>
                   <div className="columns">
                     <h4 className="column is-gapless">{loan.start.substring(10,-5)}</h4>

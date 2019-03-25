@@ -423,7 +423,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       return Loan.create([
         {
           book: books[3],
-          borrower: users[3],
+          borrower: users[2],
           start: '2019-02-20T10:14:31.561Z',
           end: '2019-02-25T10:14:31.561Z',
           message: 'Loan A Zoe to Sumi returned',
@@ -432,7 +432,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         },
         {
           book: books[6],
-          borrower: users[3],
+          borrower: users[2],
           start: '2019-03-20T10:14:31.561Z',
           end: '2019-04-20T10:14:31.561Z',
           message: 'Loan B Zoe to Sumi ongoing',
@@ -441,7 +441,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         },
         {
           book: books[2],
-          borrower: users[2],
+          borrower: users[3],
           start: '2019-02-19T10:14:31.561Z',
           end: '2019-02-25T10:14:31.561Z',
           message: 'Request A Book Sumi to Zoe returned',
@@ -451,7 +451,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
 
         {
           book: books[5],
-          borrower: users[2],
+          borrower: users[3],
           start: '2019-03-20T10:14:31.561Z',
           end: '2019-04-20T10:14:31.561Z',
           message: 'Request A Book Sumi to Zoe still reading',
