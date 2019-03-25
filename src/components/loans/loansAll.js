@@ -2,10 +2,14 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+import Auth from '../../lib/auth'
+
 class LoansAll extends React.Component {
   constructor() {
     super()
     this.state = {
+      loanedFromMe: [],
+      loanedByMe: [],
       errors: {}
     }
 
@@ -15,8 +19,17 @@ class LoansAll extends React.Component {
 
   componentDidMount() {
     axios.get('/api/loans')
-      .then(res => this.setState({ loans: res.data }))
+      .then(res => {
+        console.log(res.data[0].borrower.username)
+        console.log('Hello', res.data)
+        console.log('auth sub', Auth.getPayload().sub)
+        console.log('abc', res.data.filter(loans => loans.book.owner === Auth.getPayload().sub))
+        // .map(user => ({loanedFromMe: user.borrower, loanedByMe: user.owner}))
+      })
+      .then(res => this.setState({ loanedFromMe: res}))
+
   }
+
 
   handleChange({ target: { name , value }}) {
     const data = {...this.state.data, [name]: value}
@@ -32,8 +45,8 @@ class LoansAll extends React.Component {
 
   render() {
     if (!this.state.loans) return null
-    console.log(this.state.loans)
-    const { loans } = this.state
+    console.log(this.state)
+    // const { loans } = this.state
 
     return (
       <div>
