@@ -1,5 +1,6 @@
 import React from 'react'
 import mapboxgl from 'mapbox-gl'
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
 
 import axios from 'axios'
@@ -22,19 +23,40 @@ class RegisterMap extends React.Component{
       zoom: 10
     })
 
+    this.map.addControl(new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken
+    }))
+
     const marker = new mapboxgl.Marker({ draggable: true })
     marker
       .setLngLat(this.props.center)
       .addTo(this.map)
 
-    const getMarkerLocation = () => {
-      const markerLocation = marker.getLngLat()
-      const location = { lat: markerLocation.lat, lng: markerLocation.lng }
-      this.props.onSelectLocation(location)
-      this.getMapboxPlace(markerLocation.lng, markerLocation.lat)
+    // const getMarkerLocation = () => {
+    //   const markerLocation = marker.getLngLat()
+    //   const location = { lat: markerLocation.lat, lng: markerLocation.lng }
+    //   this.props.onSelectLocation(location)
+    //   this.getMapboxPlace(markerLocation.lng, markerLocation.lat)
+    // }
+
+    // marker.on('dragend', getMarkerLocation)
+
+    const getLocation = (e) => {
+      console.log(e.lngLat)
+      // const location = { lat: markerLocation.lat, lng: markerLocation.lng }
+      // this.props.onSelectLocation(location)
+      // this.getMapboxPlace(markerLocation.lng, markerLocation.lat)
     }
 
-    marker.on('dragend', getMarkerLocation)
+    const addMarker = (map, e) => {
+      console.log(e)
+      const marker = new mapboxgl.Marker({ draggable: true })
+      marker
+        .setLngLat(e.latLng)
+        .addTo(this.map)
+    }
+
+    this.map.on('click', getLocation)
   }
 
   getMapboxPlace(lng, lat) {
