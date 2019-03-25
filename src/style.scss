@@ -1,8 +1,9 @@
 @import '~mapbox-gl/dist/mapbox-gl.css';
+@import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.css");
 
 div.map-libraries {
   width: 100vw;
-  height: 90vh;
+  height: calc(100vh - 3.25rem);
 }
 
 .backgroundHero {

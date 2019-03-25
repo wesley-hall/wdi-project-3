@@ -58,9 +58,7 @@ class LibrariesMap extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="map-libraries" ref={el => this.mapDiv = el} />
-      </div>
+      <div className="map-libraries" ref={el => this.mapDiv = el} />
     )
   }
 }

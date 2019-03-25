@@ -37,28 +37,10 @@ class Libraries extends React.Component {
     console.log('libraries[0] books length', libraries[0].books.length)
     return (
       <div>
-        <div>
-          <LibrariesMap
-            center={center}
-            points={libraries}
-          />
-        </div>
-        <div>
-          {libraries.map(library => (
-            library.books.length !== 0 &&
-              <div key={library.owner}>
-                <h3>{library.libraryName}</h3>
-                <h4>Books:</h4>
-                <ul>
-                  {library.books.map(book => (
-                    <li key={book._id}>
-                      {book.title}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-          ))}
-        </div>
+        <LibrariesMap
+          center={center}
+          points={libraries}
+        />
       </div>
     )
   }
