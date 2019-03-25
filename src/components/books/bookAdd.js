@@ -52,65 +52,92 @@ class BookAdd extends React.Component {
         <main className="section">
           <div className="container">
             <form>
-              <input
-                className="input"
-                name="title"
-                placeholder="Title"
-                value={this.state.data.title}
-                onChange={this.handleChange}
-              />
-              <br />
 
-              <input
-                className="input"
-                name="authors"
-                placeholder="Author(s)"
-                value={this.state.data.authors}
-                onChange={this.handleChange}
-              />
-              <br />
-
-              <input
-                className="input"
-                name="image"
-                placeholder="Cover Image (url)"
-                value={this.state.data.image}
-                onChange={this.handleChange}
-              />
-              <br />
-
-              <div className="control">
-                <label className="radio">
-                  <input
-                    type="radio"
-                    name="answer"
-                    checked
-                    onChange={this.handleChange}
-                  />
-                  Fiction
-                </label>
-                <label className="radio">
-                  <input
-                    type="radio"
-                    name="answer"
-                    onChange={this.handleChange}
-                  />
-                  Non-Fiction
-                </label>
+              <div>
+                <input
+                  className="input"
+                  name="title"
+                  placeholder="*Title"
+                  value={this.state.data.title}
+                  onChange={this.handleChange}
+                />
               </div>
               <br />
 
-              <div className="field">
+              <div>
+                <input
+                  className="input"
+                  name="authors"
+                  placeholder="*Author(s)"
+                  value={this.state.data.authors}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <br />
+
+              <div>
+                <input
+                  className="input"
+                  name="image"
+                  placeholder="*Cover Image (url)"
+                  value={this.state.data.image}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <br />
+
+              <div className="control">
+                <div className="select">
+                  <select>
+                    {this.state.genres && this.state.genres.map(genre => (
+                      <option key={genre._id}>{genre.genre}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <br />
+
+
+              <div>
                 <div className="control">
                   <div className="select">
                     <select>
-                      {this.state.genres && this.state.genres.map(genre => (
-                        <option key={genre._id}>{genre.genre}</option>
-                      ))}
+                      <option>Fiction/Non-Fiction?</option>
+                      <option>Fiction</option>
+                      <option>Non-Fiction</option>
                     </select>
                   </div>
                 </div>
               </div>
+              <br />
+
+              <div>
+                <input
+                  className="input"
+                  name="description"
+                  placeholder="Description"
+                  value={this.state.data.description}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <br />
+
+              <div>
+                <div className="control">
+                  <div className="select">
+                    <select>
+                      <option>Rating</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <br />
+
 
               <div>
                 <button className="button is-success is-pulled-right">Add Book</button>
@@ -125,3 +152,26 @@ class BookAdd extends React.Component {
 }
 
 export default BookAdd
+//
+// <div className="column">
+//   <div className="control">
+//     <label className="radio">
+//       <input
+//         type="radio"
+//         name="fiction"
+//         checked
+//         onChange={this.handleChange}
+//       />
+//       Fiction
+//     </label>
+//
+//     <label className="radio">
+//       <input
+//         type="radio"
+//         name="fiction"
+//         onChange={this.handleChange}
+//       />
+//       Non-Fiction
+//     </label>
+//   </div>
+// </div>
