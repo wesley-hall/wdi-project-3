@@ -51,7 +51,7 @@ class BookShow extends React.Component {
         <main className="section">
           <div className="container">
             <h2 className="title">{book.title}</h2>
-            <h3 className="title is-4">by: {book.authors[0]}</h3>
+            <h3 className="title is-4">by: {book.authors}</h3>
             <hr />
             <div className="columns">
               <div className="column is-half">
