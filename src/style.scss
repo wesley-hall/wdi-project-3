@@ -30,6 +30,20 @@ h1.title {
   margin-top: 10px;
 }
 
+.bookCoverWrapper {
+  max-height: 75vh;
+}
+
+#bookCoverImage{
+  height: 100%;
+  width: auto;
+  margin: 0 auto;
+}
+
+.bookDescription {
+  text-align: justify;
+}
+
 .marker-libraries {
   color: white;
   font-size: 16px;

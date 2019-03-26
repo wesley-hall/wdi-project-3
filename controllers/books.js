@@ -1,5 +1,6 @@
 const Book = require('../models/book')
 require('../models/bookGenre')
+require('../models/loan')
 
 function booksAll(req, res) {
   Book
@@ -24,7 +25,7 @@ function bookCreate(req, res) {
 function bookShow(req, res) {
   Book
     .findById(req.params.id)
-    .populate('owner genre')
+    .populate('owner genre existingLoans')
     .exec()
     .then(book => {
       if(!book) {

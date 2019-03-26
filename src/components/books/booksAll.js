@@ -112,8 +112,7 @@ class BooksAll extends React.Component {
                         <h5 className="subtitle is-7">Genre: {book.genre.genre}</h5>
                         <h5 className="subtitle is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h5>
                         <h5 className="subtitle is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
-                        <h5 className="subtitle is-7">Distance: {this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51.514980, -0.070729)}km</h5>
-                        <h5 className="subtitle is-7">Return Date: {book.returnDate}</h5>
+                        <h5 className="subtitle is-7">Location: {book.owner.libraryName} ({this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51.514980, -0.070729)}km)</h5>
                       </div>
                     </div>
                   </Link>

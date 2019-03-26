@@ -64,7 +64,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'jack@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'jacklibrary',
+        libraryName: 'Jack\'s bookshelf',
         location: { lat: 51.517066, lng: -0.069700 },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryB.jpg',
         libraryDescription: 'Collection of books slightly chewed up by cats, but still functional'
@@ -75,7 +75,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'sumi@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Sumilibrary',
+        libraryName: 'Sumi\'s books!',
         location: { lat: 51.515204, lng: -0.072349 },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryC.jpg',
         libraryDescription: 'I am an avid collection of religious books such as the Quran, the Torah, the bible.'
@@ -86,7 +86,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'zoe@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Zoe library',
+        libraryName: 'Zoe\'s library',
         location: { lat: 51.514120, lng: -0.071449 },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryD.jpg',
         libraryDescription: 'Eclectic collection of books, records and antiques. Some comic books as well.'
@@ -97,7 +97,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'orjon@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Orjon library',
+        libraryName: 'Orjon\'s home library',
         location: { lat: 51.515795, lng: -0.067593 },
         libraryPicture: 'someurl',
         libraryDescription: 'filled with dead bodies'
@@ -108,7 +108,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'mary@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Mary library',
+        libraryName: 'Mary&John\'s bookcase',
         location: { lat: 51.513791, lng: -0.067392 },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
@@ -119,7 +119,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'wesley@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Wesley library',
+        libraryName: 'Wesley\'s mini-library',
         location: { lat: 51.511868, lng: -0.072210},
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
@@ -130,7 +130,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'steven@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Steve library',
+        libraryName: 'Steve\'s library',
         location: { lat: 51.522164, lng: -0.075526 },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
@@ -141,7 +141,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'matthew@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Matthew library',
+        libraryName: 'Matthew\'s library',
         location: { lat: 51.518474, lng: -0.061351 },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
@@ -152,7 +152,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'stephano@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Stephano library',
+        libraryName: 'Stephano\'s library',
         location: { lat: 51.518474, lng: -0.061351},
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'
@@ -163,7 +163,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'pascual@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Pascual library',
+        libraryName: 'Pascual\'s book collection',
         location: { lat: 51.517453, lng: -0.088473 },
         libraryPicture: 'someurl',
         libraryDescription: 'cluttered'

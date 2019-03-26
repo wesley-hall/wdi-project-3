@@ -23,6 +23,16 @@ const bookSchema = new mongoose.Schema({
   owner: { type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
 })
 
+bookSchema.virtual('existingLoans', {
+  ref: 'Loan',
+  localField: '_id',
+  foreignField: 'book'
+})
+
+bookSchema.set('toJSON', {
+  virtuals: true
+})
+
 bookSchema.plugin(require('mongoose-autopopulate'))
 
 module.exports = mongoose.model('Book', bookSchema)
