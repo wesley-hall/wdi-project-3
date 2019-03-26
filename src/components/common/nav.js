@@ -1,20 +1,29 @@
 import React from 'react'
+import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
 
 import Auth from '../../lib/auth'
-
-
 
 class Nav extends React.Component {
   constructor() {
     super()
 
+    this.userCurrent = '',
     this.logout = this.logout.bind(this)
+
   }
 
   logout() {
     Auth.logout()
     this.props.history.push('/')
+  }
+
+  componentDidMount() {
+    axios.get(`/api/users/${Auth.getPayload().sub}`)
+      .then(res => {
+        this.userCurrent = res.data.username.charAt(0).toUpperCase() + res.data.username.slice(1)
+      })
+
   }
 
 
@@ -30,8 +39,9 @@ class Nav extends React.Component {
         <div className="navbar-menu">
           <div className="navbar-end">
             {!Auth.isAuthenticated() && <Link to="/login" className="navbar-item">Login/Register</Link>}
-            {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
+            {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout {this.userCurrent}</a>}
           </div>
+
         </div>
 
       </nav>

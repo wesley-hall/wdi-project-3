@@ -69,7 +69,8 @@ class BookAdd extends React.Component {
       <div>
         <main className="section">
           <div className="container">
-            <form>
+            <h1>Add a new book to share:</h1>
+            <form onSubmit={this.handleSubmit}>
 
               <div>
                 <input

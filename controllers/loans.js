@@ -1,4 +1,6 @@
 const Loan = require('../models/loan')
+// require('../models/book')
+// require('../models/user')
 
 function loansAll(req, res, next) {
   Loan
