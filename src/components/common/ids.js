@@ -15,6 +15,9 @@ class IdsAll extends React.Component {
     axios.get('/api/users')
       .then(res => this.setState({ users: res.data }))
       .catch(e => console.error(e))
+    axios.get('/api/loans')
+      .then(res => this.setState({ loans: res.data }))
+      .catch(e => console.error(e))
   }
 
 
@@ -33,6 +36,13 @@ class IdsAll extends React.Component {
           {!this.state.users && <p>...loading</p>}
           {this.state.users && this.state.users.map(user => (
             <div key={user._id}>{user._id} : {user.username}</div>
+          ))}
+        </div>
+        <div className="container">
+          <h1>loans._id</h1>
+          {!this.state.loans && <p>...loading</p>}
+          {this.state.loans && this.state.loans.map(loan => (
+            <div key={loan._id}>{loan._id}</div>
           ))}
         </div>
       </main>
