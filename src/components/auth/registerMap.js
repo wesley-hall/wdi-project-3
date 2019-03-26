@@ -23,37 +23,21 @@ class RegisterMap extends React.Component{
       zoom: 10
     })
 
+    this.map.addControl(new mapboxgl.NavigationControl(), 'bottom-right')
+
     this.map.addControl(new MapboxGeocoder({
       accessToken: mapboxgl.accessToken
     }))
 
     const marker = new mapboxgl.Marker({ draggable: true })
-    marker
-      .setLngLat(this.props.center)
-      .addTo(this.map)
 
-    // const getMarkerLocation = () => {
-    //   const markerLocation = marker.getLngLat()
-    //   const location = { lat: markerLocation.lat, lng: markerLocation.lng }
-    //   this.props.onSelectLocation(location)
-    //   this.getMapboxPlace(markerLocation.lng, markerLocation.lat)
-    // }
-
-    // marker.on('dragend', getMarkerLocation)
-
-    const getLocation = (e) => {
-      console.log(e.lngLat)
-      // const location = { lat: markerLocation.lat, lng: markerLocation.lng }
-      // this.props.onSelectLocation(location)
-      // this.getMapboxPlace(markerLocation.lng, markerLocation.lat)
-    }
-
-    const addMarker = (map, e) => {
-      console.log(e)
-      const marker = new mapboxgl.Marker({ draggable: true })
+    const getLocation = ({ lngLat }) => {
+      const location = { lat: lngLat.lat, lng: lngLat.lng }
       marker
-        .setLngLat(e.latLng)
+        .setLngLat(location)
         .addTo(this.map)
+
+      this.getMapboxPlace(location.lng, location.lat)
     }
 
     this.map.on('click', getLocation)
