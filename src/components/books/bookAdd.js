@@ -9,11 +9,14 @@ class BookAdd extends React.Component {
       data: {
         title: '',
         authors: '',
-        image: '12345',
-        fiction: '12345',
-        genre: '5c99695fd767f14ae7265a41',
-        description: '12345',
-        rating: [],
+        image: '',
+        fiction: true,
+        fictionrrr: true,
+        genre: '',
+        description: '',
+        rating: {
+          rating: ''
+        },
         review: [],
         owner: ''
       },
@@ -21,6 +24,8 @@ class BookAdd extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleRatingChange = this.handleRatingChange.bind(this)
+    this.handleSwitch = this.handleSwitch.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
   }
@@ -34,10 +39,23 @@ class BookAdd extends React.Component {
       .catch(err => console.log(err))
   }
 
-  handleChange({ target: { name , value }}) {
+  handleChange({ target: { name, value }}) {
     const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: ''}
     this.setState({data,errors})
+  }
+
+  handleRatingChange({ target: { name, value }}) {
+    const rating = {...this.state.data.rating, [name]: value}
+    const data = {...this.state.data, rating}
+    const errors = {...this.state.errors, [name]: ''}
+    this.setState({ data, errors})
+  }
+
+  handleSwitch({ target }) {
+    console.log('switching')
+    const data = {...this.state.data, [target.name]: target.checked }
+    this.setState({ data })
   }
 
   handleSubmit(e) {
@@ -98,23 +116,24 @@ class BookAdd extends React.Component {
               </div>
               <br />
 
-
-              <div>
-                <div className="control">
-                  <div className="select">
-                    <select>
-                      <option>Fiction/Non-Fiction?</option>
-                      <option>Fiction</option>
-                      <option>Non-Fiction</option>
-                    </select>
-                  </div>
+              <div className="control">
+                <div className="field">
+                  <input
+                    id="fiction"
+                    type="checkbox"
+                    name="fiction"
+                    className="switch is-success"
+                    defaultChecked="checked"
+                    onChange={this.handleSwitch}
+                  />
+                  <label htmlFor="fiction">{this.state.data.fiction ? 'Fiction' : 'Non-Fiction'}</label>
                 </div>
               </div>
               <br />
 
               <div>
-                <input
-                  className="input"
+                <textarea
+                  className="textarea"
                   name="description"
                   placeholder="Description"
                   value={this.state.data.description}
@@ -139,6 +158,14 @@ class BookAdd extends React.Component {
               </div>
               <br />
 
+              <div>
+                <div className="control">
+                  <p>Rating: {this.state.data.rating.rating && this.state.data.rating.rating}</p>
+                  <input className="slider is-success" name="rating" onChange={this.handleRatingChange} step="1" min="1" max="5" value={this.state.data.rating.rating} type="range" />
+                </div>
+              </div>
+              <br />
+
 
               <div>
                 <button className="button is-success is-pulled-right">Add Book</button>
@@ -153,26 +180,3 @@ class BookAdd extends React.Component {
 }
 
 export default BookAdd
-//
-// <div className="column">
-//   <div className="control">
-//     <label className="radio">
-//       <input
-//         type="radio"
-//         name="fiction"
-//         checked
-//         onChange={this.handleChange}
-//       />
-//       Fiction
-//     </label>
-//
-//     <label className="radio">
-//       <input
-//         type="radio"
-//         name="fiction"
-//         onChange={this.handleChange}
-//       />
-//       Non-Fiction
-//     </label>
-//   </div>
-// </div>

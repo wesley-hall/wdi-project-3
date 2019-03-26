@@ -1,6 +1,9 @@
 @import '~mapbox-gl/dist/mapbox-gl.css';
 @import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.css");
 
+@import '~bulma';
+@import '~bulma-extensions/dist/css/bulma-extensions.min.css';
+
 div.map-libraries {
   width: 100vw;
   height: calc(100vh - 3.25rem);
