@@ -18,6 +18,7 @@ import BooksAll from './components/books/booksAll'
 import BookShow from './components/books/bookShow'
 import BookAdd from './components/books/bookAdd'
 import BookUpdate from './components/books/bookUpdate'
+import BookBorrow from './components/books/bookBorrow'
 import Libraries from './components/books/libraries'
 
 import IdsAll from './components/common/ids'
@@ -36,6 +37,7 @@ class App extends React.Component {
           <Nav />
           <Switch>
             <SecureRoute path="/books/:id/update" component={BookUpdate}/>
+            <SecureRoute path="/books/:id/borrow" component={BookBorrow}/>
             <SecureRoute path="/books/:id/loan" component={LoanAdd}/>
             <SecureRoute path="/books/add" component={BookAdd}/>
             <Route path="/books/:id" component={BookShow}/>
@@ -59,6 +61,3 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 )
-
-// import LoanApproval from './components/loans/loanApproval'
-// <SecureRoute path="/loans/:id/approval" component={LoanApproval}/>

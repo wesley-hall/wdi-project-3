@@ -66,9 +66,7 @@ class BookShow extends React.Component {
               </div>
               <div className="column">
                 <div>
-                  <Link to={`/books/${book._id}/loan`}>
-                    <button className="button is-success is-pulled-right">Borrow this book</button>
-                  </Link>
+                  <button className="button is-success is-pulled-right" onClick={this.handleBorrow}>Borrow this book</button>
                   <br />
                   <br />
                   <br />
@@ -97,7 +95,7 @@ class BookShow extends React.Component {
                   <div className="column is-1">
                     {this.isOwner() && <Link
                       className="button is-warning"
-                      to={`/books/${book._id}/update`}>Edit</Link>}
+                      to={`/bookjs/${book._id}/edit`}>Edit</Link>}
                   </div>
                   <div className="column is-1">
                     {this.isOwner() && <button className="button is-danger" onClick={this.handleDelete}>Delete</button>}
