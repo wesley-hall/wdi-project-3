@@ -452,6 +452,24 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           message: 'Loan F',
           returned: null,
           approved: false
+        },
+        {
+          book: books[0],
+          borrower: users[2],
+          start: '2019-01-15T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan G',
+          returned: null,
+          approved: true
+        },
+        {
+          book: books[5],
+          borrower: users[0],
+          start: '2019-01-15T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan H',
+          returned: null,
+          approved: true
         }
       ])
     })
