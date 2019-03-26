@@ -20,6 +20,8 @@ import BookAdd from './components/books/bookAdd'
 import BookUpdate from './components/books/bookUpdate'
 import Libraries from './components/books/libraries'
 
+import IdsAll from './components/common/ids'
+
 import LoansAll from './components/loans/loansAll'
 import LoanAdd from './components/loans/loanAdd'
 
@@ -38,6 +40,7 @@ class App extends React.Component {
             <Route path="/books/:id" component={BookShow}/>
             <Route path="/libraries" component={Libraries}/>
             <Route path="/books" component={BooksAll}/>
+            <Route path="/ids" component={IdsAll}/>
 
             <SecureRoute path="/loans" component={LoansAll}/>
             <Route path="/register" component={Register}/>
