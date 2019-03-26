@@ -61,9 +61,9 @@ class LoansAll extends React.Component {
     return loan.returned
   }
 
-  isOverdue() {
-    const { end, approved, returned } = this.state.loans.loanedByMe
-    return approved && !returned && Date.now() > end
+  isOverdue(loan) {
+    const { end, approved, returned } = loan
+    return approved && !returned && '2019-03-26T12:00:00.561Z' > end
   }
 
   isPending(loan) {
@@ -147,7 +147,14 @@ class LoansAll extends React.Component {
                         </div>
                       </div>
                     }
-                    {this.isOverdue(loan) && <p>Blah blah blah</p>}
+                    {this.isOverdue(loan) &&
+                      <div className="column is-4 is-gapless columns">
+                        <h4 className="column is-half has-text-danger is-gapless">Overdue</h4>
+                        <div className="column is-half is-gapless">
+                          Remind {loan.borrower.username} to return {loan.book.title}
+                        </div>
+                      </div>
+                    }
                   </div>
                 </div>
               ))}
@@ -209,9 +216,9 @@ class LoansAll extends React.Component {
                     }
                     {this.isOverdue(loan) &&
                         <div className="column is-4 is-gapless columns">
-                          <h4 className="column is-half is-danger is-gapless">Overdue</h4>
+                          <h4 className="column is-half has-text-danger is-gapless">Overdue</h4>
                           <div className="column is-half is-gapless">
-                            Lorem ipsum
+                            Please return {loan.book.title} to {loan.book.owner.username}
                           </div>
                         </div>
                     }

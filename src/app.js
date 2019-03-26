@@ -35,9 +35,9 @@ class App extends React.Component {
         <div>
           <Nav />
           <Switch>
-            <Route path="/books/:id/update" component={BookUpdate}/>
-            <Route path="/books/:id/loan" component={LoanAdd}/>
-            <Route path="/books/add" component={BookAdd}/>
+            <SecureRoute path="/books/:id/update" component={BookUpdate}/>
+            <SecureRoute path="/books/:id/loan" component={LoanAdd}/>
+            <SecureRoute path="/books/add" component={BookAdd}/>
             <Route path="/books/:id" component={BookShow}/>
             <Route path="/libraries" component={Libraries}/>
             <Route path="/books" component={BooksAll}/>
