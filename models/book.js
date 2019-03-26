@@ -20,7 +20,9 @@ const bookSchema = new mongoose.Schema({
   description: {type: String},
   rating: [ratingSchema],
   review: [reviewSchema],
-  owner: { type: mongoose.Schema.ObjectId, ref: 'User'}
+  owner: { type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
 })
+
+bookSchema.plugin(require('mongoose-autopopulate'))
 
 module.exports = mongoose.model('Book', bookSchema)
