@@ -9,12 +9,42 @@ class BooksAll extends React.Component {
     super()
 
     this.state = {}
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
+    this.getBooks()
+    this.getLibraries()
+  }
+
+  getBooks() {
     axios.get('/api/books')
-      .then(res => this.setState({ books: res.data }))
-      .catch(e => console.error(e))
+      .then(res => {
+        this.setState({ books: res.data })
+        this.showAllBooks()
+      })
+      .catch(err => console.error(err))
+  }
+
+  getLibraries() {
+    axios.get('/api/libraries')
+      .then(res => this.setState({ libraries: res.data }))
+      .catch(err => console.log(err))
+  }
+
+  showAllBooks() {
+    const filteredBooks = this.state.books
+    this.setState({...this.state, filteredBooks})
+  }
+
+  showFilteredBooks(value) {
+    const filteredBooks = this.state.books.filter(books => books.owner._id === value)
+    this.setState({...this.state, filteredBooks})
+  }
+
+  handleChange({ target: { value }}) {
+    if (value === 'all') return this.showAllBooks()
+    return this.showFilteredBooks(value)
   }
 
   ratingAverage(ratingArray) {
@@ -46,12 +76,25 @@ class BooksAll extends React.Component {
         {Auth.isAuthenticated() && <Link to="/books/add" className="button button-add-book is-success is-pulled-right">Add a book...</Link>}
 
         <main className="section">
-
           <div className="container">
+            <div className="">
+              <span>Filter books by library:</span>
+              <select
+                name="libraries"
+                onChange={this.handleChange}
+                defaultValue="all"
+              >
+                <option value="all">All Libraries</option>
+                {this.state.libraries && this.state.libraries.map(library => (
+                  <option key={library.owner} value={library.owner}>{library.libraryName}</option>
+                ))}
+              </select>
+            </div>
+
 
             <div className="columns is-mobile is-multiline">
-              {!this.state.books && <p>...loading</p>}
-              {this.state.books && this.state.books.map(book => (
+              {!this.state.filteredBooks && <p>...loading</p>}
+              {this.state.filteredBooks && this.state.filteredBooks.map(book => (
                 <div key={book._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
                   <Link to={`/books/${book._id}`} >
                     <div className="card">
