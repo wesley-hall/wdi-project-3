@@ -12,7 +12,7 @@ class Nav extends React.Component {
     }
 
     this.logout = this.logout.bind(this)
-    
+
   }
 
   logout() {
@@ -29,11 +29,11 @@ class Nav extends React.Component {
   }
 
   componentDidMount() {
-    this.getUser()
+    {Auth.isAuthenticated() && this.getUser()}
   }
 
   componentDidUpdate() {
-    this.getUser()
+    {Auth.isAuthenticated() && this.getUser()}
   }
 
 
