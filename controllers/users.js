@@ -7,6 +7,14 @@ function usersAll(req, res) {
     .catch(e => console.log(e))
 }
 
+function usersShow(req, res) {
+  Users
+    .findById(req.params.id)
+    .then(user => res.status(200).json(user))
+    .catch(err => res.json(err))
+}
+
 module.exports = {
-  usersAll: usersAll
+  usersAll: usersAll,
+  usersShow: usersShow
 }

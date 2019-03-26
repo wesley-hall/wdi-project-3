@@ -15,6 +15,7 @@ router.get('/libraries', auth.librariesAll)
 router.get('/genres', genres.genresAll)
 
 router.get('/users', users.usersAll)
+router.get('/users/:id', users.usersShow)
 
 router.route('/books')
   .get(books.booksAll)

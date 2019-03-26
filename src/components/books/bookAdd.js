@@ -9,10 +9,10 @@ class BookAdd extends React.Component {
       data: {
         title: '',
         authors: '',
-        image: '',
-        fiction: '',
-        genre: '',
-        description: '',
+        image: '12345',
+        fiction: '12345',
+        genre: '5c99695fd767f14ae7265a41',
+        description: '12345',
         rating: [],
         review: [],
         owner: ''
