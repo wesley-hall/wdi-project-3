@@ -9,6 +9,9 @@ class IdsAll extends React.Component {
   }
 
   componentDidMount() {
+    axios.get('/api/books')
+      .then(res => this.setState({ books: res.data }))
+      .catch(e => console.error(e))
     axios.get('/api/genres')
       .then(res => this.setState({ genres: res.data }))
       .catch(e => console.error(e))
@@ -24,6 +27,13 @@ class IdsAll extends React.Component {
   render() {
     return (
       <main className="section">
+        <div className="container">
+          <h1>book._id : book.title</h1>
+          {!this.state.books && <p>...loading</p>}
+          {this.state.books && this.state.books.map(book => (
+            <div key={book._id}>{book._id} - {book.owner.username} : {book.title}</div>
+          ))}
+        </div>
         <div className="container">
           <h1>genre._id : genre.genre</h1>
           {!this.state.genres && <p>...loading</p>}
