@@ -138,5 +138,46 @@ describe('Book tests', () => {
         })
     })
   })
+  describe('GET /api/books/:id', () => {
 
+    let book
+
+    beforeEach(done => {
+      Book
+        .create(bookData)
+        .then(booksData => {
+          book = booksData
+          done()
+        })
+        .catch(done)
+    })
+
+    it('should return a 200 response', done => {
+      api
+        .get(`/api/books/${book._id}`)
+        .set('Accept', 'application/json')
+        .expect(200, done)
+    })
+  })
+
+  describe('DELETE /api/shoes/:id', () => {
+
+    let book
+
+    beforeEach(done => {
+      Book
+        .create(bookData)
+        .then(booksData => {
+          book = booksData
+          done()
+        })
+        .catch(done)
+    })
+    it('should return a 204 response', done => {
+      api
+        .delete(`/api/books/${book._id}`)
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${token}`})
+        .expect(204, done)
+    })
+  })
 })
