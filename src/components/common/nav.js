@@ -8,12 +8,11 @@ class Nav extends React.Component {
   constructor() {
     super()
     this.state = {
-
+      userCurrent: ''
     }
 
-    this.userCurrent = '',
     this.logout = this.logout.bind(this)
-
+    
   }
 
   logout() {
@@ -24,8 +23,8 @@ class Nav extends React.Component {
   getUser() {
     axios.get(`/api/users/${Auth.getPayload().sub}`)
       .then(res => {
-        this.userCurrent = res.data.username.charAt(0).toUpperCase() + res.data.username.slice(1)
-        this.setState(this.userCurrent)
+        const current = res.data.username.charAt(0).toUpperCase() + res.data.username.slice(1)
+        this.setState({ userCurrent: current })
       })
   }
 
@@ -50,7 +49,7 @@ class Nav extends React.Component {
         <div className="navbar-menu">
           <div className="navbar-end">
             {!Auth.isAuthenticated() && <Link to="/login" className="navbar-item">Login/Register</Link>}
-            {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout {this.userCurrent}</a>}
+            {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout {this.state.userCurrent}</a>}
           </div>
 
         </div>
