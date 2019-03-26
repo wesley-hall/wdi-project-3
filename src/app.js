@@ -24,6 +24,7 @@ import IdsAll from './components/common/ids'
 
 import LoansAll from './components/loans/loansAll'
 import LoanAdd from './components/loans/loanAdd'
+import UserProfile from './components/users/userprofile'
 
 
 class App extends React.Component {
@@ -40,6 +41,7 @@ class App extends React.Component {
             <Route path="/books/:id" component={BookShow}/>
             <Route path="/libraries" component={Libraries}/>
             <Route path="/books" component={BooksAll}/>
+            <Route path="/users" component={UserProfile}/>
             <Route path="/ids" component={IdsAll}/>
 
             <SecureRoute path="/loans" component={LoansAll}/>

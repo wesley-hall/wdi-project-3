@@ -7,14 +7,26 @@ function usersAll(req, res) {
     .catch(e => console.log(e))
 }
 
-function usersShow(req, res) {
+function userShow(req, res) {
   Users
     .findById(req.params.id)
     .then(user => res.status(200).json(user))
     .catch(err => res.json(err))
 }
 
+function userUpdate(req, res) {
+  Users
+    .findById(req.params.id)
+    .then(user => {
+      Object.assign(user, req.body)
+      return user.save()
+    })
+    .then(user => res.status(200).json(user))
+    .catch(err => res.status(500).json(err))
+}
+
 module.exports = {
   usersAll: usersAll,
-  usersShow: usersShow
+  userShow: userShow,
+  userUpdate: userUpdate
 }

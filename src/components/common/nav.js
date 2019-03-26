@@ -12,7 +12,7 @@ class Nav extends React.Component {
     }
 
     this.logout = this.logout.bind(this)
-    
+
   }
 
   logout() {
@@ -44,6 +44,7 @@ class Nav extends React.Component {
           <Link to="/" className="navbar-item">Booker</Link>
           <Link to="/books" className="navbar-item">/Books</Link>
           <Link to="/libraries" className="navbar-item">/Libraries</Link>
+          <Link to="/users" className="navbar-item">/User Profile</Link>
           {Auth.isAuthenticated() && <Link to="/loans" className="navbar-item">/Loans</Link>}
         </div>
         <div className="navbar-menu">
