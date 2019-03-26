@@ -81,7 +81,8 @@ class BookAdd extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    axios.post('/api/books', this.state.data)
+    axios.post('/api/books', this.state.data,
+      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(() => this.props.history.push('/books'))
       .catch(err => this.setState({errors: err.response.data.errors}))
   }
@@ -140,7 +141,7 @@ class BookAdd extends React.Component {
                         name="genre"
                         onChange={this.handleChange}>
                         {this.state.genres && this.state.genres.map(genre => (
-                          <option key={genre._id} value={genre.genre}>{genre.genre}</option>
+                          <option key={genre._id} value={genre._id}>{genre.genre}</option>
                         ))}
                       </select>
                     </div>
