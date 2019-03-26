@@ -30,7 +30,8 @@ class Userprofile extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    axios.put(`/api/users/${Auth.getPayload().sub}`, this.state.data)
+    axios.put(`/api/users/${Auth.getPayload().sub}`, this.state.data,
+      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(() => this.getUser())
       .catch(err => this.setState({errors: err.response.data.errors}))
   }
@@ -90,7 +91,7 @@ class Userprofile extends React.Component {
               <div>
                 <input
                   className="input"
-                  name="ProfilePicture"
+                  name="profilePicture"
                   placeholder="Please submit a new Profile Picture"
                   onChange={this.handleChange}
                 />
