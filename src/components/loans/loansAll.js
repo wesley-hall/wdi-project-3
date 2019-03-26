@@ -25,7 +25,7 @@ class LoansAll extends React.Component {
         console.log(res.data[0].borrower.username)
         console.log('Hello', res.data)
         console.log('auth sub', Auth.getPayload().sub)
-        const loanedFromMe = res.data.filter(loans => loans.book.owner === Auth.getPayload().sub)
+        const loanedFromMe = res.data.filter(loans => loans.book.owner._id === Auth.getPayload().sub)
         const loanedByMe = res.data.filter(loans => loans.borrower._id === Auth.getPayload().sub)
         console.log('loanedFromMe', loanedFromMe)
         console.log('loanedByMe', loanedByMe)
@@ -35,9 +35,6 @@ class LoansAll extends React.Component {
       })
 
   }
-
-
-
 
   handleChange({ target: { name , value }}) {
     const data = {...this.state.data, [name]: value}
@@ -50,6 +47,30 @@ class LoansAll extends React.Component {
     const errors = {...this.state.errors, [name]: ''}
     this.setState({data,errors})
   }
+
+  isApproved(loan) {
+    return loan.approved
+  }
+
+  isOnLoan(loan) {
+    const { end, approved, returned } = loan
+    return approved && !returned && '2019-03-26T12:00:00.561Z' < end
+  }
+
+  isReturned(loan) {
+    return loan.returned
+  }
+
+  isOverdue() {
+    const { end, approved, returned } = this.state.loans.loanedByMe
+    return approved && !returned && Date.now() > end
+  }
+
+  isPending(loan) {
+    return !this.isApproved(loan)
+  }
+
+
 
   render() {
     if (!this.state.loans.loanedFromMe && !this.state.loans.loanedByMe) return null
@@ -83,7 +104,7 @@ class LoansAll extends React.Component {
                 <h4 className="column is-2 is-gapless">End Date</h4>
                 <h4 className="column is-2 is-gapless">Book Title</h4>
                 <h4 className="column is-2 is-gapless">Requested By</h4>
-                <h4 className="column is-2 is-gapless">Returned</h4>
+                <h4 className="column is-2 is-gapless">Status</h4>
                 <h4 className="column is-2 is-gapless">Actions</h4>
               </div>
               {loanedFromMe.map(loan => (
@@ -93,22 +114,43 @@ class LoansAll extends React.Component {
                     <h4 className="column is-2 is-gapless">{loan.end.substring(10,-5)}</h4>
                     <h4 className="column is-2 is-gapless">{loan.book.title}</h4>
                     <h4 className="column is-2 is-gapless">{loan.borrower.username}</h4>
-                    <h4 className="column is-2 is-gapless">{loan.returned && loan.returned.substring(10,-5)}</h4>
-                    <div className="column is-2 is-gapless">
-                      <button className="button is-small is-warning" onClick={this.handleClick}>
-                        Confirm Book Returned
-                      </button>
-                      <button className="button is-small is-warning" onClick={this.handleClick}>
-                        Approve Loan
-                      </button>
-                      <button className="button is-small is-warning" onClick={this.handleClick}>
-                        Reject Loan
-                      </button>
-                    </div>
+                    {this.isReturned(loan) &&
+                        <div className="column is-4 is-gapless columns">
+                          <h4 className="column is-half is-gapless">Returned on<br /> {loan.returned && loan.returned.substring(10,-5)}</h4>
+                          <div className="column is-half is-gapless">
+                            <button className="button is-small is-info" onClick={this.handleClick}>
+                              Rate borrower?
+                            </button>
+                          </div>
+                        </div>
+                    }
+                    {this.isOnLoan(loan) &&
+                        <div className="column is-4 is-gapless columns">
+                          <h4 className="column is-half is-gapless">On loan</h4>
+                          <div className="column is-half is-gapless">
+                            <button className="button is-small is-warning" onClick={this.handleClick}>
+                              Confirm Book Returned
+                            </button>
+                          </div>
+                        </div>
+                    }
+                    {this.isPending(loan) &&
+                      <div className="column is-4 is-gapless columns">
+                        <h4 className="column is-half is-gapless">Pending</h4>
+                        <div className="column is-half is-gapless">
+                          <button className="button is-small is-success" onClick={this.handleClick}>
+                            Approve Loan
+                          </button>
+                          <button className="button is-small is-danger" onClick={this.handleClick}>
+                            Reject Loan
+                          </button>
+                        </div>
+                      </div>
+                    }
+                    {this.isOverdue(loan) && <p>Blah blah blah</p>}
                   </div>
                 </div>
               ))}
-
               <hr />
             </div>
 
@@ -134,7 +176,7 @@ class LoansAll extends React.Component {
                 <h4 className="column is-2 is-gapless">End Date</h4>
                 <h4 className="column is-2 is-gapless">Book Title</h4>
                 <h4 className="column is-2 is-gapless">Requested From</h4>
-                <h4 className="column is-2 is-gapless">Returns</h4>
+                <h4 className="column is-2 is-gapless">Status</h4>
                 <h4 className="column is-2 is-gapless">Actions</h4>
               </div>
               {loanedByMe.map(loan => (
@@ -143,13 +185,47 @@ class LoansAll extends React.Component {
                     <h4 className="column is-2 is-gapless">{loan.start.substring(10,-5)}</h4>
                     <h4 className="column is-2 is-gapless">{loan.end.substring(10,-5)}</h4>
                     <h4 className="column is-2 is-gapless">{loan.book.title}</h4>
-                    <h4 className="column is-2 is-gapless">{loan.borrower.username}</h4>
-                    <h4 className="column is-2 is-gapless">{loan.returned && loan.returned.substring(10,-5)}</h4>
-                    <div className="column is-2 is-gapless">
-                      <button className="button is-small is-danger" onClick={this.handleClick}>
-                        Cancel Loan Request
-                      </button>
-                    </div>
+                    <h4 className="column is-2 is-gapless">{loan.book.owner.username}</h4>
+
+                    {this.isPending(loan) &&
+                      <div className="column is-4 is-gapless columns">
+                        <h4 className="column is-half is-gapless">Pending</h4>
+                        <div className="column is-half is-gapless">
+                          <button className="button is-small is-danger" onClick={this.handleClick}>
+                            Cancel request
+                          </button>
+                        </div>
+                      </div>
+                    }
+                    {this.isOnLoan(loan) &&
+                        <div className="column is-4 is-gapless columns">
+                          <h4 className="column is-half is-gapless">On loan</h4>
+                          <div className="column is-half is-gapless">
+                            <button className="button is-small is-info" onClick={this.handleClick}>
+                              Rate/review book?
+                            </button>
+                          </div>
+                        </div>
+                    }
+                    {this.isOverdue(loan) &&
+                        <div className="column is-4 is-gapless columns">
+                          <h4 className="column is-half is-danger is-gapless">Overdue</h4>
+                          <div className="column is-half is-gapless">
+                            Lorem ipsum
+                          </div>
+                        </div>
+                    }
+                    {this.isReturned(loan) &&
+                        <div className="column is-4 is-gapless columns">
+                          <h4 className="column is-half is-gapless">Returned on<br /> {loan.returned && loan.returned.substring(10,-5)}</h4>
+                          <div className="column is-half is-gapless">
+                            <button className="button is-small is-info" onClick={this.handleClick}>
+                              Rate book?
+                            </button>
+                          </div>
+                        </div>
+                    }
+
                   </div>
                 </div>
               ))}
