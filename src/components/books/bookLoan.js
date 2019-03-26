@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom'
 import Auth from '../../lib/auth'
 
 
-class BookShow extends React.Component {
+class BookLoan extends React.Component {
   constructor() {
     super()
 
     this.state = {}
 
     this.handleDelete = this.handleDelete.bind(this)
-    this.handleEdit = this.handleEdit.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
   }
 
   componentDidMount() {
@@ -20,7 +20,8 @@ class BookShow extends React.Component {
       .then(res => this.setState({ book: res.data }))
   }
 
-  handleEdit() {
+  handleCancel() {
+
   }
 
   handleDelete() {
@@ -61,12 +62,12 @@ class BookShow extends React.Component {
           <div className="container">
             <div className="columns">
               <div className="column">
-                <h2 className="title">{book.title}</h2>
+                <h2 className="title">LOAN LOAN LOAN{book.title}</h2>
                 <h3 className="title is-4">by: {book.authors}</h3>
               </div>
               <div className="column">
                 <div>
-                  <button className="button is-success is-pulled-right" onClick={this.handleBorrow}>Borrow this book</button>
+                  <button className="button is-warning is-pulled-right" onClick={this.handleCancel}>Cancel</button>
                   <br />
                   <br />
                   <br />
@@ -86,11 +87,11 @@ class BookShow extends React.Component {
               </div>
               <div className="column is-half">
 
-                <h5 className="is-7">Genre: {book.genre.genre} [{book.fiction ? 'Fiction' : 'Non-fiction'}]</h5>
-                <h5 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
-                <br />
-                <h5 className="bookDescription subtitle is-6">{book.description}</h5>
-                <hr />
+                <h5 className="is-7">Availability:</h5>
+                {book.existingLoans && book.existingLoans.map(loan => (
+                  <h5 className="subtitle is-7" key={loan._id}>{loan.start} to {loan.end}</h5>))}
+                  
+                <h5 className="is-7"></h5>
                 <div className="columns">
                   <div className="column is-1">
                     {this.isOwner() && <Link
@@ -111,7 +112,7 @@ class BookShow extends React.Component {
   }
 }
 
-export default BookShow
+export default BookLoan
 
 // {book.existingLoans && book.existingLoans.map(loan => (
 //   <h5 className="subtitle is-7" key={loan._id}>{loan.start} to {loan.end}</h5>))}

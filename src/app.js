@@ -18,13 +18,13 @@ import BooksAll from './components/books/booksAll'
 import BookShow from './components/books/bookShow'
 import BookAdd from './components/books/bookAdd'
 import BookUpdate from './components/books/bookUpdate'
-import BookBorrow from './components/books/bookBorrow'
+import BookLoan from './components/books/bookLoan'
 import Libraries from './components/books/libraries'
 
 import IdsAll from './components/common/ids'
 
 import LoansAll from './components/loans/loansAll'
-import LoanAdd from './components/loans/loanAdd'
+// import LoanAdd from './components/loans/loanAdd'
 import UserProfile from './components/users/userprofile'
 
 
@@ -37,8 +37,7 @@ class App extends React.Component {
           <Nav />
           <Switch>
             <SecureRoute path="/books/:id/update" component={BookUpdate}/>
-            <SecureRoute path="/books/:id/borrow" component={BookBorrow}/>
-            <SecureRoute path="/books/:id/loan" component={LoanAdd}/>
+            <SecureRoute path="/books/:id/loan" component={BookLoan}/>
             <SecureRoute path="/books/add" component={BookAdd}/>
             <Route path="/books/:id" component={BookShow}/>
             <Route path="/libraries" component={Libraries}/>

@@ -114,6 +114,3 @@ class BookShow extends React.Component {
 }
 
 export default BookShow
-
-// {book.existingLoans && book.existingLoans.map(loan => (
-//   <h5 className="subtitle is-7" key={loan._id}>{loan.start} to {loan.end}</h5>))}
