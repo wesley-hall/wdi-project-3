@@ -7,6 +7,9 @@ import Auth from '../../lib/auth'
 class Nav extends React.Component {
   constructor() {
     super()
+    this.state = {
+
+    }
 
     this.userCurrent = '',
     this.logout = this.logout.bind(this)
@@ -18,12 +21,20 @@ class Nav extends React.Component {
     this.props.history.push('/')
   }
 
-  componentDidMount() {
+  getUser() {
     axios.get(`/api/users/${Auth.getPayload().sub}`)
       .then(res => {
         this.userCurrent = res.data.username.charAt(0).toUpperCase() + res.data.username.slice(1)
+        this.setState(this.userCurrent)
       })
+  }
 
+  componentDidMount() {
+    this.getUser()
+  }
+
+  componentDidUpdate() {
+    this.getUser()
   }
 
 
