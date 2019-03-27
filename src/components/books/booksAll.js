@@ -8,8 +8,11 @@ class BooksAll extends React.Component {
   constructor() {
     super()
 
-    this.state = {}
+    this.state = {
+      search: ''
+    }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   componentDidMount() {
@@ -47,6 +50,10 @@ class BooksAll extends React.Component {
     return this.showFilteredBooks(value)
   }
 
+  handleSearch(e) {
+    this.setState({ search: e.target.value.substr(0, 20) })
+  }
+
   ratingAverage(ratingArray) {
     let sum = 0
     for (let i=0; i < ratingArray.length; i++) {
@@ -70,6 +77,9 @@ class BooksAll extends React.Component {
   }
 
   render() {
+    if (!this.state.filteredBooks) return  <p>Loading...</p>
+    const filteredBooks = this.state.filteredBooks.filter(books => books.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || books.authors.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1)
+    console.log(filteredBooks)
     return (
       <div>
         <br />
@@ -77,24 +87,35 @@ class BooksAll extends React.Component {
 
         <main className="section">
           <div className="container">
-            <div className="">
-              <span>Filter books by library:</span>
-              <select
-                name="libraries"
-                onChange={this.handleChange}
-                defaultValue="all"
-              >
-                <option value="all">All Libraries</option>
-                {this.state.libraries && this.state.libraries.map(library => (
-                  <option key={library.owner} value={library.owner}>{library.libraryName}</option>
-                ))}
-              </select>
+
+            <div className="columns is-mobile">
+              <div className="column is-one-third-desktop is-half-tablet is-full-mobile">
+                <span>Filter books by library:</span>
+                <select
+                  className="select"
+                  name="libraries"
+                  onChange={this.handleChange}
+                  defaultValue="all"
+                >
+                  <option value="all">All Libraries</option>
+                  {this.state.libraries && this.state.libraries.map(library => (
+                    <option key={library.owner} value={library.owner}>{library.libraryName}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="column is-one-third-desktop is-half-tablet is-full-mobile">
+                <input
+                  type="text"
+                  value={this.state.search}
+                  onChange={this.handleSearch}
+                / >
+              </div>
             </div>
 
 
             <div className="columns is-mobile is-multiline">
               {!this.state.filteredBooks && <p>...loading</p>}
-              {this.state.filteredBooks && this.state.filteredBooks.map(book => (
+              {this.state.filteredBooks && filteredBooks.map(book => (
                 <div key={book._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
                   <Link to={`/books/${book._id}`} >
                     <div className="card">
