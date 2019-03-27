@@ -31,14 +31,16 @@ class BookUpdate extends React.Component {
     const user = this.getUserId()
     const rating = {...this.state.data.rating, user: user}
     const review = {...this.state.data.review, user: user}
-    const data = {...this.state.data, owner: user, rating: rating, review: review }
-    console.log('did mount')
+    // const data = {...this.state.data, owner: user, rating: rating, review: review }
     axios.get(`/api/books/${this.props.match.params.id}`)
-      .then(res => this.setState({ data: res.data }))
+      .then(res => this.setState({ data: res.data }), this.getGenres())
+      .catch(err => console.log(err))
+  }
 
+  getGenres() {
     axios.get('/api/genres')
       .then(res => {
-        this.setState({ genres: res.data, data })
+        this.setState({ genres: res.data })
       })
       .catch(err => console.log(err))
   }
