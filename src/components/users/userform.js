@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Auth from '../../lib/auth'
-import RegisterMap from '../auth/registerMap'
+import UserEditMap from '../common/userEditMap'
 
 class UserForm extends React.Component {
   constructor() {
@@ -97,7 +97,7 @@ class UserForm extends React.Component {
 
             <div>
               <label>Where are your books located? (drag pointer)</label>
-              <RegisterMap
+              <UserEditMap
                 center={this.mapCenter}
                 onSelectLocation={this.handleLocation}
               />
