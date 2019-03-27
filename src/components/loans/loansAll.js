@@ -12,36 +12,91 @@ class LoansAll extends React.Component {
     this.state = {
       loans: {
         loanedFromMe: [],
-        loanedByMe: []
+        loanedByMe: [],
+        refreshLoans: false
       },
       errors: {}
     }
 
     this.handleClick = this.handleClick.bind(this)
+    this.confirmBookReturn = this.confirmBookReturn.bind(this)
+    this.approveLoanRequest = this.approveLoanRequest.bind(this)
+    this.declineLoanRequest = this.declineLoanRequest.bind(this)
+    this.cancelLoanRequest = this.cancelLoanRequest.bind(this)
   }
 
   componentDidMount() {
+    this.getLoans()
+  }
+
+  getLoans() {
     axios.get('/api/loans')
       .then(res => {
         const loanedFromMe = res.data.filter(loans => loans.book.owner._id === Auth.getPayload().sub)
         const loanedByMe = res.data.filter(loans => loans.borrower._id === Auth.getPayload().sub)
-        console.log('loanedFromMe', loanedFromMe)
-        console.log('loanedByMe', loanedByMe)
+        loanedFromMe.sort((a, b) => new Date(a.start) - new Date(b.start))
+        loanedByMe.sort((a, b) => new Date(a.start) - new Date(b.start))
         const loans = {...this.state.loans, loanedFromMe, loanedByMe}
-        console.log('loans', loans)
         this.setState({ loans })
       })
-
   }
 
   confirmBookReturn(e) {
-    // console.log('in confirmBookReturn e is', e.target.value)
-    axios.put(`/api/loans/${e.target.value}`,
-      { body: { returned: new Date() }},
-      { headers: { Authorization: `Bearer ${Auth.getToken()}` }})
-      .then(res => console.log(res))
+    console.log('in confirmBookReturn e is', e)
+    axios({
+      method: 'PUT',
+      url: `/api/loans/${e.target.value}`,
+      headers: {
+        'Authorization': `Bearer ${Auth.getToken()}`
+      },
+      data: {
+        returned: new Date()
+      }
+    })
+      .then(() => this.getLoans())
       .catch(err => console.log(err))
   }
+
+
+  approveLoanRequest(e) {
+    console.log('in approveLoanRequest e is', e.target.value)
+    axios({
+      method: 'PUT',
+      url: `/api/loans/${e.target.value}`,
+      headers: {
+        'Authorization': `Bearer ${Auth.getToken()}`
+      },
+      data: {
+        approved: true
+      }
+    })
+      .then(() => this.getLoans())
+      .catch(err => console.log(err))
+  }
+
+  declineLoanRequest(e) {
+    axios({
+      method: 'PUT',
+      url: `/api/loans/${e.target.value}`,
+      headers: {
+        'Authorization': `Bearer ${Auth.getToken()}`
+      },
+      data: {
+        declined: true
+      }
+    })
+      .then(() => this.getLoans())
+      .catch(err => console.log(err))
+  }
+
+
+  cancelLoanRequest(e) {
+    axios.delete(`/api/loans/${e.target.value}`,
+      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => this.getLoans())
+      .catch(err => console.log(err))
+  }
+
 
   handleClick({ target: { name , value }}) {
     const data = {...this.state.data, [name]: value}
@@ -49,13 +104,15 @@ class LoansAll extends React.Component {
     this.setState({data,errors})
   }
 
-  isApproved(loan) {
-    return loan.approved
-  }
-
   isOnLoan(loan) {
     const { end, approved, returned } = loan
     return approved && !returned && new Date() < new Date(end)
+  }
+
+// isDeclined does not work... because approved: false is the same as approved not existing!! ??????????????????
+  isDeclined(loan) {
+    const { approved, declined } = loan
+    return !approved && declined
   }
 
   isReturned(loan) {
@@ -66,12 +123,6 @@ class LoansAll extends React.Component {
     const { end, approved, returned } = loan
     return approved && !returned && new Date() > new Date(end)
   }
-
-  isPending(loan) {
-    return !loan.approved
-  }
-
-
 
   render() {
     if (!this.state.loans.loanedFromMe && !this.state.loans.loanedByMe) return null
@@ -100,11 +151,14 @@ class LoansAll extends React.Component {
                   <LoanedFromMe
                     loan={loan}
                     handleClick={this.handleClick}
+                    isPending={this.isPending}
+                    approveLoanRequest={this.approveLoanRequest}
+                    declineLoanRequest={this.declineLoanRequest}
                     isOnLoan={this.isOnLoan}
                     confirmBookReturn={this.confirmBookReturn}
-                    isReturned={this.isReturned}
+                    isDeclined={this.isDeclined}
                     isOverdue={this.isOverdue}
-                    isPending={this.isPending}
+                    isReturned={this.isReturned}
                   />
                 </div>
               ))}
@@ -130,10 +184,11 @@ class LoansAll extends React.Component {
                   <LoanedByMe
                     loan={loan}
                     handleChange={this.handleChange}
-                    isOnLoan={this.isOnLoan}
-                    isReturned={this.isReturned}
-                    isOverdue={this.isOverdue}
                     isPending={this.isPending}
+                    cancelLoanRequest={this.cancelLoanRequest}
+                    isOnLoan={this.isOnLoan}
+                    isOverdue={this.isOverdue}
+                    isReturned={this.isReturned}
                   />
                 </div>
               ))}
@@ -153,7 +208,7 @@ export default LoansAll
 // ----- Under this.state, add: -----
 // this.handleChange = this.handleChange.bind(this)
 
-// ----- After componentDidMoiunt(), add: -----
+// ----- After componentDidMount(), add: -----
 // handleChange({ target: { name , value }}) {
 //   const data = {...this.state.data, [name]: value}
 //   const errors = {...this.state.errors, [name]: ''}
