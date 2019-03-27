@@ -11,10 +11,11 @@ class BookShow extends React.Component {
 
     this.state = {}
 
-
+    this.handleDelete = this.handleDelete.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
+    this.handleBack = this.handleBack.bind(this)
   }
-  // this.handleDelete = this.handleDelete.bind(this)
+
   componentDidMount() {
     this.getUserLocation()
     axios.get(`/api/books/${this.props.match.params.id}`)
@@ -25,8 +26,19 @@ class BookShow extends React.Component {
     e.preventDefault()
   }
 
-  // handleDelete(e) {
-  // }
+  handleBack() {
+    this.props.history.push('/books')
+  }
+
+  handleDelete(e) {
+    e.preventDefault()
+    console.log(`Bearer ${Auth.getToken()}`)
+    axios.delete(`/api/books/${this.props.match.params.id}`,
+      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => this.props.history.push('/books/'))
+      .catch(err => this.setState({errors: err.response.data.errors}))
+  }
+
 
   isOwner() {
     return Auth.isAuthenticated() && this.state.book.owner._id ===Auth.getPayload().sub
@@ -98,19 +110,12 @@ class BookShow extends React.Component {
 
                   {!this.isOwner() && Auth.isAuthenticated() &&
                     <div>
+                      <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back</button>
+                      <br />
+                      <br />
                       <Link to={`/books/${book._id}/loan`}>
-                        <button className="button is-success is-pulled-right">Borrow this book</button>
+                        <button className="button is-success is-pulled-right">Request to borrow</button>
                       </Link>
-                      <br />
-                      <br />
-                      <br />
-                      <h4 className="is-pulled-right">
-                        {book.owner.libraryName} - {this.calculateDistance(
-                          book.owner.location.lat,
-                          book.owner.location.lng,
-                          this.state.userLat,
-                          this.state.userLng)}km
-                      </h4>
                     </div>
                   }
                 </div>
@@ -119,16 +124,35 @@ class BookShow extends React.Component {
 
 
             <hr />
+
+
             <div className="columns">
-              <div className="column is-half">
+              <div className="column is-third">
                 <figure className="image bookCoverWrapper">
                   <img id="bookCoverImage" src={book.image} alt={book.title} />
                 </figure>
               </div>
-              <div className="column is-half">
 
-                <h5 className="is-7">Genre: {book.genre.genre} [{book.fiction ? 'Fiction' : 'Non-fiction'}]</h5>
-                <h5 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
+              <div className="column is-two-thirds">
+
+                <div className="columns">
+                  <div className="column is-half">
+                    <h4 className="is-7">Genre: {book.genre.genre} [{book.fiction ? 'Fiction' : 'Non-fiction'}]</h4>
+                    <h4 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h4>
+                  </div>
+                  <div className="column is-half">
+                    <h4 className="is-pulled-right">
+                      Library: {book.owner.libraryName}
+                      {Auth.isAuthenticated() &&
+                      <span> ({this.calculateDistance(
+                        book.owner.location.lat,
+                        book.owner.location.lng,
+                        this.state.userLat,
+                        this.state.userLng)}km)
+                      </span>}
+                    </h4>
+                  </div>
+                </div>
                 <br />
                 <h5 className="bookDescription subtitle is-6">{book.description}</h5>
 

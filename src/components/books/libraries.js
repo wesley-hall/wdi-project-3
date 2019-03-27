@@ -26,8 +26,6 @@ class Libraries extends React.Component {
       .catch(err => console.log(err))
   }
 
-
-
   displayLibraryInfo() {
     this.state.libraries
   }
@@ -45,8 +43,6 @@ class Libraries extends React.Component {
   render() {
     if (!this.state.libraries) return null
     const { center, libraries } = this.state
-    console.log('libraries', libraries)
-    console.log('libraries[0] books length', libraries[0].books.length)
     return (
       <div>
         <LibrariesMap

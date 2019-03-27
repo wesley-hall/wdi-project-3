@@ -34,6 +34,14 @@ class UserForm extends React.Component {
       .catch(err => this.setState({errors: err.response.data.errors}))
   }
 
+  handleDelete(e) {
+    e.preventDefault()
+    console.log(`Bearer ${Auth.getToken()}`)
+    axios.delete(`/api/users/${this.props.match.params.id}`,
+      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => this.props.history.push('/users/'))
+      .catch(err => this.setState({errors: err.response.data.errors}))
+  }
 
   getUser() {
     axios.get(`/api/users/${Auth.getPayload().sub}`)

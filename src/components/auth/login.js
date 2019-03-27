@@ -85,7 +85,7 @@ class Login extends React.Component {
             <br />
             <div>
               <button
-                className="Login button is-success is-pulled-right"
+                className="button is-success is-pulled-right"
               >Login</button>
             </div>
           </form>

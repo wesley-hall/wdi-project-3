@@ -25,6 +25,7 @@ class BookUpdate extends React.Component {
     this.handleSwitch = this.handleSwitch.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.getUserId = this.getUserId.bind(this)
+  
   }
 
   componentDidMount() {
@@ -44,7 +45,6 @@ class BookUpdate extends React.Component {
       })
       .catch(err => console.log(err))
   }
-
 
   handleChange({ target: { name, value }}) {
     console.log(this.state.data)
