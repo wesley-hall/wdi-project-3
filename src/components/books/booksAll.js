@@ -98,21 +98,21 @@ class BooksAll extends React.Component {
                 <div key={book._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
                   <Link to={`/books/${book._id}`} >
                     <div className="card">
-                      <div className="card-header">
-                        <div className="card-image">
+                      <div className="card-header is-horizontal-center">
+                        <div className="card-image max-image-on-card">
                           <figure className="image">
                             <img src={book.image} alt={book.title} />
                           </figure>
                         </div>
                       </div>
 
-                      <div className="card-content">
-                        <h4 className="title is-6">{book.title}</h4>
-                        <h5 className="title is-7">by: {book.authors}</h5>
-                        <h5 className="subtitle is-7">Genre: {book.genre.genre}</h5>
-                        <h5 className="subtitle is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h5>
-                        <h5 className="subtitle is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
-                        <h5 className="subtitle is-7">Location: {book.owner.libraryName} ({this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51.514980, -0.070729)}km)</h5>
+                      <div className="card-content is-horizontal-center">
+                        <h4 className="is-6">{book.title}</h4>
+                        <h5 className="is-6">by: {book.authors}</h5>
+                        <h6 className="is-7">Genre: {book.genre.genre}</h6>
+                        <h6 className="is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h6>
+                        <h6 className="is-7">Rating({book.rating.length}): {this.ratingAverage(book.rating).toFixed(1)} </h6>
+                        <h6 className="is-7">{book.owner.libraryName} -  {this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51.514980, -0.070729)}km</h6>
                       </div>
                     </div>
                   </Link>

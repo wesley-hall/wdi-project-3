@@ -17,9 +17,20 @@ div.map-libraries {
 }
 
 h1.title {
-
   color: black;
   font-size: 3rem;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 600;
+}
+h5 {
+  font-size: 14px;
+  font-weight: 600;
+}
+h6 {
+  font-size: 12px;
 }
 
 .radio {
@@ -29,6 +40,15 @@ h1.title {
 .switch {
   margin-top: 10px;
 }
+
+.is-horizontal-center {
+  justify-content: center;
+}
+
+img.max-image-on-card {
+  max-height: 275px;
+}
+
 
 .bookCoverWrapper {
   max-height: 75vh;
