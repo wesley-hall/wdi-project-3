@@ -98,18 +98,25 @@ class BookShow extends React.Component {
                   {!this.isOwner() && Auth.isAuthenticated() &&
                     <div>
                       <Link to={`/books/${book._id}/loan`}>
-                        <button className="button is-success is-pulled-right">Borrow this book</button>
+                        <button className="button is-success is-pulled-right">Request to borrow</button>
                       </Link>
                       <br />
                       <br />
                       <br />
                       <h4 className="is-pulled-right">
-                        {book.owner.libraryName} - {this.calculateDistance(
+                        {book.owner.libraryName}
+                        {Auth.isAuthenticated() &&
+                        <span> - {this.calculateDistance(
                           book.owner.location.lat,
                           book.owner.location.lng,
                           this.state.userLat,
                           this.state.userLng)}km
+                        </span>}
                       </h4>
+
+
+
+
                     </div>
                   }
                 </div>
@@ -119,12 +126,12 @@ class BookShow extends React.Component {
 
             <hr />
             <div className="columns">
-              <div className="column is-half">
+              <div className="column is-third">
                 <figure className="image bookCoverWrapper">
                   <img id="bookCoverImage" src={book.image} alt={book.title} />
                 </figure>
               </div>
-              <div className="column is-half">
+              <div className="column is-two-thirds">
 
                 <h5 className="is-7">Genre: {book.genre.genre} [{book.fiction ? 'Fiction' : 'Non-fiction'}]</h5>
                 <h5 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>

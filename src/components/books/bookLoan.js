@@ -4,20 +4,32 @@ import { Link } from 'react-router-dom'
 
 import Auth from '../../lib/auth'
 
-
 class BookLoan extends React.Component {
   constructor() {
     super()
 
     this.state = {}
 
+    this.startDate= '',
+    this.endDate= ''
+
     this.handleDelete = this.handleDelete.bind(this)
     this.handleCancel = this.handleCancel.bind(this)
   }
 
   componentDidMount() {
+    this.getUserLocation()
     axios.get(`/api/books/${this.props.match.params.id}`)
       .then(res => this.setState({ book: res.data }))
+  }
+
+  getUserLocation() {
+    axios.get(`/api/users/${Auth.getPayload().sub}`)
+      .then(res => {
+        const userLat = res.data.location.lat
+        const userLng = res.data.location.lng
+        this.setState({ userLat: userLat, userLng: userLng })
+      })
   }
 
   handleCancel() {
@@ -53,6 +65,10 @@ class BookLoan extends React.Component {
     return (d/1000).toFixed(2)
   }
 
+  filteredDates() {
+    return this.state.book.existingLoans.filter(loan => new Date(loan.end) > new Date())
+  }
+
   render() {
     if (!this.state.book) return null
     const { book } = this.state
@@ -62,7 +78,7 @@ class BookLoan extends React.Component {
           <div className="container">
             <div className="columns">
               <div className="column">
-                <h2 className="title">LOAN LOAN LOAN{book.title}</h2>
+                <h2 className="title">{book.title}</h2>
                 <h3 className="title is-4">by: {book.authors}</h3>
               </div>
               <div className="column">
@@ -71,8 +87,13 @@ class BookLoan extends React.Component {
                   <br />
                   <br />
                   <br />
-                  <h5 className="is-pulled-right is-7">Location: {book.owner.libraryName} 
-                  ({this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51.514980, -0.070729)}km)</h5>
+                  <h4 className="is-pulled-right">
+                    {book.owner.libraryName} - {this.calculateDistance(
+                      book.owner.location.lat,
+                      book.owner.location.lng,
+                      this.state.userLat,
+                      this.state.userLng)}km
+                  </h4>
                 </div>
               </div>
             </div>
@@ -80,39 +101,69 @@ class BookLoan extends React.Component {
 
             <hr />
             <div className="columns">
-              <div className="column is-half">
+
+              <div className="column is-third">
                 <figure className="image bookCoverWrapper">
                   <img id="bookCoverImage" src={book.image} alt={book.title} />
                 </figure>
               </div>
-              <div className="column is-half">
 
-                <h5 className="is-7">Availability:</h5>
-                {book.existingLoans && book.existingLoans.map(loan => (
-                  <h5 className="subtitle is-7" key={loan._id}>{loan.start} to {loan.end}</h5>))}
 
-                <h5 className="is-7"></h5>
-                <div className="columns">
-                  <div className="column is-1">
-                    {this.isOwner() && <Link
-                      className="button is-warning"
-                      to={`/bookjs/${book._id}/edit`}>Edit</Link>}
+              <div className="column is-two-thirds">
+                <h4 className="is-7">Request book for the following dates:</h4>
+                <form
+                  className="update"
+                  onSubmit={this.handleSubmit}
+                >
+                  <div className="columns">
+                    <div className="column">
+                      <h1>Collect:</h1>
+                      <input
+                        className="input"
+                        name="startDate"
+                        placeholder="YYYY-MM-DD"
+                        value={this.state.startDate}
+                        onChange={this.handleChange}
+                      />
+                      <h1>Return:</h1>
+                      <input
+                        className="input"
+                        name="endDate"
+                        placeholder="YYYY-MM-DD"
+                        value={this.state.endDate}
+                        onChange={this.handleChange}
+                      />
+                    </div>
+
                   </div>
-                  <div className="column is-1">
-                    {this.isOwner() && <button className="button is-danger" onClick={this.handleDelete}>Delete</button>}
-                  </div>
-                </div>
+                  <button className="Login button is-success is-pulled-right">
+                    Request
+                  </button>
+
+                </form>
+
               </div>
+
             </div>
+
+            <hr />
+            <div className="container">
+              <h4 className="is-7">Currently reserved for these dates:</h4>
+
+              {book.existingLoans && this.filteredDates().map(loan => (
+                <div key={loan._id}>
+                  <h5 className="subtitle is-6" >
+                    {loan.start.substring(10,-5)} to {loan.end.substring(10,-5)}
+                  </h5>
+                </div>))}
+            </div>
+
           </div>
         </main>
-        )
+
       </div>
     )
   }
 }
 
 export default BookLoan
-
-// {book.existingLoans && book.existingLoans.map(loan => (
-//   <h5 className="subtitle is-7" key={loan._id}>{loan.start} to {loan.end}</h5>))}

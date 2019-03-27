@@ -4,6 +4,11 @@
 @import '~bulma';
 @import '~bulma-extensions/dist/css/bulma-extensions.min.css';
 
+@charset "utf-8";
+
+// @import 'bulma.sass';
+// @import "bulmaCalendar.sass";
+
 div.map-libraries {
   width: 100vw;
   height: calc(100vh - 3.25rem);
@@ -19,6 +24,7 @@ div.map-libraries {
 #root > div > nav {
   background-color: #246cc1;
 }
+
 
 h1.title {
   color: black;
