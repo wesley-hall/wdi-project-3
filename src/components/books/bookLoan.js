@@ -71,7 +71,7 @@ class BookLoan extends React.Component {
                   <br />
                   <br />
                   <br />
-                  <h5 className="is-pulled-right is-7">Location: {book.owner.libraryName}
+                  <h5 className="is-pulled-right is-7">Location: {book.owner.libraryName} 
                   ({this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51.514980, -0.070729)}km)</h5>
                 </div>
               </div>
@@ -90,7 +90,7 @@ class BookLoan extends React.Component {
                 <h5 className="is-7">Availability:</h5>
                 {book.existingLoans && book.existingLoans.map(loan => (
                   <h5 className="subtitle is-7" key={loan._id}>{loan.start} to {loan.end}</h5>))}
-                  
+
                 <h5 className="is-7"></h5>
                 <div className="columns">
                   <div className="column is-1">

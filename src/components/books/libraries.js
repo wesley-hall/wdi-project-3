@@ -2,21 +2,22 @@ import React from 'react'
 import axios from 'axios'
 
 import LibrariesMap from './librariesMap'
+import Auth from '../../lib/auth'
 
 class Libraries extends React.Component {
   constructor() {
     super()
 
     this.state = {
-      // center should be the current user's home/library location
       center: {
-        lat: 51.509865,
-        lng: -0.118092
+        lat: 51.515447,
+        lng: -0.071510
       }
     }
   }
-
+  
   componentDidMount() {
+    this.getUserLocation()
     axios.get('/api/libraries')
       .then(res => {
         console.log(res.data)
@@ -25,8 +26,21 @@ class Libraries extends React.Component {
       .catch(err => console.log(err))
   }
 
+  componentDidUpdate() {
+    this.getUserLocation()
+  }
+
   displayLibraryInfo() {
     this.state.libraries
+  }
+
+  getUserLocation() {
+    axios.get(`/api/users/${Auth.getPayload().sub}`)
+      .then(res => {
+        const center = { lat: res.data.location.lat,
+          lng: res.data.location.lng }
+        this.setState({ center: center })
+      })
   }
 
 

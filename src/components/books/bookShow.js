@@ -16,6 +16,7 @@ class BookShow extends React.Component {
   }
 
   componentDidMount() {
+    this.getUserLocation()
     axios.get(`/api/books/${this.props.match.params.id}`)
       .then(res => this.setState({ book: res.data }))
   }
@@ -28,6 +29,15 @@ class BookShow extends React.Component {
 
   isOwner() {
     return Auth.isAuthenticated() && this.state.book.owner._id ===Auth.getPayload().sub
+  }
+
+  getUserLocation() {
+    axios.get(`/api/users/${Auth.getPayload().sub}`)
+      .then(res => {
+        const userLat = res.data.location.lat
+        const userLng = res.data.location.lng
+        this.setState({ userLat: userLat, userLng: userLng })
+      })
   }
 
   ratingAverage(ratingArray) {
@@ -72,8 +82,11 @@ class BookShow extends React.Component {
                   <br />
                   <br />
                   <br />
-                  <h5 className="is-pulled-right is-7">Location: {book.owner.libraryName}
-                  ({this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51.514980, -0.070729)}km)</h5>
+                  <h5 className="is-pulled-right is-7">Location: {book.owner.libraryName} -  {this.calculateDistance(
+                    book.owner.location.lat,
+                    book.owner.location.lng,
+                    this.state.userLat,
+                    this.state.userLng)}km</h5>
                 </div>
               </div>
             </div>
