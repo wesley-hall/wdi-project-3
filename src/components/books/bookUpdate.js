@@ -94,7 +94,7 @@ class BookForm extends React.Component {
         <main className="section">
           <div className="container">
             <h1 className="title">Edit a book:</h1>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} >
 
               <div className="columns">
                 <div className="column">
