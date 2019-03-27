@@ -20,23 +20,6 @@ class Nav extends React.Component {
     this.props.history.push('/')
   }
 
-  getUser() {
-    axios.get(`/api/users/${Auth.getPayload().sub}`)
-      .then(res => {
-        const current = res.data.username.charAt(0).toUpperCase() + res.data.username.slice(1)
-        this.setState({ userCurrent: current })
-      })
-  }
-
-  componentDidMount() {
-    {Auth.isAuthenticated() && this.getUser()}
-  }
-
-  componentDidUpdate() {
-    {Auth.isAuthenticated() && this.getUser()}
-  }
-
-
   render() {
     return (
       <nav className="navbar is-info">

@@ -11,7 +11,8 @@ class BookLoan extends React.Component {
     this.state = {}
 
     this.startDate= '',
-    this.endDate= ''
+    this.endDate= '',
+    this.message=''
 
     this.handleDelete = this.handleDelete.bind(this)
     this.handleCancel = this.handleCancel.bind(this)
@@ -110,14 +111,13 @@ class BookLoan extends React.Component {
 
 
               <div className="column is-two-thirds">
-                <h4 className="is-7">Request book for the following dates:</h4>
                 <form
                   className="update"
                   onSubmit={this.handleSubmit}
                 >
                   <div className="columns">
                     <div className="column">
-                      <h1>Collect:</h1>
+                      <h1>Reqest collect date:</h1>
                       <input
                         className="input"
                         name="startDate"
@@ -125,7 +125,9 @@ class BookLoan extends React.Component {
                         value={this.state.startDate}
                         onChange={this.handleChange}
                       />
-                      <h1>Return:</h1>
+                    </div>
+                    <div className="column">
+                      <h1>Return date:</h1>
                       <input
                         className="input"
                         name="endDate"
@@ -134,8 +136,20 @@ class BookLoan extends React.Component {
                         onChange={this.handleChange}
                       />
                     </div>
-
                   </div>
+
+                  <div>
+                    <p>Message to book owner: <br />
+                      <textarea
+                        className="textarea"
+                        name="message"
+                        placeholder="Please enter a descriptive message"
+                        value={this.state.message}
+                        onChange={this.handleChange}
+                      />
+                    </p>
+                  </div>
+                  <br />
                   <button className="Login button is-success is-pulled-right">
                     Request
                   </button>
