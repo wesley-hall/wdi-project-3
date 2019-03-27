@@ -25,8 +25,17 @@ function userUpdate(req, res) {
     .catch(err => res.status(500).json(err))
 }
 
+function userDelete(req, res) {
+  Users
+    .findByID(req.params.id)
+    .then(user => user.remove())
+    .then(() => res.sendStatus(204))
+    .catch(err => res.status(500).json(err))
+}
+
 module.exports = {
   usersAll: usersAll,
   userShow: userShow,
-  userUpdate: userUpdate
+  userUpdate: userUpdate,
+  userDelete: userDelete
 }
