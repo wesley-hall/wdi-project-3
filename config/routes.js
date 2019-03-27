@@ -19,6 +19,7 @@ router.get('/users', users.usersAll)
 router.route('/users/:id')
   .get(users.userShow)
   .put(secureRoute, users.userUpdate)
+  .delete(secureRoute, users.userDelete)
 
 router.route('/books')
   .get(books.booksAll)
