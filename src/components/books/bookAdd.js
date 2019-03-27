@@ -83,6 +83,7 @@ class BookAdd extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    console.log('posting data', this.state.data)
     axios.post('/api/books', this.state.data,
       { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(() => this.props.history.push('/books'))
