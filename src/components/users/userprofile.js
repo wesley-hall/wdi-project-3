@@ -1,17 +1,13 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import Auth from '../../lib/auth'
-import RegisterMap from '../auth/registerMap'
-import UserForm from '../users/userform'
+import UserShowMap from '../common/userShowMap'
 
 class Userprofile extends React.Component {
   constructor() {
     super()
     this.state = {
-      currentUser: { location: {}},
-      userdata: {
-      },
+      currentUser: { location: {} },
       errors: {}
     }
     this.mapCenter = {
@@ -27,8 +23,6 @@ class Userprofile extends React.Component {
     this.props.history.push('/userform')
   }
 
-
-
   getUser() {
     axios.get(`/api/users/${Auth.getPayload().sub}`)
       .then(res => this.setState({  currentUser: res.data }))
@@ -39,8 +33,9 @@ class Userprofile extends React.Component {
   }
 
   render() {
-
-    console.log(this.state.currentUser)
+    if (!this.state.currentUser.location.lat) return null
+    console.log('state currentU', this.state.currentUser)
+    console.log('location123', this.state.currentUser.location)
     const {
       email,
       username,
@@ -48,14 +43,8 @@ class Userprofile extends React.Component {
       libraryName,
       libraryPicture,
       libraryDescription,
-      location: {
-        lat, lng
-      }
+      location
     } = this.state.currentUser
-    // if (!this.state.currentUser) return null
-    // console.log('auth sub', Auth.getPayload().sub)
-    // console.log('I am all usersdata', this.state.userdata)
-    console.log(lat, lng)
     return(
       <main className="section">
         <div className="columns">
@@ -86,8 +75,9 @@ class Userprofile extends React.Component {
               <p><img src={libraryPicture}></img></p>
             </div>
             <p>Your current library location: </p>
-            <p>{lat}</p>
-            <p>{lng}</p>
+            <UserShowMap
+              center={location}
+            />
             <div>
               <p>Library Description: </p>
               <p>{libraryDescription} </p>
