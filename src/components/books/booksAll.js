@@ -139,9 +139,8 @@ class BooksAll extends React.Component {
                       <div className="card-content is-horizontal-center">
                         <h4 className="is-6">{book.title}</h4>
                         <h5 className="is-6">by: {book.authors}</h5>
-                        <h6 className="is-7">Genre: {book.genre.genre}</h6>
-                        <h6 className="is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h6>
-                        <h6 className="is-7">Rating({book.rating.length}): {this.ratingAverage(book.rating).toFixed(1)} </h6>
+                        <h6 className="is-7">Genre: {book.genre.genre} [{book.fiction ? 'Fiction' : 'Non-fiction'}]</h6>
+                        <h6 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h6>
                         <h6 className="is-7">{book.owner.libraryName} -  {this.calculateDistance(
                           book.owner.location.lat,
                           book.owner.location.lng,

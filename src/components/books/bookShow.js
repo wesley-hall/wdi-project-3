@@ -74,19 +74,44 @@ class BookShow extends React.Component {
                 <h2 className="title">{book.title}</h2>
                 <h3 className="title is-4">by: {book.authors}</h3>
               </div>
+
               <div className="column">
                 <div>
-                  <Link to={`/books/${book._id}/loan`}>
-                    <button className="button is-success is-pulled-right">Borrow this book</button>
-                  </Link>
-                  <br />
-                  <br />
-                  <br />
-                  <h5 className="is-pulled-right is-7">Location: {book.owner.libraryName} -  {this.calculateDistance(
-                    book.owner.location.lat,
-                    book.owner.location.lng,
-                    this.state.userLat,
-                    this.state.userLng)}km</h5>
+
+                  {this.isOwner() &&
+                    <div>
+                      <Link
+                        className="button button-book-update is-warning is-pulled-right"
+                        to={`/books/${book._id}/update`}>
+                      Update details
+                      </Link>
+                      <br />
+                      <br />
+                      <button
+                        className="button is-danger is-pulled-right"
+                        onClick={this.handleDelete}>
+                      Remove from library
+                      </button>
+                    </div>
+                  }
+
+                  {!this.isOwner() &&
+                    <div>
+                      <Link to={`/books/${book._id}/loan`}>
+                        <button className="button is-success is-pulled-right">Borrow this book</button>
+                      </Link>
+                      <br />
+                      <br />
+                      <br />
+                      <h4 className="is-pulled-right">
+                        {book.owner.libraryName} - {this.calculateDistance(
+                          book.owner.location.lat,
+                          book.owner.location.lng,
+                          this.state.userLat,
+                          this.state.userLng)}km
+                      </h4>
+                    </div>
+                  }
                 </div>
               </div>
             </div>
@@ -105,19 +130,13 @@ class BookShow extends React.Component {
                 <h5 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
                 <br />
                 <h5 className="bookDescription subtitle is-6">{book.description}</h5>
-                <hr />
-                <div className="columns">
-                  <div className="column is-1">
-                    {this.isOwner() && <Link
-                      className="button is-warning"
-                      to={`/books/${book._id}/update`}>Edit</Link>}
-                  </div>
-                  <div className="column is-1">
-                    {this.isOwner() && <button className="button is-danger" onClick={this.handleDelete}>Delete</button>}
-                  </div>
-                </div>
+
               </div>
             </div>
+            <hr />
+            <div className="container">
+            </div>
+
           </div>
         </main>
         )
