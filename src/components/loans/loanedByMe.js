@@ -4,7 +4,7 @@ import React from 'react'
 class LoanedByMe extends React.Component {
 
   render() {
-    const { loan } = this.props
+    const { loan, isOnLoan, isOverdue, isReturned } = this.props
     return (
       <div key={loan._id}>
         <div className="columns">
@@ -13,7 +13,7 @@ class LoanedByMe extends React.Component {
           <span className="column is-2 is-gapless">{loan.book.title}</span>
           <span className="column is-2 is-gapless">{loan.book.owner.username}</span>
 
-          {this.props.isPending(loan) &&
+          {!isOnLoan(loan) && !isOverdue(loan) && !isReturned(loan) && 
             <div className="column is-4 is-gapless columns">
               <span className="column is-half is-gapless">Pending</span>
               <div className="column is-half is-gapless">
@@ -23,7 +23,7 @@ class LoanedByMe extends React.Component {
               </div>
             </div>
           }
-          {this.props.isOnLoan(loan) &&
+          {isOnLoan(loan) &&
               <div className="column is-4 is-gapless columns">
                 <span className="column is-half is-gapless">On loan</span>
                 <div className="column is-half is-gapless">
@@ -33,7 +33,7 @@ class LoanedByMe extends React.Component {
                 </div>
               </div>
           }
-          {this.props.isOverdue(loan) &&
+          {isOverdue(loan) &&
               <div className="column is-4 is-gapless columns">
                 <span className="column is-half has-text-weight-bold has-text-danger is-gapless">Overdue</span>
                 <div className="column is-half is-gapless">
@@ -41,7 +41,7 @@ class LoanedByMe extends React.Component {
                 </div>
               </div>
           }
-          {this.props.isReturned(loan) &&
+          {isReturned(loan) &&
               <div className="column is-4 is-gapless columns">
                 <span className="column is-half is-gapless">Returned on<br /> {loan.returned && loan.returned.substring(10,-5)}</span>
                 <div className="column is-half is-gapless">
