@@ -9,8 +9,6 @@ class UserForm extends React.Component {
     super()
     this.state = {
       currentUser: { location: {}},
-      userdata: {
-      },
       errors: {}
     }
     this.mapCenter = {
@@ -19,6 +17,7 @@ class UserForm extends React.Component {
 
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleLocation = this.handleLocation.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -26,6 +25,11 @@ class UserForm extends React.Component {
     const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: ''}
     this.setState({ data, errors })
+  }
+
+  handleLocation(location) {
+    const data = {...this.state.data, location}
+    this.setState({ data })
   }
 
   handleSubmit(e) {
@@ -49,7 +53,8 @@ class UserForm extends React.Component {
   }
 
   render() {
-    console.log('user data', this.state.currentUser)
+    console.log('currentUser', this.state.currentUser)
+    console.log('data', this.state.data)
     const {
       email,
       username,
@@ -66,80 +71,75 @@ class UserForm extends React.Component {
     return(
       <main className="section">
         <div className="columns">
-          <div className="column">
+          <form
+            onSubmit={this.handleSubmit}
+          >
+
+            <div>
+              <input
+                className="input"
+                name="profilePicture"
+                placeholder="Please submit a new Profile Picture (optional)"
+                onChange={this.handleChange}
+              />
             </div>
-            <form
-              onSubmit={this.handleSubmit}
-            >
+            <br />
 
-              <div>
-                <input
-                  className="input"
-                  name="profilePicture"
-                  placeholder="Please submit a new Profile Picture (optional)"
+            <div>
+              <input
+                className="input"
+                name="email"
+                placeholder="Please enter your Email Address (optional)"
+                onChange={this.handleChange}
+              />
+            </div>
+            <br />
+
+            <div>
+              <label>Where are your books located? (drag pointer)</label>
+              <RegisterMap
+                center={this.mapCenter}
+                onSelectLocation={this.handleLocation}
+              />
+            </div>
+            <br />
+
+            <div>
+              <input
+                className="input"
+                name="libraryName"
+                placeholder="Please enter a Library Name (optional)"
+                onChange={this.handleChange}
+              />
+            </div>
+            <br />
+
+            <div>
+              <p>Library Description: <br />
+                <textarea
+                  className="textarea"
+                  name="libraryDescription"
+                  placeholder="Please enter a description of your library (optional)"
                   onChange={this.handleChange}
                 />
-              </div>
-              <br />
+              </p>
+            </div>
+            <br />
 
-              <div>
-                <input
-                  className="input"
-                  name="email"
-                  placeholder="Please enter your Email Address (optional)"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <br />
+            <div>
+              <input
+                className="input"
+                name="libraryPicture"
+                placeholder="Picture of your library (optional)"
+                onChange={this.handleChange}
+              />
+            </div>
+            <br />
 
-              <div>
-                <label>Where are your books located? (drag pointer)</label>
-                <RegisterMap
-                  center={this.mapCenter}
-                  onSelectLocation={this.handleLocation}
-                />
-              </div>
-              <br />
-
-              <div>
-                <input
-                  className="input"
-                  name="libraryName"
-                  placeholder="Please enter a Library Name (optional)"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <br />
-
-              <div>
-                <p>Library Description: <br />
-                  <textarea
-                    className="textarea"
-                    name="libraryDescription"
-                    placeholder="Please enter a description of your library (optional)"
-                    onChange={this.handleChange}
-                  />
-                </p>
-              </div>
-              <br />
-
-              <div>
-                <input
-                  className="input"
-                  name="libraryPicture"
-                  placeholder="Picture of your library (optional)"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <br />
-
-              <div>
-                <button className="button is-primary is-pulled-right">Submit</button>
-              </div>
-
-            </form>
-
-          </div>
+            <div>
+              <button className="button is-primary is-pulled-right">Submit</button>
+            </div>
+          </form>
         </div>
       </main>
     )
