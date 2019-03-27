@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-import RegisterMap from './registerMap'
+import UserEditMap from '../common/userEditMap'
 
 class Register extends React.Component {
   constructor() {
@@ -118,7 +118,7 @@ class Register extends React.Component {
 
             <div>
               <label>Where are your books located? (drag pointer)</label>
-              <RegisterMap
+              <UserEditMap
                 center={this.mapCenter}
                 onSelectLocation={this.handleLocation}
               />
