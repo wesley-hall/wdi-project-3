@@ -17,7 +17,6 @@ class UserForm extends React.Component {
 
     }
     this.handleChange = this.handleChange.bind(this)
-    this.handleLocation = this.handleLocation.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -27,16 +26,10 @@ class UserForm extends React.Component {
     this.setState({ data, errors })
   }
 
-  handleLocation(location) {
-    const data = {...this.state.data, location}
-    this.setState({ data })
-  }
-
   handleSubmit(e) {
     e.preventDefault()
     axios.put(`/api/users/${Auth.getPayload().sub}`, this.state.data,
       { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => this.getUser())
       .then(() => this.props.history.push('/users'))
       .catch(err => this.setState({errors: err.response.data.errors}))
   }
@@ -45,7 +38,7 @@ class UserForm extends React.Component {
   getUser() {
     axios.get(`/api/users/${Auth.getPayload().sub}`)
       .then(res => this.setState({  currentUser: res.data }))
-    console.log(this.state.currentUser)
+      .catch(err => console.log(err))
   }
 
   componentDidMount() {
@@ -53,8 +46,7 @@ class UserForm extends React.Component {
   }
 
   render() {
-    console.log('currentUser', this.state.currentUser)
-    console.log('data', this.state.data)
+    console.log('user data', this.state.currentUser)
     const {
       email,
       username,
@@ -139,8 +131,11 @@ class UserForm extends React.Component {
             <div>
               <button className="button is-primary is-pulled-right">Submit</button>
             </div>
+
           </form>
+
         </div>
+
       </main>
     )
   }

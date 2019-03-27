@@ -37,9 +37,19 @@ h6 {
   font-size: 12px;
 }
 
+hr {
+  margin: 1rem 0px;
+  background-color: #d6e8ff;
+}
+
 .radio {
   padding-right: 7px;
 }
+
+.card-header {
+  box-shadow: 0;
+}
+
 
 .switch {
   margin-top: 10px;

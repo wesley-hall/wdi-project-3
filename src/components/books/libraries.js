@@ -15,7 +15,7 @@ class Libraries extends React.Component {
       }
     }
   }
-  
+
   componentDidMount() {
     this.getUserLocation()
     axios.get('/api/libraries')
@@ -26,9 +26,7 @@ class Libraries extends React.Component {
       .catch(err => console.log(err))
   }
 
-  componentDidUpdate() {
-    this.getUserLocation()
-  }
+
 
   displayLibraryInfo() {
     this.state.libraries

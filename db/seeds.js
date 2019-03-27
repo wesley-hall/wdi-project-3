@@ -2906,7 +2906,152 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           message: 'Loan H',
           returned: null,
           approved: true
+        },
+        {
+          book: books[90],
+          borrower: users[1],
+          start: '2019-01-15T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan i',
+          returned: null,
+          approved: true
+        },
+        {
+          book: books[89],
+          borrower: users[1],
+          start: '2019-05-15T10:14:31.561Z',
+          end: '2019-05-25T10:14:31.561Z',
+          message: 'Loan j',
+          returned: null,
+          approved: false
+        },
+        {
+          book: books[88],
+          borrower: users[2],
+          start: '2019-05-15T10:14:31.561Z',
+          end: '2019-05-25T10:14:31.561Z',
+          message: 'Loan k',
+          returned: null,
+          approved: false
+        },
+        {
+          book: books[87],
+          borrower: users[2],
+          start: '2019-02-20T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan l',
+          returned: '2019-02-25T10:14:31.561Z',
+          approved: true
+        },
+        {
+          book: books[86],
+          borrower: users[0],
+          start: '2019-02-19T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan m',
+          returned: '2019-02-25T10:14:31.561Z',
+          approved: true
+        },
+        {
+          book: books[85],
+          borrower: users[4],
+          start: '2019-01-15T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan n',
+          returned: null,
+          approved: true
+        },
+        {
+          book: books[84],
+          borrower: users[1],
+          start: '2019-05-15T10:14:31.561Z',
+          end: '2019-05-25T10:14:31.561Z',
+          message: 'Loan o',
+          returned: null,
+          approved: false
+        },
+        {
+          book: books[83],
+          borrower: users[2],
+          start: '2019-05-15T10:14:31.561Z',
+          end: '2019-05-25T10:14:31.561Z',
+          message: 'Loan p',
+          returned: null,
+          approved: false
+        },
+        {
+          book: books[82],
+          borrower: users[3],
+          start: '2019-02-20T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan q',
+          returned: '2019-02-25T10:14:31.561Z',
+          approved: true
+        },
+        {
+          book: books[81],
+          borrower: users[3],
+          start: '2019-02-19T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan r',
+          returned: '2019-02-25T10:14:31.561Z',
+          approved: true
+        },
+        {
+          book: books[80],
+          borrower: users[0],
+          start: '2019-02-19T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan s',
+          returned: '2019-02-25T10:14:31.561Z',
+          approved: true
+        },
+        {
+          book: books[79],
+          borrower: users[4],
+          start: '2019-01-15T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan t',
+          returned: null,
+          approved: true
+        },
+        {
+          book: books[78],
+          borrower: users[1],
+          start: '2019-05-15T10:14:31.561Z',
+          end: '2019-05-25T10:14:31.561Z',
+          message: 'Loan u',
+          returned: null,
+          approved: false
+        },
+        {
+          book: books[77],
+          borrower: users[2],
+          start: '2019-05-15T10:14:31.561Z',
+          end: '2019-05-25T10:14:31.561Z',
+          message: 'Loan v',
+          returned: null,
+          approved: false
+        },
+        {
+          book: books[76],
+          borrower: users[3],
+          start: '2019-02-20T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan w',
+          returned: '2019-02-25T10:14:31.561Z',
+          approved: true
+        },
+        {
+          book: books[75],
+          borrower: users[3],
+          start: '2019-02-19T10:14:31.561Z',
+          end: '2019-02-25T10:14:31.561Z',
+          message: 'Loan x',
+          returned: '2019-02-25T10:14:31.561Z',
+          approved: true
         }
+
       ])
     })
     .then(loans => console.log(`${loans.length} loans created`))

@@ -23,7 +23,6 @@ class LibrariesMap extends React.Component {
     }))
 
     this.setLibraryMarkers()
-    // this.setUserMarker()
   }
 
   setLibraryMarkers() {
