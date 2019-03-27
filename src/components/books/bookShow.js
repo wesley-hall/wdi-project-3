@@ -95,7 +95,7 @@ class BookShow extends React.Component {
                     </div>
                   }
 
-                  {!this.isOwner() &&
+                  {!this.isOwner() && Auth.isAuthenticated() &&
                     <div>
                       <Link to={`/books/${book._id}/loan`}>
                         <button className="button is-success is-pulled-right">Borrow this book</button>
