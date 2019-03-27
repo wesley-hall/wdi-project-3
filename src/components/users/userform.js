@@ -17,7 +17,6 @@ class UserForm extends React.Component {
 
     }
     this.handleChange = this.handleChange.bind(this)
-    this.handleLocation = this.handleLocation.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -25,11 +24,6 @@ class UserForm extends React.Component {
     const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: ''}
     this.setState({ data, errors })
-  }
-
-  handleLocation(location) {
-    const data = {...this.state.data, location}
-    this.setState({ data })
   }
 
   handleSubmit(e) {
@@ -53,8 +47,7 @@ class UserForm extends React.Component {
   }
 
   render() {
-    console.log('currentUser', this.state.currentUser)
-    console.log('data', this.state.data)
+    console.log('user data', this.state.currentUser)
     const {
       email,
       username,
@@ -139,8 +132,11 @@ class UserForm extends React.Component {
             <div>
               <button className="button is-primary is-pulled-right">Submit</button>
             </div>
+
           </form>
+
         </div>
+
       </main>
     )
   }

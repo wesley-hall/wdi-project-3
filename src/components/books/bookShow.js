@@ -11,20 +11,21 @@ class BookShow extends React.Component {
 
     this.state = {}
 
-    this.handleDelete = this.handleDelete.bind(this)
+
     this.handleEdit = this.handleEdit.bind(this)
   }
-
+  // this.handleDelete = this.handleDelete.bind(this)
   componentDidMount() {
     axios.get(`/api/books/${this.props.match.params.id}`)
       .then(res => this.setState({ book: res.data }))
   }
 
-  handleEdit() {
+  handleEdit(e) {
+    e.preventDefault()
   }
 
-  handleDelete() {
-  }
+  // handleDelete(e) {
+  // }
 
   isOwner() {
     return Auth.isAuthenticated() && this.state.book.owner._id ===Auth.getPayload().sub

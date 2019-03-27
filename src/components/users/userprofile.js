@@ -3,7 +3,6 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Auth from '../../lib/auth'
 import RegisterMap from '../auth/registerMap'
-import UserForm from '../users/userform'
 
 class Userprofile extends React.Component {
   constructor() {
@@ -26,8 +25,6 @@ class Userprofile extends React.Component {
     e.preventDefault()
     this.props.history.push('/userform')
   }
-
-
 
   getUser() {
     axios.get(`/api/users/${Auth.getPayload().sub}`)
