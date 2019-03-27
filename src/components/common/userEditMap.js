@@ -5,7 +5,7 @@ mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
 
 import axios from 'axios'
 
-class RegisterMap extends React.Component{
+class UserEditMap extends React.Component{
   constructor() {
     super()
     this.state = {
@@ -38,6 +38,7 @@ class RegisterMap extends React.Component{
         .addTo(this.map)
 
       this.getMapboxPlace(location.lng, location.lat)
+      this.props.onSelectLocation(location)
     }
 
     this.map.on('click', getLocation)
@@ -69,4 +70,4 @@ class RegisterMap extends React.Component{
   }
 }
 
-export default RegisterMap
+export default UserEditMap
