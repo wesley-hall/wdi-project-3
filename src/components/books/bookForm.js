@@ -4,13 +4,14 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
   {console.log('bookform data', data)}
   {console.log('bookform errors', errors)}
   return (
+
     <form onSubmit={handleSubmit}>
       <div className="columns">
         <div className="column">
           <input
             className={`input ${errors.title ? 'is-danger': ''}`}
             name="title"
-            placeholder="Title"
+            placeholder="Title (required)"
             value={data.title || ''}
             onChange={handleChange}
           />
@@ -29,7 +30,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
 
       <div>
         <input
-          className={`input ${errors.name ? 'is-danger': ''}`}
+          className={`input ${errors.image ? 'is-danger': ''}`}
           name="image"
           placeholder="Image URL"
           value={data.image || ''}
@@ -44,7 +45,9 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
             <div className="select">
               <select
                 name="genre"
+                defaultValue={data.genre._id || 'default'}
                 onChange={handleChange}>
+                <option value="default">Choose a genre</option>
                 {genres && genres.map(genre => (
                   <option key={genre._id} value={genre._id}>{genre.genre}</option>
                 ))}
@@ -60,7 +63,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
                 id="fiction"
                 type="checkbox"
                 name="fiction"
-                className={`switch is-medium is-success ${errors.name ? 'is-danger': ''}`}
+                className="switch is-medium is-success"
                 onChange={handleSwitch}
               />
               <label htmlFor="fiction">{data.fiction ? 'Fiction' : 'Non-Fiction' }</label>
@@ -72,7 +75,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
 
       <div>
         <textarea
-          className={`textarea ${errors.name ? 'is-danger': ''}`}
+          className={`textarea ${errors.description ? 'is-danger': ''}`}
           name="description"
           placeholder="Description"
           value={data.description || ''}
@@ -115,7 +118,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
       <br />
 
       <div>
-        <button className="button is-success is-pulled-right">Submit</button>
+        <button disabled={!data.genre} className="button is-success is-pulled-right">Submit</button>
       </div>
 
     </form>
