@@ -30,7 +30,6 @@ class UserForm extends React.Component {
     e.preventDefault()
     axios.put(`/api/users/${Auth.getPayload().sub}`, this.state.data,
       { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => this.getUser())
       .then(() => this.props.history.push('/users'))
       .catch(err => this.setState({errors: err.response.data.errors}))
   }
@@ -39,7 +38,7 @@ class UserForm extends React.Component {
   getUser() {
     axios.get(`/api/users/${Auth.getPayload().sub}`)
       .then(res => this.setState({  currentUser: res.data }))
-    console.log(this.state.currentUser)
+      .catch(err => console.log(err))
   }
 
   componentDidMount() {
