@@ -142,11 +142,11 @@ class BooksAll extends React.Component {
                         <h6 className="is-7">Genre: {book.genre.genre} [{book.fiction ? 'Fiction' : 'Non-fiction'}]</h6>
                         <h6 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h6>
                         <h6 className="is-7">{book.owner.libraryName}
-                          {Auth.isAuthenticated() && <span>- {this.calculateDistance(
+                          {Auth.isAuthenticated() && <span> ({this.calculateDistance(
                             book.owner.location.lat,
                             book.owner.location.lng,
                             this.state.userLat,
-                            this.state.userLng)}km
+                            this.state.userLng)}km)
                           </span>}
                         </h6>
                       </div>

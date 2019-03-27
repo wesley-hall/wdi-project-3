@@ -26,7 +26,6 @@ class Libraries extends React.Component {
       .catch(err => console.log(err))
   }
 
-
   displayLibraryInfo() {
     this.state.libraries
   }

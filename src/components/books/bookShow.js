@@ -11,8 +11,9 @@ class BookShow extends React.Component {
 
     this.state = {}
 
-    this.handleDelete = this.handleDelete.bind(this)
+
     this.handleEdit = this.handleEdit.bind(this)
+    this.handleBack = this.handleBack.bind(this)
   }
 
   componentDidMount() {
@@ -21,11 +22,17 @@ class BookShow extends React.Component {
       .then(res => this.setState({ book: res.data }))
   }
 
-  handleEdit() {
+  handleEdit(e) {
+    e.preventDefault()
   }
 
-  handleDelete() {
+  handleBack() {
+    this.props.history.push('/books')
   }
+
+
+  // handleDelete(e) {
+  // }
 
   isOwner() {
     return Auth.isAuthenticated() && this.state.book.owner._id ===Auth.getPayload().sub
@@ -97,26 +104,12 @@ class BookShow extends React.Component {
 
                   {!this.isOwner() && Auth.isAuthenticated() &&
                     <div>
+                      <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back</button>
+                      <br />
+                      <br />
                       <Link to={`/books/${book._id}/loan`}>
                         <button className="button is-success is-pulled-right">Request to borrow</button>
                       </Link>
-                      <br />
-                      <br />
-                      <br />
-                      <h4 className="is-pulled-right">
-                        {book.owner.libraryName}
-                        {Auth.isAuthenticated() &&
-                        <span> - {this.calculateDistance(
-                          book.owner.location.lat,
-                          book.owner.location.lng,
-                          this.state.userLat,
-                          this.state.userLng)}km
-                        </span>}
-                      </h4>
-
-
-
-
                     </div>
                   }
                 </div>
@@ -125,16 +118,35 @@ class BookShow extends React.Component {
 
 
             <hr />
+
+
             <div className="columns">
               <div className="column is-third">
                 <figure className="image bookCoverWrapper">
                   <img id="bookCoverImage" src={book.image} alt={book.title} />
                 </figure>
               </div>
+
               <div className="column is-two-thirds">
 
-                <h5 className="is-7">Genre: {book.genre.genre} [{book.fiction ? 'Fiction' : 'Non-fiction'}]</h5>
-                <h5 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h5>
+                <div className="columns">
+                  <div className="column is-half">
+                    <h4 className="is-7">Genre: {book.genre.genre} [{book.fiction ? 'Fiction' : 'Non-fiction'}]</h4>
+                    <h4 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h4>
+                  </div>
+                  <div className="column is-half">
+                    <h4 className="is-pulled-right">
+                      Library: {book.owner.libraryName}
+                      {Auth.isAuthenticated() &&
+                      <span> ({this.calculateDistance(
+                        book.owner.location.lat,
+                        book.owner.location.lng,
+                        this.state.userLat,
+                        this.state.userLng)}km)
+                      </span>}
+                    </h4>
+                  </div>
+                </div>
                 <br />
                 <h5 className="bookDescription subtitle is-6">{book.description}</h5>
 

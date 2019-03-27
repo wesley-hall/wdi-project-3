@@ -35,11 +35,15 @@ function bookShow(req, res) {
 
 function bookUpdate(req, res) {
   Book
-    .findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true})
-    .exec()
+    .findById(req.params.id)
+    .then(book => {
+      Object.assign(book, req.body)
+      return book.save()
+    })
     .then(book => res.status(200).json(book))
-    .catch(err => res.status(500).json(err))
+    .catch(err => console.log(err))
 }
+
 
 function bookDelete(req, res) {
   Book

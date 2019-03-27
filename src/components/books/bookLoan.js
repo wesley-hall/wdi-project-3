@@ -8,14 +8,17 @@ class BookLoan extends React.Component {
   constructor() {
     super()
 
-    this.state = {}
-
-    this.startDate= '',
-    this.endDate= '',
-    this.message=''
+    this.state = {
+      data: {
+        startDate: '',
+        endDate: '',
+        message: ''
+      }
+    }
 
     this.handleDelete = this.handleDelete.bind(this)
-    this.handleCancel = this.handleCancel.bind(this)
+    this.handleBack = this.handleBack.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
@@ -33,8 +36,14 @@ class BookLoan extends React.Component {
       })
   }
 
-  handleCancel() {
+  handleChange({ target: { name, value }}) {
+    const data = {...this.state.data, [name]: value }
+    const error = ''
+    this.setState({ data, error })
+  }
 
+  handleBack() {
+    this.props.history.push(`/books/${this.props.match.params.id}`)
   }
 
   handleDelete() {
@@ -70,9 +79,16 @@ class BookLoan extends React.Component {
     return this.state.book.existingLoans.filter(loan => new Date(loan.end) > new Date())
   }
 
+  checkRequestDates() {
+    
+  }
+
   render() {
     if (!this.state.book) return null
     const { book } = this.state
+
+    console.log(this.state.data)
+
     return(
       <div>
         <main className="section">
@@ -84,17 +100,7 @@ class BookLoan extends React.Component {
               </div>
               <div className="column">
                 <div>
-                  <button className="button is-warning is-pulled-right" onClick={this.handleCancel}>Cancel</button>
-                  <br />
-                  <br />
-                  <br />
-                  <h4 className="is-pulled-right">
-                    {book.owner.libraryName} - {this.calculateDistance(
-                      book.owner.location.lat,
-                      book.owner.location.lng,
-                      this.state.userLat,
-                      this.state.userLng)}km
-                  </h4>
+                  <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back</button>
                 </div>
               </div>
             </div>
@@ -120,6 +126,7 @@ class BookLoan extends React.Component {
                       <h1>Reqest collect date:</h1>
                       <input
                         className="input"
+                        type="date"
                         name="startDate"
                         placeholder="YYYY-MM-DD"
                         value={this.state.startDate}
@@ -130,6 +137,7 @@ class BookLoan extends React.Component {
                       <h1>Return date:</h1>
                       <input
                         className="input"
+                        type="date"
                         name="endDate"
                         placeholder="YYYY-MM-DD"
                         value={this.state.endDate}
@@ -150,7 +158,7 @@ class BookLoan extends React.Component {
                     </p>
                   </div>
                   <br />
-                  <button className="Login button is-success is-pulled-right">
+                  <button className="button is-success is-pulled-right">
                     Request
                   </button>
 
