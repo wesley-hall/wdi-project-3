@@ -20,23 +20,6 @@ class Nav extends React.Component {
     this.props.history.push('/')
   }
 
-  getUser() {
-    axios.get(`/api/users/${Auth.getPayload().sub}`)
-      .then(res => {
-        const current = res.data.username.charAt(0).toUpperCase() + res.data.username.slice(1)
-        this.setState({ userCurrent: current })
-      })
-  }
-
-  componentDidMount() {
-    {Auth.isAuthenticated() && this.getUser()}
-  }
-
-  componentDidUpdate() {
-    {Auth.isAuthenticated() && this.getUser()}
-  }
-
-
   render() {
     return (
       <nav className="navbar is-info">
@@ -50,7 +33,7 @@ class Nav extends React.Component {
         <div className="navbar-menu">
           <div className="navbar-end">
             {!Auth.isAuthenticated() && <Link to="/login" className="navbar-item">Login/Register</Link>}
-            {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout {this.state.userCurrent}</a>}
+            {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
           </div>
 
         </div>
