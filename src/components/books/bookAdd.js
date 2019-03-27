@@ -222,13 +222,3 @@ class BookAdd extends React.Component {
 }
 
 export default BookAdd
-
-
-
-              // <div>
-              //   <div className="control">
-              //     <p>Rating: {this.state.data.rating.rating && this.state.data.rating.rating}</p>
-              //     <input className="slider is-success" name="rating" onChange={this.handleRatingChange} step="1" min="1" max="5" value={this.state.data.rating.rating} type="range" />
-              //   </div>
-              // </div>
-              // <br />

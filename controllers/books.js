@@ -13,9 +13,6 @@ function booksAll(req, res) {
 
 function bookCreate(req, res) {
   console.log('adding book')
-  // req.body.owner = req.currentUser
-  // req.body.rating.user = req.currentUser
-  // console.log('bookCreate on: ',req.body)
   Book
     .create(req.body)
     .then(book => res.status(201).json(book))
