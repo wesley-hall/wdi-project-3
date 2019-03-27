@@ -2,8 +2,9 @@ import React from 'react'
 import axios from 'axios'
 
 import Auth from '../../lib/auth'
+import BookForm from './bookForm'
 
-class BookForm extends React.Component {
+class BookUpdate extends React.Component {
   constructor() {
     super()
 
@@ -24,7 +25,6 @@ class BookForm extends React.Component {
     this.handleSwitch = this.handleSwitch.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.getUserId = this.getUserId.bind(this)
-
   }
 
   componentDidMount() {
@@ -34,7 +34,7 @@ class BookForm extends React.Component {
     const data = {...this.state.data, owner: user, rating: rating, review: review }
     console.log('did mount')
     axios.get(`/api/books/${this.props.match.params.id}`)
-      .then(res => this.setState({ book: res.data }))
+      .then(res => this.setState({ data: res.data }))
 
     axios.get('/api/genres')
       .then(res => {
@@ -87,124 +87,24 @@ class BookForm extends React.Component {
   }
 
   render() {
-    console.log('State.book:', this.state.book)
+    if (!this.state.data.title) return null
+    console.log('State.data:', this.state.data)
     console.log('params:', this.props.match.params)
     return (
       <div>
         <main className="section">
           <div className="container">
             <h1 className="title">Edit a book:</h1>
-            <form onSubmit={this.handleSubmit} >
-
-              <div className="columns">
-                <div className="column">
-                  <input
-                    className="input"
-                    name="title"
-                    placeholder="Title"
-                    onChange={this.handleChange}
-                  />
-                </div>
-
-                <div className="column">
-                  <input
-                    className="input"
-                    name="authors"
-                    placeholder="Author(s)"
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <input
-                  className="input"
-                  name="image"
-                  placeholder="Cover Image (url)"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <br />
-
-              <div className="columns">
-                <div className="column is-3">
-                  <div className="control">
-                    <div className="select">
-                      <select
-                        name="genre"
-                        onChange={this.handleChange}>
-                        {this.state.genres && this.state.genres.map(genre => (
-                          <option key={genre._id} value={genre._id}>{genre.genre}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="column is-3">
-                  <div className="control">
-                    <div className="field">
-                      <input
-                        id="fiction"
-                        type="checkbox"
-                        name="fiction"
-                        className="switch is-medium is-success"
-                        onChange={this.handleSwitch}
-                      />
-                      <label htmlFor="fiction">{this.state.data.fiction ? 'Fiction' : 'Non-Fiction' }</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <br />
-
-              <div>
-                <textarea
-                  className="textarea"
-                  name="description"
-                  placeholder="Description"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <br />
-              <hr />
-
-              <div className="control"
-                onChange={this.handleRatingChange}>Rating: {this.state.data.rating.rating && this.state.data.rating.rating}
-                <br />
-                <label className="radio">
-                  <input type="radio" name="rating" value="1"/>
-                </label>
-                <label className="radio">
-                  <input type="radio" name="rating" value="2"/>
-                </label>
-                <label className="radio">
-                  <input type="radio" name="rating" value="3"/>
-                </label>
-                <label className="radio">
-                  <input type="radio" name="rating" value="4"/>
-                </label>
-                <label className="radio">
-                  <input type="radio" name="rating" value="5"/>
-                </label>
-              </div>
-              <br />
-
-              <div>
-                <textarea
-                  className="textarea"
-                  name="review"
-                  placeholder="Review"
-                  onChange={this.handleReviewChange}
-                />
-              </div>
-              <br />
-
-              <div>
-                <button className="button is-warning is-pulled-right">Edit Book</button>
-              </div>
-
-            </form>
+            <BookForm
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              handleRatingChange={this.handleRatingChange}
+              handleReviewChange={this.handleReviewChange}
+              handleSwitch={this.handleSwitch}
+              data={this.state.data}
+              genres={this.state.genres}
+              errors={this.state.errors}
+            />
           </div>
         </main>
       </div>
@@ -212,4 +112,4 @@ class BookForm extends React.Component {
   }
 }
 
-export default BookForm
+export default BookUpdate
