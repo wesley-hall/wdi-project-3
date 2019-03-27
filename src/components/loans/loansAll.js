@@ -3,6 +3,8 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import Auth from '../../lib/auth'
+import LoanedFromMe from './loanedFromMe'
+import LoanedByMe from './loanedByMe'
 
 class LoansAll extends React.Component {
   constructor() {
@@ -15,16 +17,12 @@ class LoansAll extends React.Component {
       errors: {}
     }
 
-    this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
     axios.get('/api/loans')
       .then(res => {
-        console.log(res.data[0].borrower.username)
-        console.log('Hello', res.data)
-        console.log('auth sub', Auth.getPayload().sub)
         const loanedFromMe = res.data.filter(loans => loans.book.owner._id === Auth.getPayload().sub)
         const loanedByMe = res.data.filter(loans => loans.borrower._id === Auth.getPayload().sub)
         console.log('loanedFromMe', loanedFromMe)
@@ -36,10 +34,13 @@ class LoansAll extends React.Component {
 
   }
 
-  handleChange({ target: { name , value }}) {
-    const data = {...this.state.data, [name]: value}
-    const errors = {...this.state.errors, [name]: ''}
-    this.setState({data,errors})
+  confirmBookReturn(e) {
+    // console.log('in confirmBookReturn e is', e.target.value)
+    axios.put(`/api/loans/${e.target.value}`,
+      { body: { returned: new Date() }},
+      { headers: { Authorization: `Bearer ${Auth.getToken()}` }})
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   }
 
   handleClick({ target: { name , value }}) {
@@ -54,7 +55,7 @@ class LoansAll extends React.Component {
 
   isOnLoan(loan) {
     const { end, approved, returned } = loan
-    return approved && !returned && '2019-03-26T12:00:00.561Z' < end
+    return approved && !returned && new Date() < new Date(end)
   }
 
   isReturned(loan) {
@@ -63,11 +64,11 @@ class LoansAll extends React.Component {
 
   isOverdue(loan) {
     const { end, approved, returned } = loan
-    return approved && !returned && '2019-03-26T12:00:00.561Z' > end
+    return approved && !returned && new Date() > new Date(end)
   }
 
   isPending(loan) {
-    return !this.isApproved(loan)
+    return !loan.approved
   }
 
 
@@ -85,19 +86,6 @@ class LoansAll extends React.Component {
             <div>
               <div className="columns">
                 <h2 className="column is-gapless">Books Loaned Out</h2>
-
-                <div className="column is-gapless">
-                  <select
-                    name="booksLoaned"
-                    defaultValue={2}
-                    onChange={this.handleInputChange}
-                  >
-                    <option value="1">On Loan</option>
-                    <option value="2">Pending Approval</option>
-                    <option value="2">Returned</option>
-                    <option value="3">Overdue</option>
-                  </select>
-                </div>
               </div>
               <div className="columns">
                 <h4 className="column is-2 is-gapless">Start Date</h4>
@@ -109,73 +97,24 @@ class LoansAll extends React.Component {
               </div>
               {loanedFromMe.map(loan => (
                 <div key={loan._id}>
-                  <div className="columns">
-                    <h4 className="column is-2 is-gapless">{loan.start.substring(10,-5)}</h4>
-                    <h4 className="column is-2 is-gapless">{loan.end.substring(10,-5)}</h4>
-                    <h4 className="column is-2 is-gapless">{loan.book.title}</h4>
-                    <h4 className="column is-2 is-gapless">{loan.borrower.username}</h4>
-                    {this.isReturned(loan) &&
-                        <div className="column is-4 is-gapless columns">
-                          <h4 className="column is-half is-gapless">Returned on<br /> {loan.returned && loan.returned.substring(10,-5)}</h4>
-                          <div className="column is-half is-gapless">
-                            <button className="button is-small is-info" onClick={this.handleClick}>
-                              Rate borrower?
-                            </button>
-                          </div>
-                        </div>
-                    }
-                    {this.isOnLoan(loan) &&
-                        <div className="column is-4 is-gapless columns">
-                          <h4 className="column is-half is-gapless">On loan</h4>
-                          <div className="column is-half is-gapless">
-                            <button className="button is-small is-warning" onClick={this.handleClick}>
-                              Confirm Book Returned
-                            </button>
-                          </div>
-                        </div>
-                    }
-                    {this.isPending(loan) &&
-                      <div className="column is-4 is-gapless columns">
-                        <h4 className="column is-half is-gapless">Pending</h4>
-                        <div className="column is-half is-gapless">
-                          <button className="button is-small is-success" onClick={this.handleClick}>
-                            Approve Loan
-                          </button>
-                          <button className="button is-small is-danger" onClick={this.handleClick}>
-                            Reject Loan
-                          </button>
-                        </div>
-                      </div>
-                    }
-                    {this.isOverdue(loan) &&
-                      <div className="column is-4 is-gapless columns">
-                        <h4 className="column is-half has-text-danger is-gapless">Overdue</h4>
-                        <div className="column is-half is-gapless">
-                          Remind {loan.borrower.username} to return {loan.book.title}
-                        </div>
-                      </div>
-                    }
-                  </div>
+                  <LoanedFromMe
+                    loan={loan}
+                    handleClick={this.handleClick}
+                    isOnLoan={this.isOnLoan}
+                    confirmBookReturn={this.confirmBookReturn}
+                    isReturned={this.isReturned}
+                    isOverdue={this.isOverdue}
+                    isPending={this.isPending}
+                  />
                 </div>
               ))}
+
               <hr />
             </div>
 
             <div>
               <div className="columns">
                 <h2 className="column is-gapless">Books Borrowed</h2>
-                <div className="column is-gapless">
-                  <select
-                    name="booksBorrowed"
-                    defaultValue={2}
-                    onChange={this.handleChange}
-                  >
-                    <option value="1">On Loan</option>
-                    <option value="2">Pending Confirmation</option>
-                    <option value="2">Returned</option>
-                    <option value="3">Overdue</option>
-                  </select>
-                </div>
               </div>
 
               <div className="columns">
@@ -188,52 +127,14 @@ class LoansAll extends React.Component {
               </div>
               {loanedByMe.map(loan => (
                 <div key={loan._id}>
-                  <div className="columns">
-                    <h4 className="column is-2 is-gapless">{loan.start.substring(10,-5)}</h4>
-                    <h4 className="column is-2 is-gapless">{loan.end.substring(10,-5)}</h4>
-                    <h4 className="column is-2 is-gapless">{loan.book.title}</h4>
-                    <h4 className="column is-2 is-gapless">{loan.book.owner.username}</h4>
-
-                    {this.isPending(loan) &&
-                      <div className="column is-4 is-gapless columns">
-                        <h4 className="column is-half is-gapless">Pending</h4>
-                        <div className="column is-half is-gapless">
-                          <button className="button is-small is-danger" onClick={this.handleClick}>
-                            Cancel request
-                          </button>
-                        </div>
-                      </div>
-                    }
-                    {this.isOnLoan(loan) &&
-                        <div className="column is-4 is-gapless columns">
-                          <h4 className="column is-half is-gapless">On loan</h4>
-                          <div className="column is-half is-gapless">
-                            <button className="button is-small is-info" onClick={this.handleClick}>
-                              Rate/review book?
-                            </button>
-                          </div>
-                        </div>
-                    }
-                    {this.isOverdue(loan) &&
-                        <div className="column is-4 is-gapless columns">
-                          <h4 className="column is-half has-text-danger is-gapless">Overdue</h4>
-                          <div className="column is-half is-gapless">
-                            Please return {loan.book.title} to {loan.book.owner.username}
-                          </div>
-                        </div>
-                    }
-                    {this.isReturned(loan) &&
-                        <div className="column is-4 is-gapless columns">
-                          <h4 className="column is-half is-gapless">Returned on<br /> {loan.returned && loan.returned.substring(10,-5)}</h4>
-                          <div className="column is-half is-gapless">
-                            <button className="button is-small is-info" onClick={this.handleClick}>
-                              Rate book?
-                            </button>
-                          </div>
-                        </div>
-                    }
-
-                  </div>
+                  <LoanedByMe
+                    loan={loan}
+                    handleChange={this.handleChange}
+                    isOnLoan={this.isOnLoan}
+                    isReturned={this.isReturned}
+                    isOverdue={this.isOverdue}
+                    isPending={this.isPending}
+                  />
                 </div>
               ))}
             </div>
@@ -245,3 +146,50 @@ class LoansAll extends React.Component {
   }
 }
 export default LoansAll
+
+
+// Only use these if we want dropdowns
+
+// ----- Under this.state, add: -----
+// this.handleChange = this.handleChange.bind(this)
+
+// ----- After componentDidMoiunt(), add: -----
+// handleChange({ target: { name , value }}) {
+//   const data = {...this.state.data, [name]: value}
+//   const errors = {...this.state.errors, [name]: ''}
+//   this.setState({data,errors})
+// }
+
+// ----- Inside return(), add: -----
+// <div className="columns">
+//   <h2 className="column is-gapless">Books Borrowed</h2>
+//   <div className="column is-gapless">
+//     <select
+//       name="booksBorrowed"
+//       defaultValue={2}
+//       onChange={this.handleChange}
+//     >
+//       <option value="1">On Loan</option>
+//       <option value="2">Pending Confirmation</option>
+//       <option value="2">Returned</option>
+//       <option value="3">Overdue</option>
+//     </select>
+//   </div>
+// </div>
+
+// <div>
+//   <div className="columns">
+//     <h2 className="column is-gapless">Books Borrowed</h2>
+//     <div className="column is-gapless">
+//       <select
+//         name="booksBorrowed"
+//         defaultValue={2}
+//         onChange={this.handleChange}
+//       >
+//         <option value="1">On Loan</option>
+//         <option value="2">Pending Confirmation</option>
+//         <option value="2">Returned</option>
+//         <option value="3">Overdue</option>
+//       </select>
+//     </div>
+//   </div>
