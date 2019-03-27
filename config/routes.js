@@ -10,9 +10,9 @@ router.post('/register', auth.register)
 
 router.post('/login', auth.login)
 
-router.get('/libraries', auth.librariesAll)
-
 router.get('/genres', genres.genresAll)
+
+router.get('/libraries', users.librariesAll)
 
 router.get('/users', users.usersAll)
 
@@ -39,5 +39,5 @@ router.route('/loans/:id')
   .put(secureRoute, loans.loanUpdate)
   .delete(secureRoute, loans.loanDelete)
 
-router.route('/books')
+
 module.exports = router
