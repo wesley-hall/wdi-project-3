@@ -11,10 +11,10 @@ class BookShow extends React.Component {
 
     this.state = {}
 
-
+    this.handleDelete = this.handleDelete.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
   }
-  // this.handleDelete = this.handleDelete.bind(this)
+
   componentDidMount() {
     this.getUserLocation()
     axios.get(`/api/books/${this.props.match.params.id}`)
@@ -25,8 +25,14 @@ class BookShow extends React.Component {
     e.preventDefault()
   }
 
-  // handleDelete(e) {
-  // }
+  handleDelete(e) {
+    e.preventDefault()
+    console.log(`Bearer ${Auth.getToken()}`)
+    axios.delete(`/api/books/${this.props.match.params.id}`,
+      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => this.props.history.push('/books/'))
+      .catch(err => this.setState({errors: err.response.data.errors}))
+  }
 
   isOwner() {
     return Auth.isAuthenticated() && this.state.book.owner._id ===Auth.getPayload().sub

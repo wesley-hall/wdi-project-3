@@ -34,6 +34,12 @@ class UserForm extends React.Component {
       .catch(err => this.setState({errors: err.response.data.errors}))
   }
 
+  //   handleDelete() {
+  //   axios.delete(`https://cheesebored.herokuapp.com/cheeses/${this.props.match.params.id}`,
+  //     { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+  //     .then(() => this.props.history.push('/cheeses'))
+  //     .catch(err => console.log(err.message))
+  // }
 
   getUser() {
     axios.get(`/api/users/${Auth.getPayload().sub}`)
