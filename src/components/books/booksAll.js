@@ -18,6 +18,7 @@ class BooksAll extends React.Component {
   componentDidMount() {
     this.getBooks()
     this.getLibraries()
+    this.getUserLocation()
   }
 
   getBooks() {
@@ -27,6 +28,15 @@ class BooksAll extends React.Component {
         this.showAllBooks()
       })
       .catch(err => console.error(err))
+  }
+
+  getUserLocation() {
+    axios.get(`/api/users/${Auth.getPayload().sub}`)
+      .then(res => {
+        const userLat = res.data.location.lat
+        const userLng = res.data.location.lng
+        this.setState({ userLat: userLat, userLng: userLng })
+      })
   }
 
   getLibraries() {
@@ -79,7 +89,6 @@ class BooksAll extends React.Component {
   render() {
     if (!this.state.filteredBooks) return  <p>Loading...</p>
     const filteredBooks = this.state.filteredBooks.filter(books => books.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || books.authors.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1)
-    console.log(filteredBooks)
     return (
       <div>
         <br />
@@ -130,10 +139,16 @@ class BooksAll extends React.Component {
                       <div className="card-content is-horizontal-center">
                         <h4 className="is-6">{book.title}</h4>
                         <h5 className="is-6">by: {book.authors}</h5>
-                        <h6 className="is-7">Genre: {book.genre.genre}</h6>
-                        <h6 className="is-7">{book.fiction ? 'Fiction' : 'Non-fiction'}</h6>
-                        <h6 className="is-7">Rating({book.rating.length}): {this.ratingAverage(book.rating).toFixed(1)} </h6>
-                        <h6 className="is-7">{book.owner.libraryName} -  {this.calculateDistance(book.owner.location.lat,book.owner.location.lng,51.514980, -0.070729)}km</h6>
+                        <h6 className="is-7">Genre: {book.genre.genre} [{book.fiction ? 'Fiction' : 'Non-fiction'}]</h6>
+                        <h6 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h6>
+                        <h6 className="is-7">{book.owner.libraryName}
+                          {Auth.isAuthenticated() && <span>- {this.calculateDistance(
+                            book.owner.location.lat,
+                            book.owner.location.lng,
+                            this.state.userLat,
+                            this.state.userLng)}km
+                          </span>}
+                        </h6>
                       </div>
                     </div>
                   </Link>
