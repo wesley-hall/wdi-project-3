@@ -51,7 +51,8 @@ hr {
 }
 
 .card-header {
-  box-shadow: 0;
+  box-shadow: none;
+  padding-top: 15px;
 }
 
 
@@ -150,6 +151,7 @@ div.map-register {
 #root > div > div > main > div.columns.is-mobile > div.column.is-half > div {
     width: 100%;
 }
+
 
 .bookerLogo {
   border-radius: 6px;
