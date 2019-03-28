@@ -1,6 +1,6 @@
 import React from 'react'
 
-class 404 extends React.Component {
+class ErrorPage extends React.Component {
   constructor() {
     super()
 
@@ -25,4 +25,4 @@ class 404 extends React.Component {
   }
 }
 
-export default 404
+export default ErrorPage
