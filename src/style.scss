@@ -6,8 +6,6 @@
 
 @charset "utf-8";
 
-// @import 'bulma.sass';
-// @import "bulmaCalendar.sass";
 
 div.map-libraries {
   width: 100vw;
@@ -72,6 +70,10 @@ img.max-image-on-card {
 
 .bookCoverWrapper {
   max-height: 75vh;
+}
+
+.buttonAddRating {
+  margin-right: 10px;
 }
 
 #bookCoverImage{

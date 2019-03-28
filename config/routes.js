@@ -36,6 +36,9 @@ router.route('/books/:id')
 router.route('/books/:id/review')
   .post(secureRoute, books.reviewAdd)
 
+router.route('/books/:id/rating')
+  .post(secureRoute, books.ratingAdd)
+
 router.route('/books/:id/review/:reviewId')
   .delete(secureRoute, books.reviewDelete)
 
