@@ -3,6 +3,8 @@ import mapboxgl from 'mapbox-gl'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
 
+import Auth from '../../lib/auth'
+
 class LibrariesMap extends React.Component {
   constructor() {
     super()
@@ -26,6 +28,9 @@ class LibrariesMap extends React.Component {
   }
 
   setLibraryMarkers() {
+    console.log(Auth.getPayload().sub)
+    const libraries = this.props.points.filter(library => library._id !== Auth.getPayload().sub )
+    console.log(libraries)
     this.markers = this.props.points.map(point => {
       const customMarker = document.createElement('div')
       customMarker.className = 'marker-libraries'
