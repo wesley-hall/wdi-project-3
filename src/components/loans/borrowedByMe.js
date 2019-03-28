@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-class LoanedByMe extends React.Component {
+class BorrowedByMe extends React.Component {
 
   render() {
     const { loan, isOnLoan, isOverdue, isReturned } = this.props
@@ -11,9 +11,9 @@ class LoanedByMe extends React.Component {
           <span className="column is-2 is-gapless">{loan.start.substring(10,-5)}</span>
           <span className="column is-2 is-gapless">{loan.end.substring(10,-5)}</span>
           <span className="column is-2 is-gapless">{loan.book.title}</span>
-          <span className="column is-2 is-gapless">{loan.book.owner.username}</span>
+          <span className="column is-2 is-gapless"><figure className="image is-64x64"><img className="is-rounded" src={loan.book.owner.profilePicture} /></figure>{loan.book.owner.username}</span>
 
-          {!isOnLoan(loan) && !isOverdue(loan) && !isReturned(loan) && 
+          {!isOnLoan(loan) && !isOverdue(loan) && !isReturned(loan) &&
             <div className="column is-4 is-gapless columns">
               <span className="column is-half is-gapless">Pending</span>
               <div className="column is-half is-gapless">
@@ -58,7 +58,7 @@ class LoanedByMe extends React.Component {
   }
 }
 
-export default LoanedByMe
+export default BorrowedByMe
 
 // this.props.onClick
 // handleClick({ target: { name , value }}) {
