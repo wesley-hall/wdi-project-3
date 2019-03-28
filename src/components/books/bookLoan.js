@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+
 import Auth from '../../lib/auth'
 
 class BookLoan extends React.Component {
@@ -10,15 +11,16 @@ class BookLoan extends React.Component {
 
     this.state = {
       data: {
-        startDate: '',
-        endDate: '',
-        message: ''
+        message: '',
+        start: new Date(),
+        end: new Date()
       }
+
     }
 
-    this.handleDelete = this.handleDelete.bind(this)
     this.handleBack = this.handleBack.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -36,22 +38,28 @@ class BookLoan extends React.Component {
       })
   }
 
-  handleChange({ target: { name, value }}) {
+
+  handleChange({ target: { name , value }}) {
     const data = {...this.state.data, [name]: value }
-    const error = ''
-    this.setState({ data, error })
+    const errors = {...this.state.errors, [name]: ''}
+    this.setState({ data,errors })
   }
+
+  handleSubmit(e){
+    e.preventDefault()
+    if (this.dateValidation(this.state.data.start, this.state.data.end)) {
+      axios.post(`/api/books/${this.props.match.params.id}/loan`, this.state.data,
+        { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => this.props.history.push('/loans'))
+        .catch(err => this.setState({errors: err.response.errors}))
+    }
+  }
+
 
   handleBack() {
     this.props.history.push(`/books/${this.props.match.params.id}`)
   }
 
-  handleDelete() {
-  }
-
-  isOwner() {
-    return Auth.isAuthenticated() && this.state.book.owner._id ===Auth.getPayload().sub
-  }
 
   ratingAverage(ratingArray) {
     let sum = 0
@@ -61,33 +69,54 @@ class BookLoan extends React.Component {
     return sum/ratingArray.length
   }
 
-  calculateDistance(lat1, lon1, lat2, lon2){
-    const R = 6371e3
-    const φ1 = lat1 * Math.PI / 180
-    const φ2 = lat2 * Math.PI / 180
-    const Δφ = (lat2-lat1) * Math.PI / 180
-    const Δλ = (lon2-lon1) * Math.PI / 180
-    const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-          Math.cos(φ1) * Math.cos(φ2) *
-          Math.sin(Δλ/2) * Math.sin(Δλ/2)
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
-    const d = R * c
-    return (d/1000).toFixed(2)
-  }
-
   filteredDates() {
     return this.state.book.existingLoans.filter(loan => new Date(loan.end) > new Date())
   }
 
-  checkRequestDates() {
-    
+  dateValidation(startDate, endDate) {
+    startDate=new Date(startDate)
+    endDate=new Date(startDate)
+    console.log('startDate: ',startDate)
+    console.log('endDate: ',endDate)
+    const today=new Date()
+    if (startDate > endDate) {
+      console.log('End before start!')
+      return false
+    }//End before start!')
+    // if (startDate < today) {
+    //   console.log('that is in the past!')
+    //   return false
+    // }//In the past')
+    if (startDate === endDate) {
+      console.log('at least one day')
+      return false
+    }//less than one day')
+    const loanDates = this.state.book.existingLoans.filter(loan => new Date(loan.end) > new Date())
+
+    for (let i=0; i<loanDates.length; i++){
+      const start = new Date(loanDates[i].start)
+      const end = new Date(loanDates[i].end)
+      console.log('start: ',start)
+      console.log('end: ',end)
+      console.log('==============')
+      if (((startDate<start) && (endDate>end))  ||
+          ((startDate>start) && (endDate<end))  ||
+          ((startDate<start) && (endDate>start))||
+          ((startDate<end) && (endDate>end))  ||
+          ((startDate<end) && (endDate>start))) {
+        console.log('rejected for some reason')
+        return false //intersecting
+      }
+    }
+    console.log('MEETS CRITERIA!')
+    return true
   }
 
   render() {
     if (!this.state.book) return null
     const { book } = this.state
-
-    console.log(this.state.data)
+    //
+    console.log('state: ',this.state)
 
     return(
       <div>
@@ -127,24 +156,24 @@ class BookLoan extends React.Component {
                       <input
                         className="input"
                         type="date"
-                        name="startDate"
-                        placeholder="YYYY-MM-DD"
-                        value={this.state.startDate}
+                        name="start"
+                        value={this.state.data.start}
                         onChange={this.handleChange}
                       />
+
                     </div>
                     <div className="column">
                       <h1>Return date:</h1>
                       <input
                         className="input"
                         type="date"
-                        name="endDate"
-                        placeholder="YYYY-MM-DD"
-                        value={this.state.endDate}
+                        name="end"
+                        value={this.state.data.end}
                         onChange={this.handleChange}
                       />
                     </div>
                   </div>
+
 
                   <div>
                     <p>Message to book owner: <br />
@@ -152,7 +181,7 @@ class BookLoan extends React.Component {
                         className="textarea"
                         name="message"
                         placeholder="Please enter a descriptive message"
-                        value={this.state.message}
+                        value={this.state.data.message}
                         onChange={this.handleChange}
                       />
                     </p>
@@ -189,3 +218,43 @@ class BookLoan extends React.Component {
 }
 
 export default BookLoan
+//
+// import DatePicker from 'react-datepicker'
+//
+// import 'react-datepicker/dist/react-datepicker.css'
+// <DatePicker
+//   openToDate={new Date()}
+//   selected={this.state.startDate}
+//   onChange={this.handleChange}
+// />
+
+//
+// <input
+//   className="input"
+//   type="date"
+//   name="startDate"
+//   placeholder="YYYY-MM-DD"
+//   min= {new Date()}
+//   value={this.state.startDate}
+//   onChange={this.handleChange}
+// />
+
+// <input
+//   className="input"
+//   type="date"
+//   name="endDate"
+//   placeholder="YYYY-MM-DD"
+//   value={this.state.endDate}
+//   onChange={this.handleChange}
+// />
+
+                      //
+                      //
+                      //
+                      // <DatePicker
+                      //   dateFormat="YYYY/MM/dd"
+                      //   name="start"
+                      //   selected={this.state.start}
+                      //   value={this.state.start}
+                      //   onChange={this.handleDateChange}
+                      // />

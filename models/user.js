@@ -35,11 +35,6 @@ userSchema.virtual('booksBorrowed', {
   foreignField: 'borrower'
 })
 
-// userSchema.virtual('booksLoanedOut', {
-//   ref: 'Loan',
-//   localField: '_id',
-//   foreignField: 'wtf, mate?'
-// })
 
 userSchema.set('toJSON', {
   virtuals: true

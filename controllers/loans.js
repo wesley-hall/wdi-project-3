@@ -10,13 +10,13 @@ function loansAll(req, res, next) {
     .catch(next)
 }
 
-function loanCreate(req, res) {
+function loanCreate(req, res, next) {
   req.body.borrower = req.currentUser
   req.body.book = req.params.id
   Loan
     .create(req.body)
     .then(loan => res.status(201).json(loan))
-    .catch(err=> res.status(500).json(err))
+    .catch(next)
 }
 
 function loanShow(req, res) {
