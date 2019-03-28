@@ -9,10 +9,12 @@ const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLo
       onSubmit={handleSubmit}
     >
       <div className="container" id="userform">
-        <p className="title is-4">Update details</p>
         <div>
+          <div className="container">
+            <div className="is-divider"></div>
+          </div>
+          <label className="label">Profile Picture</label>
           <input
-            label="Profile Picture"
             className={`input ${errors.profilePicture ? 'is-danger': ''}`}
             name="profilePicture"
             value={currentUser.profilePicture || ''}
@@ -23,6 +25,7 @@ const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLo
         <br />
 
         <div>
+          <label className="label">Email</label>
           <input
             className={`input ${errors.email ? 'is-danger': ''}`}
             name="email"
@@ -35,7 +38,7 @@ const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLo
         <br />
 
         <div>
-          <label className="label">Where are your books located? Click to add location</label>
+          <label className="label">Click to update location</label>
           <UserEditMap
             center={mapCenter}
             onSelectLocation={handleLocation}
@@ -44,6 +47,7 @@ const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLo
         <br />
 
         <div>
+          <label className="label">Library Name</label>
           <input
             className={`input ${errors.libraryName ? 'is-danger': ''}`}
             name="libraryName"
@@ -56,19 +60,20 @@ const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLo
         <br />
 
         <div>
-          <p>Library Description: <br />
-            <textarea
-              className={`textarea ${errors.libraryDescription ? 'is-danger': ''}`}
-              name="libraryDescription"
-              value={currentUser.libraryDescription || ''}
-              placeholder="Please enter a description of your library (optional)"
-              onChange={handleChange}
-            />
-          </p>
+          <label className="label">Library Description</label>
+          <textarea
+            className={`textarea ${errors.libraryDescription ? 'is-danger': ''}`}
+            name="libraryDescription"
+            value={currentUser.libraryDescription || ''}
+            placeholder="Please enter a description of your library (optional)"
+            onChange={handleChange}
+          />
+
         </div>
         <br />
 
         <div>
+          <label className="label">Library Picture</label>
           <input
             className={`input ${errors.libraryPicture ? 'is-danger': ''}`}
             name="libraryPicture"
@@ -80,7 +85,7 @@ const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLo
         <br />
 
         <div>
-          <button className="button is-primary is-pulled-right">Submit</button>
+          <button className="button is-warning is-pulled-right">Submit change </button>
         </div>
       </div>
 

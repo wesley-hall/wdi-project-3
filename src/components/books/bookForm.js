@@ -9,6 +9,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
     <form onSubmit={handleSubmit}>
       <div className="columns">
         <div className="column">
+          <label className="label">Title</label>
           <input
             className={`input ${errors.title ? 'is-danger': ''}`}
             name="title"
@@ -20,6 +21,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
         </div>
 
         <div className="column">
+          <label className="label">Authors</label>
           <input
             className={`input ${errors.authors ? 'is-danger': ''}`}
             name="authors"
@@ -31,6 +33,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
       </div>
 
       <div>
+        <label className="label">Image</label>
         <input
           className={`input ${errors.image ? 'is-danger': ''}`}
           name="image"
@@ -44,6 +47,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
       <div className="columns">
         <div className="column is-3">
           <div className="control">
+            <label className="label">Genre</label>
             <div className="select">
               <select
                 name="genre"
@@ -61,6 +65,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
 
         <div className="column is-3">
           <div className="control">
+            <label className="label">Fiction</label>
             <div className="field">
               <input
                 id="fiction"
@@ -77,6 +82,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
       <br />
 
       <div>
+        <label className="label">Description</label>
         <textarea
           className={`textarea ${errors.description ? 'is-danger': ''}`}
           name="description"
@@ -89,7 +95,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
       <hr />
 
       <div className="control"
-        onChange={handleRatingChange}>Rating: {data.rating.rating && data.rating.rating}
+        onChange={handleRatingChange}><label className="label">Rating</label>{data.rating.rating && data.rating.rating}
         <br />
         <label className="radio">
           <input type="radio" name="rating" value="1"/>
@@ -110,6 +116,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
       <br />
 
       <div>
+        <label className="label">Review</label>
         <textarea
           className="textarea"
           name="review"
