@@ -1,5 +1,6 @@
 @import '~mapbox-gl/dist/mapbox-gl.css';
 @import url("https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v3.1.6/mapbox-gl-geocoder.css");
+@import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
 
 @import '~bulma';
 @import '~bulma-extensions/dist/css/bulma-extensions.min.css';
@@ -180,6 +181,13 @@ input.input {
 
 #userform {
   margin-left: 10%;
+}
+
+#libraryname {
+  margin-top: 30px;
+}
+.usercolumn {
+  margin-top: 20px;
 }
 
 .loan-border-bottom {

@@ -95,7 +95,7 @@ class Userprofile extends React.Component {
               <p>{email}</p>
             </div>
           </div>
-          <div className="column">
+          <div>
             <figure className="image is-128x128">
               <p><img className="is-rounded" src={profilePicture} onError={this.addAltProfile}></img></p>
             </figure>
@@ -107,28 +107,28 @@ class Userprofile extends React.Component {
         </div>
 
         <div className="container">
-          <div className="column">
+          <div>
             <p className="title is-4">Library Description</p>
           </div>
-          <div className="column">
-            <p className="title is-6">Library Name:</p>
+          <div className="usercolumn">
+            <p className="title is-6" id="libraryname">Library Name:</p>
             <p>{libraryName}</p>
           </div>
 
-          <div className="column" id="librarypic">
+          <div className="usercolumn" id="librarypic">
             <p className="title is-6">Library Picture:</p>
             <img src={libraryPicture} onError={this.addAltImage} />
           </div>
 
-          <div className="column">
+          <div className="usercolumn">
             <p className="title is-6">Your current library location:</p>
           </div>
-          <div className="column">
+          <div className="usercolumn">
             <UserShowMap
               center={location}
             />
           </div>
-          <div className="column">
+          <div className="usercolumn">
             <p className="title is-6">Library Description:</p>
             <p>{libraryDescription || 'No library description'} </p>
           </div>
