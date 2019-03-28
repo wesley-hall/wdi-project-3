@@ -7,6 +7,7 @@
     "start:server": "nodemon",
     "start:client": "webpack-dev-server --mode=development",
     "seed": "node db/seeds.js",
+    "drop": "node db/drop.js",
     "test": "node_modules/.bin/mocha"
   },
   "dependencies": {

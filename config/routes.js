@@ -25,6 +25,9 @@ router.route('/books')
   .get(books.booksAll)
   .post(secureRoute, books.bookCreate)
 
+router.get('/books/library/all', books.booksAll)
+router.get('/books/library/:libraryId', books.booksFiltered)
+
 router.route('/books/:id')
   .get(books.bookShow)
   .put(secureRoute, books.bookUpdate)

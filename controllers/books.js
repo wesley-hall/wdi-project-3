@@ -10,6 +10,13 @@ function booksAll(req, res) {
     .catch(e => console.log(e))
 }
 
+function booksFiltered(req, res) {
+  Book
+    .find({ owner: req.params.libraryId })
+    .populate('owner genre')
+    .then(books => res.json(books))
+    .catch(e => console.log(e))
+}
 
 function bookCreate(req, res) {
   console.log('adding book')
@@ -55,6 +62,7 @@ function bookDelete(req, res) {
 
 module.exports = {
   booksAll: booksAll,
+  booksFiltered: booksFiltered,
   bookCreate: bookCreate,
   bookShow: bookShow,
   bookUpdate: bookUpdate,
