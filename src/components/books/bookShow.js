@@ -44,7 +44,6 @@ class BookShow extends React.Component {
   }
 
   handleReviewChange({ target: { name, value }}) {
-    console.log(this.state.data)
     const review = {...this.state.data.review, [name]: value }
     const data = {...this.state.data, review}
     const errors = {...this.state.errors, [name]: ''}
@@ -121,7 +120,6 @@ class BookShow extends React.Component {
   render() {
     if (!this.state.book) return null
     const { book } = this.state
-    console.log(this.state)
     return(
       <div>
         <main className="section">
