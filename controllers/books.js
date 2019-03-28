@@ -1,5 +1,4 @@
 const Book = require('../models/book')
-// const BookReview = require('../models/book')
 require('../models/bookGenre')
 require('../models/loan')
 
@@ -90,6 +89,22 @@ function reviewAdd(req, res) {
 }
 
 
+function ratingAdd(req, res) {
+  req.body.user = req.currentUser
+  Book
+    .findById(req.params.id)
+    .populate('rating')
+    .then(book => {
+      book.rating.push(req.body)
+      return book.save()
+    })
+    .then(book => res.json(book))
+    .catch(err => res.status(422).json(err))
+}
+
+
+
+
 module.exports = {
   booksAll: booksAll,
   booksFiltered: booksFiltered,
@@ -98,5 +113,6 @@ module.exports = {
   bookUpdate: bookUpdate,
   bookDelete: bookDelete,
   reviewDelete: reviewDelete,
-  reviewAdd: reviewAdd
+  reviewAdd: reviewAdd,
+  ratingAdd: ratingAdd
 }

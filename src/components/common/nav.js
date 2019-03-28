@@ -27,8 +27,8 @@ class Nav extends React.Component {
           <Link to="/" className="navbar-item">Booker</Link>
           <Link to="/books" className="navbar-item">/Books</Link>
           <Link to="/libraries" className="navbar-item">/Libraries</Link>
-          {Auth.isAuthenticated() && <Link to="/users" className="navbar-item">/User Profile</Link>}
           {Auth.isAuthenticated() && <Link to="/loans" className="navbar-item">/Loans</Link>}
+          {Auth.isAuthenticated() && <Link to="/users" className="navbar-item">/User Profile</Link>}
         </div>
         <div className="navbar-menu">
           <div className="navbar-end">

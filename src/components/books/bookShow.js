@@ -13,6 +13,9 @@ class BookShow extends React.Component {
       data: {
         review: {
           review: ''
+        },
+        rating: {
+          rating: ''
         }
       }
     }
@@ -20,9 +23,11 @@ class BookShow extends React.Component {
     this.handleDeleteReview = this.handleDeleteReview.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
     this.handleReviewChange = this.handleReviewChange.bind(this)
+    this.handleRatingChange = this.handleRatingChange.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
     this.handleBack = this.handleBack.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleReviewSubmit = this.handleReviewSubmit.bind(this)
+    this.handleRatingSubmit = this.handleRatingSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -50,7 +55,7 @@ class BookShow extends React.Component {
     this.setState({ data, errors})
   }
 
-  handleSubmit(e) {
+  handleReviewSubmit(e) {
     e.preventDefault()
     axios.post(`/api/books/${this.props.match.params.id}/review`, this.state.data.review,
       { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
@@ -61,13 +66,32 @@ class BookShow extends React.Component {
       .catch(err => this.setState({errors: err.response.data.errors}))
   }
 
+  handleRatingChange({ target: { name, value }}) {
+    const rating = {...this.state.data.rating, [name]: value}
+    const data = {...this.state.data, rating}
+    const errors = {...this.state.errors, [name]: ''}
+    this.setState({ data, errors})
+  }
+
+  handleRatingSubmit(e) {
+    e.preventDefault()
+    axios.post(`/api/books/${this.props.match.params.id}/rating`, this.state.data.rating,
+      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => {
+        const data = {...this.state.data, rating: {...this.state.data.rating, rating: ''}}
+        this.setState({ data }, this.getBookData)
+      })
+      .catch(err => this.setState({errors: err.response.data.errors}))
+  }
 
   handleDelete(e) {
     e.preventDefault()
-    axios.delete(`/api/books/${this.props.match.params.id}`,
-      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => this.props.history.push('/books/'))
-      .catch(err => this.setState({errors: err.response.data.errors}))
+    if (window.confirm('Delete the item?')) {
+      axios.delete(`/api/books/${this.props.match.params.id}`,
+        { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => this.props.history.push('/books/'))
+        .catch(err => this.setState({errors: err.response.data.errors}))
+    }
   }
 
   handleDeleteReview(review) {
@@ -76,7 +100,6 @@ class BookShow extends React.Component {
       .then(() => this.getBookData())
       .catch(err => console.log(err))
   }
-
 
   isOwner() {
     return Auth.isAuthenticated() && this.state.book.owner._id ===Auth.getPayload().sub
@@ -115,6 +138,10 @@ class BookShow extends React.Component {
 
   hasReview() {
     return this.state.book.review.some(review => review.user._id === Auth.getPayload().sub)
+  }
+
+  hasRating() {
+    return this.state.book.rating.some(rating => rating.user._id === Auth.getPayload().sub)
   }
 
   render() {
@@ -166,7 +193,6 @@ class BookShow extends React.Component {
 
             <hr />
 
-
             <div className="columns">
               <div className="column is-third">
                 <figure className="image bookCoverWrapper">
@@ -177,10 +203,42 @@ class BookShow extends React.Component {
               <div className="column is-two-thirds">
 
                 <div className="columns">
+
                   <div className="column is-half">
                     <h4 className="is-7">Genre: {book.genre.genre} [{book.fiction ? 'Fiction' : 'Non-fiction'}]</h4>
                     <h4 className="is-7">Rating: {this.ratingAverage(book.rating).toFixed(1)} ({book.rating.length})</h4>
+
+                    {!this.hasRating() && Auth.getPayload().sub &&
+                      <form onSubmit={this.handleRatingSubmit}>
+
+                        <div className="control"
+                          onChange={this.handleRatingChange}>
+                          <label className="radio">
+                            <input type="radio" name="rating" value="1"/>
+                          </label>
+                          <label className="radio">
+                            <input type="radio" name="rating" value="2"/>
+                          </label>
+                          <label className="radio">
+                            <input type="radio" name="rating" value="3"/>
+                          </label>
+                          <label className="radio">
+                            <input type="radio" name="rating" value="4"/>
+                          </label>
+                          <label className="radio">
+                            <input type="radio" name="rating" value="5"/>
+                          </label>
+
+                          <button disabled={!this.state.data.rating.rating}
+                            className="button buttonAddRating is-success is-pulled-left is-small">Add rating: {!this.state.data.rating.rating && <p>&nbsp;?</p>}
+                            {this.state.data.rating.rating && this.state.data.rating.rating}</button>
+
+                        </div>
+                      </form>
+                    }
+
                   </div>
+
                   <div className="column is-half">
                     <h4 className="is-pulled-right">
                       Library: {book.owner.libraryName}
@@ -236,11 +294,11 @@ class BookShow extends React.Component {
                   <hr />
                 </div>
               ))}
-              {!this.hasReview() && Auth.getPayload().sub && 
+              {!this.hasReview() && Auth.getPayload().sub &&
                 <div className="columns">
                   <div className="column">
                     <h4 className="title is-6" >Add review...</h4>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleReviewSubmit}>
                       <textarea
                         className="textarea"
                         name="review"
@@ -253,7 +311,7 @@ class BookShow extends React.Component {
                         <br />
                         <button
                           className="button is-success is-pulled-right"
-                          onClick={this.handleSubmit}>
+                          onClick={this.handleReviewSubmit}>
                         Add review
                         </button>
                       </div>
