@@ -23,8 +23,10 @@ class BooksAll extends React.Component {
   }
 
   getBooks() {
+    console.log('happening')
     axios.get(`/api/books/library/${this.state.filter}`)
       .then(res => {
+        console.log(res.data)
         this.setState({ books: res.data })
       })
       .catch(err => console.error(err))

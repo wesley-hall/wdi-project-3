@@ -33,6 +33,12 @@ router.route('/books/:id')
   .put(secureRoute, books.bookUpdate)
   .delete(secureRoute, books.bookDelete)
 
+router.route('/books/:id/review')
+  .post(secureRoute, books.reviewAdd)
+
+router.route('/books/:id/review/:reviewId')
+  .delete(secureRoute, books.reviewDelete)
+
 router.get('/loans', loans.loansAll)
 
 router.post('/books/:id/loan', secureRoute, loans.loanCreate)
