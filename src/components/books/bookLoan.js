@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
-import moment from 'moment'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import Auth from '../../lib/auth'
