@@ -10,9 +10,9 @@ router.post('/register', auth.register)
 
 router.post('/login', auth.login)
 
-router.get('/libraries', auth.librariesAll)
-
 router.get('/genres', genres.genresAll)
+
+router.get('/libraries', users.librariesAll)
 
 router.get('/users', users.usersAll)
 
@@ -24,6 +24,9 @@ router.route('/users/:id')
 router.route('/books')
   .get(books.booksAll)
   .post(secureRoute, books.bookCreate)
+
+router.get('/books/library/all', books.booksAll)
+router.get('/books/library/:libraryId', books.booksFiltered)
 
 router.route('/books/:id')
   .get(books.bookShow)
@@ -39,5 +42,5 @@ router.route('/loans/:id')
   .put(secureRoute, loans.loanUpdate)
   .delete(secureRoute, loans.loanDelete)
 
-router.route('/books')
+
 module.exports = router

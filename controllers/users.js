@@ -1,22 +1,22 @@
-const Users = require('../models/user')
-const Books = require('../models/book')
+const User = require('../models/user')
+const Book = require('../models/book')
 
 function usersAll(req, res) {
-  Users
+  User
     .find()
     .then(users => res.json(users))
     .catch(e => console.log(e))
 }
 
 function userShow(req, res) {
-  Users
+  User
     .findById(req.params.id)
     .then(user => res.status(200).json(user))
     .catch(err => res.json(err))
 }
 
 function userUpdate(req, res) {
-  Users
+  User
     .findById(req.params.id)
     .then(user => {
       Object.assign(user, req.body)
@@ -28,9 +28,9 @@ function userUpdate(req, res) {
 
 function userDelete(req, res) {
   const promiseArray = [
-    Books
+    Book
       .remove({owner: req.params.id}),
-    Users
+    User
       .findByIdAndRemove(req.params.id)
       .exec()
   ]
@@ -40,9 +40,18 @@ function userDelete(req, res) {
     .catch(err => res.status(500).json(err))
 }
 
+function librariesAll(req, res) {
+  User
+    .find()
+    .populate('booksOwned')
+    .then(libraries => res.json(libraries.map(library => ({ libraryName: library.libraryName, libraryDescription: library.libraryDescription, location: library.location, books: library.booksOwned, owner: library._id }))))
+    .catch(err => res.json(err))
+}
+
 module.exports = {
   usersAll: usersAll,
   userShow: userShow,
   userUpdate: userUpdate,
-  userDelete: userDelete
+  userDelete: userDelete,
+  librariesAll: librariesAll
 }

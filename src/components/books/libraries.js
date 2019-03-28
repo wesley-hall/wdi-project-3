@@ -47,7 +47,8 @@ class Libraries extends React.Component {
       <div>
         <LibrariesMap
           center={center}
-          points={libraries}
+          libraries={libraries}
+          currentUserId={Auth.getPayload().sub}
         />
       </div>
     )

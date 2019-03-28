@@ -23,35 +23,72 @@ class LibrariesMap extends React.Component {
     }))
 
     this.setLibraryMarkers()
+    this.setUserMarker()
   }
 
   setLibraryMarkers() {
-    this.markers = this.props.points.map(point => {
-      const customMarker = document.createElement('div')
-      customMarker.className = 'marker-libraries'
+    const libraries = this.props.libraries.filter(library => library.owner !== this.props.currentUserId)
+
+
+    this.markers = libraries.map(library => {
+      const markerLibraries = document.createElement('div')
+      markerLibraries.className = 'marker-libraries'
 
       const markerText = document.createElement('span')
-      markerText.innerHTML = point.books.length
+      markerText.innerHTML = library.books.length
 
-      customMarker.appendChild(markerText)
+      markerLibraries.appendChild(markerText)
 
       const popup = new mapboxgl.Popup({ offset: 25 })
         .setHTML(`
-          <h2>${point.libraryName}</h2>
-          <p>Number of books: ${point.books.length}</p>
+          <h2 class="title is-4">${library.libraryName}</h2>
+          <div>
+          ${library.books.slice(0,3).map(book => `<img key=${book._id} src=${book.image} />`)}
+          <p>${library.books.slice(3) && `And ${library.books.slice(3).length} more books...`}</p>
+          </div>
+          <p>${library.libraryDescription}</p>
+          <a href=${`/books/library/${library.owner}`}><p>See all books</p></a>
         `)
 
-      return new mapboxgl.Marker(customMarker)
-        .setLngLat(point.location)
+      return new mapboxgl.Marker(markerLibraries)
+        .setLngLat(library.location)
         .setPopup(popup)
         .addTo(this.map)
     })
   }
 
   setUserMarker() {
-    return new mapboxgl.Marker()
-      .setLngLat(this.props.center)
-      .addTo(this.map)
+    const userLibrary = this.props.libraries.filter(library => library.owner === this.props.currentUserId)
+
+    userLibrary.map(library => {
+      const markerUserLibrary = document.createElement('div')
+      markerUserLibrary.className = 'marker-user-library'
+
+      const markerText = document.createElement('span')
+      markerText.innerHTML = library.books.length
+
+      markerUserLibrary.appendChild(markerText)
+
+      const popup = new mapboxgl.Popup({ offset: 25 })
+        .setHTML(`
+          <h2 class="title is-5">My library</h2>
+          <a href=${'/'}><p>See all books</p></a>
+        `)
+
+      return new mapboxgl.Marker(markerUserLibrary)
+        .setLngLat(library.location)
+        .setPopup(popup)
+        .addTo(this.map)
+
+    })
+
+    // const markerText = document.createElement('span')
+    // markerText.innerHTML = userLibrary.
+    //
+    // return new mapboxgl.Marker(markerUserLibrary)
+    //   .setLngLat(this.props.center)
+    //   .setPopup
+    //   .addTo(this.map)
   }
 
 

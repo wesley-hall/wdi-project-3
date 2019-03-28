@@ -7,12 +7,10 @@ const loanSchema = new mongoose.Schema({
   end: { type: Date, required: true},
   message: { type: String },
   returned: { type: Date},
-  approved: { type: Boolean }
+  approved: { type: Boolean },
+  declined: { type: Boolean }
 }, {
   timestamps: true
 })
-
-
-loanSchema.plugin(require('mongoose-unique-validator'))
 
 module.exports = mongoose.model('Loan', loanSchema)

@@ -187,6 +187,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
   Promise.all(promiseArray)
     .then(data => {
       const [ users, genres ] = data
+      console.log(`${users.length} users created`)
+      console.log(`${genres.length} genres created`)
       return Promise.all([
         Books.create([
           {
@@ -2834,6 +2836,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
     })
     .then(data => {
       const [ books, users ] = data
+      console.log(`${books.length} books created`)
       return Loan.create([
         {
           book: books[3],
@@ -3030,8 +3033,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           start: '2019-05-15T10:14:31.561Z',
           end: '2019-05-25T10:14:31.561Z',
           message: 'Loan v',
-          returned: null,
-          approved: false
+          returned: null
         },
         {
           book: books[76],
