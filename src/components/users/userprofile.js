@@ -66,44 +66,50 @@ class Userprofile extends React.Component {
       <main className="section">
         <div className="columns">
           <div className="container">
-            <div className="column">
-              <button className="button is-warning is-pulled-right" id="editbutton" onClick={this.handleEdit}>Edit details</button>
-            </div>
-            <br />
-            <div className="column">
+            <figure>
               <button
                 className="button is-danger is-pulled-right"
                 onClick={this.handleDelete}>
-            Delete my account
-              </button>
-            </div>
-            <h4 className="title"> Your details </h4>
-            <div className="column">
-              <p>Username: {username} </p>
-            </div>
-
-            <div className="column">
-              <p>Email: {email} </p>
-            </div>
-
-            <figure className="image is-128x128">
-              <p><img className="is-rounded" src={profilePicture}></img></p>
+                Delete my account</button>
+              <button className="button is-warning is-pulled-right" id="editbutton" onClick={this.handleEdit}>Edit details</button>
             </figure>
+            <h4 className="title"> Your details </h4>
+            <div className="column is-third">
+              <p className="title is-6">Username:</p>
+              <p>{username}</p>
+            </div>
+
+            <div className="column is-two-thirds">
+              <p className="title is-6">Email:</p>
+              <p>{email}</p>
+            </div>
 
             <div className="column">
-              <p>Library Name: {libraryName} </p>
+              <figure className="image is-128x128">
+                <p><img className="is-rounded" src={profilePicture}></img></p>
+              </figure>
+            </div>
+
+            <div className="column">
+              <p className="title is-6">Library Name:</p>
+              <p>{libraryName}</p>
             </div>
 
             <div className="column" id="librarypic">
-              <p>LibraryPicture:</p>
+              <p className="title is-6">Library Picture:</p>
               <img src={libraryPicture} onError={this.addAltImage} />
             </div>
-            <p>Your current library location: </p>
-            <UserShowMap
-              center={location}
-            />
-            <div>
-              <p>Library Description: </p>
+
+            <div className="column">
+              <p className="title is-6">Your current library location:</p>
+            </div>
+            <div className="column">
+              <UserShowMap
+                center={location}
+              />
+            </div>
+            <div className="column">
+              <p className="title is-6">Library Description:</p>
               <p>{libraryDescription} </p>
             </div>
           </div>
