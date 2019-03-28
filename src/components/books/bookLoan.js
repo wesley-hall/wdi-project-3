@@ -145,7 +145,7 @@ class BookLoan extends React.Component {
 
                     <div className="column">
                       <br />
-                      <h1>Reqest collect date:</h1>
+                      <h1>Request collect date:</h1>
                       <input
                         className="input"
                         type="date"

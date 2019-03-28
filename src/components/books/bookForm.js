@@ -21,11 +21,11 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
         </div>
 
         <div className="column">
-          <label className="label">Authors</label>
+          <label className="label">Author(s)</label>
           <input
             className={`input ${errors.authors ? 'is-danger': ''}`}
             name="authors"
-            placeholder="Authors"
+            placeholder="Author(s)"
             value={data.authors || ''}
             onChange={handleChange}
           />

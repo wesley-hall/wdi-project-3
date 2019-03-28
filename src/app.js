@@ -20,7 +20,7 @@ import BookAdd from './components/books/bookAdd'
 import BookUpdate from './components/books/bookUpdate'
 import BookLoan from './components/books/bookLoan'
 import Libraries from './components/books/libraries'
-
+import ErrorPage from './components/pages/404'
 import IdsAll from './components/common/ids'
 
 import LoansAll from './components/loans/loansAll'
@@ -51,6 +51,7 @@ class App extends React.Component {
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
             <Route exact path="/" component={Home}/>
+            <Route component={ErrorPage} />
 
           </Switch>
         </div>
