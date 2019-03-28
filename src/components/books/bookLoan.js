@@ -40,15 +40,6 @@ class BookLoan extends React.Component {
       })
   }
 
-  getUser() {
-    axios.get(`/api/users/${Auth.getPayload().sub}`)
-      .then(res => {
-        const user = res.data._id
-        const data = {...this.state.data, borrower: user }
-        this.setState({ data })
-      })
-  }
-
 
   handleChange({ target: { name , value }}) {
     const data = {...this.state.data, [name]: value }
@@ -58,17 +49,9 @@ class BookLoan extends React.Component {
 
   handleSubmit(e){
     e.preventDefault()
-    this.getUser()
-    const dateStart = new Date(this.state.data.start)
-    const dateEnd = new Date(this.state.data.end)
-    const data = {...this.state.data,
-      start: dateStart,
-      end: dateEnd,
-      book: this.props.match.params.id }
-    const errors = {...this.state.errors, [name]: ''}
-    this.setState({ data, errors })
     if (this.dateValidation(this.state.data.start, this.state.data.end)) {
-      axios.post(`/api/books/${this.props.match.params.id}/loan`, this.state.data)
+      axios.post(`/api/books/${this.props.match.params.id}/loan`, this.state.data,
+        { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
         .then(() => this.props.history.push('/loans'))
         .catch(err => this.setState({errors: err.response.errors}))
     }
