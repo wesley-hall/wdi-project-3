@@ -21,7 +21,7 @@ class Userprofile extends React.Component {
 
   handleEdit(e) {
     e.preventDefault()
-    this.props.history.push('/userform')
+    this.props.history.push('/useredit')
   }
 
   handleDelete(e) {
