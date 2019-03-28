@@ -7,7 +7,7 @@ function booksAll(req, res) {
     .find()
     .populate('owner genre')
     .then(books => res.json(books))
-    .catch(e => console.log(e))
+    .catch(err => res.status(400).json(err))
 }
 
 function booksFiltered(req, res) {
@@ -15,7 +15,7 @@ function booksFiltered(req, res) {
     .find({ owner: req.params.libraryId })
     .populate('owner genre')
     .then(books => res.json(books))
-    .catch(e => console.log(e))
+    .catch(err => res.status(400).json(err))
 }
 
 function bookCreate(req, res) {
@@ -47,8 +47,12 @@ function bookUpdate(req, res) {
       Object.assign(book, req.body)
       return book.save()
     })
-    .then(book => res.status(200).json(book))
-    .catch(err => console.log(err))
+    .then(book => {
+      res.status(200).json(book)
+    })
+    .catch(err => {
+      res.status(422).json(err)
+    })
 }
 
 

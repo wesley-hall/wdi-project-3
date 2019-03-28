@@ -45,6 +45,10 @@ class Userprofile extends React.Component {
     this.getUser()
   }
 
+  addAltImage(e){
+    e.target.src = 'http://www.orjon.com/dev/booker/images/libraries/libraryD.jpg'
+  }
+
   render() {
     if (!this.state.currentUser.location.lat) return null
     console.log('state currentU', this.state.currentUser)
@@ -62,7 +66,6 @@ class Userprofile extends React.Component {
       <main className="section">
         <div className="columns">
           <div className="container">
-            <h4 className="title"> Your details </h4>
             <div className="column">
               <button className="button is-warning is-pulled-right" id="editbutton" onClick={this.handleEdit}>Edit details</button>
             </div>
@@ -74,7 +77,7 @@ class Userprofile extends React.Component {
             Delete my account
               </button>
             </div>
-
+            <h4 className="title"> Your details </h4>
             <div className="column">
               <p>Username: {username} </p>
             </div>
@@ -82,19 +85,18 @@ class Userprofile extends React.Component {
             <div className="column">
               <p>Email: {email} </p>
             </div>
-            <div className="column">
-              <p>Profile Picture: </p>
-            </div>
-            <div className="column">
-              <p><img src={profilePicture}></img></p>
-            </div>
+
+            <figure className="image is-128x128">
+              <p><img className="is-rounded" src={profilePicture}></img></p>
+            </figure>
+
             <div className="column">
               <p>Library Name: {libraryName} </p>
             </div>
-            <div className="column">
-              <p>LibraryPicture:</p>
 
-              <p><img src={libraryPicture}></img></p>
+            <div className="column" id="librarypic">
+              <p>LibraryPicture:</p>
+              <img src={libraryPicture} onError={this.addAltImage} />
             </div>
             <p>Your current library location: </p>
             <UserShowMap

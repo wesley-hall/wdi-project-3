@@ -87,7 +87,10 @@ class BookAdd extends React.Component {
     axios.post('/api/books', this.state.data,
       { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(() => this.props.history.push('/books'))
-      .catch(err => this.setState({errors: err.response.data.errors}))
+      .catch(err => {
+        console.log('err is ', err)
+        this.setState({errors: err.response.data.errors})
+      })
   }
 
   getUserId() {
