@@ -29,7 +29,6 @@
     "mongoose-autopopulate": "^0.9.1",
     "mongoose-unique-validator": "^2.0.2",
     "react": "^16.8.4",
-    "react-datepicker": "^2.3.0",
     "react-dom": "^16.8.4",
     "react-router-dom": "^5.0.0",
     "url-loader": "^1.1.2"
