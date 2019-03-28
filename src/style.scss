@@ -84,6 +84,10 @@ img.max-image-on-card {
   text-align: justify;
 }
 
+.bookReviews {
+ text-align: justify;
+}
+
 .button-add-book {
   margin-right:1.5rem
 }
@@ -135,6 +139,11 @@ img.max-image-on-card {
 div.map-register {
   width: 600px;
   height: 300px
+}
+
+#librarypic {
+  max-width: 600px;
+  max-height: 500px;
 }
 
 .loan-border-bottom {

@@ -8,6 +8,7 @@ import './style.scss'
 import SecureRoute from './components/common/secureRoute'
 import Nav from './components/common/nav'
 import Home from './components/pages/home'
+// import ErrorPage from './components/pages/404'
 
 import Register from './components/auth/register'
 import Login from './components/auth/login'
@@ -50,6 +51,7 @@ class App extends React.Component {
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
             <Route exact path="/" component={Home}/>
+
           </Switch>
         </div>
       </BrowserRouter>
@@ -61,6 +63,6 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 )
-
+            // <Route path="/*" component={ErrorPage}/>
 
 // <Route path="/books/library/:libraryId" component={BooksAll}/>

@@ -93,6 +93,8 @@ describe('Book tests', () => {
               '_id',
               'authors',
               'description',
+              'existingLoans',
+              'id',
               'fiction',
               'image',
               'rating',

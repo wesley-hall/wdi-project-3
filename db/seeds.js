@@ -115,7 +115,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       },
       {
         username: 'Wesley',
-        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyC.jpg',
+        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/manD.jpg',
         email: 'wesley@email',
         password: 'pass',
         passwordConfirmation: 'pass',
@@ -126,7 +126,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       },
       {
         username: 'Steven',
-        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyC.jpg',
+        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/manE.jpg',
         email: 'steven@email',
         password: 'pass',
         passwordConfirmation: 'pass',
@@ -137,7 +137,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       },
       {
         username: 'Matthew',
-        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyC.jpg',
+        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/manF.jpg',
         email: 'matthew@email',
         password: 'pass',
         passwordConfirmation: 'pass',
@@ -148,7 +148,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       },
       {
         username: 'Stephano',
-        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyC.jpg',
+        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/manG.jpg',
         email: 'stephano@email',
         password: 'pass',
         passwordConfirmation: 'pass',
@@ -159,7 +159,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       },
       {
         username: 'Pascual',
-        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/ladyC.jpg',
+        profilePicture: 'http://www.orjon.com/dev/booker/images/profile/manH.jpg',
         email: 'pascual@email',
         password: 'pass',
         passwordConfirmation: 'pass',
@@ -358,19 +358,11 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
                 But in the long run, all that does not matter, because George Orwell got it right.
 
                 Orwell, a socialist who fought against Franco, watched appalled as the great Soviet experiment was reduced to a totalitarian state, a repressive force equal in evil to Fascist Italy or Nazi Germany. He came to realize that ideology in an authoritarian state is nothing but a distraction, a shiny thing made for the public to stare at. He came to realize that the point of control was more control, the point of torture was more torture, that the point of all their "alternative facts" was to fashion a world where people would no longer possess even a word for truth. `,
-                user: users[1]
-              },
-              {
-                review: `This book is far from perfect. Its characters lack depth, its rhetoric is sometimes didactic, its plot (well, half of it anyway) was lifted from Zumyatin’s We, and the lengthy Goldstein treatise shoved into the middle is a flaw which alters the structure of the novel like a scar disfigures a face.
-
-                But in the long run, all that does not matter, because George Orwell got it right.
-
-                Orwell, a socialist who fought against Franco, watched appalled as the great Soviet experiment was reduced to a totalitarian state, a repressive force equal in evil to Fascist Italy or Nazi Germany. He came to realize that ideology in an authoritarian state is nothing but a distraction, a shiny thing made for the public to stare at. He came to realize that the point of control was more control, the point of torture was more torture, that the point of all their "alternative facts" was to fashion a world where people would no longer possess even a word for truth. `,
-                user: users[1]
+                user: users[3]
               },
               {
                 review: '1984 is not a particularly good novel, but it is a very good essay. On the novel front, the characters are bland and you only care about them because of the awful things they live through. As a novel all the political exposition is heavyhanded, and the message completely overrides any sense of storytelling. As an essay, the points it makes can be earthshaking. It seems everyone who has so much as gotten a parking ticket thinks he lives in a 1984-dystopia. Every administration that reaches for power, injures civil liberties or collaborates too much with media is accused of playing Big Brother. These are the successes of 1984\'s paranoia, far outliving its original intent as a battery against where Communism was going (Orwell was a severely disappointed Marxist), and while people who compare their leaders to Big Brother are usually overreaching themselves and speak far away from Orwell\'s intent and vision, it is a useful catchcloth for dissent. Like so many immortalized books with a social vision, 1984\'s actual substance is so thin that its ideologies and fear-mongering aspects can be stretched and skewed to suit the readers. If you\'d like a better sense of the real world and Orwell\'s intents, rather than third-hand interpretations of his fiction, then his Homage to Catalonia is highly recommended. ',
-                user: users[1]
+                user: users[8]
               }
             ]
           },
@@ -440,7 +432,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
               },
               {
                 review: 'Te his adhuc vituperata, et mei bonorum facilis epicuri. Vis dico erant dolor ea. Eum an suas inani efficiendi, mei ne congue salutandi. Et ipsum laboramus vim, cu eos dicunt aliquando liberavisse.',
-                user: users[2]
+                user: users[5]
               },
               {
                 review: 'At vel amet vivendum. Brute ignota nemore sit id, vis ne quaeque accumsan. Malis pertinacia omittantur ex vim, vis ne quidam invenire adversarium, quaerendum interpretaris ne qui. Cum ex menandri sensibus iudicabit, te suscipit perfecto pri.\nCu facete propriae duo, his tollit iisque constituam ei, cu vel quot dolores deseruisse.',

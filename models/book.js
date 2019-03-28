@@ -7,11 +7,10 @@ const ratingSchema = new mongoose.Schema({
 
 const reviewSchema = new mongoose.Schema({
   review: {type: String},
-  user: {type: mongoose.Schema.ObjectId, ref: 'User'}
+  user: {type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
 })
 
 const bookSchema = new mongoose.Schema({
-
   title: {type: String, required: true},
   authors: {type: String},
   image: {type: String},
@@ -34,5 +33,5 @@ bookSchema.set('toJSON', {
 })
 
 bookSchema.plugin(require('mongoose-autopopulate'))
-
+reviewSchema.plugin(require('mongoose-autopopulate'))
 module.exports = mongoose.model('Book', bookSchema)

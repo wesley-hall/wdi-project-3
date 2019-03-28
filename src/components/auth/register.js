@@ -13,7 +13,10 @@ class Register extends React.Component {
         password: '',
         passwordConfirmation: '',
         profilePicture: '',
-        location: {},
+        location: {
+          lat: '',
+          lng: ''
+        },
         libraryName: '',
         libraryDescription: '',
         libraryPicture: ''
@@ -61,30 +64,32 @@ class Register extends React.Component {
 
             <div>
               <input
-                className="input"
+                className={`input ${this.state.errors.username ? 'is-danger': ''}`}
                 name="username"
-                placeholder="*Username"
+                placeholder="* Username"
                 value={this.state.data.username}
                 onChange={this.handleChange}
               />
             </div>
+            {this.state.errors.username && <small className="help is-danger">Username is Required</small> }
             <br />
 
             <div>
               <input
-                className="input"
+                className={`input ${this.state.errors.email ? 'is-danger': ''}`}
                 name="email"
                 placeholder="*Email address"
                 value={this.state.data.email}
                 onChange={this.handleChange}
               />
             </div>
+            {this.state.errors.email && <small className="help is-danger">Email is Required</small> }
             <br />
 
             <div className="columns">
               <div className="column is-half">
                 <input
-                  className="input"
+                  className={`input ${this.state.errors.password ? 'is-danger': ''}`}
                   name="password"
                   type="password"
                   placeholder="*Password"
@@ -92,10 +97,12 @@ class Register extends React.Component {
                   onChange={this.handleChange}
                 />
               </div>
+              {this.state.errors.password && <small className="help is-danger">Password is Required</small> }
+              <br />
 
               <div className="column is-half">
                 <input
-                  className="input"
+                  className={`input ${this.state.errors.passwordConfirmation ? 'is-danger': ''}`}
                   name="passwordConfirmation"
                   type="password"
                   placeholder="*Password Confirmation"
@@ -103,13 +110,14 @@ class Register extends React.Component {
                   onChange={this.handleChange}
                 />
               </div>
+              {this.state.errors.passwordConfirmation && <small className="help is-danger">Passwords must match</small> }
             </div>
 
             <div>
               <input
                 className="input"
                 name="profilePicture"
-                placeholder="Your profile picture (url)"
+                placeholder="Profile picture (url) - (optional)"
                 value={this.state.data.profilePicture}
                 onChange={this.handleChange}
               />
@@ -117,23 +125,26 @@ class Register extends React.Component {
             <br />
 
             <div>
-              <label>Where are your books located? (drag pointer)</label>
+              <label
+                className={`label ${this.state.errors['location.lat'] ? 'is-danger': ''}`}>Where are your books located? (Click to select)</label>
               <UserEditMap
                 center={this.mapCenter}
                 onSelectLocation={this.handleLocation}
               />
+              {this.state.errors['location.lat'] && <small className="help is-danger">Passwords must match</small> }
             </div>
             <br />
 
             <div>
               <input
-                className="input"
+                className={`input ${this.state.errors.libraryName ? 'is-danger': ''}`}
                 name="libraryName"
-                placeholder="Library Name"
+                placeholder="Library Name (optional)"
                 value={this.state.data.libraryName}
                 onChange={this.handleChange}
               />
             </div>
+            {this.state.errors.libraryName && <small className="help is-danger">Library Name is required</small> }
             <br />
 
             <div>
@@ -141,7 +152,7 @@ class Register extends React.Component {
                 <textarea
                   className="textarea"
                   name="libraryDescription"
-                  placeholder="Please enter a description of your library"
+                  placeholder="Please enter a description of your library (optional)"
                   value={this.state.data.libraryDescription}
                   onChange={this.handleChange}
                 />
@@ -161,7 +172,7 @@ class Register extends React.Component {
             <br />
 
             <div>
-              <button className="button is-success is-pulled-right">Join</button>
+              <button className="button is-success is-pulled-right">Join now</button>
             </div>
 
           </form>

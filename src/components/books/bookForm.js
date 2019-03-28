@@ -3,6 +3,7 @@ import React from 'react'
 const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewChange, handleSwitch, genres, data, errors}) => {
   {console.log('bookform data', data)}
   {console.log('bookform errors', errors)}
+  if (!data.owner) return null
   return (
 
     <form onSubmit={handleSubmit}>
@@ -15,6 +16,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
             value={data.title || ''}
             onChange={handleChange}
           />
+          {errors.title && <small className="help is-danger">Please enter a title</small> }
         </div>
 
         <div className="column">
@@ -47,11 +49,12 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
                 name="genre"
                 defaultValue={data.genre._id || 'default'}
                 onChange={handleChange}>
-                <option value="default">Choose a genre</option>
+                <option disabled value="default">Choose a genre</option>
                 {genres && genres.map(genre => (
                   <option key={genre._id} value={genre._id}>{genre.genre}</option>
                 ))}
               </select>
+              {errors.genre && <small className="help is-danger">Please choose a genre</small> }
             </div>
           </div>
         </div>
@@ -118,12 +121,12 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
       <br />
 
       <div>
-        <button disabled={!data.genre} className="button is-success is-pulled-right">Submit</button>
+        <button className="button is-success is-pulled-right">Submit</button>
       </div>
 
     </form>
   )
 }
-
+// button disabled={!data.genre}
 
 export default BookForm

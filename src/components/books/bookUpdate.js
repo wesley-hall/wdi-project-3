@@ -10,11 +10,8 @@ class BookUpdate extends React.Component {
 
     this.state = {
       data: {
-        rating: {
-        },
-        review: {
-
-        }
+        rating: {},
+        review: {}
       },
       errors: {}
     }
@@ -25,7 +22,7 @@ class BookUpdate extends React.Component {
     this.handleSwitch = this.handleSwitch.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.getUserId = this.getUserId.bind(this)
-  
+
   }
 
   componentDidMount() {
@@ -50,7 +47,7 @@ class BookUpdate extends React.Component {
     console.log(this.state.data)
     const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: ''}
-    this.setState({data,errors})
+    this.setState({ data, errors})
   }
 
   handleRatingChange({ target: { name, value }}) {
@@ -75,13 +72,17 @@ class BookUpdate extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log('submitting properly')
     e.preventDefault()
     axios.put(`/api/books/${this.props.match.params.id}`, this.state.data,
       { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => this.getUserId())
-      .then(() => this.props.history.push(`/books/${this.props.match.params.id}`))
-      .catch(err => this.setState({errors: err.response.data.errors}))
+      .then(res => {
+        console.log(res)
+        this.props.history.push(`/books/${this.props.match.params.id}`)
+      })
+      .catch(err => {
+        console.log('err is ', err)
+        this.setState({errors: err.response.data.errors})
+      })
   }
 
   getUserId() {
@@ -89,7 +90,6 @@ class BookUpdate extends React.Component {
   }
 
   render() {
-    if (!this.state.data.title) return null
     console.log('State.data:', this.state.data)
     console.log('params:', this.props.match.params)
     return (

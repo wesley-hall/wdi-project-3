@@ -28,11 +28,12 @@ const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLo
           placeholder="Please enter your Email Address *required)"
           onChange={handleChange}
         />
+        {errors.email && <small className="help is-danger">Email is required</small> }
       </div>
       <br />
 
       <div>
-        <label>Where are your books located? (drag pointer)</label>
+        <label className="label">Where are your books located? Click to add location</label>
         <UserEditMap
           center={mapCenter}
           onSelectLocation={handleLocation}
@@ -48,6 +49,7 @@ const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLo
           placeholder="Please enter a Library Name *required)"
           onChange={handleChange}
         />
+        {errors.libraryName && <small className="help is-danger">Library Name is required</small> }
       </div>
       <br />
 
