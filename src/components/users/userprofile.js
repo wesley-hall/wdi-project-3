@@ -27,13 +27,15 @@ class Userprofile extends React.Component {
   handleDelete(e) {
     e.preventDefault()
     console.log(`Bearer ${Auth.getToken()}`)
-    axios.delete(`/api/users/${Auth.getPayload().sub}`,
-      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => {
-        Auth.logout()
-        this.props.history.push('/')
-      })
-      .catch(err => this.setState({errors: err.response.data.errors}))
+    if (window.confirm('Delete the item?')) {
+      axios.delete(`/api/users/${Auth.getPayload().sub}`,
+        { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => {
+          Auth.logout()
+          this.props.history.push('/')
+        })
+        .catch(err => this.setState({errors: err.response.data.errors}))
+    }
   }
 
   getUser() {
@@ -47,6 +49,10 @@ class Userprofile extends React.Component {
 
   addAltImage(e){
     e.target.src = 'http://www.orjon.com/dev/booker/images/libraries/libraryD.jpg'
+  }
+
+  addAltProfile(e){
+    e.target.src = 'http://www.orjon.com/dev/booker/images/profile/noimage.jpg'
   }
 
   render() {
@@ -64,54 +70,67 @@ class Userprofile extends React.Component {
     } = this.state.currentUser
     return(
       <main className="section">
-        <div className="columns">
-          <div className="container">
-            <figure>
-              <button
-                className="button is-danger is-pulled-right"
-                onClick={this.handleDelete}>
-                Delete my account</button>
-              <button className="button is-warning is-pulled-right" id="editbutton" onClick={this.handleEdit}>Edit details</button>
-            </figure>
-            <h4 className="title"> Your details </h4>
-            <div className="column is-third">
+
+        <div className="container">
+
+          <button
+            className="button is-danger is-pulled-right"
+            id="btndeleteuser"
+            onClick={this.handleDelete} >
+              Delete my account</button>
+
+          <button className="button is-warning is-pulled-right" id="editbutton" onClick={this.handleEdit}>Edit details</button>
+
+          <h4 className="title"> Your details </h4>
+          <div className="is-divider"></div>
+        </div>
+        <div className="container">
+          <div className="columns">
+            <div className="column">
               <p className="title is-6">Username:</p>
               <p>{username}</p>
             </div>
-
-            <div className="column is-two-thirds">
+            <div className="column">
               <p className="title is-6">Email:</p>
               <p>{email}</p>
             </div>
+          </div>
+          <div className="column">
+            <figure className="image is-128x128">
+              <p><img className="is-rounded" src={profilePicture} onError={this.addAltProfile}></img></p>
+            </figure>
+          </div>
+        </div>
 
-            <div className="column">
-              <figure className="image is-128x128">
-                <p><img className="is-rounded" src={profilePicture}></img></p>
-              </figure>
-            </div>
+        <div className="container">
+          <div className="is-divider"></div>
+        </div>
 
-            <div className="column">
-              <p className="title is-6">Library Name:</p>
-              <p>{libraryName}</p>
-            </div>
+        <div className="container">
+          <div className="column">
+            <p className="title is-4">Library Description</p>
+          </div>
+          <div className="column">
+            <p className="title is-6">Library Name:</p>
+            <p>{libraryName}</p>
+          </div>
 
-            <div className="column" id="librarypic">
-              <p className="title is-6">Library Picture:</p>
-              <img src={libraryPicture} onError={this.addAltImage} />
-            </div>
+          <div className="column" id="librarypic">
+            <p className="title is-6">Library Picture:</p>
+            <img src={libraryPicture} onError={this.addAltImage} />
+          </div>
 
-            <div className="column">
-              <p className="title is-6">Your current library location:</p>
-            </div>
-            <div className="column">
-              <UserShowMap
-                center={location}
-              />
-            </div>
-            <div className="column">
-              <p className="title is-6">Library Description:</p>
-              <p>{libraryDescription} </p>
-            </div>
+          <div className="column">
+            <p className="title is-6">Your current library location:</p>
+          </div>
+          <div className="column">
+            <UserShowMap
+              center={location}
+            />
+          </div>
+          <div className="column">
+            <p className="title is-6">Library Description:</p>
+            <p>{libraryDescription || 'No library description'} </p>
           </div>
         </div>
       </main>
