@@ -7,7 +7,7 @@ const loanSchema = new mongoose.Schema({
   end: { type: Date, required: true},
   message: { type: String },
   returned: { type: Date},
-  approved: { type: Boolean, required: true }
+  approved: { type: Boolean }
 }, {
   timestamps: true
 })
