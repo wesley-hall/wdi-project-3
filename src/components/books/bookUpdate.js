@@ -90,7 +90,7 @@ class BookUpdate extends React.Component {
       <div>
         <main className="section">
           <div className="container">
-            <h1 className="title">Edit a book:</h1>
+            <h1 className="title is-4">Edit a book:</h1>
             <BookForm
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}

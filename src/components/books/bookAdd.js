@@ -101,7 +101,10 @@ class BookAdd extends React.Component {
       <div>
         <main className="section">
           <div className="container">
-            <h1>Add a new book to share:</h1>
+            <h1 className="title is-3">Add a book</h1>
+            <div className="container">
+              <div className="is-divider"></div>
+            </div>
             <BookForm
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
