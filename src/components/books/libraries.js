@@ -17,10 +17,9 @@ class Libraries extends React.Component {
   }
 
   componentDidMount() {
-    this.getUserLocation()
+    {Auth.getPayload().sub && this.getUserLocation()}
     axios.get('/api/libraries')
       .then(res => {
-        console.log(res.data)
         this.setState({ libraries: res.data })
       })
       .catch(err => console.log(err))

@@ -26,7 +26,7 @@ class BookShow extends React.Component {
   }
 
   componentDidMount() {
-    this.getUserLocation()
+    {Auth.getPayload().sub && this.getUserLocation()}
     this.getBookData()
   }
 
@@ -236,7 +236,7 @@ class BookShow extends React.Component {
                   <hr />
                 </div>
               ))}
-              {!this.hasReview() &&
+              {!this.hasReview() && Auth.getPayload().sub && 
                 <div className="columns">
                   <div className="column">
                     <h4 className="title is-6" >Add review...</h4>

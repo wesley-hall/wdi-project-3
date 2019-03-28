@@ -19,11 +19,10 @@ class BooksAll extends React.Component {
   componentDidMount() {
     this.getBooks()
     this.getLibraries()
-    this.getUserLocation()
+    {Auth.getPayload().sub && this.getUserLocation()}
   }
 
   getBooks() {
-    console.log('happening')
     axios.get(`/api/books/library/${this.state.filter}`)
       .then(res => {
         this.setState({ books: res.data })
