@@ -9,7 +9,7 @@ const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLo
       onSubmit={handleSubmit}
     >
       <div className="container" id="userform">
-        <p className="title">Update details</p>
+        <p className="title is-4">Update details</p>
         <div>
           <input
             label="Profile Picture"
