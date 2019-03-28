@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Auth from '../../lib/auth'
 import LoanedFromMe from './loanedFromMe'
-import LoanedByMe from './loanedByMe'
+import BorrowedByMe from './borrowedByMe'
 
 class LoansAll extends React.Component {
   constructor() {
@@ -12,13 +12,14 @@ class LoansAll extends React.Component {
     this.state = {
       loans: {
         loanedFromMe: [],
-        loanedByMe: [],
+        borrowedByMe: [],
         refreshLoans: false
       },
       errors: {}
     }
 
     this.handleClick = this.handleClick.bind(this)
+    this.confirmBookCollected = this.confirmBookCollected.bind(this)
     this.confirmBookReturn = this.confirmBookReturn.bind(this)
     this.approveLoanRequest = this.approveLoanRequest.bind(this)
     this.declineLoanRequest = this.declineLoanRequest.bind(this)
@@ -32,17 +33,31 @@ class LoansAll extends React.Component {
   getLoans() {
     axios.get('/api/loans')
       .then(res => {
-        const loanedFromMe = res.data.filter(loans => loans.book.owner._id === Auth.getPayload().sub)
-        const loanedByMe = res.data.filter(loans => loans.borrower._id === Auth.getPayload().sub)
+        const loanedFromMe = res.data.filter(loans => loans.book && loans.book.owner._id === Auth.getPayload().sub)
+        const borrowedByMe = res.data.filter(loans => loans.borrower && loans.borrower._id === Auth.getPayload().sub)
         loanedFromMe.sort((a, b) => new Date(a.start) - new Date(b.start))
-        loanedByMe.sort((a, b) => new Date(a.start) - new Date(b.start))
-        const loans = {...this.state.loans, loanedFromMe, loanedByMe}
+        borrowedByMe.sort((a, b) => new Date(a.start) - new Date(b.start))
+        const loans = {...this.state.loans, loanedFromMe, borrowedByMe}
         this.setState({ loans })
       })
   }
 
+  confirmBookCollected(e) {
+    axios({
+      method: 'PUT',
+      url: `/api/loans/${e.target.value}`,
+      headers: {
+        'Authorization': `Bearer ${Auth.getToken()}`
+      },
+      data: {
+        collected: new Date()
+      }
+    })
+      .then(() => this.getLoans())
+      .catch(err => console.log(err))
+  }
+
   confirmBookReturn(e) {
-    console.log('in confirmBookReturn e is', e)
     axios({
       method: 'PUT',
       url: `/api/loans/${e.target.value}`,
@@ -59,7 +74,6 @@ class LoansAll extends React.Component {
 
 
   approveLoanRequest(e) {
-    console.log('in approveLoanRequest e is', e.target.value)
     axios({
       method: 'PUT',
       url: `/api/loans/${e.target.value}`,
@@ -104,56 +118,73 @@ class LoansAll extends React.Component {
     this.setState({data,errors})
   }
 
-  isOnLoan(loan) {
-    const { end, approved, returned } = loan
-    return approved && !returned && new Date() < new Date(end)
+  isPending(loan) {
+    const { approved, declined, returned, end } = loan
+    return !approved && !declined && !returned && new Date() < new Date(end)
   }
 
-// isDeclined does not work... because approved: false is the same as approved not existing!! ??????????????????
+  isExpired(loan) {
+    const { collected, approved, returned, end } = loan
+    return !collected && !approved && !returned && new Date() > new Date(end)
+  }
+
+  isAwaitingCollection(loan) {
+    const { approved, collected, returned } = loan
+    return approved && !collected && !returned
+  }
+
+  isOnLoan(loan) {
+    const { approved, collected, returned, end } = loan
+    return approved && !!collected && !returned && new Date() < new Date(end)
+  }
+
+
   isDeclined(loan) {
-    const { approved, declined } = loan
-    return !approved && declined
+    return loan.declined
   }
 
   isReturned(loan) {
-    return loan.returned
+    return !!loan.returned
   }
 
   isOverdue(loan) {
-    const { end, approved, returned } = loan
-    return approved && !returned && new Date() > new Date(end)
+    const { end, approved, collected, returned } = loan
+    return approved && !!collected && !returned && new Date() > new Date(end)
   }
 
   render() {
-    if (!this.state.loans.loanedFromMe && !this.state.loans.loanedByMe) return null
+    if (!this.state.loans.loanedFromMe && !this.state.loans.borrowedByMe) return null
     console.log(this.state)
-    const { loanedFromMe, loanedByMe } = this.state.loans
+    const { loanedFromMe, borrowedByMe } = this.state.loans
 
     return (
       <div>
         <main className="section">
           <div className="container">
-            <h1>My account</h1>
             <div>
               <div className="columns">
                 <h2 className="column is-gapless">Books Loaned Out</h2>
               </div>
-              <div className="columns">
+              <div className="columns is-mobile">
                 <h4 className="column is-2 is-gapless">Start Date</h4>
                 <h4 className="column is-2 is-gapless">End Date</h4>
                 <h4 className="column is-2 is-gapless">Book Title</h4>
                 <h4 className="column is-2 is-gapless">Requested By</h4>
-                <h4 className="column is-2 is-gapless">Status</h4>
-                <h4 className="column is-2 is-gapless">Actions</h4>
+                <h4 className="column is-4 is-gapless">Status</h4>
               </div>
+              {loanedFromMe.length === 0 &&
+                <p className="column is-12 is-gapless has-text-centered">You are not loaning out any books</p>}
               {loanedFromMe.map(loan => (
                 <div key={loan._id}>
                   <LoanedFromMe
                     loan={loan}
                     handleClick={this.handleClick}
                     isPending={this.isPending}
+                    isExpired={this.isExpired}
                     approveLoanRequest={this.approveLoanRequest}
                     declineLoanRequest={this.declineLoanRequest}
+                    isAwaitingCollection={this.isAwaitingCollection}
+                    confirmBookCollected={this.confirmBookCollected}
                     isOnLoan={this.isOnLoan}
                     confirmBookReturn={this.confirmBookReturn}
                     isDeclined={this.isDeclined}
@@ -171,17 +202,18 @@ class LoansAll extends React.Component {
                 <h2 className="column is-gapless">Books Borrowed</h2>
               </div>
 
-              <div className="columns">
+              <div className="columns is-mobile">
                 <h4 className="column is-2 is-gapless">Start Date</h4>
                 <h4 className="column is-2 is-gapless">End Date</h4>
                 <h4 className="column is-2 is-gapless">Book Title</h4>
                 <h4 className="column is-2 is-gapless">Requested From</h4>
-                <h4 className="column is-2 is-gapless">Status</h4>
-                <h4 className="column is-2 is-gapless">Actions</h4>
+                <h4 className="column is-4 is-gapless">Status</h4>
               </div>
-              {loanedByMe.map(loan => (
+              {borrowedByMe.length === 0 &&
+                <p className="column is-12 is-gapless has-text-centered">You are not borrowing any books</p>}
+              {borrowedByMe.map(loan => (
                 <div key={loan._id}>
-                  <LoanedByMe
+                  <BorrowedByMe
                     loan={loan}
                     handleChange={this.handleChange}
                     isPending={this.isPending}

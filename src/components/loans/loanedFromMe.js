@@ -1,63 +1,70 @@
 import React from 'react'
 
+import LoanReturned from './statusButtons/returned'
+import LoanedOnLoan from './statusButtons/loanedOnLoan'
+import LoanedPending from './statusButtons/loanedPending'
+import LoanedOverdue from './statusButtons/loanedOverdue'
+import LoanedAwaitingCollection from './statusButtons/loanedAwaitingCollection'
 
 const LoanedFromMe = (props) => {
-  const { loan, isReturned, isOnLoan, confirmBookReturn, isOverdue, isDeclined, approveLoanRequest, declineLoanRequest, handleClick } = props
+  const { loan, isPending, isExpired, approveLoanRequest, declineLoanRequest, isDeclined, isAwaitingCollection, confirmBookCollected, isOnLoan, isOverdue, confirmBookReturn, isReturned  } = props
   return (
     <div>
-      <div className="columns">
+      <div className={`columns is-mobile is-vcentered loan-border-bottom ${isOverdue(loan) ? 'has-text-danger has-text-weight-bold' : ''}`}>
         <span className="column is-2 is-gapless">{loan.start.substring(10,-5)}</span>
         <span className="column is-2 is-gapless">{loan.end.substring(10,-5)}</span>
         <span className="column is-2 is-gapless">{loan.book.title}</span>
-        <span className="column is-2 is-gapless">{loan.borrower.username}</span>
-        {isReturned(loan) &&
-            <div className="column is-4 is-gapless columns">
-              <span className="column is-half is-gapless">Returned on<br /> {loan.returned && loan.returned.substring(10,-5)}</span>
-              <div className="column is-half is-gapless">
-                <button className="button is-small is-info" onClick={handleClick}>
-                  Rate borrower?
-                </button>
-              </div>
-            </div>
-        }
-        {isOnLoan(loan) &&
-            <div className="column is-4 is-gapless columns">
-              <span className="column is-half is-gapless">On loan</span>
-              <div className="column is-half is-gapless">
-                <button className="button is-small is-warning" value={loan._id} onClick={confirmBookReturn}>
-                  Confirm Book Returned
-                </button>
-              </div>
-            </div>
-        }
-        {!isOnLoan(loan) && !isOverdue(loan) && !isReturned(loan) &&
+        <span className="column is-2 is-gapless columns is-marginless is-vcentered">
+          <span className="column is-half">
+            <figure className="image is-64x64">
+              <img className="is-rounded" src={loan.borrower.profilePicture} />
+            </figure>
+          </span>
+          <span className="column is-half">
+            {loan.borrower.email}
+          </span>
+        </span>
+        {isExpired(loan) &&
           <div className="column is-4 is-gapless columns">
-            <span className="column is-half is-gapless">Pending</span>
-            <div className="column is-half is-gapless">
-              <button className="button is-small is-success" value={loan._id} onClick={approveLoanRequest}>
-                Approve Loan
-              </button>
-              <button className="button is-small is-danger" value={loan._id} onClick={declineLoanRequest}>
-                Reject Loan
-              </button>
-            </div>
-          </div>
-        }
-        {isOverdue(loan) &&
-          <div className="column is-4 is-gapless columns">
-            <span className="column is-half has-text-weight-bold has-text-danger is-gapless">Overdue</span>
-            <div className="column is-half is-gapless">
-              Remind {loan.borrower.username} to return {loan.book.title}
-            </div>
+            <span className="column is-full is-gapless">Expired</span>
           </div>
         }
         {isDeclined(loan) &&
           <div className="column is-4 is-gapless columns">
-            <span className="column is-half has-text-weight-bold has-text-danger is-gapless">Declined</span>
-            <div className="column is-half is-gapless">
-              Nada
-            </div>
+            <span className="column is-full is-gapless">Declined</span>
           </div>
+        }
+        {isReturned(loan) &&
+          <LoanReturned
+            loan={loan}
+          />
+        }
+        {isOnLoan(loan) &&
+          <LoanedOnLoan
+            loan={loan}
+            confirmBookReturn={confirmBookReturn}
+          />
+        }
+
+        {isPending(loan) &&
+          <LoanedPending
+            className="loan-border-bottom"
+            loan={loan}
+            approveLoanRequest={approveLoanRequest}
+            declineLoanRequest={declineLoanRequest}
+          />
+        }
+        {isOverdue(loan) &&
+          <LoanedOverdue
+            loan={loan}
+            confirmBookReturn={confirmBookReturn}
+          />
+        }
+        {isAwaitingCollection(loan) &&
+          <LoanedAwaitingCollection
+            loan={loan}
+            confirmBookCollected={confirmBookCollected}
+          />
         }
       </div>
     </div>

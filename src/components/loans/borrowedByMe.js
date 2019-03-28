@@ -1,23 +1,23 @@
 import React from 'react'
 
 
-class LoanedByMe extends React.Component {
+class BorrowedByMe extends React.Component {
 
   render() {
-    const { loan, isOnLoan, isOverdue, isReturned } = this.props
+    const { loan, isOnLoan, cancelLoanRequest, isOverdue, isReturned } = this.props
     return (
       <div key={loan._id}>
-        <div className="columns">
+        <div className="columns is-mobile">
           <span className="column is-2 is-gapless">{loan.start.substring(10,-5)}</span>
           <span className="column is-2 is-gapless">{loan.end.substring(10,-5)}</span>
           <span className="column is-2 is-gapless">{loan.book.title}</span>
-          <span className="column is-2 is-gapless">{loan.book.owner.username}</span>
+          <span className="column is-2 is-gapless"><figure className="image is-64x64"><img className="is-rounded" src={loan.book.owner.profilePicture} /></figure>{loan.book.owner.username}</span>
 
-          {!isOnLoan(loan) && !isOverdue(loan) && !isReturned(loan) && 
+          {!isOnLoan(loan) && !isOverdue(loan) && !isReturned(loan) &&
             <div className="column is-4 is-gapless columns">
               <span className="column is-half is-gapless">Pending</span>
               <div className="column is-half is-gapless">
-                <button className="button is-small is-danger" onClick={this.handleClick}>
+                <button className="button is-small is-danger" value={loan._id} onClick={cancelLoanRequest}>
                   Cancel request
                 </button>
               </div>
@@ -58,7 +58,7 @@ class LoanedByMe extends React.Component {
   }
 }
 
-export default LoanedByMe
+export default BorrowedByMe
 
 // this.props.onClick
 // handleClick({ target: { name , value }}) {

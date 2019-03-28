@@ -6,9 +6,10 @@ const loanSchema = new mongoose.Schema({
   start: { type: Date, required: true},
   end: { type: Date, required: true},
   message: { type: String },
-  returned: { type: Date},
   approved: { type: Boolean },
-  declined: { type: Boolean }
+  declined: { type: Boolean },
+  collected: { type: Date },
+  returned: { type: Date}
 }, {
   timestamps: true
 })
