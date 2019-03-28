@@ -35,7 +35,7 @@ class BookReview extends React.Component {
               <textarea
                 className="textarea"
                 name="bookReview"
-                value={this.state.data.review}
+                value={this.state.data.review.review}
                 onChange={this.handleChange}
               />
             </p>

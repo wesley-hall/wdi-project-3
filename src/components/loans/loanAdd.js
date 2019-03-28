@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+// LINK TO LOANS ALL PAGE - OWNER CAN SEE AND APPROVE
+// MISSING LOANS APPROVE FORM PAGE UNLESS IT JUST GOES TO THE STATUS BAR OF LOANS ALL
 import Auth from '../../lib/auth'
 
 class LoanAdd extends React.Component {
