@@ -9,7 +9,8 @@ class BooksAll extends React.Component {
     super()
 
     this.state = {
-      search: ''
+      search: '',
+      filter: 'all'
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
@@ -22,10 +23,9 @@ class BooksAll extends React.Component {
   }
 
   getBooks() {
-    axios.get('/api/books')
+    axios.get(`/api/books/library/${this.state.filter}`)
       .then(res => {
         this.setState({ books: res.data })
-        this.showAllBooks()
       })
       .catch(err => console.error(err))
   }
@@ -45,19 +45,8 @@ class BooksAll extends React.Component {
       .catch(err => console.log(err))
   }
 
-  showAllBooks() {
-    const filteredBooks = this.state.books
-    this.setState({...this.state, filteredBooks})
-  }
-
-  showFilteredBooks(value) {
-    const filteredBooks = this.state.books.filter(books => books.owner._id === value)
-    this.setState({...this.state, filteredBooks})
-  }
-
-  handleChange({ target: { value }}) {
-    if (value === 'all') return this.showAllBooks()
-    return this.showFilteredBooks(value)
+  handleChange(e) {
+    this.setState({ filter: e.target.value }, () => this.getBooks())
   }
 
   handleSearch(e) {
@@ -87,8 +76,8 @@ class BooksAll extends React.Component {
   }
 
   render() {
-    if (!this.state.filteredBooks) return  <p>Loading...</p>
-    const filteredBooks = this.state.filteredBooks.filter(books => books.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || books.authors.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1)
+    if (!this.state.books) return  <p>Loading...</p>
+    const filteredBooks = this.state.books.filter(books => books.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || books.authors.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1)
     return (
       <div>
         <br />
@@ -98,33 +87,49 @@ class BooksAll extends React.Component {
           <div className="container">
 
             <div className="columns is-mobile">
-              <div className="column is-one-third-desktop is-half-tablet is-full-mobile">
-                <span>Filter books by library:</span>
-                <select
-                  className="select"
-                  name="libraries"
-                  onChange={this.handleChange}
-                  defaultValue="all"
-                >
-                  <option value="all">All Libraries</option>
-                  {this.state.libraries && this.state.libraries.map(library => (
-                    <option key={library.owner} value={library.owner}>{library.libraryName}</option>
-                  ))}
-                </select>
+              <div className="column is-half-mobile">
+                <div className="field is-pulled-right">
+                  <div className="control">
+                    <div className="select">
+                      <select
+                        name="libraries"
+                        onChange={this.handleChange}
+                        defaultValue="all"
+                      >
+                        <option value="all">All Libraries</option>
+                        {this.state.libraries && this.state.libraries.map(library => (
+                          <option key={library.owner} value={library.owner}>{library.libraryName}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
               </div>
-              <div className="column is-one-third-desktop is-half-tablet is-full-mobile">
-                <input
-                  type="text"
-                  value={this.state.search}
-                  onChange={this.handleSearch}
-                / >
+              <div className="column is-half-mobile">
+
+                <div className="field has-addons">
+                  <div className="control">
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="Search by title/author"
+                      value={this.state.search}
+                      onChange={this.handleSearch}
+                    / >
+                  </div>
+                  <div className="control">
+                    <a className="button is-primary is-outlined">Search</a>
+                  </div>
+                </div>
               </div>
             </div>
+            <hr />
 
 
             <div className="columns is-mobile is-multiline">
-              {!this.state.filteredBooks && <p>...loading</p>}
-              {this.state.filteredBooks && filteredBooks.map(book => (
+              {!this.state.books && <p>...loading</p>}
+              {this.state.books && filteredBooks.map(book => (
 
                 <div key={book._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
                   <Link to={`/books/${book._id}`} >
