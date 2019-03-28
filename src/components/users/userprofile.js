@@ -16,11 +16,24 @@ class Userprofile extends React.Component {
 
     }
     this.handleEdit = this.handleEdit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleEdit(e) {
     e.preventDefault()
-    this.props.history.push('/userform')
+    this.props.history.push('/useredit')
+  }
+
+  handleDelete(e) {
+    e.preventDefault()
+    console.log(`Bearer ${Auth.getToken()}`)
+    axios.delete(`/api/users/${Auth.getPayload().sub}`,
+      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => {
+        Auth.logout()
+        this.props.history.push('/')
+      })
+      .catch(err => this.setState({errors: err.response.data.errors}))
   }
 
   getUser() {
@@ -50,9 +63,18 @@ class Userprofile extends React.Component {
         <div className="columns">
           <div className="container">
             <h4 className="title"> Your details </h4>
-            <div>
+            <div className="column">
               <button className="button is-warning is-pulled-right" id="editbutton" onClick={this.handleEdit}>Edit details</button>
             </div>
+            <br />
+            <div className="column">
+              <button
+                className="button is-danger is-pulled-right"
+                onClick={this.handleDelete}>
+            Delete my account
+              </button>
+            </div>
+
             <div className="column">
               <p>Username: {username} </p>
             </div>

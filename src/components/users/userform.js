@@ -1,149 +1,86 @@
 import React from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
-import Auth from '../../lib/auth'
 import UserEditMap from '../common/userEditMap'
 
-class UserForm extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      currentUser: { location: {}},
-      errors: {}
-    }
-    this.mapCenter = {
-      lat: 51.5,
-      lng: -0.11
+const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLocation, errors }) => {
+  {console.log('handlelocation', handleLocation)}
+  {console.log('currentUser', currentUser)}
+  return (
+    <form
+      onSubmit={handleSubmit}
+    >
 
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
+      <div>
+        <input
+          className={`input ${errors.profilePicture ? 'is-danger': ''}`}
+          name="profilePicture"
+          value={currentUser.profilePicture || ''}
+          placeholder="Please submit a new Profile Picture (optional)"
+          onChange={handleChange}
+        />
+      </div>
+      <br />
 
-  handleChange({ target: { name , value }}) {
-    const data = {...this.state.data, [name]: value}
-    const errors = {...this.state.errors, [name]: ''}
-    this.setState({ data, errors })
-  }
+      <div>
+        <input
+          className={`input ${errors.email ? 'is-danger': ''}`}
+          name="email"
+          value={currentUser.email || ''}
+          placeholder="Please enter your Email Address *required)"
+          onChange={handleChange}
+        />
+      </div>
+      <br />
 
-  handleSubmit(e) {
-    e.preventDefault()
-    axios.put(`/api/users/${Auth.getPayload().sub}`, this.state.data,
-      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => this.props.history.push('/users'))
-      .catch(err => this.setState({errors: err.response.data.errors}))
-  }
+      <div>
+        <label>Where are your books located? (drag pointer)</label>
+        <UserEditMap
+          center={mapCenter}
+          onSelectLocation={handleLocation}
+        />
+      </div>
+      <br />
 
-  //   handleDelete() {
-  //   axios.delete(`https://cheesebored.herokuapp.com/cheeses/${this.props.match.params.id}`,
-  //     { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-  //     .then(() => this.props.history.push('/cheeses'))
-  //     .catch(err => console.log(err.message))
-  // }
+      <div>
+        <input
+          className={`input ${errors.libraryName ? 'is-danger': ''}`}
+          name="libraryName"
+          value={currentUser.libraryName || ''}
+          placeholder="Please enter a Library Name *required)"
+          onChange={handleChange}
+        />
+      </div>
+      <br />
 
-  getUser() {
-    axios.get(`/api/users/${Auth.getPayload().sub}`)
-      .then(res => this.setState({  currentUser: res.data }))
-      .catch(err => console.log(err))
-  }
+      <div>
+        <p>Library Description: <br />
+          <textarea
+            className={`textarea ${errors.libraryDescription ? 'is-danger': ''}`}
+            name="libraryDescription"
+            value={currentUser.libraryDescription || ''}
+            placeholder="Please enter a description of your library (optional)"
+            onChange={handleChange}
+          />
+        </p>
+      </div>
+      <br />
 
-  componentDidMount() {
-    this.getUser()
-  }
+      <div>
+        <input
+          className={`input ${errors.libraryPicture ? 'is-danger': ''}`}
+          name="libraryPicture"
+          value={currentUser.libraryPicture || ''}
+          placeholder="Picture of your library (optional)"
+          onChange={handleChange}
+        />
+      </div>
+      <br />
 
-  render() {
-    console.log('user data', this.state.currentUser)
-    const {
-      email,
-      username,
-      profilePicture,
-      libraryName,
-      libraryPicture,
-      libraryDescription,
-      location: {
-        lat, lng
-      }
-    } = this.state.currentUser
+      <div>
+        <button className="button is-primary is-pulled-right">Submit</button>
+      </div>
 
-    console.log(lat, lng)
-    return(
-      <main className="section">
-        <div className="columns">
-          <form
-            onSubmit={this.handleSubmit}
-          >
-
-            <div>
-              <input
-                className="input"
-                name="profilePicture"
-                placeholder="Please submit a new Profile Picture (optional)"
-                onChange={this.handleChange}
-              />
-            </div>
-            <br />
-
-            <div>
-              <input
-                className="input"
-                name="email"
-                placeholder="Please enter your Email Address (optional)"
-                onChange={this.handleChange}
-              />
-            </div>
-            <br />
-
-            <div>
-              <label>Where are your books located? (drag pointer)</label>
-              <UserEditMap
-                center={this.mapCenter}
-                onSelectLocation={this.handleLocation}
-              />
-            </div>
-            <br />
-
-            <div>
-              <input
-                className="input"
-                name="libraryName"
-                placeholder="Please enter a Library Name (optional)"
-                onChange={this.handleChange}
-              />
-            </div>
-            <br />
-
-            <div>
-              <p>Library Description: <br />
-                <textarea
-                  className="textarea"
-                  name="libraryDescription"
-                  placeholder="Please enter a description of your library (optional)"
-                  onChange={this.handleChange}
-                />
-              </p>
-            </div>
-            <br />
-
-            <div>
-              <input
-                className="input"
-                name="libraryPicture"
-                placeholder="Picture of your library (optional)"
-                onChange={this.handleChange}
-              />
-            </div>
-            <br />
-
-            <div>
-              <button className="button is-primary is-pulled-right">Submit</button>
-            </div>
-
-          </form>
-
-        </div>
-
-      </main>
-    )
-  }
+    </form>
+  )
 }
+
 export default UserForm

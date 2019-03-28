@@ -1,4 +1,5 @@
 const Users = require('../models/user')
+const Books = require('../models/book')
 
 function usersAll(req, res) {
   Users
@@ -26,9 +27,15 @@ function userUpdate(req, res) {
 }
 
 function userDelete(req, res) {
-  Users
-    .findByID(req.params.id)
-    .then(user => user.remove())
+  const promiseArray = [
+    Books
+      .remove({owner: req.params.id}),
+    Users
+      .findByIdAndRemove(req.params.id)
+      .exec()
+  ]
+
+  Promise.all(promiseArray)
     .then(() => res.sendStatus(204))
     .catch(err => res.status(500).json(err))
 }

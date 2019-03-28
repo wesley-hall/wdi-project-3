@@ -125,6 +125,7 @@ class BooksAll extends React.Component {
             <div className="columns is-mobile is-multiline">
               {!this.state.filteredBooks && <p>...loading</p>}
               {this.state.filteredBooks && filteredBooks.map(book => (
+
                 <div key={book._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
                   <Link to={`/books/${book._id}`} >
                     <div className="card">
