@@ -67,7 +67,6 @@ class BookShow extends React.Component {
   }
 
   handleRatingChange({ target: { name, value }}) {
-    console.log(this.state.data.rating)
     const rating = {...this.state.data.rating, [name]: value}
     const data = {...this.state.data, rating}
     const errors = {...this.state.errors, [name]: ''}
@@ -76,7 +75,6 @@ class BookShow extends React.Component {
 
   handleRatingSubmit(e) {
     e.preventDefault()
-    console.log('posting data', this.state.data)
     axios.post(`/api/books/${this.props.match.params.id}/rating`, this.state.data.rating,
       { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(() => {
@@ -86,10 +84,8 @@ class BookShow extends React.Component {
       .catch(err => this.setState({errors: err.response.data.errors}))
   }
 
-
   handleDelete(e) {
     e.preventDefault()
-    console.log(`Bearer ${Auth.getToken()}`)
     if (window.confirm('Delete the item?')) {
       axios.delete(`/api/books/${this.props.match.params.id}`,
         { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
