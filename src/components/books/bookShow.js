@@ -177,6 +177,12 @@ class BookShow extends React.Component {
                     </div>
                   }
 
+                  {!Auth.isAuthenticated() &&
+                    <div>
+                      <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back</button>
+                    </div>
+                  }
+
                   {!this.isOwner() && Auth.isAuthenticated() &&
                     <div>
                       <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back</button>

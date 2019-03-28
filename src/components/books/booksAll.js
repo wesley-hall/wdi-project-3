@@ -80,52 +80,49 @@ class BooksAll extends React.Component {
     const filteredBooks = this.state.books.filter(books => books.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || books.authors.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1)
     return (
       <div>
-        <br />
-        {Auth.isAuthenticated() && <Link to="/books/add" className="button button-add-book is-success is-pulled-right">Add a book...</Link>}
 
         <main className="section">
-          <div className="container">
-
-            <div className="columns is-mobile">
-              <div className="column is-half-mobile">
-                <div className="field is-pulled-right">
-                  <div className="control">
-                    <div className="select">
-                      <select
-                        name="libraries"
-                        onChange={this.handleChange}
-                        defaultValue="all"
-                      >
-                        <option value="all">All Libraries</option>
-                        {this.state.libraries && this.state.libraries.map(library => (
-                          <option key={library.owner} value={library.owner}>{library.libraryName}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div className="column is-half-mobile">
-
-                <div className="field has-addons">
-                  <div className="control">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="Search by title/author"
-                      value={this.state.search}
-                      onChange={this.handleSearch}
-                    / >
-                  </div>
-                  <div className="control">
-                    <a className="button is-primary is-outlined">Search</a>
+          <div className="columns is-mobile">
+            <div className="column is-quarter">
+              <div className="field is-pulled-left">
+                <div className="control">
+                  <div className="select">
+                    <select
+                      name="libraries"
+                      onChange={this.handleChange}
+                      defaultValue="all"
+                    >
+                      <option value="all">All Libraries</option>
+                      {this.state.libraries && this.state.libraries.map(library => (
+                        <option key={library.owner} value={library.owner}>{library.libraryName}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
               </div>
             </div>
-            <hr />
 
+            <div className="column is-half">
+              <div className="field has-addons is-center">
+                <div className="control is-center">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Search by title/author"
+                    value={this.state.search}
+                    onChange={this.handleSearch}
+                  / >
+                </div>
+              </div>
+            </div>
+
+            <div className="column is-quarter">
+              {Auth.isAuthenticated() && <Link to="/books/add" className="button button-add-book is-success is-pulled-right">Add a book...</Link>}
+            </div>
+
+          </div>
+
+          <div className="container">
 
             <div className="columns is-mobile is-multiline">
               {!this.state.books && <p>...loading</p>}

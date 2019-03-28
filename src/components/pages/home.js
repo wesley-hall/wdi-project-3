@@ -13,8 +13,9 @@ class Home extends React.Component {
         <div className="hero-body">
 
           <div className="container has-text-centered">
+            <img className="bookerHero" src="http://www.orjon.com/dev/booker/images/bookerLogoBlack.png"/>
             <h1 className="title">
-              Booker: The community library project
+              The community library project
             </h1>
           </div>
 
