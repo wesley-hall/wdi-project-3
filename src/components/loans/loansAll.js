@@ -33,8 +33,8 @@ class LoansAll extends React.Component {
   getLoans() {
     axios.get('/api/loans')
       .then(res => {
-        const loanedFromMe = res.data.filter(loans => loans.book.owner._id === Auth.getPayload().sub)
-        const borrowedByMe = res.data.filter(loans => loans.borrower._id === Auth.getPayload().sub)
+        const loanedFromMe = res.data.filter(loans => loans.book && loans.book.owner._id === Auth.getPayload().sub)
+        const borrowedByMe = res.data.filter(loans => loans.borrower && loans.borrower._id === Auth.getPayload().sub)
         loanedFromMe.sort((a, b) => new Date(a.start) - new Date(b.start))
         borrowedByMe.sort((a, b) => new Date(a.start) - new Date(b.start))
         const loans = {...this.state.loans, loanedFromMe, borrowedByMe}
@@ -123,6 +123,11 @@ class LoansAll extends React.Component {
     return !approved && !declined && !returned && new Date() < new Date(end)
   }
 
+  isExpired(loan) {
+    const { collected, approved, returned, end } = loan
+    return !collected && !approved && !returned && new Date() > new Date(end)
+  }
+
   isAwaitingCollection(loan) {
     const { approved, collected, returned } = loan
     return approved && !collected && !returned
@@ -156,12 +161,11 @@ class LoansAll extends React.Component {
       <div>
         <main className="section">
           <div className="container">
-            <h1>My account</h1>
             <div>
               <div className="columns">
                 <h2 className="column is-gapless">Books Loaned Out</h2>
               </div>
-              <div className="columns">
+              <div className="columns is-mobile">
                 <h4 className="column is-2 is-gapless">Start Date</h4>
                 <h4 className="column is-2 is-gapless">End Date</h4>
                 <h4 className="column is-2 is-gapless">Book Title</h4>
@@ -176,6 +180,7 @@ class LoansAll extends React.Component {
                     loan={loan}
                     handleClick={this.handleClick}
                     isPending={this.isPending}
+                    isExpired={this.isExpired}
                     approveLoanRequest={this.approveLoanRequest}
                     declineLoanRequest={this.declineLoanRequest}
                     isAwaitingCollection={this.isAwaitingCollection}
@@ -197,7 +202,7 @@ class LoansAll extends React.Component {
                 <h2 className="column is-gapless">Books Borrowed</h2>
               </div>
 
-              <div className="columns">
+              <div className="columns is-mobile">
                 <h4 className="column is-2 is-gapless">Start Date</h4>
                 <h4 className="column is-2 is-gapless">End Date</h4>
                 <h4 className="column is-2 is-gapless">Book Title</h4>
