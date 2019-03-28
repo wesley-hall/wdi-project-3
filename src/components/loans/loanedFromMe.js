@@ -7,14 +7,28 @@ import LoanedOverdue from './statusButtons/loanedOverdue'
 import LoanedAwaitingCollection from './statusButtons/loanedAwaitingCollection'
 
 const LoanedFromMe = (props) => {
-  const { loan, isPending, approveLoanRequest, declineLoanRequest, isDeclined, isAwaitingCollection, confirmBookCollected, isOnLoan, isOverdue, confirmBookReturn, isReturned  } = props
+  const { loan, isPending, isExpired, approveLoanRequest, declineLoanRequest, isDeclined, isAwaitingCollection, confirmBookCollected, isOnLoan, isOverdue, confirmBookReturn, isReturned  } = props
   return (
     <div>
-      <div className={`columns is-vcentered loan-border-bottom ${isOverdue(loan) ? 'has-text-danger has-text-weight-bold' : ''}`}>
+      <div className={`columns is-mobile is-vcentered loan-border-bottom ${isOverdue(loan) ? 'has-text-danger has-text-weight-bold' : ''}`}>
         <span className="column is-2 is-gapless">{loan.start.substring(10,-5)}</span>
         <span className="column is-2 is-gapless">{loan.end.substring(10,-5)}</span>
         <span className="column is-2 is-gapless">{loan.book.title}</span>
-        <span className="column is-2 is-gapless"><figure className="image is-64x64"><img className="is-rounded" src={loan.borrower.profilePicture} /></figure>{loan.borrower.username}</span>
+        <span className="column is-2 is-gapless columns is-marginless is-vcentered">
+          <span className="column is-half">
+            <figure className="image is-64x64">
+              <img className="is-rounded" src={loan.borrower.profilePicture} />
+            </figure>
+          </span>
+          <span className="column is-half">
+            {loan.borrower.email}
+          </span>
+        </span>
+        {isExpired(loan) &&
+          <div className="column is-4 is-gapless columns">
+            <span className="column is-full is-gapless">Expired</span>
+          </div>
+        }
         {isDeclined(loan) &&
           <div className="column is-4 is-gapless columns">
             <span className="column is-full is-gapless">Declined</span>
