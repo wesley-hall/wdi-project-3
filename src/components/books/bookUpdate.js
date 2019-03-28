@@ -26,10 +26,6 @@ class BookUpdate extends React.Component {
   }
 
   componentDidMount() {
-    const user = this.getUserId()
-    const rating = {...this.state.data.rating, user: user}
-    const review = {...this.state.data.review, user: user}
-    // const data = {...this.state.data, owner: user, rating: rating, review: review }
     axios.get(`/api/books/${this.props.match.params.id}`)
       .then(res => this.setState({ data: res.data }), this.getGenres())
       .catch(err => console.log(err))
@@ -90,8 +86,6 @@ class BookUpdate extends React.Component {
   }
 
   render() {
-    console.log('State.data:', this.state.data)
-    console.log('params:', this.props.match.params)
     return (
       <div>
         <main className="section">
