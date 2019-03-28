@@ -2,6 +2,7 @@ import React from 'react'
 import mapboxgl from 'mapbox-gl'
 mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN
 
+// WHAT IS THE DIFF BETWEEN USER SHOW AND EDIT MAP?
 
 class UserShowMap extends React.Component{
   constructor() {
