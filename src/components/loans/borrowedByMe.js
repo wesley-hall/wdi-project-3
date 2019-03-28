@@ -4,10 +4,10 @@ import React from 'react'
 class BorrowedByMe extends React.Component {
 
   render() {
-    const { loan, isOnLoan, isOverdue, isReturned } = this.props
+    const { loan, isOnLoan, cancelLoanRequest, isOverdue, isReturned } = this.props
     return (
       <div key={loan._id}>
-        <div className="columns">
+        <div className="columns is-mobile">
           <span className="column is-2 is-gapless">{loan.start.substring(10,-5)}</span>
           <span className="column is-2 is-gapless">{loan.end.substring(10,-5)}</span>
           <span className="column is-2 is-gapless">{loan.book.title}</span>
@@ -17,7 +17,7 @@ class BorrowedByMe extends React.Component {
             <div className="column is-4 is-gapless columns">
               <span className="column is-half is-gapless">Pending</span>
               <div className="column is-half is-gapless">
-                <button className="button is-small is-danger" onClick={this.handleClick}>
+                <button className="button is-small is-danger" value={loan._id} onClick={cancelLoanRequest}>
                   Cancel request
                 </button>
               </div>
