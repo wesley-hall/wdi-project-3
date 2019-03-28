@@ -64,7 +64,6 @@ class BookShow extends React.Component {
 
   handleDelete(e) {
     e.preventDefault()
-<<<<<<< HEAD
     console.log(`Bearer ${Auth.getToken()}`)
     if (window.confirm('Delete the item?')) {
       axios.delete(`/api/books/${this.props.match.params.id}`,
@@ -72,12 +71,6 @@ class BookShow extends React.Component {
         .then(() => this.props.history.push('/books/'))
         .catch(err => this.setState({errors: err.response.data.errors}))
     }
-=======
-    axios.delete(`/api/books/${this.props.match.params.id}`,
-      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => this.props.history.push('/books/'))
-      .catch(err => this.setState({errors: err.response.data.errors}))
->>>>>>> development
   }
 
   handleDeleteReview(review) {
@@ -246,7 +239,7 @@ class BookShow extends React.Component {
                   <hr />
                 </div>
               ))}
-              {!this.hasReview() && Auth.getPayload().sub && 
+              {!this.hasReview() && Auth.getPayload().sub &&
                 <div className="columns">
                   <div className="column">
                     <h4 className="title is-6" >Add review...</h4>
