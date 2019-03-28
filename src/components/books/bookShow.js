@@ -89,10 +89,13 @@ class BookShow extends React.Component {
 
   handleDelete(e) {
     e.preventDefault()
-    axios.delete(`/api/books/${this.props.match.params.id}`,
-      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
-      .then(() => this.props.history.push('/books/'))
-      .catch(err => this.setState({errors: err.response.data.errors}))
+    console.log(`Bearer ${Auth.getToken()}`)
+    if (window.confirm('Delete the item?')) {
+      axios.delete(`/api/books/${this.props.match.params.id}`,
+        { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => this.props.history.push('/books/'))
+        .catch(err => this.setState({errors: err.response.data.errors}))
+    }
   }
 
   handleDeleteReview(review) {
