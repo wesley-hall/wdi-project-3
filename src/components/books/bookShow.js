@@ -160,11 +160,22 @@ class BookShow extends React.Component {
             </div>
             <hr />
             <div className="container">
+              {(book.review.length>0) &&
+                <div>
+                  <h4 className="is-7">Reviews({book.review.length}):</h4>
+                  <br />
+                </div>
+              }
+              {(book.review.length>0) && book.review.map(review => (
+                <div key={review._id}>
+                  <h4 className="is-6" >{review.user.username}</h4>
+                  <h4 className="bookReviews subtitle is-6" >{review.review}</h4>
+                  <br />
+                </div>
+              ))}
             </div>
-
           </div>
         </main>
-        )
       </div>
     )
   }
