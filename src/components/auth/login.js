@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import Auth from '../../lib/auth'
 
@@ -34,8 +34,9 @@ class Login extends React.Component {
         Auth.setToken(res.data.token)
         this.props.history.push('/books')
       })
-      .catch(() => {
-        this.setState({ error: 'Invalid Credentials'})
+      .catch((err) => {
+        console.log('the error is', err)
+        this.setState({ error: 'Invalid Credentials'}, () => console.log('this.state', this.state))
       })
   }
 
@@ -63,7 +64,7 @@ class Login extends React.Component {
             <br />
             <div>
               <input
-                className="input"
+                className={`input ${this.state.error ? 'is-danger': ''}`}
                 name="email"
                 placeholder="Email"
                 value={this.state.data.email}
@@ -74,7 +75,7 @@ class Login extends React.Component {
 
             <div>
               <input
-                className="input"
+                className={`input ${this.state.error ? 'is-danger': ''}`}
                 name="password"
                 type="password"
                 placeholder="Password"
@@ -83,6 +84,7 @@ class Login extends React.Component {
               />
             </div>
             <br />
+            {this.state.error && <small className="help is-danger">{this.state.error} </small>}
             <div>
               <button
                 className="button is-success is-pulled-right"
