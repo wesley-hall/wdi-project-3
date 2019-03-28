@@ -5,7 +5,7 @@ function usersAll(req, res) {
   User
     .find()
     .then(users => res.json(users))
-    .catch(e => console.log(e))
+    .catch(err => res.json(err))
 }
 
 function userShow(req, res) {
@@ -45,7 +45,7 @@ function librariesAll(req, res) {
     .find()
     .populate('booksOwned')
     .then(libraries => res.json(libraries.map(library => ({ libraryName: library.libraryName, libraryDescription: library.libraryDescription, location: library.location, books: library.booksOwned, owner: library._id }))))
-    .catch(err => res.json(err))
+    .catch(err => res.status(404).json(err))
 }
 
 module.exports = {
