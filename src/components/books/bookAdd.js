@@ -72,7 +72,6 @@ class BookAdd extends React.Component {
     const review = {...this.state.data.review, [name]: value}
     const data = {...this.state.data, review}
     const errors = {...this.state.errors, [name]: ''}
-
     this.setState({ data, errors})
   }
 
@@ -98,7 +97,6 @@ class BookAdd extends React.Component {
   }
 
   render() {
-    console.log(this.state.data)
     return (
       <div>
         <main className="section">

@@ -9,15 +9,28 @@ class BookShow extends React.Component {
   constructor() {
     super()
 
-    this.state = {}
+    this.state = {
+      data: {
+        review: {
+          review: ''
+        }
+      }
+    }
 
+    this.handleDeleteReview = this.handleDeleteReview.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleReviewChange = this.handleReviewChange.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
     this.handleBack = this.handleBack.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    this.getUserLocation()
+    {Auth.getPayload().sub && this.getUserLocation()}
+    this.getBookData()
+  }
+
+  getBookData() {
     axios.get(`/api/books/${this.props.match.params.id}`)
       .then(res => this.setState({ book: res.data }))
   }
@@ -30,8 +43,28 @@ class BookShow extends React.Component {
     this.props.history.push('/books')
   }
 
+  handleReviewChange({ target: { name, value }}) {
+    const review = {...this.state.data.review, [name]: value }
+    const data = {...this.state.data, review}
+    const errors = {...this.state.errors, [name]: ''}
+    this.setState({ data, errors})
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    axios.post(`/api/books/${this.props.match.params.id}/review`, this.state.data.review,
+      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => {
+        const data = {...this.state.data, review: {...this.state.data.review, review: ''}}
+        this.setState({ data }, this.getBookData)
+      })
+      .catch(err => this.setState({errors: err.response.data.errors}))
+  }
+
+
   handleDelete(e) {
     e.preventDefault()
+<<<<<<< HEAD
     console.log(`Bearer ${Auth.getToken()}`)
     if (window.confirm('Delete the item?')) {
       axios.delete(`/api/books/${this.props.match.params.id}`,
@@ -39,6 +72,19 @@ class BookShow extends React.Component {
         .then(() => this.props.history.push('/books/'))
         .catch(err => this.setState({errors: err.response.data.errors}))
     }
+=======
+    axios.delete(`/api/books/${this.props.match.params.id}`,
+      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => this.props.history.push('/books/'))
+      .catch(err => this.setState({errors: err.response.data.errors}))
+>>>>>>> development
+  }
+
+  handleDeleteReview(review) {
+    axios.delete(`/api/books/${this.props.match.params.id}/review/${review._id}`,
+      { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+      .then(() => this.getBookData())
+      .catch(err => console.log(err))
   }
 
 
@@ -75,6 +121,10 @@ class BookShow extends React.Component {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
     const d = R * c
     return (d/1000).toFixed(2)
+  }
+
+  hasReview() {
+    return this.state.book.review.some(review => review.user._id === Auth.getPayload().sub)
   }
 
   render() {
@@ -124,7 +174,6 @@ class BookShow extends React.Component {
               </div>
             </div>
 
-
             <hr />
 
 
@@ -162,11 +211,68 @@ class BookShow extends React.Component {
             </div>
             <hr />
             <div className="container">
-            </div>
+              {(book.review.length>0) &&
+                <div>
+                  <h4 className="is-7">Reviews({book.review.length}):</h4>
+                  <br />
+                </div>
+              }
+              {(book.review.length>0) && book.review.map(review => (
+                <div key={review._id}>
+                  <div className="columns">
 
+                    <div className="column is-2">
+                      <figure className="image is-96x96">
+                        <img className="is-rounded" src={review.user.profilePicture} />
+                      </figure>
+                      <br />
+                    </div>
+                    <div className="column">
+                      <h4 className="title is-6" >{review.user.username}</h4>
+                      <h4 className="bookReviews subtitle is-6" >{review.review}</h4>
+
+                      {(review.user._id === Auth.getPayload().sub) &&
+                        <div>
+
+                          <button
+                            className="button is-danger is-pulled-right"
+                            onClick={() => this.handleDeleteReview(review)}>
+                          Delete review
+                          </button>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                  <hr />
+                </div>
+              ))}
+              {!this.hasReview() && Auth.getPayload().sub && 
+                <div className="columns">
+                  <div className="column">
+                    <h4 className="title is-6" >Add review...</h4>
+                    <form onSubmit={this.handleSubmit}>
+                      <textarea
+                        className="textarea"
+                        name="review"
+                        placeholder="Review"
+                        value={this.state.data.review.review}
+                        onChange={this.handleReviewChange}
+                      />
+
+                      <div>
+                        <br />
+                        <button
+                          className="button is-success is-pulled-right"
+                          onClick={this.handleSubmit}>
+                        Add review
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>}
+            </div>
           </div>
         </main>
-        )
       </div>
     )
   }
