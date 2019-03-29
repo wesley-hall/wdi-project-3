@@ -8,7 +8,6 @@ import './style.scss'
 import SecureRoute from './components/common/secureRoute'
 import Nav from './components/common/nav'
 import Home from './components/pages/home'
-// import ErrorPage from './components/pages/404'
 
 import Register from './components/auth/register'
 import Login from './components/auth/login'
@@ -53,7 +52,7 @@ class App extends React.Component {
             <Route path="/login" component={Login}/>
             <Route path="/about" component={About}/>
             <Route exact path="/" component={Home}/>
-            <Route component={ErrorPage} />
+            <Route path='/*' component={ErrorPage} />
 
           </Switch>
         </div>

@@ -82,7 +82,7 @@ class Userprofile extends React.Component {
             <div className="columns">
 
               <div className="column">
-                <h2 className="title">Your details</h2>
+                <h2 className="title">My details</h2>
               </div>
 
               <div className="column">
