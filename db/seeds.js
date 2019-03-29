@@ -99,7 +99,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Orjon\'s home library',
         location: { lat: 51.515795, lng: -0.067593 },
-        libraryPicture: 'someurl',
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryE.jpg',
         libraryDescription: 'filled with dead bodies'
       },
       {
@@ -121,7 +121,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Wesley\'s mini-library',
         location: { lat: 51.511868, lng: -0.072210},
-        libraryPicture: 'someurl',
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryF.jpg',
         libraryDescription: 'cluttered'
       },
       {
@@ -132,7 +132,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Steve\'s library',
         location: { lat: 51.522164, lng: -0.075526 },
-        libraryPicture: 'someurl',
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryG.jpg',
         libraryDescription: 'cluttered'
       },
       {
@@ -143,7 +143,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Matthew\'s library',
         location: { lat: 51.518474, lng: -0.061351 },
-        libraryPicture: 'someurl',
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryH.jpg',
         libraryDescription: 'cluttered'
       },
       {
@@ -154,7 +154,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Stephano\'s library',
         location: { lat: 51.518474, lng: -0.061351},
-        libraryPicture: 'someurl',
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryI.jpg',
         libraryDescription: 'cluttered'
       },
       {
@@ -165,7 +165,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Pascual\'s book collection',
         location: { lat: 51.517453, lng: -0.088473 },
-        libraryPicture: 'someurl',
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryJ.jpg',
         libraryDescription: 'cluttered'
       }
     ]),

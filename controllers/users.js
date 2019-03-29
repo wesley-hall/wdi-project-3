@@ -44,7 +44,7 @@ function librariesAll(req, res) {
   User
     .find()
     .populate('booksOwned')
-    .then(libraries => res.json(libraries.map(library => ({ libraryName: library.libraryName, libraryDescription: library.libraryDescription, location: library.location, books: library.booksOwned, owner: library._id }))))
+    .then(libraries => res.json(libraries.map(library => ({ libraryName: library.libraryName, libraryDescription: library.libraryDescription, libraryPicture: library.libraryPicture, location: library.location, books: library.booksOwned, owner: library._id }))))
     .catch(err => res.status(404).json(err))
 }
 
