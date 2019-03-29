@@ -156,9 +156,19 @@ class LoansAll extends React.Component {
       <div>
         <main className="section">
           <div className="container">
+            <div className="columns">
+              <div className="column">
+                <h2 className="title">My loaned and borrowed books</h2>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div className="container">
             <div>
               <div className="columns">
-                <h2 className="column is-gapless">Books Loaned Out</h2>
+                <div className="column is-gapless">
+                  <h2 className="title is-5">Books Loaned Out</h2>
+                </div>
               </div>
               <div className="columns has-text-centered is-mobile">
                 <h4 className="column is-3 is-gapless">Dates</h4>
@@ -188,10 +198,15 @@ class LoansAll extends React.Component {
                 </div>
               ))}
             </div>
-
+          </div>
+          <br />
+          
+          <div className="container">
             <div>
               <div className="columns">
-                <h2 className="column is-gapless">Books Borrowed</h2>
+                <div className="column is-gapless">
+                  <h2 className="title is-5">Books Borrowed</h2>
+                </div>
               </div>
               <div className="columns is-mobile has-text-centered">
                 <h4 className="column is-3 is-gapless">Dates</h4>
