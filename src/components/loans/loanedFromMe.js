@@ -10,7 +10,7 @@ const LoanedFromMe = (props) => {
   const { loan, isPending, isExpired, approveLoanRequest, declineLoanRequest, isDeclined, isAwaitingCollection, confirmBookCollected, isOnLoan, isOverdue, confirmBookReturn, isReturned  } = props
   return (
     <div>
-      <div className={`columns is-mobile has-text-centered is-vcentered loan-border-bottom ${isOverdue(loan) ? 'has-text-danger has-text-weight-bold' : ''}`}>
+      <div className={`columns is-mobile  has-text-left is-vcentered loan-border-bottom ${isOverdue(loan) ? 'has-text-danger has-text-weight-bold' : ''}`}>
         <span className="column is-3 is-gapless">{loan.start.substring(10,-5)} to {loan.end.substring(10,-5)}</span>
         <span className="column is-2 is-gapless">{loan.book.title}</span>
         <span className="column is-3 is-gapless">

@@ -10,6 +10,7 @@ router.post('/register', auth.register)
 
 router.post('/login', auth.login)
 
+
 router.get('/genres', genres.genresAll)
 
 router.get('/libraries', users.librariesAll)

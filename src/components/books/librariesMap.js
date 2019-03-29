@@ -42,12 +42,11 @@ class LibrariesMap extends React.Component {
       const popup = new mapboxgl.Popup({ offset: 25 })
         .setHTML(`
           <h2 class="title is-4">${library.libraryName}</h2>
-          <div>
-          ${library.books.slice(0,3).map(book => `<img key=${book._id} src=${book.image} />`)}
-          <p>${library.books.slice(3) && `And ${library.books.slice(3).length} more books...`}</p>
+          <div id=${'libraries-popup-container'}>
+            <img src=${library.libraryPicture} alt=${library.libraryName} />
+            <p class="subtitle is-6">${library.libraryDescription}</p>
+            <a class="button is-small is-link" href=${'/books'}><p>See all books</p></a>
           </div>
-          <p>${library.libraryDescription}</p>
-          <a href=${`/books/library/${library.owner}`}><p>See all books</p></a>
         `)
 
       return new mapboxgl.Marker(markerLibraries)
@@ -71,8 +70,14 @@ class LibrariesMap extends React.Component {
 
       const popup = new mapboxgl.Popup({ offset: 25 })
         .setHTML(`
-          <h2 class="title is-5">My library</h2>
-          <a href=${'/'}><p>See all books</p></a>
+          <h2 class="title is-5">My library: ${library.libraryName}</h2>
+          <div id=${'libraries-popup-container'}>
+            <img id=${'libraries-map-picture'} src=${library.libraryPicture} alt=${library.libraryName} />
+            <p class="subtitle is-6">${library.libraryDescription}</p>
+            <a class="button is-small is-link is-pulled-left" href=${'/books'}><p>See all books</p></a>
+            <a class="button is-small buttonBookUpdate is-pulled-right is-marginless" href=${'/users'}><p>View/edit my profile</p></a>
+          </div>
+
         `)
 
       return new mapboxgl.Marker(markerUserLibrary)

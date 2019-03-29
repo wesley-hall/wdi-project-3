@@ -7,7 +7,7 @@ const LoanedAwaitingCollection = (props) => {
     <div className="column is-4 is-gapless columns">
       <span className="column is-half is-gapless">Awaiting Collection</span>
       <div className="column is-half is-gapless has-text-centered">
-        <button className="button is-small is-warning" value={loan._id} onClick={confirmBookCollected}>
+        <button className="button is-small is-warning is-pulled-right" value={loan._id} onClick={confirmBookCollected}>
           Book Collected
         </button>
       </div>

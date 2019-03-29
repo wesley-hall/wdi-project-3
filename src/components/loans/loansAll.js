@@ -17,6 +17,7 @@ class LoansAll extends React.Component {
     }
 
     this.confirmBookCollected = this.confirmBookCollected.bind(this)
+    this.handleBack = this.handleBack.bind(this)
     this.confirmBookReturn = this.confirmBookReturn.bind(this)
     this.approveLoanRequest = this.approveLoanRequest.bind(this)
     this.declineLoanRequest = this.declineLoanRequest.bind(this)
@@ -113,6 +114,9 @@ class LoansAll extends React.Component {
       .catch(err => console.log(err))
   }
 
+  handleBack() {
+    this.props.history.push('/books')
+  }
 
   isPending(loan) {
     const { approved, declined, returned, end } = loan
@@ -158,7 +162,10 @@ class LoansAll extends React.Component {
           <div className="container">
             <div className="columns">
               <div className="column">
-                <h2 className="title">My loaned and borrowed books</h2>
+                <h2 className="title">Book Loans</h2>
+              </div>
+              <div className="column">
+                <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back</button>
               </div>
             </div>
             <hr />
@@ -170,7 +177,7 @@ class LoansAll extends React.Component {
                   <h2 className="title is-5">Books Loaned Out</h2>
                 </div>
               </div>
-              <div className="columns has-text-centered is-mobile">
+              <div className="columns has-text-left is-mobile">
                 <h4 className="column is-3 is-gapless">Dates</h4>
 
                 <h4 className="column is-2 is-gapless">Book Title</h4>
@@ -178,7 +185,7 @@ class LoansAll extends React.Component {
                 <h4 className="column is-4 is-gapless">Status</h4>
               </div>
               {loanedFromMe.length === 0 &&
-                <p className="column is-12 is-gapless has-text-centered">You are not loaning out any books</p>}
+                <p className="column is-12 is-gapless has-text-left">You are not loaning out any books</p>}
               {loanedFromMe.map(loan => (
                 <div key={loan._id}>
                   <LoanedFromMe
@@ -209,14 +216,14 @@ class LoansAll extends React.Component {
                   <h2 className="title is-5">Books Borrowed</h2>
                 </div>
               </div>
-              <div className="columns is-mobile has-text-centered">
+              <div className="columns is-mobile  has-text-left">
                 <h4 className="column is-3 is-gapless">Dates</h4>
                 <h4 className="column is-2 is-gapless">Book Title</h4>
                 <h4 className="column is-3 is-gapless">Requested From</h4>
                 <h4 className="column is-4 is-gapless">Status</h4>
               </div>
               {borrowedByMe.length === 0 &&
-                <p className="column is-12 is-gapless has-text-centered">You are not borrowing any books</p>}
+                <p className="column is-12 is-gapless  has-text-left">You are not borrowing any books</p>}
               {borrowedByMe.map(loan => (
                 <div key={loan._id}>
                   <BorrowedByMe

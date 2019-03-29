@@ -25,13 +25,14 @@ class Nav extends React.Component {
       <nav className="navbar is-info is-fixed-top">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item"><img className="bookerLogo" src="http://www.orjon.com/dev/booker/images/logo/bookerLogo.png"/></Link>
+          {!Auth.isAuthenticated() && <Link to="/about" className="navbar-item">About</Link>}
           <Link to="/books" className="navbar-item">Books</Link>
           <Link to="/libraries" className="navbar-item">Libraries</Link>
           {Auth.isAuthenticated() && <Link to="/loans" className="navbar-item">Loans</Link>}
-          {Auth.isAuthenticated() && <Link to="/users" className="navbar-item">User Profile</Link>}
         </div>
         <div className="navbar-menu">
           <div className="navbar-end">
+            {Auth.isAuthenticated() && <Link to="/users" className="navbar-item">My Profile</Link>}
             {!Auth.isAuthenticated() && <Link to="/login" className="navbar-item">Login/Register</Link>}
             {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
           </div>

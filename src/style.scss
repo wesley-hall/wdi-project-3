@@ -27,9 +27,21 @@ div.map-libraries {
   margin-top: 5vh;
 }
 
+
+.aboutText{
+  width: 100vw;
+}
+
 .backgroundHero {
   height: 500px;
   background-image: url(http://www.orjon.com/dev/booker/images/hero/bookshelf3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.aboutHero {
+  height: 500px;
+  background-image: url(http://www.orjon.com/dev/booker/images/about/about1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -131,6 +143,12 @@ img.max-image-on-card {
   align-items: center;
 }
 
+.main-container {
+height: 90vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
 .marker-libraries:before {
   content: '';
   position: absolute;
@@ -200,6 +218,8 @@ input.input {
 #libraryname {
   margin-top: 30px;
 }
+
+
 .usercolumn {
   margin-top: 20px;
 }
@@ -212,4 +232,9 @@ input.input {
 .buttonBookUpdate {
   margin-right: 12px;
   background-color: #ffb734;
+}
+
+
+#libraries-popup-container {
+  max-width: 300px;
 }

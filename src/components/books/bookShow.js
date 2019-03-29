@@ -38,7 +38,11 @@ class BookShow extends React.Component {
   getBookData() {
     axios.get(`/api/books/${this.props.match.params.id}`)
       .then(res => this.setState({ book: res.data }))
+      .catch(err => this.setState({errors: err.response.data.errors}))
+
   }
+
+
 
   handleEdit(e) {
     e.preventDefault()

@@ -11,6 +11,7 @@ import Home from './components/pages/home'
 
 import Register from './components/auth/register'
 import Login from './components/auth/login'
+import About from './components/pages/about'
 
 import UserProfile from './components/users/userprofile'
 import UserEdit from './components/users/userEdit'
@@ -21,7 +22,7 @@ import BookAdd from './components/books/bookAdd'
 import BookUpdate from './components/books/bookUpdate'
 import BookLoan from './components/books/bookLoan'
 import Libraries from './components/books/libraries'
-import ErrorPage from './components/pages/404'
+
 import IdsAll from './components/common/ids'
 
 import LoansAll from './components/loans/loansAll'
@@ -49,8 +50,9 @@ class App extends React.Component {
             <SecureRoute path="/loans" component={LoansAll}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
+            <Route path="/about" component={About}/>
             <Route exact path="/" component={Home}/>
-            <Route component={ErrorPage} />
+
 
           </Switch>
         </div>

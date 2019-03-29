@@ -89,7 +89,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         libraryName: 'Zoe\'s library',
         location: { lat: 51.514120, lng: -0.071449 },
         libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryD.jpg',
-        libraryDescription: 'Eclectic collection of books, records and antiques. Some comic books as well.'
+        libraryDescription: 'Eclectic collection of books, ranging from novels to textbooks, and even some comic books!'
       },
       {
         username: 'Orjon',
@@ -99,8 +99,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Orjon\'s home library',
         location: { lat: 51.515795, lng: -0.067593 },
-        libraryPicture: 'someurl',
-        libraryDescription: 'filled with dead bodies'
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryE.jpg',
+        libraryDescription: 'My library collection has been passed down through many generations.'
       },
       {
         username: 'Mary',
@@ -108,10 +108,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'mary@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Mary&John\'s bookcase',
+        libraryName: 'Mary & John\'s bookcase',
         location: { lat: 51.513791, lng: -0.067392 },
-        libraryPicture: 'someurl',
-        libraryDescription: 'cluttered'
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryF.jpg',
+        libraryDescription: 'We\'ve collected many books from around the world and love sharing them with you all!'
       },
       {
         username: 'Wesley',
@@ -119,10 +119,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         email: 'wesley@email',
         password: 'pass',
         passwordConfirmation: 'pass',
-        libraryName: 'Wesley\'s mini-library',
+        libraryName: 'Wesley\'s Library',
         location: { lat: 51.511868, lng: -0.072210},
-        libraryPicture: 'someurl',
-        libraryDescription: 'cluttered'
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryG.jpg',
+        libraryDescription: 'If you love Sci-Fi novels, my library is for you.'
       },
       {
         username: 'Steven',
@@ -132,8 +132,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Steve\'s library',
         location: { lat: 51.522164, lng: -0.075526 },
-        libraryPicture: 'someurl',
-        libraryDescription: 'cluttered'
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryH.jpg',
+        libraryDescription: 'My collection is largely music and film-based, with a few classics thrown in.'
       },
       {
         username: 'Matthew',
@@ -143,8 +143,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Matthew\'s library',
         location: { lat: 51.518474, lng: -0.061351 },
-        libraryPicture: 'someurl',
-        libraryDescription: 'cluttered'
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryI.jpg',
+        libraryDescription: 'Romance novels, technical journals and many many children\'s books!'
       },
       {
         username: 'Stephano',
@@ -154,8 +154,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Stephano\'s library',
         location: { lat: 51.518474, lng: -0.061351},
-        libraryPicture: 'someurl',
-        libraryDescription: 'cluttered'
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryJ.jpg',
+        libraryDescription: 'Cooking and cakes is what it\'s all about!'
       },
       {
         username: 'Pascual',
@@ -165,8 +165,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         passwordConfirmation: 'pass',
         libraryName: 'Pascual\'s book collection',
         location: { lat: 51.517453, lng: -0.088473 },
-        libraryPicture: 'someurl',
-        libraryDescription: 'cluttered'
+        libraryPicture: 'http://www.orjon.com/dev/booker/images/libraries/libraryK.jpg',
+        libraryDescription: 'D.I.Y, language and art books are what you will find. Everyone is welcome!'
       }
     ]),
     BookGenre.create([
