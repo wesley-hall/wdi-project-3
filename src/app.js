@@ -12,8 +12,8 @@ import Home from './components/pages/home'
 import Register from './components/auth/register'
 import Login from './components/auth/login'
 
-import UserProfile from './components/users/userProfile'
-import UserEdit from './components/users/userEdit'
+import UserProfile from './components/users/userprofile'
+import UserEdit from './components/users/useredit'
 
 import BooksAll from './components/books/booksAll'
 import BookShow from './components/books/bookShow'
@@ -63,6 +63,3 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 )
-            // <Route path="/*" component={ErrorPage}/>
-
-// <Route path="/books/library/:libraryId" component={BooksAll}/>
