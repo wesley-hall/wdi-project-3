@@ -48,6 +48,6 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: './src/assets', to: 'assets' }
     ]),
-    new webpack.EnvironmentPlugin(...process.env)
+    new webpack.EnvironmentPlugin({...process.env})
   ]
 }
