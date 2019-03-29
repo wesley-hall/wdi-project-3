@@ -41,55 +41,63 @@ class Login extends React.Component {
 
   render() {
     return (
-      <main className="section" id="loginsection">
-        <div className="container">
-          <div className="column is-centered">
-            <Link to="/register">
-              <button
-                className="button is-warning is-pulled-right"
-              >New user?</button>
-            </Link>
-          </div>
-          <form
-            className="update"
-            onSubmit={this.handleSubmit}
-          >
-            <div className="columns">
-              <div className="column">
-                <h1>Login</h1>
+      <main className="main-container">
+        <div className="section">
+          <div className="container">
+            <div className="column">
+              <Link to="/register">
+                <button
+                  className="button is-warning is-pulled-right"
+                >New user?</button>
+              </Link>
+            </div>
+            <form
+              className="update"
+              onSubmit={this.handleSubmit}
+            >
+              <div className="columns">
+                <div className="column">
+                  <h1 className="title is-4">Login</h1>
+                </div>
+
               </div>
+              <br />
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  className={`input ${this.state.error ? 'is-danger': ''}`}
+                  name="email"
+                  placeholder="Email"
+                  value={this.state.data.email}
+                  onChange={this.handleChange}
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-envelope"></i>
+                </span>
+              </div>
+              <br />
 
-            </div>
-            <br />
-            <div>
-              <input
-                className={`input ${this.state.error ? 'is-danger': ''}`}
-                name="email"
-                placeholder="Email"
-                value={this.state.data.email}
-                onChange={this.handleChange}
-              />
-            </div>
-            <br />
-
-            <div>
-              <input
-                className={`input ${this.state.error ? 'is-danger': ''}`}
-                name="password"
-                type="password"
-                placeholder="Password"
-                value={this.state.data.password}
-                onChange={this.handleChange}
-              />
-            </div>
-            <br />
-            {this.state.error && <small className="help is-danger">{this.state.error} </small>}
-            <div>
-              <button
-                className="button is-success is-pulled-right"
-              >Login &#x3E;</button>
-            </div>
-          </form>
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  className={`input ${this.state.error ? 'is-danger': ''}`}
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  value={this.state.data.password}
+                  onChange={this.handleChange}
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-key"></i>
+                </span>
+              </div>
+              <br />
+              {this.state.error && <small className="help is-danger">{this.state.error} </small>}
+              <div>
+                <button
+                  className="button is-success is-pulled-right"
+                >Login &#x3E;</button>
+              </div>
+            </form>
+          </div>
         </div>
       </main>
 

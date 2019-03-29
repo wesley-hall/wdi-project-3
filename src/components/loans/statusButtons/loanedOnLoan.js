@@ -7,7 +7,7 @@ const LoanedOnLoan = (props) => {
     <div className="column is-4 is-gapless columns">
       <span className="column is-half is-gapless">On loan</span>
       <div className="column is-half is-gapless has-text-centered">
-        <button className="button is-small is-warning" value={loan._id} onClick={confirmBookReturn}>
+        <button className="button is-small is-warning is-pulled-right" value={loan._id} onClick={confirmBookReturn}>
           Book Returned
         </button>
       </div>
