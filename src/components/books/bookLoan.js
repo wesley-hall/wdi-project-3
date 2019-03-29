@@ -82,14 +82,14 @@ class BookLoan extends React.Component {
     if (startDate > endDate) {
       return false
     }//End before start!')
-<<<<<<< HEAD
+
     if (startDate < today) {
       return false
     }//In the past')
     if (startDate === endDate) {
       return false
     }
-=======
+
     // if (startDate < today) {
     //   console.log('that is in the past!')
     //   return false
@@ -98,7 +98,7 @@ class BookLoan extends React.Component {
     //   console.log('at least one day')
     //   return false
     // }
->>>>>>> updateuser
+
     const loanDates = this.state.book.existingLoans.filter(loan => new Date(loan.end) > new Date())
 
     for (let i=0; i<loanDates.length; i++){
@@ -118,11 +118,8 @@ class BookLoan extends React.Component {
   render() {
     if (!this.state.book) return null
     const { book } = this.state
-<<<<<<< HEAD
-=======
     console.log('state: ',this.state)
     console.log('errors', this.state.errors)
->>>>>>> updateuser
     return(
       <div>
         <main className="section">
@@ -156,7 +153,7 @@ class BookLoan extends React.Component {
                       <br />
                       <h1>Request collect date:</h1>
                       <input
-                        className={`input ${this.state.errors ? 'is-danger': ''}`}
+                        className="input"
                         type="date"
                         name="start"
                         value={this.state.data.start}
@@ -168,7 +165,7 @@ class BookLoan extends React.Component {
                       <br />
                       <h1>Return date:</h1>
                       <input
-                        className={`input ${this.state.errors ? 'is-danger': ''}`}
+                        className="input"
                         type="date"
                         name="end"
                         value={this.state.data.end}
