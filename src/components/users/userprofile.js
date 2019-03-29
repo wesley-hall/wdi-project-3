@@ -70,9 +70,7 @@ class Userprofile extends React.Component {
     } = this.state.currentUser
     return(
       <main className="section">
-
         <div className="container">
-
           <button
             className="button is-danger is-pulled-right"
             id="btndeleteuser"

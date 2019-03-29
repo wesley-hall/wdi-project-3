@@ -80,8 +80,7 @@ class BooksAll extends React.Component {
     const filteredBooks = this.state.books.filter(books => books.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || books.authors.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1)
     return (
       <div>
-
-        <main className="section">
+        <main className="section ">
           <div className="columns is-mobile">
             <div className="column is-quarter">
               <div className="field is-pulled-left">
