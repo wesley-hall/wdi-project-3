@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import UserShowMap from '../common/userShowMap'
+import UserForm from './userForm'
 
 class Userprofile extends React.Component {
   constructor() {
@@ -15,8 +16,10 @@ class Userprofile extends React.Component {
       lng: -0.11
 
     }
+
     this.handleEdit = this.handleEdit.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleBack = this.handleBack.bind(this)
   }
 
   handleEdit(e) {
@@ -24,9 +27,12 @@ class Userprofile extends React.Component {
     this.props.history.push('/useredit')
   }
 
+  handleBack() {
+    this.props.history.push('/books')
+  }
+
   handleDelete(e) {
     e.preventDefault()
-    console.log(`Bearer ${Auth.getToken()}`)
     if (window.confirm('Delete the item?')) {
       axios.delete(`/api/users/${Auth.getPayload().sub}`,
         { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
@@ -57,8 +63,6 @@ class Userprofile extends React.Component {
 
   render() {
     if (!this.state.currentUser.location.lat) return null
-    console.log('state currentU', this.state.currentUser)
-    console.log('location123', this.state.currentUser.location)
     const {
       email,
       username,
@@ -69,69 +73,41 @@ class Userprofile extends React.Component {
       location
     } = this.state.currentUser
     return(
-      <main className="section">
-        <div className="container">
-          <button
-            className="button is-danger is-pulled-right"
-            id="btndeleteuser"
-            onClick={this.handleDelete} >
-              Delete my account</button>
+      <div>
+        <main className="section">
+          <div className="container">
+            <div className="columns">
+              <div className="column">
+                <h2 className="title">Your details</h2>
+              </div>
 
-          <button className="button is-warning is-pulled-right" id="editbutton" onClick={this.handleEdit}>Edit details</button>
-
-          <h4 className="title"> Your details </h4>
-          <div className="is-divider"></div>
-        </div>
-        <div className="container">
-          <div className="columns">
-            <div className="column">
-              <p className="title is-6">Username:</p>
-              <p>{username}</p>
+              <div className="column">
+                <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back
+                </button>
+                <br />
+                <br />
+                <button
+                  className="button is-danger is-pulled-right"
+                  onClick={this.handleDelete}>Delete my account &#215;
+                </button>
+                <button
+                  className="button buttonBookUpdate is-pulled-right" id="editbutton" onClick={this.handleEdit}>Update details _?
+                </button>
+              </div>
             </div>
-            <div className="column">
-              <p className="title is-6">Email:</p>
-              <p>{email}</p>
-            </div>
           </div>
-          <div>
-            <figure className="image is-128x128">
-              <p><img className="is-rounded" src={profilePicture} onError={this.addAltProfile}></img></p>
-            </figure>
-          </div>
-        </div>
+          <hr />
+          <UserForm
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            handleLocation={this.handleLocation}
+            currentUser={this.state.currentUser}
+            mapCenter={this.mapCenter}
+            errors={this.state.errors}
+          />
 
-        <div className="container">
-          <div className="is-divider"></div>
-        </div>
-
-        <div className="container">
-          <div>
-            <p className="title is-4">Library Description</p>
-          </div>
-          <div className="usercolumn">
-            <p className="title is-6" id="libraryname">Library Name:</p>
-            <p>{libraryName}</p>
-          </div>
-
-          <div className="usercolumn" id="librarypic">
-            <p className="title is-6">Library Picture:</p>
-            <img src={libraryPicture} onError={this.addAltImage} />
-          </div>
-
-          <div className="usercolumn">
-            <p className="title is-6">Your current library location:</p>
-          </div>
-          <div className="usercolumn">
-            <UserShowMap
-              center={location}
-            />
-          </div>
-          <div className="usercolumn">
-            <p className="title is-6">Library Description:</p>
-            <p>{libraryDescription || 'No library description'} </p>
-          </div>
-        </div>
-      </main>
+        </main>
+      </div>
     )
   }
 }
