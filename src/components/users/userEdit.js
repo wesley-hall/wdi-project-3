@@ -1,8 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import Auth from '../../lib/auth'
-import UserEditMap from '../common/userEditMap'
 import UserForm from './userForm'
 
 class UserEdit extends React.Component {
