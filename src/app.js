@@ -8,11 +8,12 @@ import './style.scss'
 import SecureRoute from './components/common/secureRoute'
 import Nav from './components/common/nav'
 import Home from './components/pages/home'
-// import ErrorPage from './components/pages/404'
 
 import Register from './components/auth/register'
 import Login from './components/auth/login'
 
+import UserProfile from './components/users/userProfile'
+import UserEdit from './components/users/userEdit'
 
 import BooksAll from './components/books/booksAll'
 import BookShow from './components/books/bookShow'
@@ -24,9 +25,7 @@ import ErrorPage from './components/pages/404'
 import IdsAll from './components/common/ids'
 
 import LoansAll from './components/loans/loansAll'
-// import LoanAdd from './components/loans/loanAdd'
-import UserProfile from './components/users/userProfile'
-import UserEdit from './components/users/userEdit'
+
 
 
 class App extends React.Component {
