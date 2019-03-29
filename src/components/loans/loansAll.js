@@ -12,17 +12,16 @@ class LoansAll extends React.Component {
     this.state = {
       loans: {
         loanedFromMe: [],
-        borrowedByMe: [],
-        refreshLoans: false
+        borrowedByMe: []
       },
       errors: {}
     }
 
-    this.handleClick = this.handleClick.bind(this)
     this.confirmBookCollected = this.confirmBookCollected.bind(this)
     this.confirmBookReturn = this.confirmBookReturn.bind(this)
     this.approveLoanRequest = this.approveLoanRequest.bind(this)
     this.declineLoanRequest = this.declineLoanRequest.bind(this)
+    this.redirectToBook = this.redirectToBook.bind(this)
     this.cancelLoanRequest = this.cancelLoanRequest.bind(this)
   }
 
@@ -103,6 +102,10 @@ class LoansAll extends React.Component {
       .catch(err => console.log(err))
   }
 
+  redirectToBook(e) {
+    console.log('trying to redirect')
+    this.props.history.push(`/books/${e.target.value}`)
+  }
 
   cancelLoanRequest(e) {
     axios.delete(`/api/loans/${e.target.value}`,
@@ -111,12 +114,6 @@ class LoansAll extends React.Component {
       .catch(err => console.log(err))
   }
 
-
-  handleClick({ target: { name , value }}) {
-    const data = {...this.state.data, [name]: value}
-    const errors = {...this.state.errors, [name]: ''}
-    this.setState({data,errors})
-  }
 
   isPending(loan) {
     const { approved, declined, returned, end } = loan
@@ -137,7 +134,6 @@ class LoansAll extends React.Component {
     const { approved, collected, returned, end } = loan
     return approved && !!collected && !returned && new Date() < new Date(end)
   }
-
 
   isDeclined(loan) {
     return loan.declined
@@ -165,11 +161,11 @@ class LoansAll extends React.Component {
               <div className="columns">
                 <h2 className="column is-gapless">Books Loaned Out</h2>
               </div>
-              <div className="columns is-mobile">
-                <h4 className="column is-2 is-gapless">Start Date</h4>
-                <h4 className="column is-2 is-gapless">End Date</h4>
+              <div className="columns has-text-centered is-mobile">
+                <h4 className="column is-3 is-gapless">Dates</h4>
+
                 <h4 className="column is-2 is-gapless">Book Title</h4>
-                <h4 className="column is-2 is-gapless">Requested By</h4>
+                <h4 className="column is-3 is-gapless">Requested By</h4>
                 <h4 className="column is-4 is-gapless">Status</h4>
               </div>
               {loanedFromMe.length === 0 &&
@@ -178,7 +174,6 @@ class LoansAll extends React.Component {
                 <div key={loan._id}>
                   <LoanedFromMe
                     loan={loan}
-                    handleClick={this.handleClick}
                     isPending={this.isPending}
                     isExpired={this.isExpired}
                     approveLoanRequest={this.approveLoanRequest}
@@ -193,20 +188,16 @@ class LoansAll extends React.Component {
                   />
                 </div>
               ))}
-
-              <hr />
             </div>
 
             <div>
               <div className="columns">
                 <h2 className="column is-gapless">Books Borrowed</h2>
               </div>
-
-              <div className="columns is-mobile">
-                <h4 className="column is-2 is-gapless">Start Date</h4>
-                <h4 className="column is-2 is-gapless">End Date</h4>
+              <div className="columns is-mobile has-text-centered">
+                <h4 className="column is-3 is-gapless">Dates</h4>
                 <h4 className="column is-2 is-gapless">Book Title</h4>
-                <h4 className="column is-2 is-gapless">Requested From</h4>
+                <h4 className="column is-3 is-gapless">Requested From</h4>
                 <h4 className="column is-4 is-gapless">Status</h4>
               </div>
               {borrowedByMe.length === 0 &&
@@ -215,12 +206,15 @@ class LoansAll extends React.Component {
                 <div key={loan._id}>
                   <BorrowedByMe
                     loan={loan}
-                    handleChange={this.handleChange}
                     isPending={this.isPending}
-                    cancelLoanRequest={this.cancelLoanRequest}
+                    isAwaitingCollection={this.isAwaitingCollection}
+                    isDeclined={this.isDeclined}
                     isOnLoan={this.isOnLoan}
                     isOverdue={this.isOverdue}
                     isReturned={this.isReturned}
+                    isExpired={this.isExpired}
+                    redirectToBook={this.redirectToBook}
+                    cancelLoanRequest={this.cancelLoanRequest}
                   />
                 </div>
               ))}
