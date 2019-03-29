@@ -200,7 +200,8 @@ class LoansAll extends React.Component {
             </div>
           </div>
           <br />
-          
+          <br />
+
           <div className="container">
             <div>
               <div className="columns">
