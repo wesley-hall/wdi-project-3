@@ -117,7 +117,7 @@ class BooksAll extends React.Component {
             </div>
 
             <div className="column is-quarter">
-              {Auth.isAuthenticated() && <Link to="/books/add" className="button button-add-book is-success is-pulled-right">Add a book...</Link>}
+              {Auth.isAuthenticated() && <Link to="/books/add" className="button button-add-book is-success is-pulled-right">Add a book to the library &#x3E;</Link>}
             </div>
 
           </div>
@@ -125,7 +125,7 @@ class BooksAll extends React.Component {
           <div className="container">
 
             <div className="columns is-mobile is-multiline">
-              {!this.state.books && <p>...loading</p>}
+              {!this.state.books && <p>Searching libraries...</p>}
               {this.state.books && filteredBooks.map(book => (
 
                 <div key={book._id} className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
@@ -166,6 +166,3 @@ class BooksAll extends React.Component {
   }
 }
 export default BooksAll
-
-// {this.isOwner() && <Link className="button is-warning" to={`/bookjs/${book._id}/edit`}>Edit</Link>}
-// {this.isOwner() && <button className="button is-danger" onClick={this.handleDelete}>Delete</button>}

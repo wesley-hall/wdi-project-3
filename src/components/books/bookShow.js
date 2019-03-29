@@ -164,18 +164,21 @@ class BookShow extends React.Component {
 
                   {this.isOwner() &&
                     <div>
-                      <Link
-                        className="button button-book-update is-warning is-pulled-right"
-                        to={`/books/${book._id}/update`}>
-                      Update details
-                      </Link>
+                      <div>
+                        <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back</button>
+                      </div>
                       <br />
                       <br />
                       <button
                         className="button is-danger is-pulled-right"
                         onClick={this.handleDelete}>
-                      Remove from library
+                      Remove from library &#215;
                       </button>
+                      <Link
+                        className="button buttonBookUpdate is-pulled-right"
+                        to={`/books/${book._id}/update`}>
+                      Update details _?
+                      </Link>
                     </div>
                   }
 
@@ -191,7 +194,7 @@ class BookShow extends React.Component {
                       <br />
                       <br />
                       <Link to={`/books/${book._id}/loan`}>
-                        <button className="button is-success is-pulled-right">Request to borrow</button>
+                        <button className="button is-info is-pulled-right">Request to borrow &#95;&#63;</button>
                       </Link>
                     </div>
                   }
@@ -293,7 +296,7 @@ class BookShow extends React.Component {
                           <button
                             className="button is-danger is-pulled-right"
                             onClick={() => this.handleDeleteReview(review)}>
-                          Delete review
+                          Delete review &#215;
                           </button>
                         </div>
                       }
@@ -305,7 +308,7 @@ class BookShow extends React.Component {
               {!this.hasReview() && Auth.getPayload().sub &&
                 <div className="columns">
                   <div className="column">
-                    <h4 className="title is-6" >Add review...</h4>
+                    <h4 className="title is-6" >Add review "+"</h4>
                     <form onSubmit={this.handleReviewSubmit}>
                       <textarea
                         className="textarea"
@@ -320,7 +323,7 @@ class BookShow extends React.Component {
                         <button
                           className="button is-success is-pulled-right"
                           onClick={this.handleReviewSubmit}>
-                        Add review
+                        Add review &#34;+&#34;
                         </button>
                       </div>
                     </form>

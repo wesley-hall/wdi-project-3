@@ -8,26 +8,40 @@
 @charset "utf-8";
 
 
+$bookerBlue: #246cc1;
+
+
 div.map-libraries {
   width: 100vw;
   height: calc(100vh - 3.25rem);
 }
 
+
+.bookerLogo {
+  border-radius: 6px;
+}
+
+.bookerHero {
+  max-width: 75%;
+  margin-bottom: 2vh;
+  border-radius: 20px;
+}
+
 .backgroundHero {
   height: 500px;
-  background-image: url(http://www.orjon.com/dev/booker/images/hero/bookshelf2-light.jpg);
+  background-image: url(http://www.orjon.com/dev/booker/images/hero/bookshelf3.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 #root > div > nav {
-  background-color: #246cc1;
+  background-color: $bookerBlue;
 }
 
 
 h1.title {
-  color: black;
-  font-size: 2rem;
+  font-size: 4rem;
+
 }
 
 h4 {
@@ -79,7 +93,7 @@ img.max-image-on-card {
 }
 
 #bookCoverImage{
-  height: 100%;
+  // height: 100%;
   width: auto;
   margin: 0 auto;
 }
@@ -154,16 +168,6 @@ div.map-register {
 }
 
 
-.bookerLogo {
-  border-radius: 6px;
-}
-
-.bookerHero {
-  max-width: 30%;
-  margin-bottom: 2vh;
-  border-radius: 20px;
-}
-
 
 input.input {
   align-content: center;
@@ -193,4 +197,9 @@ input.input {
 .loan-border-bottom {
   border-bottom: 1px solid #d6e8ff;
   margin: 5px 0;
+}
+
+.buttonBookUpdate {
+  margin-right: 12px;
+  background-color: #ffb734;
 }

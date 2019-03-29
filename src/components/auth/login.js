@@ -27,7 +27,6 @@ class Login extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log('submitting properly')
     e.preventDefault()
     axios.post('/api/login', this.state.data)
       .then(res => {
@@ -57,7 +56,7 @@ class Login extends React.Component {
           >
             <div className="columns">
               <div className="column">
-                <h1 >Login</h1>
+                <h1>Login</h1>
               </div>
 
             </div>
@@ -88,7 +87,7 @@ class Login extends React.Component {
             <div>
               <button
                 className="button is-success is-pulled-right"
-              >Login</button>
+              >Login &#x3E;</button>
             </div>
           </form>
         </div>

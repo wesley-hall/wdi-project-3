@@ -35,6 +35,7 @@ class BookAdd extends React.Component {
     this.handleSwitch = this.handleSwitch.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.getUserId = this.getUserId.bind(this)
+    this.handleBack = this.handleBack.bind(this)
 
   }
 
@@ -92,6 +93,10 @@ class BookAdd extends React.Component {
       })
   }
 
+  handleBack() {
+    this.props.history.push('/books')
+  }
+
   getUserId() {
     return Auth.getPayload().sub
   }
@@ -101,10 +106,15 @@ class BookAdd extends React.Component {
       <div>
         <main className="section">
           <div className="container">
-            <h1 className="title is-3">Add a book</h1>
-            <div className="container">
-              <div className="is-divider"></div>
+            <div className="columns">
+              <div className="column">
+                <h2 className="title">Add a book</h2>
+              </div>
+              <div className="column">
+                <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back</button>
+              </div>
             </div>
+            <hr />
             <BookForm
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}

@@ -24,7 +24,7 @@ class Nav extends React.Component {
     return (
       <nav className="navbar is-info">
         <div className="navbar-brand">
-          <Link to="/" className="navbar-item"><img className="bookerLogo" src="http://www.orjon.com/dev/booker/images/bookerLogo.png"/></Link>
+          <Link to="/" className="navbar-item"><img className="bookerLogo" src="http://www.orjon.com/dev/booker/images/logo/bookerLogo.png"/></Link>
           <Link to="/books" className="navbar-item">Books</Link>
           <Link to="/libraries" className="navbar-item">Libraries</Link>
           {Auth.isAuthenticated() && <Link to="/loans" className="navbar-item">Loans</Link>}

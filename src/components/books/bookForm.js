@@ -95,8 +95,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
       <hr />
 
       <div className="control"
-        onChange={handleRatingChange}><label className="label">Rating</label>{data.rating.rating && data.rating.rating}
-        <br />
+        onChange={handleRatingChange}><label className="label">Rating: {data.rating.rating && data.rating.rating}</label>
         <label className="radio">
           <input type="radio" name="rating" value="1"/>
         </label>
@@ -128,7 +127,7 @@ const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewC
       <br />
 
       <div>
-        <button className="button is-success is-pulled-right">Submit</button>
+        <button className="button is-success is-pulled-right">Save &#43;</button>
       </div>
 
     </form>

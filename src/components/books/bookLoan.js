@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+
 
 import Auth from '../../lib/auth'
 
@@ -74,19 +74,14 @@ class BookLoan extends React.Component {
   dateValidation(startDate, endDate) {
     startDate=new Date(startDate)
     endDate=new Date(startDate)
-    console.log('startDate: ',startDate)
-    console.log('endDate: ',endDate)
     const today=new Date()
     if (startDate > endDate) {
-      console.log('End before start!')
       return false
     }//End before start!')
     if (startDate < today) {
-      console.log('that is in the past!')
       return false
     }//In the past')
     if (startDate === endDate) {
-      console.log('at least one day')
       return false
     }
     const loanDates = this.state.book.existingLoans.filter(loan => new Date(loan.end) > new Date())
@@ -94,26 +89,20 @@ class BookLoan extends React.Component {
     for (let i=0; i<loanDates.length; i++){
       const start = new Date(loanDates[i].start)
       const end = new Date(loanDates[i].end)
-      console.log('start: ',start)
-      console.log('end: ',end)
-      console.log('==============')
       if (((startDate<start) && (endDate>end))  ||
           ((startDate>start) && (endDate<end))  ||
           ((startDate<start) && (endDate>start))||
           ((startDate<end) && (endDate>end))  ||
           ((startDate<end) && (endDate>start))) {
-        console.log('rejected for some reason')
         return false //intersecting
       }
     }
-    console.log('MEETS CRITERIA!')
     return true
   }
 
   render() {
     if (!this.state.book) return null
     const { book } = this.state
-    console.log('state: ',this.state)
     return(
       <div>
         <main className="section">
@@ -168,8 +157,8 @@ class BookLoan extends React.Component {
                     </div>
                   </div>
                   <br />
-                  <button className="button is-success is-pulled-right">
-                    Request
+                  <button className="button is-info is-pulled-right">
+                    Send request &#62;&#62;
                   </button>
                 </form>
               </div>
@@ -177,7 +166,7 @@ class BookLoan extends React.Component {
 
             <hr />
             <div className="container">
-              <h4 className="is-7">Currently reserved for these dates:</h4>
+              {!this.filteredDates() && <h4 className="is-7">Currently reserved for these dates:</h4>}
               {book.existingLoans && this.filteredDates().map(loan => (
                 <div key={loan._id}>
                   <h5 className="subtitle is-6" >
