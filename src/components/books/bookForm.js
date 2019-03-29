@@ -1,8 +1,7 @@
 import React from 'react'
 //
 const BookForm = ({handleChange, handleSubmit, handleRatingChange, handleReviewChange, handleSwitch, genres, data, errors}) => {
-  {console.log('bookform data', data)}
-  {console.log('bookform errors', errors)}
+
   if (!data.owner) return null
   return (
 

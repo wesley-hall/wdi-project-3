@@ -2,16 +2,13 @@ import React from 'react'
 import UserEditMap from '../common/userEditMap'
 
 const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLocation, errors }) => {
-  {console.log('handlelocation', handleLocation)}
-  {console.log('currentUser', currentUser)}
   return (
     <form
       onSubmit={handleSubmit}
     >
-      <div className="container" id="userform">
+      <div className="container">
         <div>
           <div className="container">
-            <div className="is-divider"></div>
           </div>
           <label className="label">Profile Picture</label>
           <input
@@ -85,7 +82,7 @@ const UserForm = ({ currentUser, handleChange, handleSubmit, mapCenter, handleLo
         <br />
 
         <div>
-          <button className="button is-warning is-pulled-right">Submit change </button>
+          <button className="button is-success is-pulled-right">Save &#43;</button>
         </div>
       </div>
 
