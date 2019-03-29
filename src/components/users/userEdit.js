@@ -19,6 +19,7 @@ class UserEdit extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleLocation = this.handleLocation.bind(this)
+    this.handleBack = this.handleBack.bind(this)
   }
 
   handleChange({ target: { name , value }}) {
@@ -28,10 +29,27 @@ class UserEdit extends React.Component {
     this.setState({ errors, currentUser: user })
   }
 
+  handleBack() {
+    this.props.history.push('/books')
+  }
+
   handleLocation(location) {
     location = {...this.state.currentUser.location, lat: location.lat, lng: location.lng}
     const currentUser = {...this.state.currentUser, location}
     this.setState({ currentUser })
+  }
+
+  handleDelete(e) {
+    e.preventDefault()
+    if (window.confirm('Delete the item?')) {
+      axios.delete(`/api/users/${Auth.getPayload().sub}`,
+        { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => {
+          Auth.logout()
+          this.props.history.push('/')
+        })
+        .catch(err => this.setState({errors: err.response.data.errors}))
+    }
   }
 
   handleSubmit(e) {
@@ -54,19 +72,37 @@ class UserEdit extends React.Component {
 
   render() {
     return(
-      <main className="section">
-        <div className="columns">
+      <div>
+        <main className="section">
+          <div className="container">
+            <div className="columns">
+              <div className="column">
+                <h2 className="title">Your details</h2>
+              </div>
+
+              <div className="column">
+                <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back</button>
+                <br />
+                <br />
+                <button
+                  className="button is-danger is-pulled-right"
+                  onClick={this.handleDelete}>Delete my account &#215;
+                </button>
+              </div>
+            </div>
+            <hr />
+          </div>
+
           <UserForm
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             handleLocation={this.handleLocation}
             currentUser={this.state.currentUser}
             mapCenter={this.mapCenter}
-            errors={this.state.errors}/>
-
-        </div>
-
-      </main>
+            errors={this.state.errors}
+          />
+        </main>
+      </div>
     )
   }
 }

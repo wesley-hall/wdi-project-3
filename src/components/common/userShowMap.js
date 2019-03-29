@@ -25,7 +25,6 @@ class UserShowMap extends React.Component{
   }
 
   render() {
-    console.log('userShowMap', this.props.center)
     return (
       <div>
         <div className="map-register" ref={el => this.mapDiv = el} />

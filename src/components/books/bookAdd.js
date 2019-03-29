@@ -44,7 +44,6 @@ class BookAdd extends React.Component {
     const rating = {...this.state.data.rating, user: user}
     const review = {...this.state.data.review, user: user}
     const data = {...this.state.data, owner: user, rating: rating, review: review }
-    console.log('did mount')
     axios.get('/api/genres')
       .then(res => {
         this.setState({ genres: res.data, data })
@@ -54,14 +53,12 @@ class BookAdd extends React.Component {
 
 
   handleChange({ target: { name, value }}) {
-    console.log(this.state.data)
     const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: ''}
     this.setState({data,errors})
   }
 
   handleRatingChange({ target: { name, value }}) {
-    console.log(this.state.data)
     const rating = {...this.state.data.rating, [name]: value}
     const data = {...this.state.data, rating}
     const errors = {...this.state.errors, [name]: ''}
@@ -69,7 +66,6 @@ class BookAdd extends React.Component {
   }
 
   handleReviewChange({ target: { name, value }}) {
-    console.log(this.state.data)
     const review = {...this.state.data.review, [name]: value}
     const data = {...this.state.data, review}
     const errors = {...this.state.errors, [name]: ''}
@@ -83,7 +79,6 @@ class BookAdd extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log('posting data', this.state.data)
     axios.post('/api/books', this.state.data,
       { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
       .then(() => this.props.history.push('/books'))
