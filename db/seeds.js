@@ -311,7 +311,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
             owner: users[5],
             title: 'The Help',
             authors: 'Kathryn Stockett',
-            image: 'https://books.google.com/books/content?id=wsEXhw17prsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+            image: 'http://www.orjon.com/dev/booker/images/bookcovers/100.jpg',
             fiction: true,
             genre: genres[9],
             description: `Twenty-two-year-old Skeeter has just returned home after graduating from Ole Miss. She may have a degree, but it is 1962, Mississippi, and her mother will not be happy till Skeeter has a ring on her finger. Skeeter would normally find solace with her beloved maid Constantine, the woman who raised her, but Constantine has disappeared and no one will tell Skeeter where she has gone.
