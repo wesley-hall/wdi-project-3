@@ -1,6 +1,7 @@
 import React from 'react'
 
 import BorrowedReturned from './statusButtons/borrowedReturned'
+import BorrowedOverdue from './statusButtons/borrowedOverdue'
 
 class BorrowedByMe extends React.Component {
 
@@ -58,20 +59,17 @@ class BorrowedByMe extends React.Component {
               </div>
           }
           {isOverdue(loan) &&
-              <div className="column is-4 is-gapless columns">
-                <span className="column is-half has-text-weight-bold has-text-danger is-gapless">Overdue</span>
-                <div className="column is-half is-gapless">
-                  Please return {loan.book.title} to {loan.book.owner.username}
-                </div>
-              </div>
+            <BorrowedOverdue
+              loan={loan}
+            />
+
           }
           {isReturned(loan) &&
-              <BorrowedReturned
-                loan={loan}
-                redirectToBook={redirectToBook}
-              />
+            <BorrowedReturned
+              loan={loan}
+              redirectToBook={redirectToBook}
+            />
           }
-
         </div>
       </div>
     )
