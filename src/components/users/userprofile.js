@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import UserShowMap from '../common/userShowMap'
-import UserForm from './userForm'
 
 class Userprofile extends React.Component {
   constructor() {
@@ -61,7 +60,11 @@ class Userprofile extends React.Component {
     e.target.src = 'http://www.orjon.com/dev/booker/images/profile/noimage.jpg'
   }
 
+
+
+
   render() {
+
     if (!this.state.currentUser.location.lat) return null
     const {
       email,
@@ -77,35 +80,71 @@ class Userprofile extends React.Component {
         <main className="section">
           <div className="container">
             <div className="columns">
+
               <div className="column">
                 <h2 className="title">Your details</h2>
               </div>
 
               <div className="column">
-                <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back
-                </button>
+                <button className="button is-warning is-pulled-right" onClick={this.handleBack}>&lt; Back</button>
                 <br />
                 <br />
                 <button
                   className="button is-danger is-pulled-right"
                   onClick={this.handleDelete}>Delete my account &#215;
                 </button>
-                <button
-                  className="button buttonBookUpdate is-pulled-right" id="editbutton" onClick={this.handleEdit}>Update details _?
-                </button>
+
+                <button className="button buttonBookUpdate is-pulled-right" id="editbutton" onClick={this.handleEdit}>Update details _?</button>
               </div>
             </div>
+            <hr />
           </div>
-          <hr />
-          <UserForm
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            handleLocation={this.handleLocation}
-            currentUser={this.state.currentUser}
-            mapCenter={this.mapCenter}
-            errors={this.state.errors}
-          />
 
+          <div className="container">
+            <div className="columns">
+              <div className="column">
+                <p className="title is-6">Username:</p>
+                <p>{username}</p>
+              </div>
+              <div className="column">
+                <p className="title is-6">Email:</p>
+                <p>{email}</p>
+              </div>
+            </div>
+            <div>
+              <figure className="image is-128x128">
+                <p><img className="is-rounded" src={profilePicture} onError={this.addAltProfile}></img></p>
+              </figure>
+            </div>
+
+            <hr />
+
+            <div>
+              <p className="title is-4">Library Description</p>
+            </div>
+            <div className="usercolumn">
+              <p className="title is-6" id="libraryname">Library Name:</p>
+              <p>{libraryName}</p>
+            </div>
+
+            <div className="usercolumn" id="librarypic">
+              <p className="title is-6">Library Picture:</p>
+              <img src={libraryPicture} onError={this.addAltImage} />
+            </div>
+
+            <div className="usercolumn">
+              <p className="title is-6">Your current library location:</p>
+            </div>
+            <div className="usercolumn">
+              <UserShowMap
+                center={location}
+              />
+            </div>
+            <div className="usercolumn">
+              <p className="title is-6">Library Description:</p>
+              <p>{libraryDescription || 'No library description'} </p>
+            </div>
+          </div>
         </main>
       </div>
     )

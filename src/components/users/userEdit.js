@@ -39,6 +39,19 @@ class UserEdit extends React.Component {
     this.setState({ currentUser })
   }
 
+  handleDelete(e) {
+    e.preventDefault()
+    if (window.confirm('Delete the item?')) {
+      axios.delete(`/api/users/${Auth.getPayload().sub}`,
+        { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
+        .then(() => {
+          Auth.logout()
+          this.props.history.push('/')
+        })
+        .catch(err => this.setState({errors: err.response.data.errors}))
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault()
     axios.put(`/api/users/${Auth.getPayload().sub}`, this.state.currentUser,
@@ -77,8 +90,9 @@ class UserEdit extends React.Component {
                 </button>
               </div>
             </div>
+            <hr />
           </div>
-          <hr />
+
           <UserForm
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
