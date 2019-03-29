@@ -10,8 +10,8 @@ const LoanedPending = (props) => {
         <button className="button is-small is-success" value={loan._id} onClick={approveLoanRequest}>
           Approve
         </button>&nbsp;
-        <button className="button is-small is-danger" value={loan._id} onClick={declineLoanRequest}>
-          Reject
+        <button className="button is-small is-danger is-pulled-right" value={loan._id} onClick={declineLoanRequest}>
+          Reject 
         </button>
       </div>
     </div>
