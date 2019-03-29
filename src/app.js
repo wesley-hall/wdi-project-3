@@ -13,7 +13,7 @@ import Register from './components/auth/register'
 import Login from './components/auth/login'
 
 import UserProfile from './components/users/userprofile'
-import UserEdit from './components/users/useredit'
+import UserEdit from './components/users/userEdit'
 
 import BooksAll from './components/books/booksAll'
 import BookShow from './components/books/bookShow'
