@@ -272,7 +272,7 @@ class BookShow extends React.Component {
             <div className="container">
               {(book.review.length>0) &&
                 <div>
-                  <h4 className="is-7">Reviews({book.review.length}):</h4>
+                  <h4 className="is-7">Reviews ({book.review.length}):</h4>
                   <br />
                 </div>
               }
@@ -308,7 +308,7 @@ class BookShow extends React.Component {
               {!this.hasReview() && Auth.getPayload().sub &&
                 <div className="columns">
                   <div className="column">
-                    <h4 className="title is-6" >Add review "+"</h4>
+                    <h4 className="title is-6" >Add review:</h4>
                     <form onSubmit={this.handleReviewSubmit}>
                       <textarea
                         className="textarea"
