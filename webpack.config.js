@@ -2,7 +2,6 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   entry: './src/app.js',
@@ -49,6 +48,6 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: './src/assets', to: 'assets' }
     ]),
-    new Dotenv()
+    new webpack.EnvironmentPlugin([...process.env])
   ]
 }
