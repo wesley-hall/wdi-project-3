@@ -9,7 +9,7 @@ class BorrowedByMe extends React.Component {
     const { loan, isPending, isAwaitingCollection, isDeclined, isOnLoan, isOverdue, isReturned, isExpired, redirectToBook, cancelLoanRequest } = this.props
     return (
       <div key={loan._id}>
-        <div className={`columns is-mobile has-text-centered is-vcentered loan-border-bottom ${isOverdue(loan) ? 'has-text-danger has-text-weight-bold' : ''}`}>
+        <div className={`columns is-mobile has-text-left is-vcentered loan-border-bottom ${isOverdue(loan) ? 'has-text-danger has-text-weight-bold' : ''}`}>
           <span className="column is-3 is-gapless">{loan.start.substring(10,-5)} to {loan.end.substring(10,-5)}</span>
           <span className="column is-2 is-gapless">{loan.book.title}</span>
 
@@ -42,7 +42,7 @@ class BorrowedByMe extends React.Component {
             <div className="column is-4 is-gapless columns">
               <span className="column is-half is-gapless">Pending</span>
               <div className="column is-half is-gapless">
-                <button className="button is-small is-danger" value={loan._id} onClick={cancelLoanRequest}>
+                <button className="button is-small is-danger is-pulled-right" value={loan._id} onClick={cancelLoanRequest}>
                   Cancel request
                 </button>
               </div>
@@ -52,7 +52,7 @@ class BorrowedByMe extends React.Component {
               <div className="column is-4 is-gapless columns">
                 <span className="column is-half is-gapless">On loan</span>
                 <div className="column is-half is-gapless">
-                  <button className="button is-small is-info" onClick={this.handleClick}>
+                  <button className="button is-small is-info is-pulled-right" onClick={this.handleClick}>
                     Rate/review book?
                   </button>
                 </div>
