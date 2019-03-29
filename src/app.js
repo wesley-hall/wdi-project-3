@@ -12,6 +12,7 @@ import Home from './components/pages/home'
 
 import Register from './components/auth/register'
 import Login from './components/auth/login'
+import About from './components/pages/about'
 
 
 import BooksAll from './components/books/booksAll'
@@ -50,6 +51,7 @@ class App extends React.Component {
             <SecureRoute path="/loans" component={LoansAll}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
+            <Route path="/about" component={About}/>
             <Route exact path="/" component={Home}/>
             <Route component={ErrorPage} />
 
@@ -64,6 +66,3 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 )
-            // <Route path="/*" component={ErrorPage}/>
-
-// <Route path="/books/library/:libraryId" component={BooksAll}/>

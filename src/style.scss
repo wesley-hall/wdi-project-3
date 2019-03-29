@@ -27,9 +27,21 @@ div.map-libraries {
   margin-top: 5vh;
 }
 
+
+.aboutText{
+  width: 100vw;
+}
+
 .backgroundHero {
   height: 500px;
   background-image: url(http://www.orjon.com/dev/booker/images/hero/bookshelf3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.aboutHero {
+  height: 500px;
+  background-image: url(http://www.orjon.com/dev/booker/images/about/about1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }

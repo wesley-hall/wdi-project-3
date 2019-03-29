@@ -25,6 +25,7 @@ class Nav extends React.Component {
       <nav className="navbar is-info is-fixed-top">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item"><img className="bookerLogo" src="http://www.orjon.com/dev/booker/images/logo/bookerLogo.png"/></Link>
+          {!Auth.isAuthenticated() && <Link to="/about" className="navbar-item">About</Link>}
           <Link to="/books" className="navbar-item">Books</Link>
           <Link to="/libraries" className="navbar-item">Libraries</Link>
           {Auth.isAuthenticated() && <Link to="/loans" className="navbar-item">Loans</Link>}
