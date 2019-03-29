@@ -12,8 +12,9 @@ class BookLoan extends React.Component {
       data: {
         start: new Date(),
         end: new Date()
+      },
+      errors: {
       }
-
     }
 
     this.handleBack = this.handleBack.bind(this)
@@ -49,7 +50,10 @@ class BookLoan extends React.Component {
       axios.post(`/api/books/${this.props.match.params.id}/loan`, this.state.data,
         { headers: { Authorization: `Bearer ${Auth.getToken()}`}})
         .then(() => this.props.history.push('/loans'))
-        .catch(err => this.setState({errors: err.response.errors}))
+        .catch(err => {
+          console.log('the error is', err)
+          this.setState({errors: err.response.errors})
+        })
     }
   }
 
@@ -80,12 +84,23 @@ class BookLoan extends React.Component {
     if (startDate > endDate) {
       return false
     }//End before start!')
+
     if (startDate < today) {
       return false
     }//In the past')
     if (startDate === endDate) {
       return false
     }
+
+    // if (startDate < today) {
+    //   console.log('that is in the past!')
+    //   return false
+    // }//In the past')
+    // if (startDate === endDate) {
+    //   console.log('at least one day')
+    //   return false
+    // }
+
     const loanDates = this.state.book.existingLoans.filter(loan => new Date(loan.end) > new Date())
 
     for (let i=0; i<loanDates.length; i++){
@@ -105,6 +120,8 @@ class BookLoan extends React.Component {
   render() {
     if (!this.state.book) return null
     const { book } = this.state
+    console.log('state: ',this.state)
+    console.log('errors', this.state.errors)
     return(
       <div>
         <main className="section">

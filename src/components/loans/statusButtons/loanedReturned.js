@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const LoanReturned = (props) => {
+const LoanedReturned = (props) => {
   const { loan } = props
   return (
     <div className="column is-4 is-gapless columns">
@@ -10,4 +10,4 @@ const LoanReturned = (props) => {
   )
 }
 
-export default LoanReturned
+export default LoanedReturned

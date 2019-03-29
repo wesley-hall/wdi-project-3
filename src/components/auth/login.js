@@ -41,9 +41,9 @@ class Login extends React.Component {
 
   render() {
     return (
-      <main className="section">
+      <main className="section" id="loginsection">
         <div className="container">
-          <div className="column">
+          <div className="column is-centered">
             <Link to="/register">
               <button
                 className="button is-warning is-pulled-right"
