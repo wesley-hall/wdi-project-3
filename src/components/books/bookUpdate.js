@@ -40,7 +40,7 @@ class BookUpdate extends React.Component {
   }
 
   handleBack() {
-    this.props.history.push('/books')
+    this.props.history.push(`/books/${this.props.match.params.id}`)
   }
 
   handleChange({ target: { name, value }}) {
