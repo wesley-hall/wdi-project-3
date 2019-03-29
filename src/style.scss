@@ -131,6 +131,12 @@ img.max-image-on-card {
   align-items: center;
 }
 
+.main-container {
+height: 90vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
 .marker-libraries:before {
   content: '';
   position: absolute;
@@ -200,6 +206,8 @@ input.input {
 #libraryname {
   margin-top: 30px;
 }
+
+
 .usercolumn {
   margin-top: 20px;
 }
