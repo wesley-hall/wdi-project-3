@@ -37,7 +37,6 @@ class BorrowedByMe extends React.Component {
             </div>
           }
 
-
           {!isOnLoan(loan) && !isOverdue(loan) && !isReturned(loan) && !isExpired(loan) &&
             <div className="column is-4 is-gapless columns">
               <span className="column is-half is-gapless">Pending</span>
@@ -77,37 +76,3 @@ class BorrowedByMe extends React.Component {
 }
 
 export default BorrowedByMe
-
-// this.props.onClick
-// handleClick({ target: { name , value }}) {
-//   const data = {...this.state.data, [name]: value}
-//   const errors = {...this.state.errors, [name]: ''}
-//   this.setState({data,errors})
-// }
-
-// this.props.isApproved(loan)
-// isApproved(loan) {
-//   return loan.approved
-// }
-//
-// this.props.isOnLoan(loan)
-// isOnLoan(loan) {
-//   const { end, approved, returned } = loan
-//   return approved && !returned && '2019-03-26T12:00:00.561Z' < end
-// }
-//
-// this.props.isReturned(loan)
-// isReturned(loan) {
-//   return loan.returned
-// }
-//
-// this.props.isOverdue(loan)
-// isOverdue(loan) {
-//   const { end, approved, returned } = loan
-//   return approved && !returned && '2019-03-26T12:00:00.561Z' > end
-// }
-//
-// this.props.isPending(loan)
-// isPending(loan) {
-//   return !this.isApproved(loan)
-// }
