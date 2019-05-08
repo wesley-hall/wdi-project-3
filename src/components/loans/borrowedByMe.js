@@ -28,7 +28,7 @@ class BorrowedByMe extends React.Component {
 
           {isExpired(loan) &&
             <div className="column is-4 is-gapless columns">
-              <span className="column is-full is-gapless">Expired</span>
+              <span className="column is-full is-gapless">Request Expired</span>
             </div>
           }
           {isDeclined(loan) &&
@@ -38,7 +38,7 @@ class BorrowedByMe extends React.Component {
           }
 
 
-          {!isOnLoan(loan) && !isOverdue(loan) && !isReturned(loan) &&
+          {!isOnLoan(loan) && !isOverdue(loan) && !isReturned(loan) && !isExpired(loan) &&
             <div className="column is-4 is-gapless columns">
               <span className="column is-half is-gapless">Pending</span>
               <div className="column is-half is-gapless">
