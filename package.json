@@ -10,7 +10,6 @@
     "test": "node_modules/.bin/mocha",
     "start": "node index",
     "build": "webpack -p",
-    "drop": "node db/drop.js",
     "test": "node_modules/.bin/mocha"
   },
   "dependencies": {
