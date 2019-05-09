@@ -92,34 +92,18 @@ In alphabetical order:
 | - Mapbox GL JS | - JSON Web Tokens (JWT) | | |
 | | - bcrypt | | | |
 
+| Front End | Back End | Testing | Other |
+|---|---|---|---|
+| React | Node.js | Mocha | Webpack |
+| ReactDOM | MongoDB (NoSQL) | Chai | Babel |
+| React Router DOM | Mongoose | SuperTest | Axios |
+| Bulma | Express | | |
+| SCSS | dotenv | | |
+| Mapbox GL JS | JSON Web Tokens (JWT) | | |
+| | bcrypt | | | |
 
 
 [View the full list of dependencies and dev dependencies](../master../package.json)
-
-
-### Front end libraries
-- React
-- Bulma
-- SCSS
-
-
-### Back end
-- MongoDB (NoSQL)
-- Mongoose
-- Node.js
-- Express
-
-### Authentication
-- JSON Web Tokens (JWT)
-- bcrypt
-
-### Testing
-- Mocha
-- Chai
-
-### Other
-- Webpack
-- Axios
 
 
 ## Team Organisation - Loose Agile Framework
