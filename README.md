@@ -5,7 +5,7 @@
 ## Table of Contents
 
 
-| 1. [Overview](#overview) <br> 2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation) | 7. [Wins](#wins) <br> 8. [Challenges](#challenges) <br> 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables) <br> &nbsp; - [Front End](#front-end) <br> &nbsp; - [Back End](#back-end) |
+| 1. [Overview](#overview) <br> 2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation) | 7. [Wins](#wins) <br> 8. [Challenges](#challenges) <br> 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables) <br> &nbsp;&nbsp; - [Front End](#front-end) <br> &nbsp;&nbsp; - [Back End](#back-end) |
 |:---|:---|
 
 
@@ -80,6 +80,19 @@ In alphabetical order:
 | Front End | Back End | Testing | Other |
 |---|---|---|---|
 | - React <br> - ReactDOM <br> - React Router DOM <br> - Bulma <br> - SCSS <br> - Mapbox GL JS | - Node.js <br> - MongoDB (NoSQL) <br> - Mongoose <br> - Express <br> - dotenv <br> - JSON Web Tokens (JWT) <br> - bcrypt | - Mocha <br> - Chai <br> - SuperTest | - Webpack <br> - Babel <br> - Axios
+
+
+| Front End | Back End | Testing | Other |
+|---|---|---|---|
+| - React | - Node.js | - Mocha | - Webpack |
+| - ReactDOM | - MongoDB (NoSQL) | - Chai | - Babel |
+| - React Router DOM | - Mongoose | - SuperTest | - Axios |
+| - Bulma | - Express | | |
+| - SCSS | - dotenv | | |
+| - Mapbox GL JS | - JSON Web Tokens (JWT) | | |
+| | - bcrypt | | | |
+
+
 
 [View the full list of dependencies and dev dependencies](../master../package.json)
 
