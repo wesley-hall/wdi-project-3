@@ -148,77 +148,58 @@ Common files
 
 | Page | Path | Description |
 |------|------|-------------|
-| Home | / | Home page with app name/logo and tagline |
-| About | /about | Value proposition/brief explanation |
-| Books | /books | All collections by all book owners |
-| Each book | /books/:id |  Displays details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |
-| Libraries | /libraries | Displays all libraries by location |
-| Login | /login | Login for returning (registered) users |
-| Register | /register | Registration for new users |
+| [Home](../master/src/components/pages/home.js) | / | Home page with app name/logo and tagline |
+| [About](../master/src/components/pages/about.js) | /about | Value proposition/brief explanation |
+| [Books](../master/src/components/books/booksAll.js) | /books | All collections by all book owners |
+| [Each book](../master/src/components/books/bookShow.js) | /books/:id |  Displays details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |
+| [Libraries](../master/src/components/books/libraries.js) | /libraries | Displays all libraries by location |
+| [Login](../master/src/components/auth/login.js) | /login | Login for returning (registered) users |
+| [Register](../master/src/components/auth/register.js) | /register | Registration for new users |
+| [404](../master/src/components/common/404.js) | | Error s404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist |
 
 #### Pages only accessible by logged in users:
 
 | Page | Path | Description |
 |------|------|-------------|
-| Loans | /loans | Loan management page for books loaned out and books borrowed |
-| My Profile | /users | Profile page of the user where they can view, update and delete their profile and library information |
+| [Loans](../master/src/components/loans/loansAll.js) | /loans | Loan management page for books loaned out and books borrowed |
+| [User Profile](../master/src/components/users/userprofile.js) | /users | Profile page of the user where they can view and delete their profile and library information |
+| [Edit Profile](../master/src/components/users/userEdit.js) | /userEdit | Page for users to update their profile and library information |
+
 
 
 #### Additional functionality for logged in users:
 
 1. Logout _(returns user to the homepage)_
-2. The CRUD Cycle for books
+2. On the libraries page:
+  - Users are shown the location of their library with a blue marker (in comparison to red markers for other libraries)
+  - A button links users to view/edit their profile
+3. On the books page:
+  - Users can see the distance from their library to the location of the books in other users' libraries
+  - Users can rate and review books
+  - Users can create loan requests
+4. The CRUD cycle for books
 
-| CRUD Cycle | Route | HTTP Method | Description |
+| CRUD Cycle | API Route | HTTP Method | Description |
 |------------|-------|-------------|-------------|
-| Create | /books | POST | Users are directed to a blank form with the following: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
-| Read | /books <br> /books/:id | GET | Users are able to view information about the book(s) |
-| Update | /books/:id/ | PUT | Users are directed to a pre-populated version of the Create form to change information |
-  | Delete | /books/:id | DELETE | A remove button on the page prompts the user to confirm that they want to delete the book before permanently removing it from the database |
+| Create | /api/books | POST | Users are directed to a blank form with the following: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
+| Read | /api/books <br> /api/books/:id | GET | Users are able to view information about the book(s) |
+| Update | /api/books/:id/ | PUT | Users are directed to a pre-populated version of the Create form to change information |
+| Delete | /api/books/:id | DELETE | A remove button on the page prompts the user to confirm that they want to delete the book before permanently removing it from the database |
 
 _Users will be returned to the books (path: /books) page on submit of create and update forms and when clicking the remove button or the back button on a /books/:id page._
 
-3. Libraries page
-  - Users are shown the location of their library with a blue marker (in comparison to red markers for other libraries)
-  - A button links users to view/edit their profile
+View the books components [here](../master/src/components/books).
 
 
+4. The CRUD cycle for loans
 
-1. Books ( /books )
-Added functionality
- - filter by owner
- - search by book title or author
- - the CRUD cycle (create, update, delete)
- - Logout (back to the home logged out page)
+| CRUD Cycle | API Route | HTTP Method | Description |
+|------------|-------|-------------|-------------|
+| Create | /api/loans | POST | Users are shown to a blank form with two date picker fields for: <br> - Loan start date <br> - Loan end date |
+| Read | /api/loans <br> /api/loans/:id | GET | Users are able to view information about the loans |
+| Update | /api/books/:id/ | PUT | Users (book owner) can edit the approved, declined, collected and returned fields for the loan to change the status. |
+| Delete | /api/loans/:id | DELETE | Users (book borrowers) are able to cancel their requests to borrow a book |
 
-              _Add_ (/books/add) CR (create)
-              _Edit_ (/books/id/update) U (update)
-              _Remove_ (/books/id/update) D (delete)
-
-              Add a book to collection as the authorised user
-              - form fields
-                 - Text fields for book by name, author, picture of the book, a description
-                 - Toggle button - category
-                 - Radio buttons - rating
-
-            CREATE-  The submit button takes user back to Books page (/books)
-            UPDATE - The submit button takes the user back to the Books page (/books/id)
-            DELETE  - The remove button removes the book automatically and takes the user back to the Books page (/books)  
-
-            _Borrow_  (/books/id/loan)
-
-            Borrow books from owners
-            -form fields
-              - collect book (loan start) date
-              - return book (loan end) date
-              - message (text field) to owner
-
-         The submit button takes the user back to the account page of the user (/loans)
-         The back button takes the user back to the main page (/books)
-
-         _Account_ (/loans)
-
-         A status page that lists all the books that are loaned out and status as well as books that have been borrowed and status
 
 ### Back End
 
