@@ -144,7 +144,7 @@ Common files
 
 
 
-#### Pages accessible by unregistered (not logged in) users:
+#### Pages accessible by unregistered or not logged in users:
 
 | Page | Path | Description |
 |------|------|-------------|
@@ -155,7 +155,7 @@ Common files
 | [Libraries](../master/src/components/books/libraries.js) | /libraries | Displays all libraries by location |
 | [Login](../master/src/components/auth/login.js) | /login | Login for returning (registered) users |
 | [Register](../master/src/components/auth/register.js) | /register | Registration for new users |
-| [404](../master/src/components/common/404.js) | | Error s404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist |
+| [404](../master/src/components/pages/404.js) | | Error s404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist |
 
 #### Pages only accessible by logged in users:
 
@@ -207,7 +207,7 @@ View the books components [here](../master/src/components/books).
  - [Environment](../master/config/environment.js) - set up for the environment, port, database URI and secret
  - [Routes](../master/config/routes.js) - pathways to the controller functions for the CRUD cycle
 
- ```
+ ```js
  // Example: Routes for /books and /books/:id
  // Note that some routes are secure and some are not
 
@@ -225,7 +225,7 @@ View the books components [here](../master/src/components/books).
 #### Controllers
  - [Authentication](../master/controllers/auth.js) - user login and registration functionality with JSON Web Tokens (JWT)
 
- ```
+ ```js
  // Example: User registration (CRUD - Create)
 
  function register(req, res, next) {
@@ -246,7 +246,7 @@ View the books components [here](../master/src/components/books).
  - CRUD functionality for:
   - [Users](../master/controllers/users.js)
 
-  ```
+  ```js
   // Example: Show information on a specific user (CRUD - Read)
 
   function userShow(req, res) {
@@ -260,7 +260,7 @@ View the books components [here](../master/src/components/books).
 
   - [Genres](../master/controllers/genres.js)
 
-  ```
+  ```js
   // Example: Show all genres (CRUD - Read)
 
   function genresAll(req, res) {
@@ -273,7 +273,7 @@ View the books components [here](../master/src/components/books).
 
   - [Books](../master/controllers/books.js), including reviews and ratings
 
-  ```
+  ```js
   // Example: Delete a book (CRUD - Delete)
 
   function bookDelete(req, res) {
@@ -283,7 +283,7 @@ View the books components [here](../master/src/components/books).
       .catch(err => res.status(500).json(err))
   }
   ```
-  ```
+  ```js
   // Example: Add a book rating (CRUD - Create)
 
   function ratingAdd(req, res) {
@@ -302,7 +302,7 @@ View the books components [here](../master/src/components/books).
 
   - [Loans](../master/controllers/loans.js)
 
-  ```
+  ```js
   // Example: Update loan information (CRUD - Update)
 
   function loanUpdate(req, res) {
@@ -334,7 +334,7 @@ View the books components [here](../master/src/components/books).
   - Books can only be created once users (book owners) and genres have been created
   - Loans can only be created once users and books have been created
 
-  ```
+  ```js
   // Create users and genres inside a promise array
   const promiseArray = [
     User.create([...]),
@@ -362,7 +362,7 @@ View the books components [here](../master/src/components/books).
 
 - Data Models/Schemas
   - [User](../master/models/user.js) - login/authentication credentials, as well as profile and library information
-  ```
+  ```js
   const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     profilePicture: { type: String},
@@ -383,7 +383,7 @@ View the books components [here](../master/src/components/books).
     - Virtual fields were also included for books, loans and password confirmation
 
   - [Genre](../master/models/bookGenre.js) - a simple schema containing one string for the genre name/title
-  ```
+  ```js
   const bookGenreSchema = new mongoose.Schema({
     genre: { type: String, required: true }
   })
@@ -391,19 +391,19 @@ View the books components [here](../master/src/components/books).
     - Genres were created separately from books so that the list could be scaled up as required
 
   - [Book](../master/models/book.js) - book information with references to the BookGenre and User schemas, as well as information for book ratings and reviews
-  ```
+  ```js
   const ratingSchema = new mongoose.Schema({
     rating: {type: Number, min: 1, max: 5},
     user: {type: mongoose.Schema.ObjectId, ref: 'User',  autopopulate: true }
   })
   ```
-  ```
+  ```js
   const reviewSchema = new mongoose.Schema({
     review: {type: String},
     user: {type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
   })
   ```
-  ```
+  ```js
   const bookSchema = new mongoose.Schema({
     title: {type: String, required: true},
     authors: {type: String},
@@ -419,7 +419,7 @@ View the books components [here](../master/src/components/books).
     - Virtual fields were used for book loans
 
   - [Loan](../master/models/loan.js) - loan information with references to the Book and User schemas
-  ```
+  ```js
   const loanSchema = new mongoose.Schema({
     book: { type: mongoose.Schema.ObjectId, ref: 'Book'},
     borrower: { type: mongoose.Schema.ObjectId, ref: 'User'},
