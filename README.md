@@ -123,10 +123,10 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 ## Project Roadmap
 
-Front-end user journeys
-Back-end configuration structure
-Data schemas
-Product backlog
+- Front-end user journeys
+- Back-end configuration structure
+- Data schemas  
+- Product backlog
 
 ## Project Deliverables
 
@@ -164,22 +164,19 @@ Common files
 | My Profile | /users | Profile page of the user where they can view, update and delete their profile and library information |
 
 
-#### Additional functionality for registered and logged in users:
+#### Additional functionality for logged in users:
 
 1. Logout _(returns user to the homepage)_
-2. Books page (/books)
-  - Dropdown to filter by user libraries
-  - Search box to filter by title or author
-  - The CRUD Cycle for individual books (/books:id)
+2. The CRUD Cycle for books
 
 | CRUD Cycle | Route | HTTP Method | Description |
 |------------|-------|-------------|-------------|
 | Create | /books | POST | Users are directed to a blank form with the following: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
 | Read | /books <br> /books/:id | GET | Users are able to view information about the book(s) |
-| Update | /books/:id/ | PUT | Users are directed to a pre-populated version of the Create form to change information. |
+| Update | /books/:id/ | PUT | Users are directed to a pre-populated version of the Create form to change information |
   | Delete | /books/:id | DELETE | A remove button on the page prompts the user to confirm that they want to delete the book before permanently removing it from the database |
 
-_Users will be returned to the books (all) page on submit of create and update forms and when clicking the remove button._
+_Users will be returned to the books (path: /books) page on submit of create and update forms and when clicking the remove button or the back button on a /books/:id page._
 
 3. Libraries page
   - Users are shown the location of their library with a blue marker (in comparison to red markers for other libraries)
