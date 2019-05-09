@@ -217,11 +217,11 @@ Added functionality
  - CRUD js-functions for loans, books, genres, users to ensure get, post, put, delete functions run smoothly
 
 #### Library files
- - [Error handlers](../lib/errorHandler.js) for custom error messages and response statuses
- - [Secure route](../lib/secureRoute.js) functionality to restrict access by unregistered and not logged in users
+ - [Error handlers](../master/lib/errorHandler.js) for custom error messages and response statuses
+ - [Secure route](../master/lib/secureRoute.js) functionality to restrict access by unregistered and not logged in users
 
 #### Database
-- [Seeds](../db/seeds.js) - To drop the current database and populate it with:
+- [Seeds](../master/db/seeds.js) - To drop the current database and populate it with:
   - 11 users
   - 11 genres
   - 91 books
