@@ -2,23 +2,19 @@
 
 ## Please note that this README is currently being worked on and is not yet finished.
 
-| Contents | |
-|---|---|
-| 1. [Overview](#overview) <br> 2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation) | 7. [Wins](#wins) <br> 8. [Challenges](#challenges) <br> 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables) <br> &nbsp; - [Front End](#front-end) <br> &nbsp; - [Back End](#back-end) |
+## Table of Contents
 
 
 | 1. [Overview](#overview) <br> 2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation) | 7. [Wins](#wins) <br> 8. [Challenges](#challenges) <br> 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables) <br> &nbsp; - [Front End](#front-end) <br> &nbsp; - [Back End](#back-end) |
-|---|---|
-
-| 1. [Overview](#overview) <br> 2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation) | 7. [Wins](#wins) <br> 8. [Challenges](#challenges) <br> 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables) <br> &nbsp; - [Front End](#front-end) <br> &nbsp; - [Back End](#back-end) |
+|:---|:---|
 
 
-## OVERVIEW
+## Overview
 
 The third WDI project was to work in a team to deliver a fully-functional user-generated CMS (Content Management System) that includes multiple relationships between database models and consumes at least one public API (Application Programming Interface).
 
 
-## TEAM
+## Team
 
 In alphabetical order:
 
@@ -29,7 +25,7 @@ In alphabetical order:
 | Sumi | https://github.com/SumiSastri |
 | Wesley | https://github.com/wesley-hall |
 
-## TECHNICAL ACCEPTANCE CRITERIA
+## Technical Acceptance Criteria
 
 1. The app must deliver something of value to the end-user with a visually impressive design, ideally should be mobile responsive.
 
@@ -50,7 +46,7 @@ In alphabetical order:
 9. A README file should outline approach and how the project meets technical requirements
 
 
-## PROJECT PROPOSAL:
+## Project Proposal:
 
 
 | App Name | Value Proposition |
@@ -66,7 +62,7 @@ In alphabetical order:
 
 
 
-## TECHNOLOGIES
+## Technologies
 
 Front-end libraries
 react-js
@@ -91,7 +87,7 @@ axios
 insomnia
 mocha-chai
 
-## TEAM ORGANISATION - LOOSE AGILE FRAMEWORK
+## Team Organisation - Loose Agile Framework
 
 Team is self-organising
 Decisions are made democratically
@@ -101,7 +97,7 @@ Seek to solve the problem with root cause analysis
 The whole team is responsible for positive outcomes and good quality code
 Interactions better than documentation
 
-## WINS
+## Wins
 
 Key technologies used by everyone
 User journeys well mapped out and data-flows discussed in detail
@@ -110,7 +106,7 @@ Testing started early
 Styling as we went rather than right at the end
 
 
-## CHALLENGES
+## Challenges
 
 Creating the promise functions - figuring out the order of promises needed
 Creating the test files - had to create a proxy user to test functionality
@@ -121,16 +117,16 @@ Loans - scoping features and functions to fit time lines
 Project management of roles and division of work - sprint rules difficult to follow for a 1 week project
 
 
-## PROJECT ROADMAP
+## Project Roadmap
 
 Front-end user journeys
 Back-end configuration structure
 Data schemas
 Product backlog
 
-## PROJECT DELIVERABLES
+## Project Deliverables
 
-### FRONT END
+### Front End
 
 Set up
 
@@ -215,7 +211,7 @@ Added functionality
 
          A status page that lists all the books that are loaned out and status as well as books that have been borrowed and status
 
-### BACK END
+### Back End
 
 #### Configuration
  - [Environment](../master/config/environment.js) - to set up the environment, port, database URI and secret
@@ -332,7 +328,7 @@ Added functionality
  - Books functions for the CRUD cycle
  - CRUD js-functions for loans, books, genres, users to ensure get, post, put, delete functions run smoothly
 
-#### Library files
+#### Library
  - [Error handlers](../master/lib/errorHandler.js) for custom error messages and response statuses
  - [Secure route](../master/lib/secureRoute.js) functionality to restrict access by unregistered and not logged in users
 
