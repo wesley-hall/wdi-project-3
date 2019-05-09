@@ -48,58 +48,33 @@ In alphabetical order:
 
 ## Project Proposal:
 
+**App Name:** booker
 
-| App Name | Value Proposition |
-|----------|-------------------|
-| booker | A multi-media sharing club - where media is loaned/ returned or kept|
+**Value Proposition:** A book sharing community - where users share their book collections by loaning out and borrowing books from other users
 
-| Key Use Cases |
-|---|
-| As a user I would like to register my details so that I can use the app and keep my details safe |
-| As a user I would like to log-in and create, update or delete my user profile as the details change so that accurate information is stored in the app |
-| As a user I would like to upload my books to the app and create a library of my books so that other users can borrow my books |
-| As a user I would like to see other people’s books so that I may borrow books from their libraries |
-| As a user I would like to confirm or reject a request to borrow the books in my library so that I retain control over who can borrow books from me |
-| As a user I would like to know how far the books that I want to borrow are from me so that I can make decisions on whether I want to travel that far to get the book |
-| As a user I would like to communicate with the owner of the book to pick the book up |
-| As a user I would like to communicate with the borrow of the book to organise pick up details |
-| As a user I would like to see the book title, author, reviews and ratings of books so that I can make decisions whether I would like to borrow the book or not |
-| As a user I would like to see ratings of borrowers to gauge whether I want to loan my book to the user |
-| As a user I would like to quickly view the books I have out on loan and the books I am loaning so that I can manage the books I am reading and keep track that all books that have been borrowed are returned in a timely fashion |
+**Key Use Cases:** "As a user, I would like to...."
 
-| Key Use Cases | |
-|---|---|
-| As a user I would like to register my details so that I can use the app and keep my details safe | As a user I would like to communicate with the owner of the book to pick the book up |
-| As a user I would like to log-in and create, update or delete my user profile as the details change so that accurate information is stored in the app | As a user I would like to communicate with the borrow of the book to organise pick up details |
-| As a user I would like to upload my books to the app and create a library of my books so that other users can borrow my books | As a user I would like to see the book title, author, reviews and ratings of books so that I can make decisions whether I would like to borrow the book or not |
-| As a user I would like to see other people’s books so that I may borrow books from their libraries | As a user I would like to see ratings of borrowers to gauge whether I want to loan my book to the user |
-| As a user I would like to confirm or reject a request to borrow the books in my library so that I retain control over who can borrow books from me | As a user I would like to quickly view the books I have out on loan and the books I am loaning so that I can manage the books I am reading and keep track that all books that have been borrowed are returned in a timely fashion |
-| As a user I would like to know how far the books that I want to borrow are from me so that I can make decisions on whether I want to travel that far to get the book | |
+- register my details so that I can use the app and keep my details safe
 
+- log-in and create, update or delete my user profile as the details change so that accurate information is stored in the app
 
-#### Key use cases:
+- upload my books to the app and create a library of my books so that other users can borrow my books
 
-- As a user I would like to register my details so that I can use the app and keep my details safe
+- see other people’s books so that I may borrow books from their libraries
 
-- As a user I would like to log-in and create, update or delete my user profile as the details change so that accurate information is stored in the app
+- confirm or reject a request to borrow the books in my library so that I retain control over who can borrow books from me
 
-- As a user I would like to upload my books to the app and create a library of my books so that other users can borrow my books
+- know how far the books that I want to borrow are from me so that I can make decisions on whether I want to travel that far to get the book
 
-- As a user I would like to see other people’s books so that I may borrow books from their libraries
+- communicate with the owner of the book to pick the book up
 
-- As a user I would like to confirm or reject a request to borrow the books in my library so that I retain control over who can borrow books from me
+- communicate with the borrow of the book to organise pick up details
 
-- As a user I would like to know how far the books that I want to borrow are from me so that I can make decisions on whether I want to travel that far to get the book
+- see the book title, author, reviews and ratings of books so that I can make decisions whether I would like to borrow the book or not
 
-- As a user I would like to communicate with the owner of the book to pick the book up
+- see ratings of borrowers to gauge whether I want to loan my book to the user
 
-- As a user I would like to communicate with the borrow of the book to organise pick up details
-
-- As a user I would like to see the book title, author, reviews and ratings of books so that I can make decisions whether I would like to borrow the book or not
-
-- As a user I would like to see ratings of borrowers to gauge whether I want to loan my book to the user
-
-- As a user I would like to quickly view the books I have out on loan and the books I am loaning so that I can manage the books I am reading and keep track that all books that have been borrowed are returned in a timely fashion
+- quickly view the books I have out on loan and the books I am loaning so that I can manage the books I am reading and keep track that all books that have been borrowed are returned in a timely fashion
 
 
 ## Technologies
