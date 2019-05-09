@@ -90,8 +90,6 @@ In alphabetical order:
 
 View the full list of dependencies and dev dependencies in the [`package.json`](../master/package.json)
 
-[View the full list of dependencies and dev dependencies in the `package.json`](../master/package.json)
-
 
 ## Team Organisation - Loose Agile Framework
 
