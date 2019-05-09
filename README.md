@@ -107,7 +107,7 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 - User journeys well mapped out and data-flows discussed in detail
 - Good road-maps to map out back-log
 - Testing started early
-- Styling as we went rather than right at the end
+- Ongoing styling rather than leaving it to right at the end
 
 
 ## Challenges
@@ -330,7 +330,7 @@ View the books components [here](../master/src/components/books).
   - 24 loan requests
 
 
-- Seeds promises - In the seeds file we used JavaScript promises to ensure that the database is always seeded in the correct order. This is because certain data models require others to exist before they can be created:
+- Seeds promises - In the seeds file, JavaScript promises were used to ensure that the database is always seeded in the correct order. This is because certain data models require others to exist before they can be created:
   - Books can only be created once users (book owners) and genres have been created
   - Loans can only be created once users and books have been created
 
