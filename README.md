@@ -223,7 +223,7 @@ Added functionality
 ### Back End
 
 #### Configuration
- - [Environment](../master/config/environment.js) - to set up the environment, port, database URI and secret
+ - [Environment](../master/config/environment.js) - set up for the environment, port, database URI and secret
  - [Routes](../master/config/routes.js) - pathways to the controller functions for the CRUD cycle
 
  ```
@@ -379,82 +379,81 @@ Added functionality
   ```
 
 
+- Data Models/Schemas
+  - [User](../master/models/user.js) - login/authentication credentials, as well as profile and library information
+  ```
+  const userSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    profilePicture: { type: String},
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true, unique: true },
+    libraryName: { type: String, required: true, unique: true },
+    location: {
+      lat: { type: Number, required: true },
+      lng: { type: Number, required: true }
+    },
+    libraryPicture: { type: String},
+    libraryDescription: { type: String },
+    userRating: [ userRatingSchema ]
+  }, {
+    timestamps: true
+  })
+  ```
+    - Virtual fields were also included for books, loans and password confirmation
 
-          DATA SCHEMAS: Plug-ins (mongoose validator and auto-populate)
+  - [Genre](../master/models/bookGenre.js) - a simple schema containing one string for the genre name/title
+  ```
+  const bookGenreSchema = new mongoose.Schema({
+    genre: { type: String, required: true }
+  })
+  ```
+    - Genres were created separately from books so that the list could be scaled up as required
 
-          **User**
+  - [Book](../master/models/book.js) - book information with references to the BookGenre and User schemas, as well as information for book ratings and reviews
+  ```
+  const ratingSchema = new mongoose.Schema({
+    rating: {type: Number, min: 1, max: 5},
+    user: {type: mongoose.Schema.ObjectId, ref: 'User',  autopopulate: true }
+  })
+  ```
+  ```
+  const reviewSchema = new mongoose.Schema({
+    review: {type: String},
+    user: {type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
+  })
+  ```
+  ```
+  const bookSchema = new mongoose.Schema({
+    title: {type: String, required: true},
+    authors: {type: String},
+    image: {type: String},
+    fiction: {type: Boolean, required: true},
+    genre: { type: mongoose.Schema.ObjectId, ref: 'BookGenre'},
+    description: {type: String},
+    rating: [ratingSchema],
+    review: [reviewSchema],
+    owner: { type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
+  })
+  ```
+    - Virtual fields were used for book loans
 
-          ratingSchema({
-            rating: { type: Number },
-            user: {type: mongoose.Schema.ObjectId, ref: 'User'}
-          })
+  - [Loan](../master/models/loan.js) - loan information with references to the Book and User schemas
+  ```
+  const loanSchema = new mongoose.Schema({
+    book: { type: mongoose.Schema.ObjectId, ref: 'Book'},
+    borrower: { type: mongoose.Schema.ObjectId, ref: 'User'},
+    start: { type: Date, required: true},
+    end: { type: Date, required: true},
+    message: { type: String },
+    approved: { type: Boolean },
+    declined: { type: Boolean },
+    collected: { type: Date },
+    returned: { type: Date}
+  }, {
+    timestamps: true
+  })
+  ```
 
-          userSchema({
-            username: { type: String, required: true, unique: true },
-            profilePicture: { type: String},
-            email: { type: String, required: true, unique: true },
-            password: { type: String, required: true, unique: true },
-            libraryName: { type: String, required: true, unique: true },
-            location: {
-              lat: { type: Number, required: true },
-              lng: { type: Number, required: true }
-            },
-            libraryPicture: { type: String},
-            libraryDescription: { type: String },
-            userRating: [ userRatingSchema ]
-          }, {
-            timestamps: true
-          })
-
-          Virtuals - books, loans and password
-
-
-          **Book:**
-
-          ratingSchema ({
-            rating: {type: Number, min: 1, max: 5},
-            user: {type: mongoose.Schema.ObjectId, ref: 'User'}
-          })
-
-          reviewSchema({
-            review: {type: String},
-            user: {type: mongoose.Schema.ObjectId, ref: 'User'}
-          })
-
-          bookSchema({
-            title: {type: String, required: true},
-            authors: {type: String},
-            image: {type: String},
-            fiction: {type: Boolean, required: true},
-            genre: { type: mongoose.Schema.ObjectId, ref: 'BookGenre'},
-            description: {type: String},
-            rating: [ratingSchema],
-            review: [reviewSchema],
-            owner: { type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
-          })
-
-          Virtuals: loans and books
-
-          **Genre**
-
-            genre: { type: String, required: true }
-
-          Created to separate genre from book schema to scale this list as required
-
-          **Loan:**
-
-          ({
-            book: { type: mongoose.Schema.ObjectId, ref: 'Book'},
-            borrower: { type: mongoose.Schema.ObjectId, ref: 'User'},
-            start: { type: Date, required: true},
-            end: { type: Date, required: true},
-            message: { type: String },
-            returned: { type: Date},
-            approved: { type: Boolean },
-            declined: { type: Boolean }
-          }, {
-            timestamps: true
-          })
 
 #### Testing
 
