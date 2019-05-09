@@ -93,32 +93,32 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 ## Team Organisation - Loose Agile Framework
 
-Team is self-organising
-Decisions are made democratically
-Trouble shoot early and often
-Support quickly and solve problem
-Seek to solve the problem with root cause analysis
-The whole team is responsible for positive outcomes and good quality code
-Interactions better than documentation
+- Team is self-organising
+- Decisions are made democratically
+- Trouble shoot early and often
+- Support quickly and solve problem
+- Seek to solve the problem with root cause analysis
+- The whole team is responsible for positive outcomes and good quality code
+- Interactions better than documentation
 
 ## Wins
 
-Key technologies used by everyone
-User journeys well mapped out and data-flows discussed in detail
-Good road-maps to map out back-log
-Testing started early
-Styling as we went rather than right at the end
+- Key technologies used by everyone
+- User journeys well mapped out and data-flows discussed in detail
+- Good road-maps to map out back-log
+- Testing started early
+- Styling as we went rather than right at the end
 
 
 ## Challenges
 
-Creating the promise functions - figuring out the order of promises needed
-Creating the test files - had to create a proxy user to test functionality
-Nav bar bugs - challenges logging out users
-Figuring out search and filter functions in React - pulling data into the render function
-User profile - giving users the ability to set their own location
-Loans - scoping features and functions to fit time lines
-Project management of roles and division of work - sprint rules difficult to follow for a 1 week project
+- Creating the promise functions in the seeds file - figuring out the order of promises needed
+- Creating the test files - had to create a proxy user to test functionality
+- Nav bar bugs - challenges logging out users
+- Figuring out search and filter functions in React - pulling data into the render function
+- User profile - giving users the ability to set their own location using a map marker
+- Loans - scoping features and functions to fit time lines
+- Project management of roles and division of work - sprint rules difficult to follow for a one week project
 
 
 ## Project Roadmap
@@ -151,10 +151,18 @@ Common files
 | Home | / | Home page with app name/logo and tagline |
 | About | /about | Value proposition/brief explanation |
 | Books | /books | All collections by all book owners |
-| One book | /books:id |  Displays details of the book clicked: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |
+| Each book | /books/:id |  Displays details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |
 | Libraries | /libraries | Displays all libraries by location |
 | Login | /login | Login for returning (registered) users |
 | Register | /register | Registration for new users |
+
+#### Pages only accessible by logged in users:
+
+| Page | Path | Description |
+|------|------|-------------|
+| Loans | /loans | Loan management page for books loaned out and books borrowed |
+| My Profile | /users | Profile page of the user where they can view, update and delete their profile and library information |
+
 
 #### Additional functionality for registered and logged in users:
 
@@ -450,5 +458,7 @@ Added functionality
           }, {
             timestamps: true
           })
+
+#### Testing
 
 ### CODE SNIPPETS
