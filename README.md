@@ -208,11 +208,102 @@ Added functionality
 ### BACK END
 
 #### Configuration
- - Environment - to set up proxy client-server and encryption/ validation
- - Routes - pathways to the controller functions for the CRUD cycle
+ - [Environment](../master/config/environment.js) - to set up proxy client-server and encryption/ validation
+ - [Routes](../master/config/routes.js) - pathways to the controller functions for the CRUD cycle
 
 #### Controllers
- - Authentication with jsonwebtoken (JWT)
+ - [Authentication](../master/controllers/auth.js) - user login and registration functionality with JSON Web Tokens (JWT)
+
+ ```
+ // Example: User registration (CRUD - Create)
+
+ function register(req, res, next) {
+   User
+     .create(req.body)
+     .then(user => {
+       const token = jwt.sign({ sub: user._id }, secret, { expiresIn: '6h' })
+       res.json({
+         message: `Thanks for registering, ${user.username}`,
+         token,
+         user
+       })
+     })
+     .catch(next)
+ }
+ ```
+
+ - CRUD functionality for:
+  - [Users](../master/controllers/users.js)
+
+  ```
+  // Example: Show information on a specific user (CRUD - Read)
+
+  function userShow(req, res) {
+    User
+      .findById(req.params.id)
+      .then(user => res.status(200).json(user))
+      .catch(err => res.json(err))
+  }
+
+  ```
+
+  - [Genres](../master/controllers/genres.js)
+
+  ```
+  // Example: Show all genres (CRUD - Read)
+
+  function genresAll(req, res) {
+    Genres
+      .find()
+      .then(genres => res.json(genres))
+      .catch(e => console.log(e))
+  }
+  ```
+
+  - [Books](../master/controllers/books.js), including reviews and ratings
+
+  ```
+  // Example: Delete a book (CRUD - Delete)
+
+  function bookDelete(req, res) {
+    Book
+      .findByIdAndRemove(req.params.id)
+      .then(() => res.sendStatus(204))
+      .catch(err => res.status(500).json(err))
+  }
+  ```
+  ```
+  // Example: Add a book rating (CRUD - Create)
+
+  function ratingAdd(req, res) {
+    req.body.user = req.currentUser
+    Book
+      .findById(req.params.id)
+      .populate('rating')
+      .then(book => {
+        book.rating.push(req.body)
+        return book.save()
+      })
+      .then(book => res.json(book))
+      .catch(err => res.status(422).json(err))
+  }
+  ```
+
+  - [Loans](../master/controllers/loans.js)
+
+  ```
+  // Example: Update loan information (CRUD - Update)
+
+  function loanUpdate(req, res) {
+    Loan
+      .findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true})
+      .exec()
+      .then(loan => res.status(200).json(loan))
+      .catch(err => res.status(500).json(err))
+  }
+
+  ```
+
  - Books functions for the CRUD cycle
  - CRUD js-functions for loans, books, genres, users to ensure get, post, put, delete functions run smoothly
 
