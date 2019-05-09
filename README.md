@@ -56,51 +56,58 @@ In alphabetical order:
 
 - register my details so that I can use the app and keep my details safe
 
-- log-in and create, update or delete my user profile as the details change so that accurate information is stored in the app
+- login and create, update or delete my user profile as the details change so that accurate information is stored in the app
 
 - upload my books to the app and create a library of my books so that other users can borrow my books
 
-- see other people’s books so that I may borrow books from their libraries
+- see other peoples’ books so that I may borrow books from their libraries
 
 - confirm or reject a request to borrow the books in my library so that I retain control over who can borrow books from me
 
 - know how far the books that I want to borrow are from me so that I can make decisions on whether I want to travel that far to get the book
 
-- communicate with the owner of the book to pick the book up
+- know the contact details of the owner of the books I want to borrow, so that I can arrange to pick the book up
 
-- communicate with the borrow of the book to organise pick up details
+- know the contact details of the borrower of my books I want to borrow, so that I can arrange the book pick up
 
 - see the book title, author, reviews and ratings of books so that I can make decisions whether I would like to borrow the book or not
 
-- see ratings of borrowers to gauge whether I want to loan my book to the user
-
-- quickly view the books I have out on loan and the books I am loaning so that I can manage the books I am reading and keep track that all books that have been borrowed are returned in a timely fashion
+- easily view the books I have out on loan and the books I am loaning in one place, so that I can manage the books I am reading and keep track that all books that have been borrowed are returned in a timely fashion
 
 
 ## Technologies
 
-Front-end libraries
-react-js
-bulma (css)
+| Front End | Back End | Testing | Other |
+|---|---|---|---|
+| - React <br> - ReactDOM <br> - React Router DOM <br> - Bulma <br> - SCSS <br> - Mapbox GL JS | - Node.js <br> - MongoDB (NoSQL) <br> - Mongoose <br> - Express <br> - dotenv <br> - JSON Web Tokens (JWT) <br> - bcrypt | - Mocha <br> - Chai <br> - SuperTest | - Webpack <br> - Babel <br> - Axios
+
+[View the full list of dependencies and dev dependencies](../master../package.json)
 
 
-Back-end noSQL db
-mongo-db
+### Front end libraries
+- React
+- Bulma
+- SCSS
 
-Authentication
-jsonwebtokens
-bcrypt
 
-Mid-ware
-mongoose (extensions form validate, autofill)
-node-js
-express
+### Back end
+- MongoDB (NoSQL)
+- Mongoose
+- Node.js
+- Express
 
-Other tools
-json
-axios
-insomnia
-mocha-chai
+### Authentication
+- JSON Web Tokens (JWT)
+- bcrypt
+
+### Testing
+- Mocha
+- Chai
+
+### Other
+- Webpack
+- Axios
+
 
 ## Team Organisation - Loose Agile Framework
 
