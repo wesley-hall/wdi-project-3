@@ -200,6 +200,8 @@ View the books components [here](../master/src/components/books).
 | Update | /api/books/:id/ | PUT | Users (book owner) can edit the approved, declined, collected and returned fields for the loan to change the status. |
 | Delete | /api/loans/:id | DELETE | Users (book borrowers) are able to cancel their requests to borrow a book |
 
+View the loans components [here](../master/src/components/loans).
+
 
 ### Back End
 
@@ -312,15 +314,38 @@ View the books components [here](../master/src/components/books).
       .then(loan => res.status(200).json(loan))
       .catch(err => res.status(500).json(err))
   }
-
   ```
 
  - Books functions for the CRUD cycle
  - CRUD js-functions for loans, books, genres, users to ensure get, post, put, delete functions run smoothly
 
 #### Library
- - [Error handlers](../master/lib/errorHandler.js) for custom error messages and response statuses
+ - [Error handler](../master/lib/errorHandler.js) for custom error messages and response statuses
  - [Secure route](../master/lib/secureRoute.js) functionality to restrict access by unregistered and not logged in users
+   ```js
+   function secureRoute(req, res, next) {
+     // Check if the request has an Authorization header
+     if (!req.headers.authorization) return res.status(401).json({ message: 'Unauthorized' })
+     // Remove 'Bearer ' from the Authorization header to just be left with the token
+     const token = req.headers.authorization.replace('Bearer ', '')
+     // Use jwt verify to check if the token is a valid JSON Web Token
+     new Promise((resolve, reject) => {
+       jwt.verify(token, secret, (err, payload) => {
+         if (err) reject(err)
+         resolve(payload)
+       })
+     })
+      // If the token is valid, the promise will be resolved and the payload sub (user id) can be used to find the user associated to the token
+       .then(payload => User.findById(payload.sub))
+       .then(user => {
+         if (!user) return res.status(401).json({ message: 'Unauthorized' })
+         req.currentUser = user
+         next()
+       })
+       // If the token is not valid, the promise will be rejected and the catch block will run
+       .catch(next)
+   }
+   ```
 
 #### Database
 - [Seeds](../master/db/seeds.js) - To drop the current database and populate it with:
@@ -437,5 +462,7 @@ View the books components [here](../master/src/components/books).
 
 
 #### Testing
+
+Ru...............
 
 ### CODE SNIPPETS
