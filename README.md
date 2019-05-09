@@ -2,7 +2,7 @@
 
 ## Please note that this README is currently being worked on and is not yet finished.
 
-| Contents |
+| Contents | |
 |---|---|
 | 1. [Overview](#overview) <br> 2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation) | 7. [Wins](#wins) <br> 8. [Challenges](#challenges) <br> 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables) <br> &nbsp; - [Front End](#front-end) <br> &nbsp; - [Back End](#back-end) |
 
