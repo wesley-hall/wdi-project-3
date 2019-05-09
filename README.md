@@ -13,7 +13,7 @@ The third WDI project was to work in a team to deliver a fully-functional user-g
 In alphabetical order:
 
 | Name | GitHub |
-|------ -|--------------------------------|
+|-------|--------------------------------|
 | Orjon | https://github.com/orjon |
 | Ru | https://github.com/RuLette |
 | Sumi | https://github.com/SumiSastri |
@@ -208,8 +208,23 @@ Added functionality
 ### BACK END
 
 #### Configuration
- - [Environment](../master/config/environment.js) - to set up proxy client-server and encryption/ validation
+ - [Environment](../master/config/environment.js) - to set up the environment, port, database URI and secret
  - [Routes](../master/config/routes.js) - pathways to the controller functions for the CRUD cycle
+
+ ```
+ // Example: Routes for /books and /books/:id
+ // Note that some routes are secure and some are not
+
+ router.route('/books')
+   .get(books.booksAll)
+   .post(secureRoute, books.bookCreate)
+
+ router.route('/books/:id')
+   .get(books.bookShow)
+   .put(secureRoute, books.bookUpdate)
+   .delete(secureRoute, books.bookDelete)
+
+ ```
 
 #### Controllers
  - [Authentication](../master/controllers/auth.js) - user login and registration functionality with JSON Web Tokens (JWT)
