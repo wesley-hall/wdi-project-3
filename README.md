@@ -78,31 +78,6 @@ In alphabetical order:
 ## Technologies
 
 | Front End | Back End | Testing | Other |
-|---|---|---|---|
-| - React <br> - ReactDOM <br> - React Router DOM <br> - Bulma <br> - SCSS <br> - Mapbox GL JS | - Node.js <br> - MongoDB (NoSQL) <br> - Mongoose <br> - Express <br> - dotenv <br> - JSON Web Tokens (JWT) <br> - bcrypt | - Mocha <br> - Chai <br> - SuperTest | - Webpack <br> - Babel <br> - Axios
-
-
-| Front End | Back End | Testing | Other |
-|---|---|---|---|
-| - React | - Node.js | - Mocha | - Webpack |
-| - ReactDOM | - MongoDB (NoSQL) | - Chai | - Babel |
-| - React Router DOM | - Mongoose | - SuperTest | - Axios |
-| - Bulma | - Express | | |
-| - SCSS | - dotenv | | |
-| - Mapbox GL JS | - JSON Web Tokens (JWT) | | |
-| | - bcrypt | | | |
-
-| Front End | Back End | Testing | Other |
-|---|---|---|---|
-| React | Node.js | Mocha | Webpack |
-| ReactDOM | MongoDB (NoSQL) | Chai | Babel |
-| React Router DOM | Mongoose | SuperTest | Axios |
-| Bulma | Express | | |
-| SCSS | dotenv | | |
-| Mapbox GL JS | JSON Web Tokens (JWT) | | |
-| | bcrypt | | | |
-
-| Front End | Back End | Testing | Other |
 |:---:|:---:|:---:|:---:|
 | React | Node.js | Mocha | Webpack |
 | ReactDOM | MongoDB (NoSQL) | Chai | Babel |
@@ -113,7 +88,9 @@ In alphabetical order:
 | | bcrypt | | | |
 
 
-[View the full list of dependencies and dev dependencies](../master../package.json)
+View the full list of dependencies and dev dependencies in the [`package.json`](../master/package.json)
+
+[View the full list of dependencies and dev dependencies in the `package.json`](../master/package.json)
 
 
 ## Team Organisation - Loose Agile Framework
