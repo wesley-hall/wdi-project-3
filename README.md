@@ -155,7 +155,7 @@ Common files
 | [Libraries](../master/src/components/books/libraries.js) | /libraries | Displays all libraries by location |
 | [Login](../master/src/components/auth/login.js) | /login | Login for returning (registered) users |
 | [Register](../master/src/components/auth/register.js) | /register | Registration for new users |
-| [404](../master/src/components/pages/404.js) | | Error s404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist |
+| [404](../master/src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist |
 
 #### Pages only accessible by logged in users:
 
@@ -164,6 +164,24 @@ Common files
 | [Loans](../master/src/components/loans/loansAll.js) | /loans | Loan management page for books loaned out and books borrowed |
 | [User Profile](../master/src/components/users/userprofile.js) | /users | Profile page of the user where they can view and delete their profile and library information |
 | [Edit Profile](../master/src/components/users/userEdit.js) | /userEdit | Page for users to update their profile and library information |
+
+
+#### The above tables should be combined....
+
+| Page | Path | Features - Logged Out | Features - Logged In |
+|---|---|---|---|
+| [Home](../master/src/components/pages/home.js) | / | App name/logo and tagline | _Only nav bar changes_ |
+| [About](../master/src/components/pages/about.js) | /about | Value proposition/brief explanation | _Only nav bar changes_ |
+| [Login](../master/src/components/auth/login.js) | /login | Login for returning (registered) users | _Only nav bar changes_ |
+| [Register](../master/src/components/auth/register.js) | /register | Registration for new users | _Only nav bar changes_ |
+| [404](../master/src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist | _Only nav bar changes_ |
+| [Books](../master/src/components/books/booksAll.js) | /books | All collections by all book owners | ... |
+| [Each book](../master/src/components/books/bookShow.js) | /books/:id |  Displays details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |  ... |
+| [Libraries](../master/src/components/books/libraries.js) | /libraries | Displays all libraries by location |  ... |
+| [Loans](../master/src/components/loans/loansAll.js) | /loans | _Access restricted_ | Loan management page for books loaned out and books borrowed |
+| [User Profile](../master/src/components/users/userprofile.js) | /users | _Access restricted_ | Profile page of the user where they can view and delete their profile and library information |
+| [Edit Profile](../master/src/components/users/userEdit.js) | /userEdit | _Access restricted_ | Page for users to update their profile and library information |
+
 
 
 
