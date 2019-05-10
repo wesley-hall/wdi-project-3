@@ -5,7 +5,7 @@
 ## Table of Contents
 
 
-| 1. [Overview](#overview) <br> 2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation) <br> 7. [Wins](#wins) <br> 8. [Challenges](#challenges) | 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables) <br> &nbsp;&nbsp;&nbsp; - [Front End](#front-end) <br> &nbsp;&nbsp;&nbsp; - [Back End](#back-end) <br> &nbsp;&nbsp;&nbsp; - [Testing](#testing) <br> 11. [Future Features](#future-features) <br> 12. [Key Learnings](#key-learnings) |
+| 1. [Overview](#overview) <br> 2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation---loose-agile-framework) <br> 7. [Wins](#wins) <br> 8. [Challenges](#challenges) | 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables) <br> &nbsp;&nbsp;&nbsp; - [Front End](#front-end) <br> &nbsp;&nbsp;&nbsp; - [Back End](#back-end) <br> &nbsp;&nbsp;&nbsp; - [Testing](#testing) <br> 11. [Future Features](#future-features) <br> 12. [Key Learnings](#key-learnings) |
 |:---|:---|
 
 
