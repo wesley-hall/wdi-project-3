@@ -169,18 +169,21 @@ Common files
 #### The above tables should be combined....
 
 | Page | Path | Features - Logged Out | Features - Logged In |
-|---|---|---|---|
-| [Home](../master/src/components/pages/home.js) | / | App name/logo and tagline | _Only nav bar changes_ |
-| [About](../master/src/components/pages/about.js) | /about | Value proposition/brief explanation | _Only nav bar changes_ |
-| [Login](../master/src/components/auth/login.js) | /login | Login for returning (registered) users | _Only nav bar changes_ |
-| [Register](../master/src/components/auth/register.js) | /register | Registration for new users | _Only nav bar changes_ |
-| [404](../master/src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist | _Only nav bar changes_ |
-| [Books](../master/src/components/books/booksAll.js) | /books | All collections by all book owners | ... |
-| [Each book](../master/src/components/books/bookShow.js) | /books/:id |  Displays details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |  ... |
+|:---:|:---:|:---|:---|
+| [Navbar](../master/src/components/common/nav.js) | _not a page_ | Navigate to pages that do not require login | Navigate to all pages or logout |
+| [Home](../master/src/components/pages/home.js) | / | View the app name/logo and tagline | _Only nav bar changes_ |
+| [About](../master/src/components/pages/about.js) | /about | View the value proposition/brief explanation | _Only nav bar changes_ |
+| [Login](../master/src/components/auth/login.js) | /login | Login as a returning (registered) users | _Only nav bar changes_ |
+| [Register](../master/src/components/auth/register.js) | /register | Register as a new user | _Only nav bar changes_ |
+| [Books](../master/src/components/books/booksAll.js) | /books | View all books in the database | ... |
+| [Each book](../master/src/components/books/bookShow.js) | /books/:id |  View details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |  ... <br> -Users that own the book can remove/delete it |
+| BookAdd | /books/add | _Access restricted_ | Add a book by filling in a blank form with the following: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
+| BookUpdate | /books/:id/update | _Access restricted_ | Change book information by filling in a pre-populated version of the Create form - _only accessible by user that owns the specific book_ |
 | [Libraries](../master/src/components/books/libraries.js) | /libraries | Displays all libraries by location |  ... |
 | [Loans](../master/src/components/loans/loansAll.js) | /loans | _Access restricted_ | Loan management page for books loaned out and books borrowed |
 | [User Profile](../master/src/components/users/userprofile.js) | /users | _Access restricted_ | Profile page of the user where they can view and delete their profile and library information |
 | [Edit Profile](../master/src/components/users/userEdit.js) | /userEdit | _Access restricted_ | Page for users to update their profile and library information |
+| [404](../master/src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist | _Only nav bar changes_ |
 
 
 
