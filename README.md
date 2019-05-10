@@ -5,7 +5,7 @@
 ## Table of Contents
 
 
-| 1. [Overview](#overview) <br> 2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation) | 7. [Wins](#wins) <br> 8. [Challenges](#challenges) <br> 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables) <br> &nbsp;&nbsp; - [Front End](#front-end) <br> &nbsp;&nbsp; - [Back End](#back-end) |
+| 1. [Overview](#overview) <br> 2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation) <br> 7. [Wins](#wins) <br> 8. [Challenges](#challenges) | 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables) <br> &nbsp;&nbsp;&nbsp; - [Front End](#front-end) <br> &nbsp;&nbsp;&nbsp; - [Back End](#back-end) <br> &nbsp;&nbsp;&nbsp; - [Testing](#testing) <br> 11. [Future Features](#future-features) <br> 12. [Key Learnings](#key-learnings) |
 |:---|:---|
 
 
@@ -144,64 +144,43 @@ Common files
 
 
 
-#### Pages accessible by unregistered or not logged in users:
+#### Pages
 
-| Page | Path | Description |
-|------|------|-------------|
-| [Home](../master/src/components/pages/home.js) | / | Home page with app name/logo and tagline |
-| [About](../master/src/components/pages/about.js) | /about | Value proposition/brief explanation |
-| [Books](../master/src/components/books/booksAll.js) | /books | All collections by all book owners |
-| [Each book](../master/src/components/books/bookShow.js) | /books/:id |  Displays details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |
-| [Libraries](../master/src/components/books/libraries.js) | /libraries | Displays all libraries by location |
-| [Login](../master/src/components/auth/login.js) | /login | Login for returning (registered) users |
-| [Register](../master/src/components/auth/register.js) | /register | Registration for new users |
-| [404](../master/src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist |
-
-#### Pages only accessible by logged in users:
-
-| Page | Path | Description |
-|------|------|-------------|
-| [Loans](../master/src/components/loans/loansAll.js) | /loans | Loan management page for books loaned out and books borrowed |
-| [User Profile](../master/src/components/users/userprofile.js) | /users | Profile page of the user where they can view and delete their profile and library information |
-| [Edit Profile](../master/src/components/users/userEdit.js) | /userEdit | Page for users to update their profile and library information |
-
-
-#### The above tables should be combined....
-
-| Page | Path | Features - Logged Out | Features - Logged In |
-|:---:|:---:|:---|:---|
-| [Navbar](../master/src/components/common/nav.js) | _not a page_ | Navigate to pages that do not require login | Navigate to all pages or logout |
-| [Home](../master/src/components/pages/home.js) | / | View the app name/logo and tagline | _Only nav bar changes_ |
-| [About](../master/src/components/pages/about.js) | /about | View the value proposition/brief explanation | _Only nav bar changes_ |
-| [Login](../master/src/components/auth/login.js) | /login | Login as a returning (registered) users | _Only nav bar changes_ |
-| [Register](../master/src/components/auth/register.js) | /register | Register as a new user | _Only nav bar changes_ |
-| [Books](../master/src/components/books/booksAll.js) | /books | View all books in the database | ... |
-| [Each book](../master/src/components/books/bookShow.js) | /books/:id |  View details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |  ... <br> -Users that own the book can remove/delete it |
-| BookAdd | /books/add | _Access restricted_ | Add a book by filling in a blank form with the following: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
-| BookUpdate | /books/:id/update | _Access restricted_ | Change book information by filling in a pre-populated version of the Create form - _only accessible by user that owns the specific book_ |
-| [Libraries](../master/src/components/books/libraries.js) | /libraries | Displays all libraries by location |  ... |
-| [Loans](../master/src/components/loans/loansAll.js) | /loans | _Access restricted_ | Loan management page for books loaned out and books borrowed |
-| [User Profile](../master/src/components/users/userprofile.js) | /users | _Access restricted_ | Profile page of the user where they can view and delete their profile and library information |
-| [Edit Profile](../master/src/components/users/userEdit.js) | /userEdit | _Access restricted_ | Page for users to update their profile and library information |
+| Page | Path | Features <br> _(Logged Out)_ | Additional Features <br> _(Logged In)_ |
+|:---:|:---:|---|---|
+| [Nav bar](../master/src/components/common/nav.js) | _On all pages_ | - Navigate to pages that do not require login <br> - Login or register | - Navigate to SecureRoute pages <br> - Logout |
+| [Home](../master/src/components/pages/home.js) | / | View the app name/logo and tagline | |
+| [About](../master/src/components/pages/about.js) | /about | View the value proposition/brief explanation |  |
+| [Login](../master/src/components/auth/login.js) | /login | Login as a returning (registered) users | |
+| [Register](../master/src/components/auth/register.js) | /register | Register as a new user | |
+| [Books (All)](../master/src/components/books/booksAll.js) | /books | View all books in the database | View the distance between the logged in user's library and the libraries that the books are in  |
+| [Book Show (Individual books)](../master/src/components/books/bookShow.js) | /books/:id |  View details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |  - All users can rate and review the book <br> - Existing reviews can be deleted by the user that created the review <br> - Users that own the book can remove/delete it <br> - Users that don't own the book can create loan requests |
+| [Book Add](../master/src/components/books/bookAdd.js) | /books/add | _Login required to access this page_ | Add a book by filling in a blank [BookForm](../master/src/components/books/bookForm.js) with the following: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
+| [Book Update](../master/src/components/books/bookUpdate.js) | /books/:id/update | _Login required to access this page_ | Users that own the book can change book information by filling in a pre-populated version of the [BookForm](../master/src/components/books/bookForm.js) |
+| [Libraries](../master/src/components/books/libraries.js) | /libraries | View all libraries by location, including: <br> - A book count in the marker <br> - Library name, picture and description in a popup |  - View the logged in user's own library location and details <br> - Link to the User Profile page to view and edit user information |
+| [Loans](../master/src/components/loans/loansAll.js) | /loans | _Login required to access this page_ | Loan management page for books loaned out and books borrowed |
+| [User Profile](../master/src/components/users/userprofile.js) | /users | _Login required to access this page_ | Profile page of the user where they can view and delete their profile and library information |
+| [Edit Profile](../master/src/components/users/userEdit.js) | /userEdit | _Login required to access this page_ | Page for users to update their profile and library information |
 | [404](../master/src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist | _Only nav bar changes_ |
 
+#### Forms
+
+| Form | Description |
+|---|---|
+| Book Form | Used for creating and updating book information: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
+| Loan Form | Used for creating loan requests: <br> - Loan start date <br> - Loan end date <br> Loan updating is not handled by this form |
+| User Form | Used for creating and updating user information: <br> - Text fields for username, email, password, password confirmation and profile picture <br> and library information: <br> - Mapbox map for library location
 
 
+#### Loan Management
 
 #### Additional functionality for logged in users:
 
-1. Logout _(returns user to the homepage)_
-2. On the libraries page:
-  - Users are shown the location of their library with a blue marker (in comparison to red markers for other libraries)
-  - A button links users to view/edit their profile
-3. On the books page:
-  - Users can see the distance from their library to the location of the books in other users' libraries
-  - Users can rate and review books
-  - Users can create loan requests
+
 4. The CRUD cycle for books
 
 | CRUD Cycle | API Route | HTTP Method | Description |
-|------------|-------|-------------|-------------|
+|---|---|---|---|
 | Create | /api/books | POST | Users are directed to a blank form with the following: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
 | Read | /api/books <br> /api/books/:id | GET | Users are able to view information about the book(s) |
 | Update | /api/books/:id/ | PUT | Users are directed to a pre-populated version of the Create form to change information |
@@ -267,7 +246,7 @@ View the loans components [here](../master/src/components/loans).
  ```
 
  - CRUD functionality for:
-  - [Users](../master/controllers/users.js)
+  - [Users](../master/controllers/users.js) - complete CRUD cycle
 
   ```js
   // Example: Show information on a specific user (CRUD - Read)
@@ -281,7 +260,7 @@ View the loans components [here](../master/src/components/loans).
 
   ```
 
-  - [Genres](../master/controllers/genres.js)
+  - [Genres](../master/controllers/genres.js) - Read only (no Create, Update or Delete for users)
 
   ```js
   // Example: Show all genres (CRUD - Read)
@@ -295,6 +274,9 @@ View the loans components [here](../master/src/components/loans).
   ```
 
   - [Books](../master/controllers/books.js), including reviews and ratings
+    - Complete CRUD cycle for books
+    - Create and Delete for reviews (no Read as this information is sent with the books)
+    - Create only for rating (no Read as this information is sent with the books)
 
   ```js
   // Example: Delete a book (CRUD - Delete)
@@ -323,7 +305,7 @@ View the loans components [here](../master/src/components/loans).
   }
   ```
 
-  - [Loans](../master/controllers/loans.js)
+  - [Loans](../master/controllers/loans.js) - complete CRUD cycle
 
   ```js
   // Example: Update loan information (CRUD - Update)
@@ -337,8 +319,6 @@ View the loans components [here](../master/src/components/loans).
   }
   ```
 
- - Books functions for the CRUD cycle
- - CRUD js-functions for loans, books, genres, users to ensure get, post, put, delete functions run smoothly
 
 #### Library
  - [Error handler](../master/lib/errorHandler.js) for custom error messages and response statuses
@@ -486,4 +466,6 @@ View the loans components [here](../master/src/components/loans).
 
 Ru...............
 
-### CODE SNIPPETS
+## Future Features
+
+## Key Learnings
