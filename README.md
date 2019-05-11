@@ -88,7 +88,7 @@ In alphabetical order:
 | | bcrypt | | | |
 
 
-View the full list of dependencies and dev dependencies in the [`package.json`](../master/package.json)
+View the full list of dependencies and dev dependencies in the [`package.json`](./package.json)
 
 
 ## Team Organisation - Loose Agile Framework
@@ -136,20 +136,20 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 | Page | Path | Features <br> _(Logged Out)_ | Additional Features <br> _(Logged In)_ |
 |:---:|:---:|---|---|
-| [Nav bar](../master/src/components/common/nav.js) | _On all pages_ | - Navigate to pages that do not require login <br> - Login or register | - Navigate to SecureRoute pages <br> - Logout |
-| [Home](../master/src/components/pages/home.js) | / | View the app name/logo and tagline | |
-| [About](../master/src/components/pages/about.js) | /about | View the value proposition/brief explanation |  |
-| [Login](../master/src/components/auth/login.js) | /login | Login as a returning (registered) users | |
-| [Register](../master/src/components/auth/register.js) | /register | Register as a new user | |
-| [Books (All)](../master/src/components/books/booksAll.js) | /books | View all books in the database | View the distance between the logged in user's library and the libraries that the books are in  |
-| [Book Show (Individual books)](../master/src/components/books/bookShow.js) | /books/:id |  View details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |  - All users can rate and review the book <br> - Existing reviews can be deleted by the user that created the review <br> - Users that own the book can remove/delete it <br> - Users that don't own the book can create loan requests |
-| [Book Add](../master/src/components/books/bookAdd.js) | /books/add | _Login required to access this page_ | Add a book by filling in a blank [BookForm](../master/src/components/books/bookForm.js) with the following: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
-| [Book Update](../master/src/components/books/bookUpdate.js) | /books/:id/update | _Login required to access this page_ | Users that own the book can change book information by filling in a pre-populated version of the [BookForm](../master/src/components/books/bookForm.js) |
-| [Libraries](../master/src/components/books/libraries.js) | /libraries | View all libraries by location, including: <br> - A book count in the marker <br> - Library name, picture and description in a popup |  - View the logged in user's own library location and details <br> - Link to the User Profile page to view and edit user information |
-| [Loans](../master/src/components/loans/loansAll.js) | /loans | _Login required to access this page_ | Loan management page for books loaned out and books borrowed |
-| [User Profile](../master/src/components/users/userprofile.js) | /users | _Login required to access this page_ | Profile page of the user where they can view and delete their profile and library information |
-| [Edit Profile](../master/src/components/users/userEdit.js) | /userEdit | _Login required to access this page_ | Page for users to update their profile and library information |
-| [404](../master/src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist | &nbsp; |
+| [Nav bar](./src/components/common/nav.js) | _On all pages_ | - Navigate to pages that do not require login <br> - Login or register | - Navigate to SecureRoute pages <br> - Logout |
+| [Home](./src/components/pages/home.js) | / | View the app name/logo and tagline | |
+| [About](./src/components/pages/about.js) | /about | View the value proposition/brief explanation |  |
+| [Login](./src/components/auth/login.js) | /login | Login as a returning (registered) users | |
+| [Register](./src/components/auth/register.js) | /register | Register as a new user | |
+| [Books (All)](./src/components/books/booksAll.js) | /books | View all books in the database | View the distance between the logged in user's library and the libraries that the books are in  |
+| [Book Show (Individual books)](./src/components/books/bookShow.js) | /books/:id |  View details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |  - All users can rate and review the book <br> - Existing reviews can be deleted by the user that created the review <br> - Users that own the book can remove/delete it <br> - Users that don't own the book can create loan requests |
+| [Book Add](./src/components/books/bookAdd.js) | /books/add | _Login required to access this page_ | Add a book by filling in a blank [BookForm](./src/components/books/bookForm.js) with the following: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
+| [Book Update](./src/components/books/bookUpdate.js) | /books/:id/update | _Login required to access this page_ | Users that own the book can change book information by filling in a pre-populated version of the [BookForm](./src/components/books/bookForm.js) |
+| [Libraries](./src/components/books/libraries.js) | /libraries | View all libraries by location, including: <br> - A book count in the marker <br> - Library name, picture and description in a popup |  - View the logged in user's own library location and details <br> - Link to the User Profile page to view and edit user information |
+| [Loans](./src/components/loans/loansAll.js) | /loans | _Login required to access this page_ | Loan management page for books loaned out and books borrowed |
+| [User Profile](./src/components/users/userprofile.js) | /users | _Login required to access this page_ | Profile page of the user where they can view and delete their profile and library information |
+| [Edit Profile](./src/components/users/userEdit.js) | /userEdit | _Login required to access this page_ | Page for users to update their profile and library information |
+| [404](./src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist | &nbsp; |
 
 #### Forms
 
@@ -174,7 +174,7 @@ Orjon?
 ### Back End
 
 #### Models
-##### [User](../master/models/user.js)
+##### [User](./models/user.js)
 
 Login/authentication credentials, as well as profile and library information
 
@@ -198,7 +198,7 @@ const userSchema = new mongoose.Schema({
 ```
  - Virtual fields were also included for books, loans and password confirmation
 
-##### [Genre](../master/models/bookGenre.js)
+##### [Genre](./models/bookGenre.js)
 
 A simple Mongoose Schema containing one string for the genre name/title
 
@@ -209,7 +209,7 @@ const bookGenreSchema = new mongoose.Schema({
 ```
  - Genres were created separately from books so that the list could be scaled up as required
 
-##### [Book](../master/models/book.js)
+##### [Book](./models/book.js)
 
 Book information with references to the BookGenre and User schemas, as well as information for book ratings and reviews
 
@@ -241,7 +241,7 @@ const bookSchema = new mongoose.Schema({
 - Virtual fields were also used for book loans
 - Where `autopopulate: true` can be seen, mongoose-autopopulate has been used to autopopulate the local field (e.g. owner) with information from the referenced model (e.g. User)
 
-##### [Loan](../master/models/loan.js)
+##### [Loan](./models/loan.js)
 
 Loan information with references to the Book and User schemas
 
@@ -263,7 +263,7 @@ const loanSchema = new mongoose.Schema({
 
 #### Controllers
 
-##### [Authentication](../master/controllers/auth.js)
+##### [Authentication](./controllers/auth.js)
 
 User login and registration functionality with JSON Web Tokens (JWT)
 
@@ -285,7 +285,7 @@ function register(req, res, next) {
 }
  ```
 
-##### [Users](../master/controllers/users.js)
+##### [Users](./controllers/users.js)
 
 Complete CRUD cycle for users:
 
@@ -307,7 +307,7 @@ function userShow(req, res) {
 }
   ```
 
-##### [Genres](../master/controllers/genres.js)
+##### [Genres](./controllers/genres.js)
 
 Read only (no Create, Update or Delete for genres):
 
@@ -326,7 +326,7 @@ function genresAll(req, res) {
 }
   ```
 
-##### [Books](../master/controllers/books.js), _including reviews and ratings_
+##### [Books](./controllers/books.js), _including reviews and ratings_
 
 Complete CRUD cycle for books:
 
@@ -375,7 +375,7 @@ function ratingAdd(req, res) {
 }
   ```
 
-##### [Loans](../master/controllers/loans.js)
+##### [Loans](./controllers/loans.js)
 
 Complete CRUD cycle for loans:
 
@@ -400,10 +400,10 @@ function loanUpdate(req, res) {
 
 
 #### Configuration
-##### [Environment](../master/config/environment.js)
+##### [Environment](./config/environment.js)
 Set up for the environment, port, database URI and secret
 
-##### [Routes](../master/config/routes.js)
+##### [Routes](./config/routes.js)
 
 Pathways to the controller functions for the CRUD cycle
 
@@ -423,7 +423,7 @@ router.route('/books/:id')
 
 #### Library
 
-##### [Error handler](../master/lib/errorHandler.js)
+##### [Error handler](./lib/errorHandler.js)
 
 For custom error messages and response statuses
 
@@ -435,7 +435,7 @@ if (err.message === 'Unauthorized') {
 }
 ```
 
-##### [Secure route](../master/lib/secureRoute.js)
+##### [Secure route](./lib/secureRoute.js)
 
 Functionality to restrict access by unregistered and not logged in users
 
@@ -465,7 +465,7 @@ function secureRoute(req, res, next) {
 ```
 
 #### Database
-##### [Seeds](../master/db/seeds.js)
+##### [Seeds](./db/seeds.js)
 
 To drop the current database and populate it with:
   - 11 users
@@ -507,7 +507,7 @@ Promise.all(promiseArray)
 ```
 
 
-#### [Testing](../master/test)
+#### [Testing](./test)
 
 Ru...............
 
