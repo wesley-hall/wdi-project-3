@@ -210,6 +210,7 @@ const bookGenreSchema = new mongoose.Schema({
 ```
  - Genres were created separately from books so that the list could be scaled up as required
 
+---
 #### [Book](./models/book.js)
 
 Book information with references to the BookGenre and User schemas, as well as information for book ratings and reviews
