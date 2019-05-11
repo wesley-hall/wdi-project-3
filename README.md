@@ -241,6 +241,7 @@ const bookSchema = new mongoose.Schema({
 - Virtual fields were also used for book loans
 - Where `autopopulate: true` can be seen, mongoose-autopopulate has been used to autopopulate the local field (e.g. owner) with information from the referenced model (e.g. User)
 
+---
 #### [Loan](./models/loan.js)
 
 Loan information with references to the Book and User schemas
@@ -261,6 +262,7 @@ const loanSchema = new mongoose.Schema({
 })
 ```
 
+---
 ### Controllers
 
 #### [Authentication](./controllers/auth.js)
@@ -285,6 +287,7 @@ function register(req, res, next) {
 }
  ```
 
+---
 #### [Users](./controllers/users.js)
 
 Complete CRUD cycle for users:
@@ -307,6 +310,7 @@ function userShow(req, res) {
 }
   ```
 
+---
 #### [Genres](./controllers/genres.js)
 
 Read only (no Create, Update or Delete for genres):
@@ -326,6 +330,7 @@ function genresAll(req, res) {
 }
   ```
 
+---
 #### [Books](./controllers/books.js), _including reviews and ratings_
 
 Complete CRUD cycle for books:
@@ -375,6 +380,7 @@ function ratingAdd(req, res) {
 }
   ```
 
+---
 #### [Loans](./controllers/loans.js)
 
 Complete CRUD cycle for loans:
@@ -398,11 +404,12 @@ function loanUpdate(req, res) {
 }
   ```
 
-
+---
 ### Configuration
 #### [Environment](./config/environment.js)
 Set up for the environment, port, database URI and secret
 
+---
 #### [Routes](./config/routes.js)
 
 Pathways to the controller functions for the CRUD cycle
@@ -421,6 +428,7 @@ router.route('/books/:id')
  .delete(secureRoute, books.bookDelete)
  ```
 
+---
 ### Library
 
 #### [Error handler](./lib/errorHandler.js)
@@ -435,6 +443,7 @@ if (err.message === 'Unauthorized') {
 }
 ```
 
+---
 #### [Secure route](./lib/secureRoute.js)
 
 Functionality to restrict access by unregistered and not logged in users
@@ -464,6 +473,7 @@ function secureRoute(req, res, next) {
 }
 ```
 
+---
 ### Database
 #### [Seeds](./db/seeds.js)
 
@@ -506,7 +516,7 @@ Promise.all(promiseArray)
   })
 ```
 
-
+---
 ### [Testing](./test)
 
 Ru...............
