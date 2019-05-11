@@ -129,11 +129,9 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 - Data schemas  
 - Product backlog
 
-## Project Deliverables
+## Project Deliverables - Front End
 
-### Front End
-
-#### Pages
+### Pages
 
 | Page | Path | Features <br> _(Logged Out)_ | Additional Features <br> _(Logged In)_ |
 |:---:|:---:|---|---|
@@ -152,7 +150,7 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 | [Edit Profile](./src/components/users/userEdit.js) | /userEdit | _Login required to access this page_ | Page for users to update their profile and library information |
 | [404](./src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist | &nbsp; |
 
-#### Forms
+### Forms
 
 | Form | Description |
 |---|---|
@@ -161,21 +159,21 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 | User Form | Used for creating and updating user information: <br> - Text fields for username, email, password, password confirmation and profile picture <br> and library information: <br> - Mapbox map for library location
 
 
-#### Loan Management
+### Loan Management
 
 .........................??
 
 
-#### Styling
+### Styling
 
 Orjon?
 ....Mainly Bulma... custom.....[SCSS](./src/style.scss)...
 
 
-### Back End
+## Project Devliverables - Back End
 
-#### Models
-##### [User](./models/user.js)
+### Models
+#### [User](./models/user.js)
 
 Login/authentication credentials, as well as profile and library information
 
@@ -199,7 +197,7 @@ const userSchema = new mongoose.Schema({
 ```
  - Virtual fields were also included for books, loans and password confirmation
 
-##### [Genre](./models/bookGenre.js)
+#### [Genre](./models/bookGenre.js)
 
 A simple Mongoose Schema containing one string for the genre name/title
 
@@ -210,7 +208,7 @@ const bookGenreSchema = new mongoose.Schema({
 ```
  - Genres were created separately from books so that the list could be scaled up as required
 
-##### [Book](./models/book.js)
+#### [Book](./models/book.js)
 
 Book information with references to the BookGenre and User schemas, as well as information for book ratings and reviews
 
@@ -242,7 +240,7 @@ const bookSchema = new mongoose.Schema({
 - Virtual fields were also used for book loans
 - Where `autopopulate: true` can be seen, mongoose-autopopulate has been used to autopopulate the local field (e.g. owner) with information from the referenced model (e.g. User)
 
-##### [Loan](./models/loan.js)
+#### [Loan](./models/loan.js)
 
 Loan information with references to the Book and User schemas
 
@@ -262,9 +260,9 @@ const loanSchema = new mongoose.Schema({
 })
 ```
 
-#### Controllers
+### Controllers
 
-##### [Authentication](./controllers/auth.js)
+#### [Authentication](./controllers/auth.js)
 
 User login and registration functionality with JSON Web Tokens (JWT)
 
@@ -286,7 +284,7 @@ function register(req, res, next) {
 }
  ```
 
-##### [Users](./controllers/users.js)
+#### [Users](./controllers/users.js)
 
 Complete CRUD cycle for users:
 
@@ -308,7 +306,7 @@ function userShow(req, res) {
 }
   ```
 
-##### [Genres](./controllers/genres.js)
+#### [Genres](./controllers/genres.js)
 
 Read only (no Create, Update or Delete for genres):
 
@@ -327,7 +325,7 @@ function genresAll(req, res) {
 }
   ```
 
-##### [Books](./controllers/books.js), _including reviews and ratings_
+#### [Books](./controllers/books.js), _including reviews and ratings_
 
 Complete CRUD cycle for books:
 
@@ -376,7 +374,7 @@ function ratingAdd(req, res) {
 }
   ```
 
-##### [Loans](./controllers/loans.js)
+#### [Loans](./controllers/loans.js)
 
 Complete CRUD cycle for loans:
 
@@ -400,11 +398,11 @@ function loanUpdate(req, res) {
   ```
 
 
-#### Configuration
-##### [Environment](./config/environment.js)
+### Configuration
+#### [Environment](./config/environment.js)
 Set up for the environment, port, database URI and secret
 
-##### [Routes](./config/routes.js)
+#### [Routes](./config/routes.js)
 
 Pathways to the controller functions for the CRUD cycle
 
@@ -422,9 +420,9 @@ router.route('/books/:id')
  .delete(secureRoute, books.bookDelete)
  ```
 
-#### Library
+### Library
 
-##### [Error handler](./lib/errorHandler.js)
+#### [Error handler](./lib/errorHandler.js)
 
 For custom error messages and response statuses
 
@@ -436,7 +434,7 @@ if (err.message === 'Unauthorized') {
 }
 ```
 
-##### [Secure route](./lib/secureRoute.js)
+#### [Secure route](./lib/secureRoute.js)
 
 Functionality to restrict access by unregistered and not logged in users
 
@@ -465,8 +463,8 @@ function secureRoute(req, res, next) {
 }
 ```
 
-#### Database
-##### [Seeds](./db/seeds.js)
+### Database
+#### [Seeds](./db/seeds.js)
 
 To drop the current database and populate it with:
   - 11 users
@@ -475,7 +473,7 @@ To drop the current database and populate it with:
   - 24 loan requests
 
 
-###### Seeds promises
+##### Seeds promises
 In the seeds file, JavaScript promises were used to ensure that the database is always seeded in the correct order. This is because certain data models require others to exist before they can be created:
   - Books can only be created once users (book owners) and genres have been created
   - Loans can only be created once users and books have been created
@@ -508,7 +506,7 @@ Promise.all(promiseArray)
 ```
 
 
-#### [Testing](./test)
+### [Testing](./test)
 
 Ru...............
 
