@@ -209,9 +209,9 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 | Form | Description |
 |---|---|
-| Book Form | Used for creating and updating book information: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
-| Loan Form | Used for creating loan requests: <br> - Loan start date <br> - Loan end date <br> Loan updating is not handled by this form |
-| User Form | Used for creating and updating user information: <br> - Text fields for username, email, password, password confirmation and profile picture <br> and library information: <br> - Mapbox map for library location
+| [Book Form](./src/components/books/bookForm.js) | Used for creating and updating book information: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
+| [Loan Form](./src/components/books/bookLoan.js) | Used for creating loan requests: <br> - Loan start date <br> - Loan end date <br> Loan updating is not handled by this form |
+| [User Form](./src/components/users/userform.js) | Used for creating and updating user information: <br> - Text fields for username, email, password, password confirmation and profile picture <br> and library information: <br> - Mapbox map for library location
 
 ---
 ### Loan Management
