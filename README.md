@@ -81,11 +81,12 @@ In alphabetical order:
 |:---:|:---:|:---:|:---:|
 | React | Node.js | Mocha | Webpack |
 | ReactDOM | MongoDB (NoSQL) | Chai | Babel |
-| React Router DOM | Mongoose | SuperTest | Axios |
-| Bulma | Express | mongoose-autopopulate | |
-| SCSS | dotenv | | |
+| React Router DOM | Express | SuperTest | Axios |
+| Bulma | Mongoose | | |
+| SCSS | mongoose-autopopulate  | | |
 | Mapbox GL JS | JSON Web Tokens (JWT) | | |
-| | bcrypt | | | |
+| | bcrypt | | |
+| | dotenv | | &nbsp; |
 
 
 View the full list of dependencies and dev dependencies in the [`package.json`](./package.json)
