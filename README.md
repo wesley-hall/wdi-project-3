@@ -611,7 +611,7 @@ To drop the current database and populate it with:
   - 24 loan requests
 
 
-##### Seeds promises
+#### Seeds promises
 In the seeds file, JavaScript promises were used to ensure that the database is always seeded in the correct order. This is because certain data models require others to exist before they can be created:
   - Books can only be created once users (book owners) and genres have been created
   - Loans can only be created once users and books have been created
