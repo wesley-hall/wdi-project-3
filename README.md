@@ -177,6 +177,9 @@ Orjon?
 
 Login/authentication credentials, as well as profile and library information
 
+---
+
+
 ```js
 const userSchema = new mongoose.Schema({
  username: { type: String, required: true, unique: true },
