@@ -365,22 +365,22 @@ Create and Delete for reviews, Create only for ratings:
 - _No Read is required as this information is sent with the books_
 
 
-  ```js
+```js
 // Example: Add a book rating (CRUD - Create)
 
 function ratingAdd(req, res) {
-  req.body.user = req.currentUser
-  Book
-    .findById(req.params.id)
-    .populate('rating')
-    .then(book => {
-      book.rating.push(req.body)
-      return book.save()
-    })
-    .then(book => res.json(book))
-    .catch(err => res.status(422).json(err))
+req.body.user = req.currentUser
+Book
+  .findById(req.params.id)
+  .populate('rating')
+  .then(book => {
+    book.rating.push(req.body)
+    return book.save()
+  })
+  .then(book => res.json(book))
+  .catch(err => res.status(422).json(err))
 }
-  ```
+```
 
 ---
 #### [Loans](./controllers/loans.js)
