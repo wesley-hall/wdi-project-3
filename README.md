@@ -82,7 +82,7 @@ In alphabetical order:
 | React | Node.js | Mocha | Webpack |
 | ReactDOM | MongoDB (NoSQL) | Chai | Babel |
 | React Router DOM | Mongoose | SuperTest | Axios |
-| Bulma | Express | | |
+| Bulma | Express | mongoose-autopopulate | |
 | SCSS | dotenv | | |
 | Mapbox GL JS | JSON Web Tokens (JWT) | | |
 | | bcrypt | | | |
@@ -132,18 +132,6 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 ### Front End
 
-Set up
-
-Authorisation files
- - Login & Register
-Common files
-  - Data id's
-  - Nav bar
-  - Secure routes
-  - Map files - for user to edit details and show user collections
-
-
-
 #### Pages
 
 | Page | Path | Features <br> _(Logged Out)_ | Additional Features <br> _(Logged In)_ |
@@ -161,7 +149,7 @@ Common files
 | [Loans](../master/src/components/loans/loansAll.js) | /loans | _Login required to access this page_ | Loan management page for books loaned out and books borrowed |
 | [User Profile](../master/src/components/users/userprofile.js) | /users | _Login required to access this page_ | Profile page of the user where they can view and delete their profile and library information |
 | [Edit Profile](../master/src/components/users/userEdit.js) | /userEdit | _Login required to access this page_ | Page for users to update their profile and library information |
-| [404](../master/src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist | _Only nav bar changes_ |
+| [404](../master/src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist | &nbsp; |
 
 #### Forms
 
@@ -174,295 +162,352 @@ Common files
 
 #### Loan Management
 
-#### Additional functionality for logged in users:
+.........................??
 
 
-4. The CRUD cycle for books
+#### Styling
 
-| CRUD Cycle | API Route | HTTP Method | Description |
-|---|---|---|---|
-| Create | /api/books | POST | Users are directed to a blank form with the following: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
-| Read | /api/books <br> /api/books/:id | GET | Users are able to view information about the book(s) |
-| Update | /api/books/:id/ | PUT | Users are directed to a pre-populated version of the Create form to change information |
-| Delete | /api/books/:id | DELETE | A remove button on the page prompts the user to confirm that they want to delete the book before permanently removing it from the database |
-
-_Users will be returned to the books (path: /books) page on submit of create and update forms and when clicking the remove button or the back button on a /books/:id page._
-
-View the books components [here](../master/src/components/books).
-
-
-4. The CRUD cycle for loans
-
-| CRUD Cycle | API Route | HTTP Method | Description |
-|------------|-------|-------------|-------------|
-| Create | /api/loans | POST | Users are shown to a blank form with two date picker fields for: <br> - Loan start date <br> - Loan end date |
-| Read | /api/loans <br> /api/loans/:id | GET | Users are able to view information about the loans |
-| Update | /api/books/:id/ | PUT | Users (book owner) can edit the approved, declined, collected and returned fields for the loan to change the status. |
-| Delete | /api/loans/:id | DELETE | Users (book borrowers) are able to cancel their requests to borrow a book |
-
-View the loans components [here](../master/src/components/loans).
+Orjon?
+....Mainly Bulma... custom.....[SCSS](./src/style.scss)...
 
 
 ### Back End
 
-#### Configuration
- - [Environment](../master/config/environment.js) - set up for the environment, port, database URI and secret
- - [Routes](../master/config/routes.js) - pathways to the controller functions for the CRUD cycle
+#### Models
+##### [User](../master/models/user.js)
 
- ```js
- // Example: Routes for /books and /books/:id
- // Note that some routes are secure and some are not
+Login/authentication credentials, as well as profile and library information
 
- router.route('/books')
-   .get(books.booksAll)
-   .post(secureRoute, books.bookCreate)
+```js
+const userSchema = new mongoose.Schema({
+ username: { type: String, required: true, unique: true },
+ profilePicture: { type: String},
+ email: { type: String, required: true, unique: true },
+ password: { type: String, required: true, unique: true },
+ libraryName: { type: String, required: true, unique: true },
+ location: {
+   lat: { type: Number, required: true },
+   lng: { type: Number, required: true }
+ },
+ libraryPicture: { type: String},
+ libraryDescription: { type: String },
+ userRating: [ userRatingSchema ]
+}, {
+ timestamps: true
+})
+```
+ - Virtual fields were also included for books, loans and password confirmation
 
- router.route('/books/:id')
-   .get(books.bookShow)
-   .put(secureRoute, books.bookUpdate)
-   .delete(secureRoute, books.bookDelete)
+##### [Genre](../master/models/bookGenre.js)
 
- ```
+A simple Mongoose Schema containing one string for the genre name/title
+
+```js
+const bookGenreSchema = new mongoose.Schema({
+ genre: { type: String, required: true }
+})
+```
+ - Genres were created separately from books so that the list could be scaled up as required
+
+##### [Book](../master/models/book.js)
+
+Book information with references to the BookGenre and User schemas, as well as information for book ratings and reviews
+
+```js
+const ratingSchema = new mongoose.Schema({
+ rating: {type: Number, min: 1, max: 5},
+ user: {type: mongoose.Schema.ObjectId, ref: 'User',  autopopulate: true }
+})
+```
+```js
+const reviewSchema = new mongoose.Schema({
+ review: {type: String},
+ user: {type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
+})
+```
+```js
+const bookSchema = new mongoose.Schema({
+ title: {type: String, required: true},
+ authors: {type: String},
+ image: {type: String},
+ fiction: {type: Boolean, required: true},
+ genre: { type: mongoose.Schema.ObjectId, ref: 'BookGenre'},
+ description: {type: String},
+ rating: [ratingSchema],
+ review: [reviewSchema],
+ owner: { type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
+})
+```
+- Virtual fields were also used for book loans
+- Where `autopopulate: true` can be seen, mongoose-autopopulate has been used to autopopulate the local field (e.g. owner) with information from the referenced model (e.g. User)
+
+##### [Loan](../master/models/loan.js)
+
+Loan information with references to the Book and User schemas
+
+```js
+const loanSchema = new mongoose.Schema({
+ book: { type: mongoose.Schema.ObjectId, ref: 'Book'},
+ borrower: { type: mongoose.Schema.ObjectId, ref: 'User'},
+ start: { type: Date, required: true},
+ end: { type: Date, required: true},
+ message: { type: String },
+ approved: { type: Boolean },
+ declined: { type: Boolean },
+ collected: { type: Date },
+ returned: { type: Date}
+}, {
+ timestamps: true
+})
+```
 
 #### Controllers
- - [Authentication](../master/controllers/auth.js) - user login and registration functionality with JSON Web Tokens (JWT)
+
+##### [Authentication](../master/controllers/auth.js)
+
+User login and registration functionality with JSON Web Tokens (JWT)
 
  ```js
- // Example: User registration (CRUD - Create)
+// Example: User registration (CRUD - Create)
 
- function register(req, res, next) {
-   User
-     .create(req.body)
-     .then(user => {
-       const token = jwt.sign({ sub: user._id }, secret, { expiresIn: '6h' })
-       res.json({
-         message: `Thanks for registering, ${user.username}`,
-         token,
-         user
-       })
+function register(req, res, next) {
+ User
+   .create(req.body)
+   .then(user => {
+     const token = jwt.sign({ sub: user._id }, secret, { expiresIn: '6h' })
+     res.json({
+       message: `Thanks for registering, ${user.username}`,
+       token,
+       user
      })
-     .catch(next)
- }
+   })
+   .catch(next)
+}
  ```
 
- - CRUD functionality for:
-  - [Users](../master/controllers/users.js) - complete CRUD cycle
+##### [Users](../master/controllers/users.js)
+
+Complete CRUD cycle for users:
+
+| CRUD | API Route | HTTP Method |
+|---|---|---|
+| Create | /api/register | POST |
+| Read | /api/users <br> /api/users/:id | GET |
+| Update | /api/users/:id | PUT |
+| Delete | /api/users/:id | DELETE |
 
   ```js
-  // Example: Show information on a specific user (CRUD - Read)
+// Example: Show information on a specific user (CRUD - Read)
 
-  function userShow(req, res) {
-    User
-      .findById(req.params.id)
-      .then(user => res.status(200).json(user))
-      .catch(err => res.json(err))
-  }
-
+function userShow(req, res) {
+  User
+    .findById(req.params.id)
+    .then(user => res.status(200).json(user))
+    .catch(err => res.json(err))
+}
   ```
 
-  - [Genres](../master/controllers/genres.js) - Read only (no Create, Update or Delete for users)
+##### [Genres](../master/controllers/genres.js)
+
+Read only (no Create, Update or Delete for genres):
+
+| CRUD | API Route | HTTP Method |
+|---|---|---|
+| Read | /api/genres | GET |
 
   ```js
-  // Example: Show all genres (CRUD - Read)
+// Example: Show all genres (CRUD - Read)
 
-  function genresAll(req, res) {
-    Genres
-      .find()
-      .then(genres => res.json(genres))
-      .catch(e => console.log(e))
-  }
+function genresAll(req, res) {
+  Genres
+    .find()
+    .then(genres => res.json(genres))
+    .catch(e => console.log(e))
+}
   ```
 
-  - [Books](../master/controllers/books.js), including reviews and ratings
-    - Complete CRUD cycle for books
-    - Create and Delete for reviews (no Read as this information is sent with the books)
-    - Create only for rating (no Read as this information is sent with the books)
+##### [Books](../master/controllers/books.js), _including reviews and ratings_
+
+Complete CRUD cycle for books:
+
+| CRUD | API Route | HTTP Method |
+|---|---|---|
+| Create | /api/books | POST |
+| Read | /api/books <br> /api/books/:id | GET |
+| Update | /api/books/:id | PUT |
+| Delete | /api/books/:id | DELETE |
+
+```js
+// Example: Delete a book (CRUD - Delete)
+
+function bookDelete(req, res) {
+  Book
+    .findByIdAndRemove(req.params.id)
+    .then(() => res.sendStatus(204))
+    .catch(err => res.status(500).json(err))
+}
+```
+
+Create and Delete for reviews, Create only for ratings:
+
+  | CRUD | API Route | HTTP Method |
+  |---|---|---|
+  | Create | /api/books/:id/review <br> /api/books/:id/rating | POST |
+  | Delete | /api/books/:id/review/:reviewId | DELETE |
+
+- _No Read is required as this information is sent with the books_
+
 
   ```js
-  // Example: Delete a book (CRUD - Delete)
+// Example: Add a book rating (CRUD - Create)
 
-  function bookDelete(req, res) {
-    Book
-      .findByIdAndRemove(req.params.id)
-      .then(() => res.sendStatus(204))
-      .catch(err => res.status(500).json(err))
-  }
+function ratingAdd(req, res) {
+  req.body.user = req.currentUser
+  Book
+    .findById(req.params.id)
+    .populate('rating')
+    .then(book => {
+      book.rating.push(req.body)
+      return book.save()
+    })
+    .then(book => res.json(book))
+    .catch(err => res.status(422).json(err))
+}
   ```
+
+##### [Loans](../master/controllers/loans.js)
+
+Complete CRUD cycle for loans:
+
+| CRUD | API Route | HTTP Method |
+|---|---|---|
+| Create | /api/books/:id/loan | POST |
+| Read | /api/loans <br> /api/loans/:id | GET |
+| Update | /api/loans/:id | PUT |
+| Delete | /api/loans/:id | DELETE |
+
   ```js
-  // Example: Add a book rating (CRUD - Create)
+// Example: Update loan information (CRUD - Update)
 
-  function ratingAdd(req, res) {
-    req.body.user = req.currentUser
-    Book
-      .findById(req.params.id)
-      .populate('rating')
-      .then(book => {
-        book.rating.push(req.body)
-        return book.save()
-      })
-      .then(book => res.json(book))
-      .catch(err => res.status(422).json(err))
-  }
+function loanUpdate(req, res) {
+  Loan
+    .findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true})
+    .exec()
+    .then(loan => res.status(200).json(loan))
+    .catch(err => res.status(500).json(err))
+}
   ```
 
-  - [Loans](../master/controllers/loans.js) - complete CRUD cycle
 
-  ```js
-  // Example: Update loan information (CRUD - Update)
+#### Configuration
+##### [Environment](../master/config/environment.js)
+Set up for the environment, port, database URI and secret
 
-  function loanUpdate(req, res) {
-    Loan
-      .findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true})
-      .exec()
-      .then(loan => res.status(200).json(loan))
-      .catch(err => res.status(500).json(err))
-  }
-  ```
+##### [Routes](../master/config/routes.js)
 
+Pathways to the controller functions for the CRUD cycle
+
+ ```js
+// Example: Routes for /books and /books/:id
+// Note that some routes are secure and some are not
+
+router.route('/books')
+ .get(books.booksAll)
+ .post(secureRoute, books.bookCreate)
+
+router.route('/books/:id')
+ .get(books.bookShow)
+ .put(secureRoute, books.bookUpdate)
+ .delete(secureRoute, books.bookDelete)
+ ```
 
 #### Library
- - [Error handler](../master/lib/errorHandler.js) for custom error messages and response statuses
- - [Secure route](../master/lib/secureRoute.js) functionality to restrict access by unregistered and not logged in users
-   ```js
-   function secureRoute(req, res, next) {
-     // Check if the request has an Authorization header
-     if (!req.headers.authorization) return res.status(401).json({ message: 'Unauthorized' })
-     // Remove 'Bearer ' from the Authorization header to just be left with the token
-     const token = req.headers.authorization.replace('Bearer ', '')
-     // Use jwt verify to check if the token is a valid JSON Web Token
-     new Promise((resolve, reject) => {
-       jwt.verify(token, secret, (err, payload) => {
-         if (err) reject(err)
-         resolve(payload)
-       })
-     })
-      // If the token is valid, the promise will be resolved and the payload sub (user id) can be used to find the user associated to the token
-       .then(payload => User.findById(payload.sub))
-       .then(user => {
-         if (!user) return res.status(401).json({ message: 'Unauthorized' })
-         req.currentUser = user
-         next()
-       })
-       // If the token is not valid, the promise will be rejected and the catch block will run
-       .catch(next)
-   }
-   ```
+
+##### [Error handler](../master/lib/errorHandler.js)
+
+For custom error messages and response statuses
+
+```js
+// Example 401 Unauthorized:
+
+if (err.message === 'Unauthorized') {
+  return res.status(401).json({ message: 'Unauthorized' })
+}
+```
+
+##### [Secure route](../master/lib/secureRoute.js)
+
+Functionality to restrict access by unregistered and not logged in users
+
+```js
+function secureRoute(req, res, next) {
+ // Check if the request has an Authorization header
+ if (!req.headers.authorization) return res.status(401).json({ message: 'Unauthorized' })
+ // Remove 'Bearer ' from the Authorization header to just be left with the token
+ const token = req.headers.authorization.replace('Bearer ', '')
+ // Use jwt verify to check if the token is a valid JSON Web Token
+ new Promise((resolve, reject) => {
+   jwt.verify(token, secret, (err, payload) => {
+     if (err) reject(err)
+     resolve(payload)
+   })
+ })
+  // If the token is valid, the promise will be resolved and the payload sub (user id) can be used to find the user associated to the token
+   .then(payload => User.findById(payload.sub))
+   .then(user => {
+     if (!user) return res.status(401).json({ message: 'Unauthorized' })
+     req.currentUser = user
+     next()
+   })
+   // If the token is not valid, the promise will be rejected and the catch block will run
+   .catch(next)
+}
+```
 
 #### Database
-- [Seeds](../master/db/seeds.js) - To drop the current database and populate it with:
+##### [Seeds](../master/db/seeds.js)
+
+To drop the current database and populate it with:
   - 11 users
   - 11 genres
   - 91 books
   - 24 loan requests
 
 
-- Seeds promises - In the seeds file, JavaScript promises were used to ensure that the database is always seeded in the correct order. This is because certain data models require others to exist before they can be created:
+###### Seeds promises
+In the seeds file, JavaScript promises were used to ensure that the database is always seeded in the correct order. This is because certain data models require others to exist before they can be created:
   - Books can only be created once users (book owners) and genres have been created
   - Loans can only be created once users and books have been created
 
-  ```js
-  // Create users and genres inside a promise array
-  const promiseArray = [
-    User.create([...]),
-    BookGenre.create([...])
-  ]
+```js
+// Exmaple of Promise in seeds.js:
 
-  // Wait for all promises to pass before continuing
-  Promise.all(promiseArray)
-    .then(data => {
-      // Deconstruct data so that users and genres can be used when creating books
-      const [ users, genres ] = data
-      return Promise.all([
-        Books.create([...]),
-        // Along with books, pass users down to the next then block
-        users
-        ])
-      })
-    .then(data => {
-      // Deconstruct data so that books and users can be used when creating loans
-      const [ books, users ] = data
-      return Loan.create([...])
+// Create users and genres inside a promise array
+const promiseArray = [
+  User.create([...]),
+  BookGenre.create([...])
+]
+
+// Wait for all promises to pass before continuing
+Promise.all(promiseArray)
+  .then(data => {
+    // Deconstruct data so that users and genres can be used when creating books
+    const [ users, genres ] = data
+    return Promise.all([
+      Books.create([...]),
+      // Along with books, pass users down to the next then block
+      users
+      ])
     })
-  ```
-
-
-- Data Models/Schemas
-  - [User](../master/models/user.js) - login/authentication credentials, as well as profile and library information
-  ```js
-  const userSchema = new mongoose.Schema({
-    username: { type: String, required: true, unique: true },
-    profilePicture: { type: String},
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true, unique: true },
-    libraryName: { type: String, required: true, unique: true },
-    location: {
-      lat: { type: Number, required: true },
-      lng: { type: Number, required: true }
-    },
-    libraryPicture: { type: String},
-    libraryDescription: { type: String },
-    userRating: [ userRatingSchema ]
-  }, {
-    timestamps: true
+  .then(data => {
+    // Deconstruct data so that books and users can be used when creating loans
+    const [ books, users ] = data
+    return Loan.create([...])
   })
-  ```
-    - Virtual fields were also included for books, loans and password confirmation
-
-  - [Genre](../master/models/bookGenre.js) - a simple schema containing one string for the genre name/title
-  ```js
-  const bookGenreSchema = new mongoose.Schema({
-    genre: { type: String, required: true }
-  })
-  ```
-    - Genres were created separately from books so that the list could be scaled up as required
-
-  - [Book](../master/models/book.js) - book information with references to the BookGenre and User schemas, as well as information for book ratings and reviews
-  ```js
-  const ratingSchema = new mongoose.Schema({
-    rating: {type: Number, min: 1, max: 5},
-    user: {type: mongoose.Schema.ObjectId, ref: 'User',  autopopulate: true }
-  })
-  ```
-  ```js
-  const reviewSchema = new mongoose.Schema({
-    review: {type: String},
-    user: {type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
-  })
-  ```
-  ```js
-  const bookSchema = new mongoose.Schema({
-    title: {type: String, required: true},
-    authors: {type: String},
-    image: {type: String},
-    fiction: {type: Boolean, required: true},
-    genre: { type: mongoose.Schema.ObjectId, ref: 'BookGenre'},
-    description: {type: String},
-    rating: [ratingSchema],
-    review: [reviewSchema],
-    owner: { type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
-  })
-  ```
-    - Virtual fields were used for book loans
-
-  - [Loan](../master/models/loan.js) - loan information with references to the Book and User schemas
-  ```js
-  const loanSchema = new mongoose.Schema({
-    book: { type: mongoose.Schema.ObjectId, ref: 'Book'},
-    borrower: { type: mongoose.Schema.ObjectId, ref: 'User'},
-    start: { type: Date, required: true},
-    end: { type: Date, required: true},
-    message: { type: String },
-    approved: { type: Boolean },
-    declined: { type: Boolean },
-    collected: { type: Date },
-    returned: { type: Date}
-  }, {
-    timestamps: true
-  })
-  ```
+```
 
 
-#### Testing
+#### [Testing](../master/test)
 
 Ru...............
 
