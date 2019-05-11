@@ -2,10 +2,6 @@
 **Please note that this README is currently being worked on and is not yet finished.**
 ---
 
-**Please note that this README is currently being worked on and is not yet finished.**
-
----
-
 # WDI Project 3 - booker
 
 ## Table of Contents
