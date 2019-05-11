@@ -216,7 +216,7 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 ---
 ### Loan Management
 
-Loan status changes were handled on the front end - there was no 'status' field stored for each loan request.
+Loan status changes were handled on the front end - there was no 'status' field stored in the database for each loan request.
 
 To do this, functions were created to filter loans based on requirements that determined their status.
 
@@ -262,7 +262,7 @@ This then allowed a certain status to be displayed, as well as a corresponding u
 }
 ```
 
-View the LoanedPending component [here](./src/components/loans/statusButtons/loanedPending.js)
+_View the LoanedPending component [here](./src/components/loans/statusButtons/loanedPending.js)_
 
 Functions were also written to handle a PUT axios request to update the loan request in the database
 
@@ -560,7 +560,7 @@ router.route('/books/:id')
 For custom error messages and response statuses
 
 ```js
-// Example 401 Unauthorized:
+// Example: 401 Unauthorized
 
 if (err.message === 'Unauthorized') {
   return res.status(401).json({ message: 'Unauthorized' })
@@ -585,7 +585,8 @@ function secureRoute(req, res, next) {
      resolve(payload)
    })
  })
-  // If the token is valid, the promise will be resolved and the payload sub (user id) can be used to find the user associated to the token
+  // If the token is valid, the promise will be resolved and the payload sub (user id)
+  // can be used to find the user associated to the token
    .then(payload => User.findById(payload.sub))
    .then(user => {
      if (!user) return res.status(401).json({ message: 'Unauthorized' })
