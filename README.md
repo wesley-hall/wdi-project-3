@@ -648,8 +648,6 @@ Promise.all(promiseArray)
 
 Ru...............?
 
-Future Features
-
 
 ## Future Features
 
