@@ -131,6 +131,8 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 ## Project Deliverables - Front End
 
+![booker Front End Logged Out](./src/assets/readme/frontend_loggedout.gif)
+
 ### Pages
 
 | Page | Path | Features <br> _(Logged Out)_ | Additional Features <br> _(Logged In)_ |
