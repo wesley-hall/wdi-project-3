@@ -141,9 +141,10 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 | [Login](./src/components/auth/login.js) | /login | Login as a returning (registered) users | |
 | [Register](./src/components/auth/register.js) | /register | Register as a new user | |
 | [Books (All)](./src/components/books/booksAll.js) | /books | View all books in the database | View the distance between the logged in user's library and the libraries that the books are in  |
-| [Book Show (Individual books)](./src/components/books/bookShow.js) | /books/:id |  View details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |  - All users can rate and review the book <br> - Existing reviews can be deleted by the user that created the review <br> - Users that own the book can remove/delete it <br> - Users that don't own the book can create loan requests |
+| [Book Show (Individual books)](./src/components/books/bookShow.js) | /books/:id |  View details of the chosen book: <br> - Book title <br> - Author <br> - Rating and reviews <br> - Owner information <br> - Loan request functionality |  - All users can rate and review the book <br> - Existing reviews can be deleted by the user that created the review <br> - Users that own the book can remove/delete it |
 | [Book Add](./src/components/books/bookAdd.js) | /books/add | _Login required to access this page_ | Add a book by filling in a blank [BookForm](./src/components/books/bookForm.js) with the following: <br> - Text fields for title, author, image URL <br> - Select dropdown with options for genre <br> - Checkbox (styled as a toggle button) for non-/fiction <br> - Radio buttons for review <br> - Textarea for description and review |
 | [Book Update](./src/components/books/bookUpdate.js) | /books/:id/update | _Login required to access this page_ | Users that own the book can change book information by filling in a pre-populated version of the [BookForm](./src/components/books/bookForm.js) |
+| [Book Loan](./src/components/books/bookLoan.js) | /books/:id/loan | _Login required to access this page_ | Users that don't own the book can create loan requests |
 | [Libraries](./src/components/books/libraries.js) | /libraries | View all libraries by location, including: <br> - A book count in the marker <br> - Library name, picture and description in a popup |  - View the logged in user's own library location and details <br> - Link to the User Profile page to view and edit user information |
 | [Loans](./src/components/loans/loansAll.js) | /loans | _Login required to access this page_ | Loan management page for books loaned out and books borrowed |
 | [User Profile](./src/components/users/userprofile.js) | /users | _Login required to access this page_ | Profile page of the user where they can view and delete their profile and library information |
@@ -151,7 +152,6 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 | [404](./src/components/pages/404.js) | /* | Error 404 page for when users attempt to access a page that does not exist | &nbsp; |
 
 #### Home and About
-
 
 | Homepage | About Page |
 |:--:|:--:|
@@ -204,9 +204,6 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 | ![Books Loaned Out](./src/assets/readme/frontend_loans_loanedout.gif) |
 
 
-
-
-
 ---
 ### Forms
 
@@ -219,14 +216,82 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 ---
 ### Loan Management
 
-.........................??
+Loan status changes were handled on the front end - there was no 'status' field stored for each loan request.
+
+To do this, functions were created to filter loans based on requirements that determined their status.
+
+```js
+// Example: Some functions used to determine the status of a loan request
+
+isPending(loan) {
+  const { approved, declined, returned, end } = loan
+  return !approved && !declined && !returned && new Date() < new Date(end)
+}
+
+isAwaitingCollection(loan) {
+  const { approved, collected, returned } = loan
+  return approved && !collected && !returned
+}
+
+isOnLoan(loan) {
+  const { approved, collected, returned, end } = loan
+  return approved && !!collected && !returned && new Date() < new Date(end)
+}
+
+isReturned(loan) {
+  return !!loan.returned
+}
+
+isOverdue(loan) {
+  const { end, approved, collected, returned } = loan
+  return approved && !!collected && !returned && new Date() > new Date(end)
+}
+```
+
+This then allowed a certain status to be displayed, as well as a corresponding user action, if one was required.
+
+```js
+// Example: If the loan is pending, display the LoanedPending component
+{isPending(loan) &&
+  <LoanedPending
+    className="loan-border-bottom"
+    loan={loan}
+    approveLoanRequest={approveLoanRequest}
+    declineLoanRequest={declineLoanRequest}
+  />
+}
+```
+
+View the LoanedPending component [here](./src/components/loans/statusButtons/loanedPending.js)
+
+Functions were also written to handle a PUT axios request to update the loan request in the database
+
+```js
+// Example: Function to allow a user to approve a loan request:
+approveLoanRequest(e) {
+  axios({
+    method: 'PUT',
+    url: `/api/loans/${e.target.value}`,
+    headers: {
+      'Authorization': `Bearer ${Auth.getToken()}`
+    },
+    data: {
+      // Here the request is to change 'approved' to true
+      approved: true
+    }
+  })
+    .then(() => this.getLoans())
+    .catch(err => console.log(err))
+}
+```
 
 ---
 ### Styling
 
 Orjon?
-....Mainly Bulma... custom.....[SCSS](./src/style.scss)...
+....Mainly Bulma... custom.....SCSS...
 
+View the style SCSS file [here](./src/style.scss)
 
 ## Project Devliverables - Back End
 
