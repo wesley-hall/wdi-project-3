@@ -131,8 +131,6 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 ## Project Deliverables - Front End
 
-![booker Front End Logged Out](./src/assets/readme/frontend_loggedout.gif)
-
 ### Pages
 
 | Page | Path | Features <br> _(Logged Out)_ | Additional Features <br> _(Logged In)_ |
@@ -150,7 +148,64 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 | [Loans](./src/components/loans/loansAll.js) | /loans | _Login required to access this page_ | Loan management page for books loaned out and books borrowed |
 | [User Profile](./src/components/users/userprofile.js) | /users | _Login required to access this page_ | Profile page of the user where they can view and delete their profile and library information |
 | [Edit Profile](./src/components/users/userEdit.js) | /userEdit | _Login required to access this page_ | Page for users to update their profile and library information |
-| [404](./src/components/pages/404.js) | /* | Error 404 page for when users attempt to access: <br> - A page they are not authorized to access <br> - A page that does not exist | &nbsp; |
+| [404](./src/components/pages/404.js) | /* | Error 404 page for when users attempt to access a page that does not exist | &nbsp; |
+
+#### Home and About
+
+
+| Homepage | About Page |
+|:--:|:--:|
+|![Homepage](./src/assets/readme/frontend_home.png) | ![About page](././src/assets/readme/frontend_about.png) |
+
+#### Login and Register
+
+| Login | Register |
+|:--:|:--:|
+|![Login](./src/assets/readme/frontend_login.png) | ![Register](././src/assets/readme/frontend_register.png) |
+
+#### Navigation Bar
+
+| Logged Out |
+|:--:|
+| ![Navbar Logged Out](./src/assets/readme/frontend_nav_loggedout.png) |
+
+| Logged In |
+|:--:|
+| ![Navbar Logged In](./src/assets/readme/frontend_nav_loggedin.png) |
+
+#### Libraries
+
+| Logged Out | Logged In |
+|:--:|:--:|
+| ![Libraries Logged Out](./src/assets/readme/frontend_libraries_loggedout.png) | ![Libraries Logged In](./src/assets/readme/frontend_libraries_loggedin.png) |
+
+#### Books
+
+| Viewing all books, filtering by library, searching for a specific book and then rating and reviewing it. |
+|:--:|
+| ![Books](./src/assets/readme/frontend_books_view_rate_review.gif) |
+
+| Adding a new book from the main Books page |
+|:--:|
+| ![Adding a book](./src/assets/readme/frontend_books_add.gif) |
+
+
+#### Book Loans - Borrowed
+
+| Borrowing a book and managing loan requests for books that the logged in user has borrow |
+|:--:|
+| ![Books Borrowed](./src/assets/readme/frontend_loans_borrowed.gif) |
+
+
+#### Book Loans - Loaned Out
+
+| Managing loan requests for loans from the logged in user |
+|:--:|
+| ![Books Loaned Out](./src/assets/readme/frontend_loans_loanedout.gif) |
+
+
+
+
 
 ---
 ### Forms
