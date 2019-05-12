@@ -3,12 +3,12 @@ const bcrypt = require('bcrypt')
 
 const userRatingSchema = new mongoose.Schema({
   rating: { type: Number },
-  user: {type: mongoose.Schema.ObjectId, ref: 'User'}
+  user: { type: mongoose.Schema.ObjectId, ref: 'User' }
 })
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
-  profilePicture: { type: String},
+  profilePicture: { type: String },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, unique: true },
   libraryName: { type: String, required: true, unique: true },
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     lat: { type: Number, required: true },
     lng: { type: Number, required: true }
   },
-  libraryPicture: { type: String},
+  libraryPicture: { type: String },
   libraryDescription: { type: String },
   userRating: [ userRatingSchema ]
 }, {
