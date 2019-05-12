@@ -309,7 +309,7 @@ Login/authentication credentials, as well as profile and library information
 ```js
 const userSchema = new mongoose.Schema({
  username: { type: String, required: true, unique: true },
- profilePicture: { type: String},
+ profilePicture: { type: String },
  email: { type: String, required: true, unique: true },
  password: { type: String, required: true, unique: true },
  libraryName: { type: String, required: true, unique: true },
@@ -317,7 +317,7 @@ const userSchema = new mongoose.Schema({
    lat: { type: Number, required: true },
    lng: { type: Number, required: true }
  },
- libraryPicture: { type: String},
+ libraryPicture: { type: String },
  libraryDescription: { type: String },
  userRating: [ userRatingSchema ]
 }, {
@@ -345,24 +345,24 @@ Book information with references to the BookGenre and User schemas, as well as i
 
 ```js
 const ratingSchema = new mongoose.Schema({
- rating: {type: Number, min: 1, max: 5},
- user: {type: mongoose.Schema.ObjectId, ref: 'User',  autopopulate: true }
+ rating: { type: Number, min: 1, max: 5 },
+ user: { type: mongoose.Schema.ObjectId, ref: 'User',  autopopulate: true }
 })
 ```
 ```js
 const reviewSchema = new mongoose.Schema({
- review: {type: String},
- user: {type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
+ review: { type: String },
+ user: { type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
 })
 ```
 ```js
 const bookSchema = new mongoose.Schema({
- title: {type: String, required: true},
- authors: {type: String},
- image: {type: String},
- fiction: {type: Boolean, required: true},
- genre: { type: mongoose.Schema.ObjectId, ref: 'BookGenre'},
- description: {type: String},
+ title: { type: String, required: true },
+ authors: { type: String },
+ image: { type: String },
+ fiction: { type: Boolean, required: true},
+ genre: { type: mongoose.Schema.ObjectId, ref: 'BookGenre' },
+ description: { type: String },
  rating: [ratingSchema],
  review: [reviewSchema],
  owner: { type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true }
@@ -386,7 +386,7 @@ const loanSchema = new mongoose.Schema({
  approved: { type: Boolean },
  declined: { type: Boolean },
  collected: { type: Date },
- returned: { type: Date}
+ returned: { type: Date }
 }, {
  timestamps: true
 })
