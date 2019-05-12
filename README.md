@@ -254,6 +254,7 @@ This then allowed a certain status to be displayed, as well as a corresponding u
 
 ```js
 // Example: If the loan is pending, display the LoanedPending component
+
 {isPending(loan) &&
   <LoanedPending
     className="loan-border-bottom"
@@ -270,6 +271,7 @@ Functions were also written to handle a PUT axios request to update the loan req
 
 ```js
 // Example: Function to allow a user to approve a loan request:
+
 approveLoanRequest(e) {
   axios({
     method: 'PUT',
@@ -295,7 +297,7 @@ Orjon?
 
 View the style SCSS file [here](./src/style.scss)
 
-## Project Devliverables - Back End
+## Project Deliverables - Back End
 
 ### Models
 #### [User](./models/user.js)
@@ -617,7 +619,7 @@ In the seeds file, JavaScript promises were used to ensure that the database is 
   - Loans can only be created once users and books have been created
 
 ```js
-// Exmaple of Promise in seeds.js:
+// Example: Promise in seeds.js
 
 // Create users and genres inside a promise array
 const promiseArray = [
@@ -625,7 +627,7 @@ const promiseArray = [
   BookGenre.create([...])
 ]
 
-// Wait for all promises to pass before continuing
+// Wait for all promises to resolve before continuing
 Promise.all(promiseArray)
   .then(data => {
     // Deconstruct data so that users and genres can be used when creating books
