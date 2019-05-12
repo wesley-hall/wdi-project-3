@@ -126,6 +126,8 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 ## Project Roadmap
 
+... Still to work on + add pictures....
+
 - Front-end user journeys
 - Back-end configuration structure
 - Data schemas  
