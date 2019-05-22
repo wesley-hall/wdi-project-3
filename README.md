@@ -7,8 +7,8 @@
 ## Table of Contents
 
 
-| 1. [Overview](#overview) <br> 2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation---loose-agile-framework) <br> 7. [Wins](#wins) <br> 8. [Challenges](#challenges) | 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables---front-end) <br> &nbsp;&nbsp;&nbsp; - [Front End](#project-deliverables---front-end) <br> &nbsp;&nbsp;&nbsp; - [Back End](#project-deliverables---back-end) <br> &nbsp;&nbsp;&nbsp; - [Testing](#testing) <br> 11. [Future Features](#future-features) <br> 12. [Key Learnings](#key-learnings) |
-|:---|:---|
+| 1. [Overview](#overview)<br>2. [Team](#team) <br> 3. [Technical Acceptance Criteria](#technical-acceptance-criteria) <br> 4. [Project Proposal](#project-proposal) <br> 5. [Technologies](#technologies) <br> 6. [Team Organisation](#team-organisation---loose-agile-framework) <br> 7. [Wins](#wins) <br> 8. [Challenges](#challenges) | 9. [Project Roadmap](#project-roadmap) <br> 10. [Project Deliverables](#project-deliverables---front-end) <br> &nbsp;&nbsp;&nbsp; - [Front End](#project-deliverables---front-end) <br> &nbsp;&nbsp;&nbsp; - [Back End](#project-deliverables---back-end) <br> &nbsp;&nbsp;&nbsp; - [Testing](#testing) <br> 11. [Future Features](#future-features) <br> 12. [Key Learnings](#key-learnings) |
+|:
 
 
 ## Overview
@@ -128,10 +128,19 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 ... Still to work on + add pictures....
 
-- Front-end user journeys
-- Back-end configuration structure
-- Data schemas  
-- Product backlog
+- [x] Front-end user journeys (orjon)
+- [ ] Back-end configuration structure
+- [ ] Data schemas  
+- [ ] Product backlog
+
+### User journey
+
+Early in the development stage we broke down all the application's functions into groups that would become the 'pages' of the application. These were sketched out on pieces of paper and the arrangement of these helped us to map out a clear user journey, and separate concerns.
+
+![Libraries Logged In](./src/assets/readme/user-flow.png)
+
+This was an iterative, sometimes subjective, but ultimately very constructive process. Sketching out the user flows in this way greatly assisted in structuring the code and filing.
+
 
 ## Project Deliverables - Front End
 
@@ -294,14 +303,36 @@ approveLoanRequest(e) {
 ---
 ### Styling
 
-Orjon?
-....Mainly Bulma... custom.....SCSS...
+#### Concept
+Of primary styling concern was to keep the interface very simple and intuitive to use.
+
+
+This begins with the about page which clearly states the purpose of the application.
+
+![Libraries Logged In](./src/assets/readme/frontend_about.jpg)
+
+#### Bulma Framework
+
+Styling was implemented using the [Bulma CSS framework](https://bulma.io/). Bulma has classes which are structured greatly speed up the process of creating grid layouts in particular, such as we used for the Books (All) page.
+
+![Libraries Logged In](./src/assets/readme/frontend_booksall.jpg)
+
+There are several different sets of information that need to be displayed on the various pages of the site - the aim was to keep these as uniformed as possible. To help visually tie the pages together a colour-coded styling language was developed for the buttons.
+
+| |Buttons|
+|:----:|:----|
+|Large|![Libraries Logged In](./src/assets/readme/buttons_large.png)|
+|Small|![Libraries Logged In](./src/assets/readme/buttons_small.png)|
 
 View the style SCSS file [here](./src/style.scss)
 
 ## Project Deliverables - Back End
 
 ### Models
+
+![Libraries Logged In](./src/assets/readme/db_structure.jpg)
+
+
 #### [User](./models/user.js)
 
 Login/authentication credentials, as well as profile and library information
