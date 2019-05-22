@@ -162,7 +162,7 @@ describe('Book tests', () => {
     })
   })
 
-  describe('DELETE /api/shoes/:id', () => {
+  describe('DELETE /api/books/:id', () => {
 
     let book
 
