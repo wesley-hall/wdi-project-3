@@ -15,6 +15,19 @@
 
 The third WDI project was to work in a team to deliver a fully-functional user-generated CMS (Content Management System) that includes multiple relationships between database models and consumes at least one public API (Application Programming Interface).
 
+### Installation
+
+### Installing Dependencies
+```
+$ yarn
+```
+```
+$ npm install
+```
+
+View the full list of dependencies and dev dependencies in the [`package.json`](./package.json)
+
+
 
 ## Team
 
@@ -684,7 +697,7 @@ A test resource was created for the books using Chai and Mocha. SuperTest was al
 
 The dummy book data used for the test was stored in a variable called bookData. As defined in the book schema, fields such as title and fiction are required and a test would not pass unless these two fields were filled.
 
-```
+```js
 const bookData = {
   title: 'The Hobbit',
   authors: 'J.R.R Tolkien',
@@ -696,7 +709,7 @@ const bookData = {
 
 As some routes (such as posting a book) were secure routes and required user authentication to access them, the user environment and JSON Web Token had to be imported into the test environment.
 
-```
+```js
 beforeEach(done => {
   Book.collection.remove()
   Book.create(
@@ -724,7 +737,7 @@ beforeEach(done => {
 })
 ```
 
-```
+```js
 describe('POST /api/books', () => {
   it('should return a 201 response', done => {
     api
@@ -742,12 +755,14 @@ describe('POST /api/books', () => {
 #### How to run tests
 
 Tests can be run from the command line using yarn or npm:
+
 ```
-yarn test
+$ yarn test
 ```
 ```
-npm run test
+$ npm run test
 ```
+
 | Running tests in iTerm2 with yarn |
 |:--:|
 |![Testing](./src/assets/readme/testing.png)|
