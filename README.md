@@ -126,8 +126,6 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 ## Project Roadmap
 
-... Still to work on + add pictures....
-
 - [x] Front-end user journeys (orjon)
 - [ ] Back-end configuration structure
 - [ ] Data schemas  
@@ -137,9 +135,13 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 Early in the development stage we broke down all the application's functions into groups that would become the 'pages' of the application. These were sketched out on pieces of paper and the arrangement of these helped us to map out a clear user journey, and separate concerns.
 
-![Libraries Logged In](./src/assets/readme/user-flow.png)
+![User journey](./src/assets/readme/planning_wireframe_userflow.jpg)
 
 This was an iterative, sometimes subjective, but ultimately very constructive process. Sketching out the user flows in this way greatly assisted in structuring the code and filing.
+
+### Database Structure
+
+![Database Structure](./src/assets/readme/planning_db_structure.jpg)
 
 
 ## Project Deliverables - Front End
@@ -309,29 +311,26 @@ Of primary styling concern was to keep the interface very simple and intuitive t
 
 This begins with the about page which clearly states the purpose of the application.
 
-![Libraries Logged In](./src/assets/readme/frontend_about.jpg)
+![About Page](./src/assets/readme/frontend_about.jpg)
 
 #### Bulma Framework
 
 Styling was implemented using the [Bulma CSS framework](https://bulma.io/). Bulma has classes which are structured greatly speed up the process of creating grid layouts in particular, such as we used for the Books (All) page.
 
-![Libraries Logged In](./src/assets/readme/frontend_booksall.jpg)
+![Books All Page](./src/assets/readme/frontend_booksall.jpg)
 
 There are several different sets of information that need to be displayed on the various pages of the site - the aim was to keep these as uniformed as possible. To help visually tie the pages together a colour-coded styling language was developed for the buttons.
 
 | |Buttons|
 |:----:|:----|
-|Large|![Libraries Logged In](./src/assets/readme/buttons_large.png)|
-|Small|![Libraries Logged In](./src/assets/readme/buttons_small.png)|
+|Large|![Buttons large](./src/assets/readme/buttons_large.png)|
+|Small|![Buttons small](./src/assets/readme/buttons_small.png)|
 
 View the style SCSS file [here](./src/style.scss)
 
 ## Project Deliverables - Back End
 
 ### Models
-
-![Libraries Logged In](./src/assets/readme/db_structure.jpg)
-
 
 #### [User](./models/user.js)
 
@@ -681,12 +680,87 @@ Promise.all(promiseArray)
 ---
 ### [Testing](./test)
 
-Ru...............?
+A test resource was created for the books using Chai and Mocha. SuperTest was also installed to make HTTP calls within the test environment. This meant that a local test environment could be created in the test file with 'dummy data'.
+
+The dummy book data used for the test was stored in a variable called bookData. As defined in the book schema, fields such as title and fiction are required and a test would not pass unless these two fields were filled.
+
+```
+const bookData = {
+  title: 'The Hobbit',
+  authors: 'J.R.R Tolkien',
+  image: 'http://www.orjon.com/dev/booker/images/bookcovers/cover-theHobbit.jpeg',
+  fiction: true,
+  description: 'In a hole in the ground there lived a hobbit....'
+}
+```
+
+As some routes (such as posting a book) were secure routes and required user authentication to access them, the user environment and JSON Web Token had to be imported into the test environment.
+
+```
+beforeEach(done => {
+  Book.collection.remove()
+  Book.create(
+    bookData
+  )
+    .then(() => User.remove({}))
+    .then(() => User.create({
+      username: 'test',
+      email: 'test',
+      password: 'test',
+      passwordConfirmation: 'test',
+      location: {
+        lat: 51.4,
+        lng: 21
+      },
+      libraryName: 'test'
+
+    }))
+    .then(user => {
+      token = jwt.sign({ sub: user._id }, secret, { expiresIn: '6h' })
+      done()
+    })
+
+    .catch(done)
+})
+```
+
+```
+describe('POST /api/books', () => {
+  it('should return a 201 response', done => {
+    api
+      .post('/api/books')
+      .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${token}`})
+      .send(bookData)
+      .end((err, res) => {
+        console.log(err)
+        expect(res.status).to.eq(201)
+        done()
+      })
+  })
+```
+
+#### How to run tests
+
+Tests can be run from the command line using yarn or npm:
+```
+yarn test
+```
+```
+npm run test
+```
+| Running tests in iTerm2 with yarn |
+|:--:|
+|![Testing](./src/assets/readme/testing.png)|
+
 
 
 ## Future Features
 
-...To add
+- Select dropdown to filter loans by status
+- Button on the Libraries page that links from a library popup to the books page filtered by books belonging to that library
+
 
 ## Key Learnings
-...To add
+
+- Promises in JavaScript
+- Backend testing
