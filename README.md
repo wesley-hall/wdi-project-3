@@ -1,8 +1,7 @@
 
-**Please note that this README is currently being worked on and is not yet finished.**
----
-
 # WDI Project 3 - booker
+
+View this project on Heroku: [https://ga-booker.herokuapp.com](https://ga-booker.herokuapp.com)
 
 ## Table of Contents
 
@@ -173,11 +172,6 @@ View the full list of dependencies and dev dependencies in the [`package.json`](
 
 
 ## Project Roadmap
-
-- [x] Front-end user journeys (orjon)
-- [ ] Back-end configuration structure
-- [ ] Data schemas  
-- [ ] Product backlog
 
 ### User journey
 
