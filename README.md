@@ -16,6 +16,7 @@ The third WDI project was to work in a team to deliver a fully-functional user-g
 ### Installation
 
 #### Install Dependencies
+#### Run the Server and Client Locally
 
 ```
 $ yarn
