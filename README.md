@@ -16,6 +16,16 @@ The third WDI project was to work in a team to deliver a fully-functional user-g
 ### Installation
 
 
+| | yarn | npm |
+|---:|:---:|:---:|
+| Install Dependencies | `$ yarn` | `$ npm install` |
+| Run Server <br> and Client Locally | `$ yarn start:server` <br> `$ yarn start:client` | `$ npm run start:server` <br> `$ npm run start:client` |
+| Seed Local Database | `$ yarn seed` | `$ npm run seed` |
+| Run Tests Locally  | `$ yarn test` | `$ npm run test` |
+| Build with Webpack  | `$ yarn build` | `$ npm run build` |
+
+
+
 #### Install Dependencies
 
 ```
