@@ -768,9 +768,14 @@ $ npm run test
 
 - Select dropdown to filter loans by status
 - Button on the Libraries page that links from a library popup to the books page filtered by books belonging to that library
+- Messaging between users
+- Book loan notifications (i.e. 'New book loan request', 'Book loan approved', 'Book due to be returned in X days', etc.)
 
 
 ## Key Learnings
 
+- Building a functioning full-stack app where requests can successfully display information on the front end (read) and data can be created/updated/deleted on the back end
 - Promises in JavaScript
-- Backend testing
+- Back end testing
+- Back end error handling
+- Custom SCSS on top of Bulma CSS Framework
