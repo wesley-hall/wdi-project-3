@@ -13,61 +13,17 @@ View this project on Heroku: [https://ga-booker.herokuapp.com](https://ga-booker
 
 The third WDI project was to work in a team to deliver a fully-functional user-generated CMS (Content Management System) that includes multiple relationships between database models and consumes at least one public API (Application Programming Interface).
 
-### Installation
+### Scripts for Installation, Setup, Development, Testing and Building
 
 
 | | yarn | npm |
 |---:|:---:|:---:|
 | Install Dependencies | `$ yarn` | `$ npm install` |
-| Run Server <br> and Client Locally | `$ yarn start:server` <br> `$ yarn start:client` | `$ npm run start:server` <br> `$ npm run start:client` |
+| Run Server Locally | `$ yarn start:server` | `$ npm run start:server` |
+| Run Client Locally | `$ yarn start:client` | `$ npm run start:client` |
 | Seed Local Database | `$ yarn seed` | `$ npm run seed` |
 | Run Tests Locally  | `$ yarn test` | `$ npm run test` |
 | Build with Webpack  | `$ yarn build` | `$ npm run build` |
-
-
-
-#### Install Dependencies
-
-```
-$ yarn
-```
-```
-$ npm install
-```
-
-#### Run the Server and Client Locally
-```
-$ yarn start:server
-$ yarn start:client
-```
-```
-$ npm run start:server
-$ npm run start:client
-```
-
-#### Seed the Local Database
-```
-$ yarn seed
-```
-```
-$ npm run seed
-```
-
-#### Run the Tests
-```
-$ yarn test
-```
-```
-$ npm run test
-```
-#### Build with Webpack
-```
-$ yarn build
-```
-```
-$ npm run build
-```
-
 
 
 View the full list of scripts and dependencies in the [`package.json`](./package.json)
