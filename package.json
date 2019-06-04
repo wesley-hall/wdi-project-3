@@ -8,6 +8,7 @@
     "start:client": "webpack-dev-server --mode=development",
     "seed": "node db/seeds.js",
     "test": "node_modules/.bin/mocha",
+    "start": "node index",
     "build": "webpack -p"
   },
   "dependencies": {
