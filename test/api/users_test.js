@@ -16,21 +16,22 @@ const bookData = {
 }
 
 let token
+const invalidToken = jwt.sign({ sub: 12345 }, secret, { expiresIn: '6h' })
 
 describe('Book tests', () => {
 
   afterEach(done => {
-    Book.collection.remove()
+    Book.collection.deleteMany()
     done()
   })
 
 
   beforeEach(done => {
-    Book.collection.remove()
+    Book.collection.deleteMany()
     Book.create(
       bookData
     )
-      .then(() => User.remove({}))
+      .then(() => User.deleteMany({}))
       .then(() => User.create({
         username: 'test',
         email: 'test',
@@ -93,7 +94,6 @@ describe('Book tests', () => {
               '_id',
               'authors',
               'description',
-              'existingLoans',
               'id',
               'fiction',
               'image',
@@ -106,13 +106,52 @@ describe('Book tests', () => {
     })
   })
   describe('POST /api/books', () => {
+    it('should return a 401 response when no Auth header is sent', done => {
+      api
+        .post('/api/books')
+        .set({ 'Accept': 'application/json'})
+        .send(bookData)
+        .end((err, res) => {
+          expect(res.status).to.eq(401)
+          done()
+        })
+    })
+    it('should return a message of "Unauthorized" when no Auth header is sent', done => {
+      api
+        .post('/api/books')
+        .set({ 'Accept': 'application/json'})
+        .send(bookData)
+        .end((err, res) => {
+          expect(res.text).to.eq('{"message":"Unauthorized"}')
+          done()
+        })
+    })
+    it('should return a 401 response when an invalid token is sent', done => {
+      api
+        .post('/api/books')
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${invalidToken}`})
+        .send(bookData)
+        .end((err, res) => {
+          expect(res.status).to.eq(401)
+          done()
+        })
+    })
+    it('should return a message of "Unauthorized. Token invalid." when an invalid token is sent', done => {
+      api
+        .post('/api/books')
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${invalidToken}`})
+        .send(bookData)
+        .end((err, res) => {
+          expect(res.text).to.eq('{"message":"Unauthorized. Token invalid."}')
+          done()
+        })
+    })
     it('should return a 201 response', done => {
       api
         .post('/api/books')
         .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${token}`})
         .send(bookData)
         .end((err, res) => {
-          console.log(err)
           expect(res.status).to.eq(201)
           done()
         })
@@ -174,6 +213,36 @@ describe('Book tests', () => {
           done()
         })
         .catch(done)
+    })
+    it('should return a 401 response when no Auth header is sent', done => {
+      api
+        .delete(`/api/books/${book._id}`)
+        .set({ 'Accept': 'application/json'})
+        .expect(401, done)
+    })
+    it('should return a message of "Unauthorized" when no Auth header is sent', done => {
+      api
+        .delete(`/api/books/${book._id}`)
+        .set({ 'Accept': 'application/json'})
+        .end((err, res) => {
+          expect(res.text).to.eq('{"message":"Unauthorized"}')
+          done()
+        })
+    })
+    it('should return a 401 response when an invalid token is sent', done => {
+      api
+        .delete(`/api/books/${book._id}`)
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${invalidToken}`})
+        .expect(401, done)
+    })
+    it('should return a message of "Unauthorized" when no Auth header is sent', done => {
+      api
+        .delete(`/api/books/${book._id}`)
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${invalidToken}`})
+        .end((err, res) => {
+          expect(res.text).to.eq('{"message":"Unauthorized. Token invalid."}')
+          done()
+        })
     })
     it('should return a 204 response', done => {
       api
