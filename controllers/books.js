@@ -19,7 +19,6 @@ function booksFiltered(req, res) {
 }
 
 function bookCreate(req, res) {
-  console.log('adding book')
   Book
     .create(req.body)
     .then(book => res.status(201).json(book))
@@ -33,7 +32,7 @@ function bookShow(req, res) {
     .exec()
     .then(book => {
       if(!book) {
-        return res.status(404).json({message: 'Could not find a book with that id'})
+        return res.status(404).json({ message: 'Could not find a book with that id' })
       }
       return res.status(200).json(book)
     })
@@ -58,7 +57,8 @@ function bookUpdate(req, res) {
 
 function bookDelete(req, res) {
   Book
-    .findByIdAndRemove(req.params.id)
+    .findById(req.params.id)
+    .deleteOne()
     .then(() => res.sendStatus(204))
     .catch(err => res.status(500).json(err))
 }
