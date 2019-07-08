@@ -19,6 +19,7 @@ function booksFiltered(req, res) {
 }
 
 function bookCreate(req, res) {
+  console.log('adding book')
   Book
     .create(req.body)
     .then(book => res.status(201).json(book))
