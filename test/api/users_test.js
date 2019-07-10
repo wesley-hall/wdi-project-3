@@ -25,7 +25,6 @@ describe('Book tests', () => {
     done()
   })
 
-
   beforeEach(done => {
     Book.collection.deleteMany()
     Book.create(
@@ -105,47 +104,8 @@ describe('Book tests', () => {
         })
     })
   })
+
   describe('POST /api/books', () => {
-    it('should return a 401 response when no Auth header is sent', done => {
-      api
-        .post('/api/books')
-        .set({ 'Accept': 'application/json'})
-        .send(bookData)
-        .end((err, res) => {
-          expect(res.status).to.eq(401)
-          done()
-        })
-    })
-    it('should return a message of "Unauthorized" when no Auth header is sent', done => {
-      api
-        .post('/api/books')
-        .set({ 'Accept': 'application/json'})
-        .send(bookData)
-        .end((err, res) => {
-          expect(res.text).to.eq('{"message":"Unauthorized"}')
-          done()
-        })
-    })
-    it('should return a 401 response when an invalid token is sent', done => {
-      api
-        .post('/api/books')
-        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${invalidToken}`})
-        .send(bookData)
-        .end((err, res) => {
-          expect(res.status).to.eq(401)
-          done()
-        })
-    })
-    it('should return a message of "Unauthorized. Token invalid." when an invalid token is sent', done => {
-      api
-        .post('/api/books')
-        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${invalidToken}`})
-        .send(bookData)
-        .end((err, res) => {
-          expect(res.text).to.eq('{"message":"Unauthorized. Token invalid."}')
-          done()
-        })
-    })
     it('should return a 201 response', done => {
       api
         .post('/api/books')
@@ -156,13 +116,30 @@ describe('Book tests', () => {
           done()
         })
     })
-    it('should create a book', done => {
+
+    it('should respond with a JSON object', done => {
+      api
+        .post('/api/books')
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${token}`})
+        .send(bookData)
+        .end((err, res) => {
+          expect(res.header['content-type'])
+            .to.be.eq('application/json; charset=utf-8')
+          done()
+        })
+    })
+
+    it('should create a book object', done => {
       api
         .post('/api/books')
         .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${token}`})
         .send(bookData)
         .end((err, res) => {
           const book = res.body
+
+          expect(book)
+            .to.be.an('object')
+
           expect(book)
             .to.have.property('_id')
             .and.to.be.a('string')
@@ -175,6 +152,50 @@ describe('Book tests', () => {
             .to.have.property('fiction')
             .and.to.be.a('boolean')
 
+          done()
+        })
+    })
+
+    it('should return a 401 response when no Auth header is sent', done => {
+      api
+        .post('/api/books')
+        .set({ 'Accept': 'application/json'})
+        .send(bookData)
+        .end((err, res) => {
+          expect(res.status).to.eq(401)
+          done()
+        })
+    })
+
+    it('should return a message of "Unauthorized" when no Auth header is sent', done => {
+      api
+        .post('/api/books')
+        .set({ 'Accept': 'application/json'})
+        .send(bookData)
+        .end((err, res) => {
+          expect(res.text).to.eq('{"message":"Unauthorized"}')
+          done()
+        })
+    })
+
+    it('should return a 401 response when an invalid token is sent', done => {
+      api
+        .post('/api/books')
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${invalidToken}`})
+        .send(bookData)
+        .end((err, res) => {
+          expect(res.status).to.eq(401)
+          done()
+        })
+    })
+
+    it('should return a message of "Unauthorized. Token invalid." when an invalid token is sent', done => {
+      api
+        .post('/api/books')
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${invalidToken}`})
+        .send(bookData)
+        .end((err, res) => {
+          expect(res.text).to.eq('{"message":"Unauthorized. Token invalid."}')
           done()
         })
     })
@@ -199,6 +220,44 @@ describe('Book tests', () => {
         .set('Accept', 'application/json')
         .expect(200, done)
     })
+
+    it('should respond with a JSON object', done => {
+      api
+        .get(`/api/books/${book._id}`)
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.header['content-type'])
+            .to.be.eq('application/json; charset=utf-8')
+          done()
+        })
+    })
+
+    it('should return a book object', done => {
+      api
+        .get(`/api/books/${book._id}`)
+        .set({ 'Accept': 'application/json' })
+        .send(bookData)
+        .end((err, res) => {
+          const book = res.body
+
+          expect(book)
+            .to.be.an('object')
+
+          expect(book)
+            .to.have.property('_id')
+            .and.to.be.a('string')
+
+          expect(book)
+            .to.have.property('title')
+            .and.to.be.a('string')
+
+          expect(book)
+            .to.have.property('fiction')
+            .and.to.be.a('boolean')
+
+          done()
+        })
+    })
   })
 
   describe('DELETE /api/books/:id', () => {
@@ -214,12 +273,32 @@ describe('Book tests', () => {
         })
         .catch(done)
     })
+
+    it('should return a 204 response', done => {
+      api
+        .delete(`/api/books/${book._id}`)
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${token}`})
+        .expect(204, done)
+    })
+
+    it('should return an empty response body', done => {
+      api
+        .delete(`/api/books/${book._id}`)
+        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${token}`})
+        .end((err, res) => {
+          expect(res.body)
+            .to.be.empty
+          done()
+        })
+    })
+
     it('should return a 401 response when no Auth header is sent', done => {
       api
         .delete(`/api/books/${book._id}`)
         .set({ 'Accept': 'application/json'})
         .expect(401, done)
     })
+
     it('should return a message of "Unauthorized" when no Auth header is sent', done => {
       api
         .delete(`/api/books/${book._id}`)
@@ -229,13 +308,15 @@ describe('Book tests', () => {
           done()
         })
     })
+
     it('should return a 401 response when an invalid token is sent', done => {
       api
         .delete(`/api/books/${book._id}`)
         .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${invalidToken}`})
         .expect(401, done)
     })
-    it('should return a message of "Unauthorized" when no Auth header is sent', done => {
+
+    it('should return a message of "Unauthorized. Token invalid." when no Auth header is sent', done => {
       api
         .delete(`/api/books/${book._id}`)
         .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${invalidToken}`})
@@ -244,11 +325,6 @@ describe('Book tests', () => {
           done()
         })
     })
-    it('should return a 204 response', done => {
-      api
-        .delete(`/api/books/${book._id}`)
-        .set({ 'Accept': 'application/json', 'Authorization': `Bearer ${token}`})
-        .expect(204, done)
-    })
+
   })
 })
