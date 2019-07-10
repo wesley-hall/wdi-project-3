@@ -47,7 +47,7 @@ const Promise = require('bluebird')
 // 5 : user2
 // 6 : user3
 
-mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
+mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true }, (err, db) => {
   db.dropDatabase()
     .then(() => {
       const promiseArray = [

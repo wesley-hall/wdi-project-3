@@ -6,7 +6,8 @@ const router = require('./config/routes')
 const errorHandler = require('./lib/errorHandler')
 
 const app = express()
-mongoose.connect(dbURI, { useNewUrlParser: true })
+mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true })
+
 
 app.use(express.static(`${__dirname}/dist`))
 
