@@ -37,7 +37,7 @@ const moment = require('moment')
 
 const usersData = () => [
     {
-        username: 'Richie Rich',
+        username: 'Rich',
         profilePicture: 'http://www.orjon.com/dev/booker/images/profile/manA.jpg',
         email: 'rich@email',
         password: 'pass',
