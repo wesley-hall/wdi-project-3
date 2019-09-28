@@ -38,6 +38,7 @@ class SeedDatabase extends React.Component {
                                     <div className="column is-full">
                                         <h1 className="title is-3">Are you sure you want to seed the database?</h1>
                                         <p className="subtitle">This will delete all information and replace it with the information from the seeds file</p>
+                                        <p className="subtitle">You will also need to wait or manually restart the dynos before the app will be fully functional again on Heroku</p>
                                     </div>
                                 </div>
                                 <div className="buttons is-centered">
