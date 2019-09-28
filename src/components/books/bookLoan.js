@@ -76,10 +76,8 @@ class BookLoan extends React.Component {
   }
 
   dateValidation(startDate, endDate) {
-    startDate=new Date(startDate)
-    endDate=new Date(startDate)
-    console.log(startDate)
-    console.log(endDate)
+    startDate = new Date(startDate)
+    endDate = new Date(endDate)
     const today=new Date()
     if (startDate > endDate) {
       return false
