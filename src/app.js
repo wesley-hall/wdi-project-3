@@ -28,6 +28,8 @@ import IdsAll from './components/common/ids'
 
 import LoansAll from './components/loans/loansAll'
 
+import SeedDatabase from './components/pages/seedDatabase'
+
 
 
 class App extends React.Component {
@@ -38,6 +40,7 @@ class App extends React.Component {
         <div>
           <Nav />
           <Switch>
+            <Route path="/seed-database" component={SeedDatabase}/>
             <SecureRoute path="/books/:id/update" component={BookUpdate}/>
             <SecureRoute path="/books/:id/loan" component={BookLoan}/>
             <SecureRoute path="/books/add" component={BookAdd}/>
@@ -47,7 +50,6 @@ class App extends React.Component {
             <Route path="/users" component={UserProfile}/>
             <Route path="/userEdit" component={UserEdit}/>
             <Route path="/ids" component={IdsAll}/>
-
             <SecureRoute path="/loans" component={LoansAll}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>

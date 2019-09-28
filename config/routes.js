@@ -4,6 +4,7 @@ const books = require('../controllers/books')
 const loans = require('../controllers/loans')
 const genres = require('../controllers/genres')
 const users = require('../controllers/users')
+const { seed } = require('../controllers/seed')
 const secureRoute = require('../lib/secureRoute')
 
 router.post('/register', auth.register)
@@ -52,5 +53,6 @@ router.route('/loans/:id')
   .put(secureRoute, loans.loanUpdate)
   .delete(secureRoute, loans.loanDelete)
 
+router.get('/seed', seed)
 
 module.exports = router
