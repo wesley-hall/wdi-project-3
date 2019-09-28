@@ -126,12 +126,12 @@ class Register extends React.Component {
 
             <div>
               <label
-                className={`label ${this.state.errors['location.lat'] ? 'is-danger': ''}`}>Where are your books located? (Click to select)</label>
+                className={`label ${this.state.errors['location.lat'] ? 'is-danger': ''}`}>* Where are your books located? (Click to select)</label>
               <UserEditMap
                 center={this.mapCenter}
                 onSelectLocation={this.handleLocation}
               />
-              {this.state.errors['location.lat'] && <small className="help is-danger">Passwords must match</small> }
+              {this.state.errors['location.lat'] && <small className="help is-danger">Please select a location on the map above.</small> }
             </div>
             <br />
 
@@ -139,7 +139,7 @@ class Register extends React.Component {
               <input
                 className={`input ${this.state.errors.libraryName ? 'is-danger': ''}`}
                 name="libraryName"
-                placeholder="Library Name (optional)"
+                placeholder="* Library Name"
                 value={this.state.data.libraryName}
                 onChange={this.handleChange}
               />
