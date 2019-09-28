@@ -118,8 +118,6 @@ class BookLoan extends React.Component {
   render() {
     if (!this.state.book) return null
     const { book } = this.state
-    console.log('state: ',this.state)
-    console.log('errors', this.state.errors)
     return(
       <div>
         <main className="section">

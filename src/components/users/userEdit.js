@@ -21,7 +21,6 @@ class UserEdit extends React.Component {
   }
 
   handleChange({ target: { name , value }}) {
-    console.log(name , value)
     const user = {...this.state.currentUser, [name]: value}
     const errors = {...this.state.errors, [name]: ''}
     this.setState({ errors, currentUser: user })

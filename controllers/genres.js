@@ -4,7 +4,7 @@ function genresAll(req, res) {
   Genres
     .find()
     .then(genres => res.json(genres))
-    .catch(e => console.log(e))
+    .catch(err => console.log(err))
 }
 
 module.exports = {

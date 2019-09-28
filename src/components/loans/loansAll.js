@@ -103,7 +103,6 @@ class LoansAll extends React.Component {
   }
 
   redirectToBook(e) {
-    console.log('trying to redirect')
     this.props.history.push(`/books/${e.target.value}`)
   }
 
@@ -153,7 +152,6 @@ class LoansAll extends React.Component {
 
   render() {
     if (!this.state.loans.loanedFromMe && !this.state.loans.borrowedByMe) return null
-    console.log(this.state)
     const { loanedFromMe, borrowedByMe } = this.state.loans
 
     return (
